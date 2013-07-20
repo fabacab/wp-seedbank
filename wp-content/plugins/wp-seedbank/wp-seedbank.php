@@ -1515,8 +1515,11 @@ class idealien_rideshare {
 			//New installation - pre-load some fields
 			wp_insert_term(__( 'Give', 'idealien-rideshare' ), 'idealien_rideshare_type');
 			wp_insert_term(__( 'Get', 'idealien-rideshare' ), 'idealien_rideshare_type');
-			
+			wp_insert_term(__( 'Sell', 'idealien-rideshare' ), 'idealien_rideshare_type');
+			wp_insert_term(__( 'Trade', 'idealien-rideshare' ), 'idealien_rideshare_type');
+
 			wp_insert_term( __( 'Alabama', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AL' ) );
+
 			wp_insert_term( __( 'Alaska', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AK' ) );
 			wp_insert_term( __( 'Arizona', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AZ' ) );
 			wp_insert_term( __( 'Arkansas', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AR' ) );
