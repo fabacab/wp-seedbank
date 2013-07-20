@@ -26,7 +26,7 @@ class WP_Seedbank {
 	//Define all meta data fields
 	var $meta_fields = array(
 		"idealien_rideshare_type",
-		"idealien_rideshare_spaces",
+		"idealien_rideshare_quantity",
 		"idealien_rideshare_event",
 		"idealien_rideshare_departureCity",
 		"idealien_rideshare_departureStateProv", 
@@ -53,7 +53,7 @@ class WP_Seedbank {
 		add_filter("manage_edit-idealien_rideshare_sortable_columns", array(&$this, "register_sortable"));
 		add_filter("request", array(&$this, "idealien_rideshare_status_column_orderby"));
 		add_filter("request", array(&$this, "idealien_rideshare_type_column_orderby"));
-		add_filter("request", array(&$this, "idealien_rideshare_spaces_column_orderby"));
+		add_filter("request", array(&$this, "idealien_rideshare_quantity_column_orderby"));
 		
 		//FUTURE: Date columns sortable
 		//add_filter("request", array(&$this, "idealien_rideshare_departureDate_column_orderby"));
@@ -208,11 +208,11 @@ class WP_Seedbank {
 						$user = get_user_by('login', $entry[12]);
 						
 						//Build message				
-						$message =  $user->display_name . " wants to connect with you about the following rideshare.\r\n";
-					 	$message .= "Rideshare: " . $ID . "\r\n";
+						$message =  $user->display_name . " wants to connect with you about the following seed exchange.\r\n";
+					 	$message .= "Seed exchange: " . $ID . "\r\n";
 						$message .= "Type: " . get_post_meta($ID, "idealien_rideshare_type", true) . "\r\n";
 						$message .= "Date: " . get_post_meta($ID, "idealien_rideshare_departureDate", true) . "\r\n";
-						$message .= "Spaces: " . get_post_meta($ID, "idealien_rideshare_spaces", true) . "\r\n";
+						$message .= "Quantity: " . get_post_meta($ID, "idealien_rideshare_quantity", true) . "\r\n";
 						$message .= "Departure: " . get_post_meta($ID, "idealien_rideshare_departureCity", true) . ", " . get_post_meta($ID, "idealien_rideshare_departureStateProv", true) . "\r\n";
 						
 						//Display either City/Stave or Event - whichever is populated
@@ -610,7 +610,7 @@ class WP_Seedbank {
 		//Retrieve meta data fields or set to initial blank state
 		if (isset($custom)){
 			$idealien_rideshare_type = $custom["idealien_rideshare_type"][0];
-			$idealien_rideshare_spaces = $custom["idealien_rideshare_spaces"][0];
+			$idealien_rideshare_quantity = $custom["idealien_rideshare_quantity"][0];
 			$idealien_rideshare_event = $custom["idealien_rideshare_event"][0];
 			$idealien_rideshare_departureCity = $custom["idealien_rideshare_departureCity"][0];
 			$idealien_rideshare_departureStateProv = $custom["idealien_rideshare_departureStateProv"][0]; 
@@ -626,7 +626,7 @@ class WP_Seedbank {
 			$idealien_rideshare_status = $custom["idealien_rideshare_status"][0];
 		} else {
 			$idealien_rideshare_type = "";
-			$idealien_rideshare_spaces = "";
+			$idealien_rideshare_quantity = "";
 			$idealien_rideshare_event = "";
 			$idealien_rideshare_departureCity = "";
 			$idealien_rideshare_departureStateProv = ""; 
@@ -751,9 +751,9 @@ class WP_Seedbank {
 	</p>
     
     <p>
-		<label class="rideshare"><?php _e('Spaces' , 'wp-seedbank'); ?>:</label>
-		<input name="idealien_rideshare_spaces" class="rideshare_inputLine" value="<?php if ($idealien_rideshare_spaces >= 1) { 
-					echo $idealien_rideshare_spaces;
+		<label class="rideshare"><?php _e('Quantity' , 'wp-seedbank'); ?>:</label>
+		<input name="idealien_rideshare_quantity" class="rideshare_inputLine" value="<?php if ($idealien_rideshare_quantity >= 1) { 
+					echo $idealien_rideshare_quantity;
 				} else {
 					echo '1';
 				} ?>" />
@@ -843,7 +843,7 @@ class WP_Seedbank {
 			"idealien_rideshare_status" => __( 'Status', 'wp-seedbank' ),
 			"idealien_rideshare_type" => __( 'Type', 'wp-seedbank' ),
 			"idealien_rideshare_departureDate" => __( 'Date', 'wp-seedbank' ),
-			"idealien_rideshare_spaces" => __( 'Spaces', 'wp-seedbank' ),
+			"idealien_rideshare_quantity" => __( 'Quantity', 'wp-seedbank' ),
 			"idealien_rideshare_destination" => __( 'Destination', 'wp-seedbank' ),
 			"idealien_rideshare_departure" => __( 'Departure', 'wp-seedbank' )
 		);
@@ -888,7 +888,7 @@ class WP_Seedbank {
 		
 		$columns['idealien_rideshare_status'] = 'idealien_rideshare_status';
 		$columns['idealien_rideshare_type'] = 'idealien_rideshare_type';
-		$columns['idealien_rideshare_spaces'] = 'idealien_rideshare_spaces';
+		$columns['idealien_rideshare_quantity'] = 'idealien_rideshare_quantity';
 		//FUTURE: When WP supports custom field orderby date, make it sortable
 		//$columns['idealien_rideshare_departureDate'] = 'idealien_rideshare_departureDate';
 		return $columns;	
@@ -918,11 +918,11 @@ class WP_Seedbank {
 		return $vars;
 	}
 	
-	//Augment the sort query for custom field - idealien_rideshare_spaces
-	function idealien_rideshare_spaces_column_orderby( $vars ) {
-		if ( isset( $vars['orderby'] ) && 'idealien_rideshare_spaces' == $vars['orderby'] ) {
+	//Augment the sort query for custom field - idealien_rideshare_quantity
+	function idealien_rideshare_quantity_column_orderby( $vars ) {
+		if ( isset( $vars['orderby'] ) && 'idealien_rideshare_quantity' == $vars['orderby'] ) {
 			$vars = array_merge( $vars, array(
-				'meta_key' => 'idealien_rideshare_spaces',
+				'meta_key' => 'idealien_rideshare_quantity',
 				'orderby' => 'meta_value_num'
 			) );
 		}
@@ -956,7 +956,7 @@ class WP_Seedbank {
 			'date' => 'current', //all, past, current, single
 			'date_filter' => null, //Populate if date = single
 			'username' => 'all', //all or specific WP username
-			'spaces' => 'all', //all or 1 - 5
+			'quantity' => 'all', //all or 1 - 5
 			'contact' => 'email' //email, form, buddypress
 			//'status' => 'active' //active or deleted
 	      ), $atts ) );
@@ -971,7 +971,7 @@ class WP_Seedbank {
 		$date = esc_attr(strtolower($date));
 		$date_filter = esc_attr(strtolower($date_filter));
 		$username = esc_attr(strtolower($username));
-		$spaces = esc_attr(strtolower($spaces));
+		$quantity = esc_attr(strtolower($quantity));
 		$contact = esc_attr(strtolower($contact));
 		//$status = esc_attr(strtolower($status));
 		
@@ -1070,10 +1070,10 @@ class WP_Seedbank {
 		} 
 		
 		//Filter meta_query based on rideshare type from shortcode
-		if($spaces != 'all') {
-			$typeSpacesQuery = array(
-				'key' => 'idealien_rideshare_spaces',
-				'value' => $spaces,
+		if($quantity != 'all') {
+			$typeQuantityQuery = array(
+				'key' => 'idealien_rideshare_quantity',
+				'value' => $quantity,
 				'compare' => '='
 			);
 		} 
@@ -1176,11 +1176,11 @@ class WP_Seedbank {
 			}
 			
 			//Filter meta_query based on rideshare type from querystring
-			$dSpaces = esc_attr(strtolower($_GET['spaces']));
-			if($dSpaces) {
-				$spacesMetaQuery = array(
-					'key' => 'idealien_rideshare_spaces',
-					'value' => $dSpaces,
+			$dQuantity = esc_attr(strtolower($_GET['quantity']));
+			if($dQuantity) {
+				$quantityMetaQuery = array(
+					'key' => 'idealien_rideshare_quantity',
+					'value' => $dQuantity,
 					'compare' => '='
 				);
 			}
@@ -1194,7 +1194,7 @@ class WP_Seedbank {
 		if ( $departureMetaQuery ) { $meta_query[] = $departureMetaQuery; }
 		if ( $dateMetaQuery ) { $meta_query[] = $dateMetaQuery; }
 		if ( $userMetaQuery ) { $meta_query[] = $userMetaQuery; }
-		if ( $spacesMetaQuery ) { $meta_query[] = $spacesMetaQuery; }
+		if ( $quantityMetaQuery ) { $meta_query[] = $quantityMetaQuery; }
 
 
 		//$output .= print_r($meta_query,true);
@@ -1249,7 +1249,7 @@ class WP_Seedbank {
 					$output .= '<th class="rideshareType">' . __('Type' , 'wp-seedbank') . '</th>';
 					$output .= '<th class="rideshareEvent">' . __('To' , 'wp-seedbank') . '</th>';
 					$output .= '<th class="rideshareCity">' . __('From' , 'wp-seedbank') . '</th>';
-					$output .= '<th class="rideshareSpaces">' . __('For' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareQuantity">' . __('For' , 'wp-seedbank') . '</th>';
 					$output .= '<th class="rideshareDDate">' . __('On' , 'wp-seedbank') . '</th>';
 					//$output .= '<th class="rideshareRDate">' . __('Return' , 'wp-seedbank') . '</th>';
 					$output .= '<th class="rideshareInfo">' . __('Add. Info' , 'wp-seedbank') . '</th>';
@@ -1288,9 +1288,9 @@ class WP_Seedbank {
 						$departureOutput = get_post_meta($ID, "idealien_rideshare_departureCity", true) . ', ' . get_post_meta($ID, "idealien_rideshare_departureStateProv", true);
 						$output .= '<td class="rideshareCity">' . $departureOutput . '</td>';
 						
-						//Spaces
-						$spacesOutput = get_post_meta($ID, "idealien_rideshare_spaces", true);
-						$output .= '<td class="rideshareSpaces">' . $spacesOutput . '</td>';
+						//Quantity
+						$quantityOutput = get_post_meta($ID, "idealien_rideshare_quantity", true);
+						$output .= '<td class="rideshareQuantity">' . $quantityOutput . '</td>';
 						
 						//Departure Date
 						$dateOutput = get_post_meta($ID, "idealien_rideshare_departureDate", true);
@@ -1382,7 +1382,7 @@ class WP_Seedbank {
 										//Button to display comment / connect form
 										$output .= '<input type="button" value="Connect!" id="rideshare_' . $ID . '" ';
 										$output .= 'onclick="rideshare_connect(\'' . $ID . '\', \'buddypress\', \'' . $selected_rideshare_username . '\', \'' . $current_user->user_login . '\', ';
-										$output .= '\'' . $destinationOutput . '\', \'' . $departureOutput . '\', \'' . $dateOutput . '\', \'' . $spacesOutput . '\' )" />';
+										$output .= '\'' . $destinationOutput . '\', \'' . $departureOutput . '\', \'' . $dateOutput . '\', \'' . $quantityOutput . '\' )" />';
 										$output .= '</td>';
 									}
 									
@@ -1407,7 +1407,7 @@ class WP_Seedbank {
 					
 				else:
 					//Empty rideshare list
-					$output .= '<p>' . __('There are no rideshares available at this time' , 'wp-seedbank') . '.</p>';
+					$output .= '<p>' . __('There are no seed excchanges available at this time' , 'wp-seedbank') . '.</p>';
 					
 				endif;
 			
@@ -1445,7 +1445,7 @@ class WP_Seedbank {
 							$output .= '<tr>';
 							$output .= '<th class="rideshareCity">' . __('Location' , 'wp-seedbank') . '</th>';
 							$output .= '<th class="rideshareType">' . __('Type' , 'wp-seedbank') . '</th>';
-							$output .= '<th class="rideshareSpaces">' . __('Spaces' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareQuantity">' . __('Quantity' , 'wp-seedbank') . '</th>';
 							$output .= '<th class="rideshareDDate">' . __('Departure' , 'wp-seedbank') . '</th>';
 							$output .= '<th class="rideshareRDate">' . __('Return' , 'wp-seedbank') . '</th>';
 							$output .= '<th class="rideshareContact">' . __('Contact' , 'wp-seedbank') . '</th>';
@@ -1458,7 +1458,7 @@ class WP_Seedbank {
 								$output .= '<tr>';
 								$output .= '<td class="rideshareCity">' . get_post_meta($ID, "idealien_rideshare_departureCity", true) . '</td>';
 								$output .= '<td class="rideshareType">' . get_post_meta($ID, "idealien_rideshare_type", true) . '</td>';
-								$output .= '<td class="rideshareSpaces">' . get_post_meta($ID, "idealien_rideshare_spaces", true) . '</td>';
+								$output .= '<td class="rideshareQuantity">' . get_post_meta($ID, "idealien_rideshare_quantity", true) . '</td>';
 								$output .= '<td class="rideshareDDate">' . get_post_meta($ID, "idealien_rideshare_departureDate", true) . '</td>';
 								$output .= '<td class="rideshareRDate">' . get_post_meta($ID, "idealien_rideshare_returnDate", true) . '</td>';
 								$output .= '<td class="rideshareContact">';
@@ -1601,7 +1601,6 @@ class WP_Seedbank {
   	// Deactivating the plugin
   	static function deactivate() {
 		//FUTURE: Delete CPT is too risky - what else shoudl happen?
-		delete_option('idealien_rideshare_version');
 	}
   
   	// FUTURE: This is not yet called in any meaningful way.
