@@ -445,7 +445,7 @@ class idealien_rideshare {
 				'rewrite' => array('slug' => 'rideshare'),
 				'public' => true,
 				'description' => __( 'Seedbank Seed Exchanges', 'idealien-rideshare' ),
-				'menu_icon' => WP_SEEDBANK_PATH . 'images/rideshare_icon.png'
+				'menu_icon' => WP_SEEDBANK_PATH . 'seedexchange_icon.png'
 			)
 		);
 		
