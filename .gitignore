@@ -5,5 +5,3 @@
 # *.[oa]
 # *~
 *.DS_Store
-cgi-bin
-wp-config.php
