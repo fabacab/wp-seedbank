@@ -86,7 +86,7 @@ class idealien_rideshare {
 		//Change data on primary form before rideshare CPT post is created
 		add_filter("gform_pre_submission", array(&$this, "pre_rideshareSubmission"), 10, 2);
 
-        wp_register_script('seedbank_exchange', IDEALIEN_RIDESHARE_PATH . 'seedbank_exchange.js', array('jquery') );
+        wp_register_script('seedbank_exchange', WP_SEEDBANK_PATH . 'seedbank_exchange.js', array('jquery') );
         wp_enqueue_script('seedbank_exchange');
 		
 		//Ensure all 3 forms are executed if being called from a buddyPress page
@@ -445,19 +445,19 @@ class idealien_rideshare {
 				'rewrite' => array('slug' => 'rideshare'),
 				'public' => true,
 				'description' => __( 'Seedbank Seed Exchanges', 'idealien-rideshare' ),
-				'menu_icon' => IDEALIEN_RIDESHARE_PATH . 'images/rideshare_icon.png'
+				'menu_icon' => WP_SEEDBANK_PATH . 'images/rideshare_icon.png'
 			)
 		);
 		
 		register_taxonomy('idealien_rideshare_type', 'idealien_rideshare', array(
 				'labels' => array(
-					'name' => __( 'Types', 'idealien-rideshare' ),
-					'singular_name' => __( 'Type', 'idealien-rideshare' ),
-					'all_items' => __( 'All Types', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Type', 'idealien-rideshare' ),
-					'update_item' => __( 'Update Type', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add New Type', 'idealien-rideshare' ),
-					'new_item_name' => __( 'New Type Name', 'idealien-rideshare' )
+					'name' => __( 'Exchange Types', 'idealien-rideshare' ),
+					'singular_name' => __( 'Exchange Type', 'idealien-rideshare' ),
+					'all_items' => __( 'All Exchange Types', 'idealien-rideshare' ),
+					'edit_item' => __( 'Edit Exchange Type', 'idealien-rideshare' ),
+					'update_item' => __( 'Update Exchange Type', 'idealien-rideshare' ),
+					'add_new_item' => __( 'Add New Exchange Type', 'idealien-rideshare' ),
+					'new_item_name' => __( 'New Exchange Type Name', 'idealien-rideshare' )
 				),
 				'hierarchical' => false,
 				'label' => 'Exchange Types'
@@ -496,13 +496,13 @@ class idealien_rideshare {
 		
 		register_taxonomy('idealien_rideshare_status', 'idealien_rideshare', array(
 				'labels' => array(
-					'name' => __( 'Status', 'idealien-rideshare' ),
-					'singular_name' => __( 'Status', 'idealien-rideshare' ),
-					'all_items' => __( 'All Status', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Status', 'idealien-rideshare' ),
-					'update_item' => __( 'Update Status', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add New Status', 'idealien-rideshare' ),
-					'new_item_name' => __( 'New Status Name', 'idealien-rideshare' )
+					'name' => __( 'Exchange Statuses', 'idealien-rideshare' ),
+					'singular_name' => __( 'Exchange Status', 'idealien-rideshare' ),
+					'all_items' => __( 'All Exchange Statuses', 'idealien-rideshare' ),
+					'edit_item' => __( 'Edit Exchange Status', 'idealien-rideshare' ),
+					'update_item' => __( 'Update Exchange Status', 'idealien-rideshare' ),
+					'add_new_item' => __( 'Add New Exchange Status', 'idealien-rideshare' ),
+					'new_item_name' => __( 'New Exchange Status Name', 'idealien-rideshare' )
 				),
 				'hierarchical' => false,
 				'label' => __( 'Exchange Status', 'idealien-rideshare' )
@@ -537,7 +537,7 @@ class idealien_rideshare {
      function enqueue_admin_scripts() {
 		global $current_screen;
 		if ($current_screen->post_type == 'idealien_rideshare') {
-				wp_register_script('jquery-ui-datepicker', IDEALIEN_RIDESHARE_PATH . 'jquery/jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core') );
+				wp_register_script('jquery-ui-datepicker', WP_SEEDBANK_PATH . 'jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core') );
 				wp_enqueue_script('jquery-ui-datepicker');
 				
 		}
@@ -554,8 +554,8 @@ class idealien_rideshare {
 
 			switch ($current_screen->post_type) {
 				case 'idealien_rideshare':
-					wp_enqueue_style('jquery-ui-theme', IDEALIEN_RIDESHARE_PATH . 'css/ui-lightness/jquery-ui-1.8.16.custom.css');
-					wp_enqueue_style('idealien_rideshare_admin', IDEALIEN_RIDESHARE_PATH . 'css/idealien_rideshare_admin.css');
+					wp_enqueue_style('jquery-ui-theme', WP_SEEDBANK_PATH . 'css/ui-lightness/jquery-ui-1.8.16.custom.css');
+					wp_enqueue_style('idealien_rideshare_admin', WP_SEEDBANK_PATH . 'css/idealien_rideshare_admin.css');
 					break;
 			}
 		}
@@ -565,14 +565,14 @@ class idealien_rideshare {
 	 //Register & activate the JS to enable comment / delete form functionality
 	 //FUTURE: Only have this fire on pages where the shortcode is in use.
 	 function frontend_scripts_init() {
-    	wp_register_script('rideshare-connect', IDEALIEN_RIDESHARE_PATH . 'jquery/idealien_rideshare_connect.js', array('jquery') );
+		wp_register_script('rideshare-connect', WP_SEEDBANK_PATH . 'idealien_rideshare_connect.js', array('jquery') );
 		wp_enqueue_script('rideshare-connect');
 	}    
  
  
 	 // add css for admin UI treatment
 	 function enqueue_display_styles() {
-	 	wp_enqueue_style('idealien_rideshare_styles', IDEALIEN_RIDESHARE_PATH . 'css/idealien_rideshare.css');
+	 	wp_enqueue_style('idealien_rideshare_styles', WP_SEEDBANK_PATH . 'css/idealien_rideshare.css');
 	 }
 	
 	//Tweak format of datepicker for admin
@@ -588,7 +588,7 @@ class idealien_rideshare {
 					jQuery( ".datepicker" ).datepicker({ 
 						dateFormat : 'mm/dd/yy',
 						showOn: "button",
-						buttonImage: "<?php echo IDEALIEN_RIDESHARE_PATH; ?>/images/calendar.gif",
+						buttonImage: "<?php echo WP_SEEDBANK_PATH; ?>/calendar.gif",
 						buttonImageOnly: true,
 						minDate: 0
 					});
@@ -645,78 +645,73 @@ class idealien_rideshare {
 			$idealien_rideshare_status = "";
 		}
 		
-	//Display data into appropriate html field elements within metabox
-	?>
-	
-     <p>
-		<label class="rideshare"><?php _e('Status' , 'idealien-rideshare'); ?>:</label>
-		<?php // Get all rideshare status terms (taxonomy)
-			$statusOptions = get_terms('idealien_rideshare_status', 'hide_empty=0&order=ASC'); ?>
-			<select name='idealien_rideshare_status' class='rideshare_selectLine'>
-            <option></option>
-			<?php
-			foreach ($statusOptions as $status) {
-				if ($status->name == $idealien_rideshare_status) {
-					echo "<option SELECTED value='" . $status->name . "'>" . $status->name . "</option>\n";
-				} else {
-					echo "<option value='" . $status->name . "'>" . $status->name . "</option>\n";
-				}
-			}
-   		?>
-		</select>
-        <span class="description">Choose <code>Active</code> if you're still seeking an exchange, <code>Connected</code> if you're in contact with another member about it, and <code>Deleted</code> if for any reason you are no longer offering this exchange.</span>
-	</p>
-    
+        // Create HTML for the drop-down menus.
+        ob_start();
+        $typeOptions = get_terms('idealien_rideshare_type', 'hide_empty=0&order=ASC');
+        print '<select name="idealien_rideshare_type">';
+        foreach ($typeOptions as $type) {
+            if ($type->name == $idealien_rideshare_type) {
+                echo "<option SELECTED value='" . $type->name . "'>" . strtolower($type->name) . "</option>\n";
+            } else {
+                echo "<option value='" . $type->name . "'>" . strtolower($type->name) . "</option>\n";
+            }
+        }
+        print '</select>';
+        $type_select = ob_get_contents();
+        ob_end_clean();
+        
+        ob_start();
+        print '<select id="wp-seedbank-common-name" name="idealien_rideshare_event">';
+        $eventOptions = get_terms('idealien_rideshare_event', 'hide_empty=0&order=ASC');
+        foreach ($eventOptions as $event) {
+            if ($event->name == $idealien_rideshare_event) {
+                echo "<option SELECTED value='" . $event->name . "'>" . $event->name . "</option>\n";
+            } else {
+                echo "<option value='" . $event->name . "'>" . $event->name . "</option>\n";
+            }
+        }
+        $common_name_select = ob_get_contents();
+        print '</select>';
+        ob_end_clean();
+
+        ob_start();
+        $statusOptions = get_terms('idealien_rideshare_status', 'hide_empty=0&order=ASC');
+        print '<select name="idealien_rideshare_status">';
+        foreach ($statusOptions as $status) {
+            if ($status->name == $idealien_rideshare_status) {
+                echo "<option SELECTED value='" . $status->name . "'>" . $status->name . "</option>\n";
+            } else {
+                echo "<option value='" . $status->name . "'>" . $status->name . "</option>\n";
+            }
+        }
+        print '</select>';
+        $status_select = ob_get_contents();
+        ob_end_clean();
+    ?>
+    <p><label>I would like to <?php print $type_select;?></label> <input name="idealien_rideshare_spaces" value="<?php print $idealien_rideshare_spaces;?>" placeholder="enter a number" /> <?php print $common_name_select;?> <input name="idealien_rideshare_username" value="<?php echo $idealien_rideshare_username;?>" placeholder="packets" />.</p>
+    <p><label>These seeds will expire on or about <input name="idealien_rideshare_departureDate" class="rideshare_inputLine datepicker" value="<?php echo $idealien_rideshare_departureDate;?>" />.</label> <span class="description">(If these seeds are in a packet, the wrapping might have an expiration date. Put that here.)</span></p>
+    <p><label>If I don't hear from anyone by <input name="idealien_rideshare_returnDate" class="rideshare_inputLine datepicker" value="<?php echo $idealien_rideshare_returnDate;?>" />, I'll stop being available to make this exchange.</label> <span class="description">(If you don't get a response by this date, your request will automatically close.)</span></p>
     <p>
-		<label class="rideshare"><?php _e('Type' , 'idealien-rideshare'); ?>:</label>
-		<?php // Get all rideshare type terms (taxonomy)
-			$typeOptions = get_terms('idealien_rideshare_type', 'hide_empty=0&order=ASC'); ?>
-			<select name='idealien_rideshare_type' class='rideshare_selectLine'>
-			<?php 
-			foreach ($typeOptions as $type) {
-				if ($type->name == $idealien_rideshare_type) {
-					echo "<option SELECTED value='" . $type->name . "'>" . $type->name . "</option>\n";
-				} else {
-					echo "<option value='" . $type->name . "'>" . $type->name . "</option>\n";
-				}
-			}
-   		?>
-		</select>
-        <span class="description">Choose <code>Get</code> if you're requesting seeds, <code>Give</code> if you're freely offering to share your own, <code>Sell</code> if you'd like money in return for your seeds, or <code>Trade</code> if you'd like to swap seeds with someone else.</span>
-	</p>
-    
-	
-    <p>
-		<label class="rideshare">Common Name:</label>
-		<?php // Get all rideshare event terms (taxonomy)
-			$eventOptions = get_terms('idealien_rideshare_event', 'hide_empty=0&order=ASC'); ?>
-			<select name='idealien_rideshare_event' class='rideshare_selectLine'>
-			<?php 
-			echo "<option></option>\n";
-			foreach ($eventOptions as $event) {
-				if ($event->name == $idealien_rideshare_event) {
-					echo "<option SELECTED value='" . $event->name . "'>" . $event->name . "</option>\n";
-				} else {
-					echo "<option value='" . $event->name . "'>" . $event->name . "</option>\n";
-				}
-			}
-   		?>
-		</select>
-        <span class="description">What general variety of seed is this?</span>
-	</p>
-    
-    <fieldset><legend>Seed variety</legend>
+        <label>Some additional relevant things about this exchange are&hellip;</label><br />
+        <textarea name="idealien_rideshare_addInfo" class="rideshare_inputBox" rows="10" cols="90"><?php echo $idealien_rideshare_addInfo;?></textarea><br />
+        <span class="description">(Enter any additional details about this exchange here, such as what kinds of seeds you're hoping to trade for, or other ways interested users might be able to contact you.)</span><br />
+    </p>
+    <p><label>This seed exchange is <?php print $status_select;?>.</label> <span id="wp-seedbank-status-helptext" class="description">(<?php foreach ($statusOptions as $x) :?>The <code><?php echo $x->name;?></code> type is for <?php print strtolower($x->description);?>, <?php endforeach;?>)</span></p>
+
+<!-- TODO: These are commented out, no need for them in minimum viable product. Add later? -->
+<!--
+    <fieldset id="wp-seedbank-bioclassification"><legend>Seed bioclassifcation</legend>
         <p>
-            <label class="rideshare"><?php _e('Species' , 'idealien-rideshare'); ?>:</label>
+            <label><?php _e('Species' , 'idealien-rideshare'); ?>:</label>
             <input name="idealien_rideshare_destinationCity" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_destinationCity; ?>" />
             <span class="description">What specific species of seed is this?</span>
         </p>
         <p>
-            <label class="rideshare"><?php _e('Genus' , 'idealien-rideshare'); ?>:</label>
+            <label><?php _e('Genus' , 'idealien-rideshare'); ?>:</label>
             <?php // Get all rideshare city terms (taxonomy)
                 $stateProvOptions = get_terms('idealien_rideshare_state_prov', 'hide_empty=0&order=ASC'); ?>
                 <select name='idealien_rideshare_destinationStateProv' class='rideshare_selectLine'>
-                <option></option>
+                <option value="">I don't know.</option>
                 <?php 
                 foreach ($stateProvOptions as $stateProv) {
                     if ($stateProv->name == $idealien_rideshare_destinationStateProv) {
@@ -731,9 +726,8 @@ class idealien_rideshare {
         </p>
     </fieldset>
 
-<!--
 	<p>
-		<label class="rideshare"><?php _e('From' , 'idealien-rideshare'); ?>:</label>
+		<label><?php _e('From' , 'idealien-rideshare'); ?>:</label>
 		<input name="idealien_rideshare_departureCity" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_departureCity; ?>" />
 	
 		<?php // Get all rideshare city terms (taxonomy)
@@ -751,56 +745,20 @@ class idealien_rideshare {
    		?>
 		</select>
 	</p>
--->
-    
+
     <p>
-		<label class="rideshare"><?php _e('Seed Expiry Date' , 'idealien-rideshare'); ?>:</label>
-		<input name="idealien_rideshare_departureDate" class="rideshare_inputLine datepicker" value="<?php echo $idealien_rideshare_departureDate;?>" />
-        <span class="description">If these seeds are in a pack, list the expiration date here.</span>
-	</p>
-    
-    <p>
-		<label class="rideshare"><?php _e('Exchange expiry date' , 'idealien-rideshare'); ?>:</label>
-		<input name="idealien_rideshare_returnDate" class="rideshare_inputLine datepicker" value="<?php echo $idealien_rideshare_returnDate;?>" />
-        <span class="description">If you don't get a response by this date, your request will automatically close.</span>
-	</p>
-    <div class="clear"></div>
-    
-    <p>
-		<label class="rideshare"><?php _e('Quantity' , 'idealien-rideshare'); ?>:</label>
-		<input name="idealien_rideshare_spaces" class="rideshare_inputLine" value="<?php if ($idealien_rideshare_spaces >= 1) {
-					echo $idealien_rideshare_spaces;
-				} else {
-					echo '1';
-				} ?>" />
-	</p>
-    <div class="clear"></div>
-	
-     <p>
-		<label class="rideshare"><?php _e('Username' , 'idealien-rideshare'); ?>:</label>
-		<input name="idealien_rideshare_username" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_username;?>" /><br />
-		
-	</p>
-    
-    <p>
-		<label class="rideshare"><?php _e('Name' , 'idealien-rideshare'); ?>:</label>
+		<label><?php _e('Name' , 'idealien-rideshare'); ?>:</label>
 		<input name="idealien_rideshare_name" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_name;?>" /><br />
 		<span class="description">If different from your member name, enter a contact person's name for this exchange here.</span>
 	</p>
     
     <p>
-		<label class="rideshare"><?php _e('Email' , 'idealien-rideshare'); ?>:</label>
+		<label><?php _e('Email' , 'idealien-rideshare'); ?>:</label>
 		<input name="idealien_rideshare_email" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_email;?>" /><br />
 		<span class="description">Enter your email address if you'd like other members to contact you privately about this exchange.</span>
 	</p> 
-    
-    
-     <p>
-		<label class="rideshare"><?php _e('Additional Info' , 'idealien-rideshare'); ?>:</label>
-        <textarea name="idealien_rideshare_addInfo" class="rideshare_inputBox"><?php echo $idealien_rideshare_addInfo;?></textarea><br />
-		<span class="description">Enter any additional details about this exchange here. For instance, if this is a <code>Trade</code>, describe what seeds you most hope to receive in exchange.</span>
-	</p>
-    
+-->
+
     <?php //For debug inspection purposes ?>
 	<span id="post_id_reference" style="display:none;"><?php echo $post->ID; ?></span>
 	
@@ -1630,7 +1588,6 @@ class idealien_rideshare {
 			wp_insert_term(__( 'Tomato', 'idealien-rideshare' ), 'idealien_rideshare_event');
 			
 			wp_insert_term(__( 'Active', 'idealien-rideshare' ), 'idealien_rideshare_status', array('description' => 'New/open seed exchange requests or offers.'));
-			wp_insert_term(__( 'Connected', 'idealien-rideshare' ), 'idealien_rideshare_status', array('description' => 'Exchanges currently in negotiation.'));
 			wp_insert_term(__( 'Deleted', 'idealien-rideshare' ), 'idealien_rideshare_status', array('description' => 'Expired or completed seed exchanges.'));
 
 		}
