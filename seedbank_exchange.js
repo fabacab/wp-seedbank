@@ -7,15 +7,15 @@ WP_SEEDBANK.UI.hideDeletedExchangeRequests = function () {
     el.innerHTML = 'Hide Deleted Seed Exchanges';
     jQuery(el).click(function (e) {
         e.preventDefault();
-        jQuery('.idealien_rideshare_status').each(function() {
+        jQuery('.wp_seedbank_status').each(function() {
             if(jQuery(this).text() != "Active") {
                 jQuery(this).parent().hide();
             }
         });
     });
-    var x = document.getElementById('post-query-submit')
+    var x = document.getElementById('post-query-submit');
     if (x && x.parentNode) {
-        parentNode.appendChild(el);
+        x.parentNode.appendChild(el);
     }
 };
 
@@ -31,7 +31,6 @@ WP_SEEDBANK.UI.toggleBatchExchangeDataSource = function () {
                         jQuery('#wp-seedbank-batch-exchange-web-fetch').show();
                     break;
                     case 'my computer':
-                        console.log('my-comp');
                         jQuery('#wp-seedbank-batch-exchange-file-upload').show();
                         jQuery('#wp-seedbank-batch-exchange-web-fetch').hide();
                     break;
@@ -44,6 +43,7 @@ WP_SEEDBANK.UI.toggleBatchExchangeDataSource = function () {
 WP_SEEDBANK.init = function () {
     // TODO: Filter these out of the result set from the PHP at some point, eh?
     WP_SEEDBANK.UI.hideDeletedExchangeRequests();
+    // TODO: Run this only on the appropriate page.
     WP_SEEDBANK.UI.toggleBatchExchangeDataSource();
 };
 
