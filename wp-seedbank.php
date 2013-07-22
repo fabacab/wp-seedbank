@@ -1501,13 +1501,15 @@ class idealien_rideshare {
         // DEV NOTE: For now, forcibly assume we're always doing a new install when we "activate."
 		$version = ""; //get_option('idealien_rideshare_version');
 		
+        // New installation - pre-load some fields
 		if($version == "") {
-			//New installation - pre-load some fields
+            // Exchange Types (verbs)
 			wp_insert_term(__( 'Give', 'idealien-rideshare' ), 'idealien_rideshare_type', array('description' => 'Exchanges offering free seeds being given away.'));
 			wp_insert_term(__( 'Get', 'idealien-rideshare' ), 'idealien_rideshare_type', array('description' => 'Exchanges requesting seeds of a variety not already listed.'));
 			wp_insert_term(__( 'Sell', 'idealien-rideshare' ), 'idealien_rideshare_type', array('description' => 'Exchanges offering seeds for money.'));
 			wp_insert_term(__( 'Trade', 'idealien-rideshare' ), 'idealien_rideshare_type', array('description' => 'Exchanges offering seeds for other seeds.'));
 			
+            // Genera
             wp_insert_term( __( 'Abelmoschus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'abelmoschus' ) );
             wp_insert_term( __( 'Agastache', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'agastache' ) );
             wp_insert_term( __( 'Allium', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'allium' ) );
@@ -1586,27 +1588,65 @@ class idealien_rideshare {
             wp_insert_term( __( 'Zea', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'zea' ) );
             wp_insert_term( __( 'Zinnia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'zinnia' ) );
 			
-			wp_insert_term(__( 'Bean', 'idealien-rideshare' ), 'idealien_rideshare_event');
-			wp_insert_term(__( 'Lettuce', 'idealien-rideshare' ), 'idealien_rideshare_event');
-			wp_insert_term(__( 'Pepper', 'idealien-rideshare' ), 'idealien_rideshare_event');
-			wp_insert_term(__( 'Pumpkin', 'idealien-rideshare' ), 'idealien_rideshare_event');
-			wp_insert_term(__( 'Tomato', 'idealien-rideshare' ), 'idealien_rideshare_event');
+            // Common Names
+            wp_insert_term( __( 'Asian Vegetable', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'asian-vegetable' ) );
+            wp_insert_term( __( 'Bean', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'bean' ) );
+            wp_insert_term( __( 'Beet', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'beet' ) );
+            wp_insert_term( __( 'Berry', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'berry' ) );
+            wp_insert_term( __( 'Broccoli', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'broccoli' ) );
+            wp_insert_term( __( 'Brussels Sprout', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'brussels-sprout' ) );
+            wp_insert_term( __( 'Cabbage', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'cabbage' ) );
+            wp_insert_term( __( 'Carrot', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'carrot' ) );
+            wp_insert_term( __( 'Cauliflower', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'cauliflower' ) );
+            wp_insert_term( __( 'Chard', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'chard' ) );
+            wp_insert_term( __( 'Corn', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'corn' ) );
+            wp_insert_term( __( 'Collard', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'collard' ) );
+            wp_insert_term( __( 'Cover Crop', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'cover-crop' ) );
+            wp_insert_term( __( 'Eggplant', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'eggplant' ) );
+            wp_insert_term( __( 'Cucumber', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'cucumber' ) );
+            wp_insert_term( __( 'Fava', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'fava' ) );
+            wp_insert_term( __( 'Flower', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'flower' ) );
+            wp_insert_term( __( 'Gourd', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'gourd' ) );
+            wp_insert_term( __( 'Green', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'green' ) );
+            wp_insert_term( __( 'Herb', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'herb' ) );
+            wp_insert_term( __( 'Kale', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'kale' ) );
+            wp_insert_term( __( 'Kohlrabi', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'kohlrabi' ) );
+            wp_insert_term( __( 'Legume', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'legume' ) );
+            wp_insert_term( __( 'Lettuce', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'lettuce' ) );
+            wp_insert_term( __( 'Melon', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'melon' ) );
+            wp_insert_term( __( 'Mustard', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'mustard' ) );
+            wp_insert_term( __( 'Okra', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'okra' ) );
+            wp_insert_term( __( 'Onion', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'onion' ) );
+            wp_insert_term( __( 'Parsnip/Root Parsley', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'parsnip-root-parsley' ) );
+            wp_insert_term( __( 'Potato', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'potato' ) );
+            wp_insert_term( __( 'Pea', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'pea' ) );
+            wp_insert_term( __( 'Peppers', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'peppers' ) );
+            wp_insert_term( __( 'Pumpkin', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'pumpkin' ) );
+            wp_insert_term( __( 'Radish', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'radish' ) );
+            wp_insert_term( __( 'Strawberry', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'strawberry' ) );
+            wp_insert_term( __( 'Root', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'root' ) );
+            wp_insert_term( __( 'Rutabaga', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'rutabaga' ) );
+            wp_insert_term( __( 'Spinach', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'spinach' ) );
+            wp_insert_term( __( 'Summer Squash', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'summer-squash' ) );
+            wp_insert_term( __( 'Tomatoes', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'tomatoes' ) );
+            wp_insert_term( __( 'Turnip', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'turnip' ) );
+            wp_insert_term( __( 'Winter Squash', 'idealien-rideshare' ), 'idealien_rideshare_event', array( 'slug' => 'winter-squash' ) );
 			
+            // Exchange statuses
 			wp_insert_term(__( 'Active', 'idealien-rideshare' ), 'idealien_rideshare_status', array('description' => 'New/open seed exchange requests or offers.'));
 			wp_insert_term(__( 'Deleted', 'idealien-rideshare' ), 'idealien_rideshare_status', array('description' => 'Expired or completed seed exchanges.'));
-
 		}
-		
+
 		//Update version number in DB
 		update_option('idealien_rideshare_version', IDEALIEN_VERSION);
-		
+
 	}
-  
+
   	// Deactivating the plugin
   	static function deactivate() {
 		//FUTURE: Delete CPT is too risky - what else shoudl happen?
 	}
-  
+
   	// FUTURE: This is not yet called in any meaningful way.
   	static function uninstall() {
 
