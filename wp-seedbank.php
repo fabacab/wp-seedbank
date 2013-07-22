@@ -1,28 +1,26 @@
 <?php
 /*
     Plugin Name: WP-SeedBank
-    Plugin URI: http://hummingbirdproject.org/wp-seedbank/
-    Description: Add seed exchange post type to turn a WordPress install into a seed bank! :D
-    Author: Cleveland GiveCamp Developers (meitar@maymay.net)
-    Version: 0.1
-    Author URI: http://hummingbirdproject.org/wp-seedbank/#contributors
-	License: GPL
-	Requires at least: 3.5.2
-	Stable tag: 0.1
+    Plugin URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/
+    Description: Add a seed exchange post type to turn your WordPress install into a community seed bank! :D
+    Author: Cleveland GiveCamp Developers
+    Version: 0.2
+    Author URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/#authors
+    License: GPL
+    Requires at least: 3.5.2
+    Stable tag: 0.2
 */
-
 
 //Modify the following two variables to identify the ID for the comment and delete forms
 define ('WP_SEEDBANK_COMMENTFORM_ID' , "REPLACEME");
 define ('WP_SEEDBANK_DELETEFORM_ID' , "REPLACEME");
 
-
 //Do not modify anything else below 
 define ('WP_SEEDBANK_PATH', WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)) );
-define ('WP_SEEDBANK_VERSION', '0.1');
+define ('WP_SEEDBANK_VERSION', '0.2');
 
 class WP_Seedbank {
-	
+
 	//Define all meta data fields
 	var $meta_fields = array(
 		"wp_seedbank_type",
