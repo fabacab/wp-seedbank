@@ -699,7 +699,7 @@ class WP_Seedbank {
     <p>
         <label>Some additional relevant things about this exchange are&hellip;</label><br />
         <textarea name="wp_seedbank_addInfo" class="rideshare_inputBox" rows="10" cols="90"><?php echo $wp_seedbank_addInfo;?></textarea><br />
-        <span class="description">(Enter any additional details about this exchange here, such as what kinds of seeds you're hoping to trade for, or other ways interested users might be able to contact you.)</span><br />
+        <span class="description">(Enter any additional details about this exchange here, such as what kinds of seeds you're hoping to swap for, or other ways interested users might be able to contact you.)</span><br />
     </p>
     <p><label>This seed exchange is <?php print $status_select;?>.</label> <span id="wp-seedbank-status-helptext" class="description">(<?php foreach ($statusOptions as $x) :?>The <code><?php echo $x->name;?></code> type is for <?php print strtolower($x->description);?>, <?php endforeach;?>)</span></p>
 
@@ -1527,10 +1527,10 @@ class WP_Seedbank {
             $wpdb->query("UPDATE {$wpdb->prefix}term_taxonomy SET taxonomy=REPLACE(taxonomy, 'wp_seedbank_username', 'wp_seedbank_unit');");
 
             // Exchange Types (verbs)
+			wp_insert_term(__( 'Swap', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges offering seeds for other seeds.'));
+			wp_insert_term(__( 'Sell', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges offering seeds for money.'));
 			wp_insert_term(__( 'Give', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges offering free seeds being given away.'));
 			wp_insert_term(__( 'Get', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges requesting seeds of a variety not already listed.'));
-			wp_insert_term(__( 'Sell', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges offering seeds for money.'));
-			wp_insert_term(__( 'Trade', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges offering seeds for other seeds.'));
 			
             // Genera
             wp_insert_term( __( 'Abelmoschus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'abelmoschus' ) );
@@ -1797,8 +1797,8 @@ class WP_SeedbankAdmin {
     </thead>
     <tbody>
         <tr>
-            <td>Looking to trade peppers for carrots</td>
-            <td>Trade</td>
+            <td>Looking to swap peppers for carrots</td>
+            <td>Swap</td>
             <td>5</td>
             <td>Pepper</td>
             <td>seeds</td>
@@ -1821,7 +1821,7 @@ class WP_SeedbankAdmin {
         </tr>
         <tr>
             <td>These are the best bean seeds!</td>
-            <td>Trade</td>
+            <td>Swap</td>
             <td>20</td>
             <td>Bean</td>
             <td>packets</td>
