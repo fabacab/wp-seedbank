@@ -1512,6 +1512,20 @@ class WP_Seedbank {
             $wpdb->query("UPDATE {$wpdb->prefix}posts SET post_type='wp_seedbank',guid=REPLACE(guid, 'idealien_rideshare', 'wp_seedbank') WHERE post_type='idealien_rideshare';");
             $wpdb->query("UPDATE {$wpdb->prefix}term_taxonomy SET taxonomy=REPLACE(taxonomy, 'idealien_rideshare', 'wp_seedbank');");
 
+            $wpdb->query("UPDATE {$wpdb->prefix}postmeta SET meta_key=REPLACE(meta_key, 'wp_seedbank_spaces', 'wp_seedbank_quantity');");
+            $wpdb->query("UPDATE {$wpdb->prefix}postmeta SET meta_key=REPLACE(meta_key, 'wp_seedbank_event', 'wp_seedbank_common_name');");
+            $wpdb->query("UPDATE {$wpdb->prefix}postmeta SET meta_key=REPLACE(meta_key, 'wp_seedbank_departureDate', 'wp_seedbank_seed_expiry_date');");
+            $wpdb->query("UPDATE {$wpdb->prefix}postmeta SET meta_key=REPLACE(meta_key, 'wp_seedbank_returnDate', 'wp_seedbank_exchange_expiry_date');");
+            $wpdb->query("UPDATE {$wpdb->prefix}postmeta SET meta_key=REPLACE(meta_key, 'wp_seedbank_returnDate', 'wp_seedbank_exchange_expiry_date');");
+            $wpdb->query("UPDATE {$wpdb->prefix}postmeta SET meta_key=REPLACE(meta_key, 'wp_seedbank_username', 'wp_seedbank_unit');");
+
+            $wpdb->query("UPDATE {$wpdb->prefix}term_taxonomy SET taxonomy=REPLACE(taxonomy, 'wp_seedbank_spaces', 'wp_seedbank_quantity');");
+            $wpdb->query("UPDATE {$wpdb->prefix}term_taxonomy SET taxonomy=REPLACE(taxonomy, 'wp_seedbank_event', 'wp_seedbank_common_name');");
+            $wpdb->query("UPDATE {$wpdb->prefix}term_taxonomy SET taxonomy=REPLACE(taxonomy, 'wp_seedbank_departureDate', 'wp_seedbank_seed_expiry_date');");
+            $wpdb->query("UPDATE {$wpdb->prefix}term_taxonomy SET taxonomy=REPLACE(taxonomy, 'wp_seedbank_returnDate', 'wp_seedbank_exchange_expiry_date');");
+            $wpdb->query("UPDATE {$wpdb->prefix}term_taxonomy SET taxonomy=REPLACE(taxonomy, 'wp_seedbank_returnDate', 'wp_seedbank_exchange_expiry_date');");
+            $wpdb->query("UPDATE {$wpdb->prefix}term_taxonomy SET taxonomy=REPLACE(taxonomy, 'wp_seedbank_username', 'wp_seedbank_unit');");
+
             // Exchange Types (verbs)
 			wp_insert_term(__( 'Give', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges offering free seeds being given away.'));
 			wp_insert_term(__( 'Get', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges requesting seeds of a variety not already listed.'));
