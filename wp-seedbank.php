@@ -1637,7 +1637,7 @@ class WP_Seedbank {
 		}
 
 		//Update version number in DB
-		update_option('wp_seedbank_version', IDEALIEN_VERSION);
+		update_option('wp_seedbank_version', WP_SEEDBANK_VERSION);
 
 	}
 
