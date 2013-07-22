@@ -432,36 +432,36 @@ class WP_Seedbank {
 		register_post_type('wp_seedbank',
 			array(
 				'labels' => array(
-					'name' => __( 'Seed Exchanges', 'idealien-rideshare' ),
-					'singular_label' => __( 'Seed Exchange', 'idealien-rideshare' ),
-					'add_new' => __( 'Add Seed Exchange', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add Seed Exchange', 'idealien-rideshare' ),
-					'edit' => __( 'Edit Seed Exchange', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Seed Exchange', 'idealien-rideshare' ),
-					'new_item' => __( 'New Seed Exchange', 'idealien-rideshare' ),
-					'view' => __( 'View Seed Exchange', 'idealien-rideshare' ),
-					'view_item' => __( 'View Seed Exchange', 'idealien-rideshare' ),
-					'search' => __( 'Search Seed Exchanges', 'idealien-rideshare' ),
-					'not_found' => __( 'No Seed Exchanges found', 'idealien-rideshare' ),
-					'not_found_in_trash' => __( 'No Seed Exchanges found in trash', 'idealien-rideshare' )
+					'name' => __( 'Seed Exchanges', 'wp-seedbank' ),
+					'singular_label' => __( 'Seed Exchange', 'wp-seedbank' ),
+					'add_new' => __( 'Add Seed Exchange', 'wp-seedbank' ),
+					'add_new_item' => __( 'Add Seed Exchange', 'wp-seedbank' ),
+					'edit' => __( 'Edit Seed Exchange', 'wp-seedbank' ),
+					'edit_item' => __( 'Edit Seed Exchange', 'wp-seedbank' ),
+					'new_item' => __( 'New Seed Exchange', 'wp-seedbank' ),
+					'view' => __( 'View Seed Exchange', 'wp-seedbank' ),
+					'view_item' => __( 'View Seed Exchange', 'wp-seedbank' ),
+					'search' => __( 'Search Seed Exchanges', 'wp-seedbank' ),
+					'not_found' => __( 'No Seed Exchanges found', 'wp-seedbank' ),
+					'not_found_in_trash' => __( 'No Seed Exchanges found in trash', 'wp-seedbank' )
 				),
 				'supports' => array('title', 'custom-fields'),
 				'rewrite' => array('slug' => 'rideshare'),
 				'public' => true,
-				'description' => __( 'Seedbank Seed Exchanges', 'idealien-rideshare' ),
+				'description' => __( 'Seedbank Seed Exchanges', 'wp-seedbank' ),
 				'menu_icon' => WP_SEEDBANK_PATH . 'seedexchange_icon.png'
 			)
 		);
 		
 		register_taxonomy('wp_seedbank_type', 'wp_seedbank', array(
 				'labels' => array(
-					'name' => __( 'Exchange Types', 'idealien-rideshare' ),
-					'singular_name' => __( 'Exchange Type', 'idealien-rideshare' ),
-					'all_items' => __( 'All Exchange Types', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Exchange Type', 'idealien-rideshare' ),
-					'update_item' => __( 'Update Exchange Type', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add New Exchange Type', 'idealien-rideshare' ),
-					'new_item_name' => __( 'New Exchange Type Name', 'idealien-rideshare' )
+					'name' => __( 'Exchange Types', 'wp-seedbank' ),
+					'singular_name' => __( 'Exchange Type', 'wp-seedbank' ),
+					'all_items' => __( 'All Exchange Types', 'wp-seedbank' ),
+					'edit_item' => __( 'Edit Exchange Type', 'wp-seedbank' ),
+					'update_item' => __( 'Update Exchange Type', 'wp-seedbank' ),
+					'add_new_item' => __( 'Add New Exchange Type', 'wp-seedbank' ),
+					'new_item_name' => __( 'New Exchange Type Name', 'wp-seedbank' )
 				),
 				'hierarchical' => false,
 				'label' => 'Exchange Types'
@@ -470,46 +470,46 @@ class WP_Seedbank {
 		
 		register_taxonomy('wp_seedbank_common_name', 'wp_seedbank', array(
 				'labels' => array(
-					'name' => __( 'Common Names', 'idealien-rideshare' ),
-					'singular_name' => __( 'Common Name', 'idealien-rideshare' ),
-					'all_items' => __( 'All Common Names', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Common Name', 'idealien-rideshare' ),
-					'update_item' => __( 'Update Common Name', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add New Common Name', 'idealien-rideshare' ),
-					'new_item_name' => __( 'New Common Name', 'idealien-rideshare' )
+					'name' => __( 'Common Names', 'wp-seedbank' ),
+					'singular_name' => __( 'Common Name', 'wp-seedbank' ),
+					'all_items' => __( 'All Common Names', 'wp-seedbank' ),
+					'edit_item' => __( 'Edit Common Name', 'wp-seedbank' ),
+					'update_item' => __( 'Update Common Name', 'wp-seedbank' ),
+					'add_new_item' => __( 'Add New Common Name', 'wp-seedbank' ),
+					'new_item_name' => __( 'New Common Name', 'wp-seedbank' )
 				),
 				'hierarchical' => false,
-				'label' => __( 'Common Names', 'idealien-rideshare' )
+				'label' => __( 'Common Names', 'wp-seedbank' )
 			)
 		);
 		
 		register_taxonomy('wp_seedbank_genus', 'wp_seedbank', array(
 				'labels' => array(
-					'name' => __( 'Seed Genera', 'idealien-rideshare' ),
-					'singular_name' => __( 'Genus', 'idealien-rideshare' ),
-					'all_items' => __( 'All Genera', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Genera', 'idealien-rideshare' ),
-					'update_item' => __( 'Update Genus', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add New Genus', 'idealien-rideshare' ),
-					'new_item_name' => __( 'New Genus Name', 'idealien-rideshare' )
+					'name' => __( 'Seed Genera', 'wp-seedbank' ),
+					'singular_name' => __( 'Genus', 'wp-seedbank' ),
+					'all_items' => __( 'All Genera', 'wp-seedbank' ),
+					'edit_item' => __( 'Edit Genera', 'wp-seedbank' ),
+					'update_item' => __( 'Update Genus', 'wp-seedbank' ),
+					'add_new_item' => __( 'Add New Genus', 'wp-seedbank' ),
+					'new_item_name' => __( 'New Genus Name', 'wp-seedbank' )
 				),
 				'hierarchical' => false,
-				'label' => __( 'Seed Genera', 'idealien-rideshare' )
+				'label' => __( 'Seed Genera', 'wp-seedbank' )
 			)
 		);
 		
 		register_taxonomy('wp_seedbank_status', 'wp_seedbank', array(
 				'labels' => array(
-					'name' => __( 'Exchange Statuses', 'idealien-rideshare' ),
-					'singular_name' => __( 'Exchange Status', 'idealien-rideshare' ),
-					'all_items' => __( 'All Exchange Statuses', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Exchange Status', 'idealien-rideshare' ),
-					'update_item' => __( 'Update Exchange Status', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add New Exchange Status', 'idealien-rideshare' ),
-					'new_item_name' => __( 'New Exchange Status Name', 'idealien-rideshare' )
+					'name' => __( 'Exchange Statuses', 'wp-seedbank' ),
+					'singular_name' => __( 'Exchange Status', 'wp-seedbank' ),
+					'all_items' => __( 'All Exchange Statuses', 'wp-seedbank' ),
+					'edit_item' => __( 'Edit Exchange Status', 'wp-seedbank' ),
+					'update_item' => __( 'Update Exchange Status', 'wp-seedbank' ),
+					'add_new_item' => __( 'Add New Exchange Status', 'wp-seedbank' ),
+					'new_item_name' => __( 'New Exchange Status Name', 'wp-seedbank' )
 				),
 				'hierarchical' => false,
-				'label' => __( 'Exchange Status', 'idealien-rideshare' )
+				'label' => __( 'Exchange Status', 'wp-seedbank' )
 			)
 		);
 		
@@ -707,12 +707,12 @@ class WP_Seedbank {
 <!--
     <fieldset id="wp-seedbank-bioclassification"><legend>Seed bioclassifcation</legend>
         <p>
-            <label><?php _e('Species' , 'idealien-rideshare'); ?>:</label>
+            <label><?php _e('Species' , 'wp-seedbank'); ?>:</label>
             <input name="wp_seedbank_destinationCity" class="rideshare_inputLine" value="<?php echo $wp_seedbank_destinationCity; ?>" />
             <span class="description">What specific species of seed is this?</span>
         </p>
         <p>
-            <label><?php _e('Genus' , 'idealien-rideshare'); ?>:</label>
+            <label><?php _e('Genus' , 'wp-seedbank'); ?>:</label>
             <?php // Get all rideshare city terms (taxonomy)
                 $stateProvOptions = get_terms('wp_seedbank_genus', 'hide_empty=0&order=ASC'); ?>
                 <select name='wp_seedbank_destinationStateProv' class='rideshare_selectLine'>
@@ -732,7 +732,7 @@ class WP_Seedbank {
     </fieldset>
 
 	<p>
-		<label><?php _e('From' , 'idealien-rideshare'); ?>:</label>
+		<label><?php _e('From' , 'wp-seedbank'); ?>:</label>
 		<input name="wp_seedbank_departureCity" class="rideshare_inputLine" value="<?php echo $wp_seedbank_departureCity; ?>" />
 	
 		<?php // Get all rideshare city terms (taxonomy)
@@ -752,13 +752,13 @@ class WP_Seedbank {
 	</p>
 
     <p>
-		<label><?php _e('Name' , 'idealien-rideshare'); ?>:</label>
+		<label><?php _e('Name' , 'wp-seedbank'); ?>:</label>
 		<input name="wp_seedbank_name" class="rideshare_inputLine" value="<?php echo $wp_seedbank_name;?>" /><br />
 		<span class="description">If different from your member name, enter a contact person's name for this exchange here.</span>
 	</p>
     
     <p>
-		<label><?php _e('Email' , 'idealien-rideshare'); ?>:</label>
+		<label><?php _e('Email' , 'wp-seedbank'); ?>:</label>
 		<input name="wp_seedbank_email" class="rideshare_inputLine" value="<?php echo $wp_seedbank_email;?>" /><br />
 		<span class="description">Enter your email address if you'd like other members to contact you privately about this exchange.</span>
 	</p> 
@@ -828,13 +828,13 @@ class WP_Seedbank {
 	{
 		$columns = array(
 			"cb" => "<input type=\"checkbox\" />",
-			"title" => __( 'Seed Exchange', 'idealien-rideshare' ),
-			"wp_seedbank_status" => __( 'Status', 'idealien-rideshare' ),
-			"wp_seedbank_type" => __( 'Type', 'idealien-rideshare' ),
-			"wp_seedbank_seed_expiry_date" => __( 'Seed Expiry Date', 'idealien-rideshare' ),
-			"wp_seedbank_quantity" => __( 'Quantity', 'idealien-rideshare' ),
-			"wp_seedbank_destination" => __( 'Common Name', 'idealien-rideshare' ),
-			//"wp_seedbank_departure" => __( 'Departure', 'idealien-rideshare' )
+			"title" => __( 'Seed Exchange', 'wp-seedbank' ),
+			"wp_seedbank_status" => __( 'Status', 'wp-seedbank' ),
+			"wp_seedbank_type" => __( 'Type', 'wp-seedbank' ),
+			"wp_seedbank_seed_expiry_date" => __( 'Seed Expiry Date', 'wp-seedbank' ),
+			"wp_seedbank_quantity" => __( 'Quantity', 'wp-seedbank' ),
+			"wp_seedbank_destination" => __( 'Common Name', 'wp-seedbank' ),
+			//"wp_seedbank_departure" => __( 'Departure', 'wp-seedbank' )
 		);
 		
 		return $columns;
@@ -1235,19 +1235,19 @@ class WP_Seedbank {
 					//Prepare table headers
 					$output .= '<table id="rideshare" class="tablestripe">';
 					$output .= '<tr>';
-					$output .= '<th class="rideshareType">' . __('Type' , 'idealien-rideshare') . '</th>';
-					$output .= '<th class="rideshareEvent">' . __('To' , 'idealien-rideshare') . '</th>';
-					$output .= '<th class="rideshareCity">' . __('From' , 'idealien-rideshare') . '</th>';
-					$output .= '<th class="rideshareSpaces">' . __('For' , 'idealien-rideshare') . '</th>';
-					$output .= '<th class="rideshareDDate">' . __('On' , 'idealien-rideshare') . '</th>';
-					//$output .= '<th class="rideshareRDate">' . __('Return' , 'idealien-rideshare') . '</th>';
-					$output .= '<th class="rideshareInfo">' . __('Add. Info' , 'idealien-rideshare') . '</th>';
+					$output .= '<th class="rideshareType">' . __('Type' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareEvent">' . __('To' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareCity">' . __('From' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareSpaces">' . __('For' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareDDate">' . __('On' , 'wp-seedbank') . '</th>';
+					//$output .= '<th class="rideshareRDate">' . __('Return' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareInfo">' . __('Add. Info' , 'wp-seedbank') . '</th>';
 					
 					//Add Engagement Column based on current user = filtered (profile scenario)
 					if( $current_user->user_login != $unit ) {
-						$output .= '<th class="rideshareContact">' . __('Contact' , 'idealien-rideshare') . '</th>';
+						$output .= '<th class="rideshareContact">' . __('Contact' , 'wp-seedbank') . '</th>';
 					} else {
-						$output .= '<th class="rideshareContact">' . __('Actions' , 'idealien-rideshare') . '</th>';
+						$output .= '<th class="rideshareContact">' . __('Actions' , 'wp-seedbank') . '</th>';
 					}
 						
 					$output .= '</tr>';
@@ -1396,7 +1396,7 @@ class WP_Seedbank {
 					
 				else:
 					//Empty rideshare list
-					$output .= '<p>' . __('There are no seed exchanges available at this time' , 'idealien-rideshare') . '.</p>';
+					$output .= '<p>' . __('There are no seed exchanges available at this time' , 'wp-seedbank') . '.</p>';
 					
 				endif;
 			
@@ -1432,13 +1432,13 @@ class WP_Seedbank {
 							$output .= '<h2>' . $common_name->name . '</h2>';
 							$output .= '<table id="rideshare" class="tablestripe">';
 							$output .= '<tr>';
-							$output .= '<th class="rideshareCity">' . __('Location' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareType">' . __('Type' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareSpaces">' . __('Quantity' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareDDate">' . __('Seed Expiry Date' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareRDate">' . __('Expiry Date' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareContact">' . __('Contact' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareInfo">' . __('Additional Info' , 'idealien-rideshare') . '</th>';
+							$output .= '<th class="rideshareCity">' . __('Location' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareType">' . __('Type' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareSpaces">' . __('Quantity' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareDDate">' . __('Seed Expiry Date' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareRDate">' . __('Expiry Date' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareContact">' . __('Contact' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareInfo">' . __('Additional Info' , 'wp-seedbank') . '</th>';
 							$output .= '</tr>';
 					
 							 while ( $IRQuery->have_posts() ) : $IRQuery->the_post(); 
@@ -1527,137 +1527,137 @@ class WP_Seedbank {
             $wpdb->query("UPDATE {$wpdb->prefix}term_taxonomy SET taxonomy=REPLACE(taxonomy, 'wp_seedbank_username', 'wp_seedbank_unit');");
 
             // Exchange Types (verbs)
-			wp_insert_term(__( 'Swap', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges offering seeds for other seeds.'));
-			wp_insert_term(__( 'Sell', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges offering seeds for money.'));
-			wp_insert_term(__( 'Give', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges offering free seeds being given away.'));
-			wp_insert_term(__( 'Get', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges requesting seeds of a variety not already listed.'));
+			wp_insert_term(__( 'Swap', 'wp-seedbank' ), 'wp_seedbank_type', array('description' => 'Exchanges offering seeds for other seeds.'));
+			wp_insert_term(__( 'Sell', 'wp-seedbank' ), 'wp_seedbank_type', array('description' => 'Exchanges offering seeds for money.'));
+			wp_insert_term(__( 'Give', 'wp-seedbank' ), 'wp_seedbank_type', array('description' => 'Exchanges offering free seeds being given away.'));
+			wp_insert_term(__( 'Get', 'wp-seedbank' ), 'wp_seedbank_type', array('description' => 'Exchanges requesting seeds of a variety not already listed.'));
 			
             // Genera
-            wp_insert_term( __( 'Abelmoschus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'abelmoschus' ) );
-            wp_insert_term( __( 'Agastache', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'agastache' ) );
-            wp_insert_term( __( 'Allium', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'allium' ) );
-            wp_insert_term( __( 'Amaranthus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'amaranthus' ) );
-            wp_insert_term( __( 'Anagallis', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'anagallis' ) );
-            wp_insert_term( __( 'Anethum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'anethum' ) );
-            wp_insert_term( __( 'Anthenum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'anthenum' ) );
-            wp_insert_term( __( 'Antirrhinum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'antirrhinum' ) );
-            wp_insert_term( __( 'Apium', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'apium' ) );
-            wp_insert_term( __( 'Asclepias', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'asclepias' ) );
-            wp_insert_term( __( 'Basella', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'basella' ) );
-            wp_insert_term( __( 'Beta', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'beta' ) );
-            wp_insert_term( __( 'Brassica', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'brassica' ) );
-            wp_insert_term( __( 'Calendula', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'calendula' ) );
-            wp_insert_term( __( 'Capsicum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'capsicum' ) );
-            wp_insert_term( __( 'Cardiospermum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'cardiospermum' ) );
-            wp_insert_term( __( 'Centaurea', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'centaurea' ) );
-            wp_insert_term( __( 'Chrysanthemum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'chrysanthemum' ) );
-            wp_insert_term( __( 'Cichorium', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'cichorium' ) );
-            wp_insert_term( __( 'Citrullus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'citrullus' ) );
-            wp_insert_term( __( 'Cleome', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'cleome' ) );
-            wp_insert_term( __( 'Cobaea', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'cobaea' ) );
-            wp_insert_term( __( 'Consolida', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'consolida' ) );
-            wp_insert_term( __( 'Convolvulus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'convolvulus' ) );
-            wp_insert_term( __( 'Coreopsis', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'coreopsis' ) );
-            wp_insert_term( __( 'Coriandrum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'coriandrum' ) );
-            wp_insert_term( __( 'Cosmos', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'cosmos' ) );
-            wp_insert_term( __( 'Cucumis', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'cucumis' ) );
-            wp_insert_term( __( 'Cucurbita', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'cucurbita' ) );
-            wp_insert_term( __( 'Dalea', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'dalea' ) );
-            wp_insert_term( __( 'Daucus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'daucus' ) );
-            wp_insert_term( __( 'Diplotaxis', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'diplotaxis' ) );
-            wp_insert_term( __( 'Dolichos', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'dolichos' ) );
-            wp_insert_term( __( 'Echinacea', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'echinacea' ) );
-            wp_insert_term( __( 'Eruca', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'eruca' ) );
-            wp_insert_term( __( 'Eschscholzia', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'eschscholzia' ) );
-            wp_insert_term( __( 'Foeniculum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'foeniculum' ) );
-            wp_insert_term( __( 'Fragaria', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'fragaria' ) );
-            wp_insert_term( __( 'Gaillardia', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'gaillardia' ) );
-            wp_insert_term( __( 'Glycine', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'glycine' ) );
-            wp_insert_term( __( 'Helianthus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'helianthus' ) );
-            wp_insert_term( __( 'Ipomoea', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'ipomoea' ) );
-            wp_insert_term( __( 'Koeleria', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'koeleria' ) );
-            wp_insert_term( __( 'Lactuca', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'lactuca' ) );
-            wp_insert_term( __( 'Lagenaria', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'lagenaria' ) );
-            wp_insert_term( __( 'Lathyrus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'lathyrus' ) );
-            wp_insert_term( __( 'Lupinus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'lupinus' ) );
-            wp_insert_term( __( 'Lycopersicon', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'lycopersicon' ) );
-            wp_insert_term( __( 'Malope', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'malope' ) );
-            wp_insert_term( __( 'Matricaria', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'matricaria' ) );
-            wp_insert_term( __( 'Mentha', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'mentha' ) );
-            wp_insert_term( __( 'Mirabilis', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'mirabilis' ) );
-            wp_insert_term( __( 'Nigella', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'nigella' ) );
-            wp_insert_term( __( 'Ocimum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'ocimum' ) );
-            wp_insert_term( __( 'Origanum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'origanum' ) );
-            wp_insert_term( __( 'Papaver', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'papaver' ) );
-            wp_insert_term( __( 'Passiflora', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'passiflora' ) );
-            wp_insert_term( __( 'Penstemon', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'penstemon' ) );
-            wp_insert_term( __( 'Petrolselinum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'petrolselinum' ) );
-            wp_insert_term( __( 'Phaseolus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'phaseolus' ) );
-            wp_insert_term( __( 'Physalis', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'physalis' ) );
-            wp_insert_term( __( 'Pisum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'pisum' ) );
-            wp_insert_term( __( 'Poterium', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'poterium' ) );
-            wp_insert_term( __( 'Raphanus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'raphanus' ) );
-            wp_insert_term( __( 'Rosmarinus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'rosmarinus' ) );
-            wp_insert_term( __( 'Rudbeckia', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'rudbeckia' ) );
-            wp_insert_term( __( 'Salvia', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'salvia' ) );
-            wp_insert_term( __( 'Scorpiurus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'scorpiurus' ) );
-            wp_insert_term( __( 'Solanum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'solanum' ) );
-            wp_insert_term( __( 'Spinachia', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'spinachia' ) );
-            wp_insert_term( __( 'Tagetes', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'tagetes' ) );
-            wp_insert_term( __( 'Thunbergia', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'thunbergia' ) );
-            wp_insert_term( __( 'Thymus', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'thymus' ) );
-            wp_insert_term( __( 'Triticum ', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'triticum ' ) );
-            wp_insert_term( __( 'Tropaeolum', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'tropaeolum' ) );
-            wp_insert_term( __( 'Zea', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'zea' ) );
-            wp_insert_term( __( 'Zinnia', 'idealien-rideshare' ), 'wp_seedbank_genus', array( 'slug' => 'zinnia' ) );
+            wp_insert_term( __( 'Abelmoschus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'abelmoschus' ) );
+            wp_insert_term( __( 'Agastache', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'agastache' ) );
+            wp_insert_term( __( 'Allium', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'allium' ) );
+            wp_insert_term( __( 'Amaranthus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'amaranthus' ) );
+            wp_insert_term( __( 'Anagallis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'anagallis' ) );
+            wp_insert_term( __( 'Anethum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'anethum' ) );
+            wp_insert_term( __( 'Anthenum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'anthenum' ) );
+            wp_insert_term( __( 'Antirrhinum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'antirrhinum' ) );
+            wp_insert_term( __( 'Apium', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'apium' ) );
+            wp_insert_term( __( 'Asclepias', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'asclepias' ) );
+            wp_insert_term( __( 'Basella', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'basella' ) );
+            wp_insert_term( __( 'Beta', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'beta' ) );
+            wp_insert_term( __( 'Brassica', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'brassica' ) );
+            wp_insert_term( __( 'Calendula', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'calendula' ) );
+            wp_insert_term( __( 'Capsicum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'capsicum' ) );
+            wp_insert_term( __( 'Cardiospermum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cardiospermum' ) );
+            wp_insert_term( __( 'Centaurea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'centaurea' ) );
+            wp_insert_term( __( 'Chrysanthemum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'chrysanthemum' ) );
+            wp_insert_term( __( 'Cichorium', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cichorium' ) );
+            wp_insert_term( __( 'Citrullus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'citrullus' ) );
+            wp_insert_term( __( 'Cleome', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cleome' ) );
+            wp_insert_term( __( 'Cobaea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cobaea' ) );
+            wp_insert_term( __( 'Consolida', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'consolida' ) );
+            wp_insert_term( __( 'Convolvulus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'convolvulus' ) );
+            wp_insert_term( __( 'Coreopsis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'coreopsis' ) );
+            wp_insert_term( __( 'Coriandrum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'coriandrum' ) );
+            wp_insert_term( __( 'Cosmos', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cosmos' ) );
+            wp_insert_term( __( 'Cucumis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cucumis' ) );
+            wp_insert_term( __( 'Cucurbita', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cucurbita' ) );
+            wp_insert_term( __( 'Dalea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'dalea' ) );
+            wp_insert_term( __( 'Daucus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'daucus' ) );
+            wp_insert_term( __( 'Diplotaxis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'diplotaxis' ) );
+            wp_insert_term( __( 'Dolichos', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'dolichos' ) );
+            wp_insert_term( __( 'Echinacea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'echinacea' ) );
+            wp_insert_term( __( 'Eruca', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'eruca' ) );
+            wp_insert_term( __( 'Eschscholzia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'eschscholzia' ) );
+            wp_insert_term( __( 'Foeniculum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'foeniculum' ) );
+            wp_insert_term( __( 'Fragaria', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'fragaria' ) );
+            wp_insert_term( __( 'Gaillardia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'gaillardia' ) );
+            wp_insert_term( __( 'Glycine', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'glycine' ) );
+            wp_insert_term( __( 'Helianthus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'helianthus' ) );
+            wp_insert_term( __( 'Ipomoea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'ipomoea' ) );
+            wp_insert_term( __( 'Koeleria', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'koeleria' ) );
+            wp_insert_term( __( 'Lactuca', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'lactuca' ) );
+            wp_insert_term( __( 'Lagenaria', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'lagenaria' ) );
+            wp_insert_term( __( 'Lathyrus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'lathyrus' ) );
+            wp_insert_term( __( 'Lupinus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'lupinus' ) );
+            wp_insert_term( __( 'Lycopersicon', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'lycopersicon' ) );
+            wp_insert_term( __( 'Malope', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'malope' ) );
+            wp_insert_term( __( 'Matricaria', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'matricaria' ) );
+            wp_insert_term( __( 'Mentha', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'mentha' ) );
+            wp_insert_term( __( 'Mirabilis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'mirabilis' ) );
+            wp_insert_term( __( 'Nigella', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'nigella' ) );
+            wp_insert_term( __( 'Ocimum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'ocimum' ) );
+            wp_insert_term( __( 'Origanum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'origanum' ) );
+            wp_insert_term( __( 'Papaver', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'papaver' ) );
+            wp_insert_term( __( 'Passiflora', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'passiflora' ) );
+            wp_insert_term( __( 'Penstemon', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'penstemon' ) );
+            wp_insert_term( __( 'Petrolselinum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'petrolselinum' ) );
+            wp_insert_term( __( 'Phaseolus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'phaseolus' ) );
+            wp_insert_term( __( 'Physalis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'physalis' ) );
+            wp_insert_term( __( 'Pisum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'pisum' ) );
+            wp_insert_term( __( 'Poterium', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'poterium' ) );
+            wp_insert_term( __( 'Raphanus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'raphanus' ) );
+            wp_insert_term( __( 'Rosmarinus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'rosmarinus' ) );
+            wp_insert_term( __( 'Rudbeckia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'rudbeckia' ) );
+            wp_insert_term( __( 'Salvia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'salvia' ) );
+            wp_insert_term( __( 'Scorpiurus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'scorpiurus' ) );
+            wp_insert_term( __( 'Solanum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'solanum' ) );
+            wp_insert_term( __( 'Spinachia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'spinachia' ) );
+            wp_insert_term( __( 'Tagetes', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'tagetes' ) );
+            wp_insert_term( __( 'Thunbergia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'thunbergia' ) );
+            wp_insert_term( __( 'Thymus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'thymus' ) );
+            wp_insert_term( __( 'Triticum ', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'triticum ' ) );
+            wp_insert_term( __( 'Tropaeolum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'tropaeolum' ) );
+            wp_insert_term( __( 'Zea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'zea' ) );
+            wp_insert_term( __( 'Zinnia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'zinnia' ) );
 			
             // Common Names
-            wp_insert_term( __( 'Asian Vegetable', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'asian-vegetable' ) );
-            wp_insert_term( __( 'Bean', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'bean' ) );
-            wp_insert_term( __( 'Beet', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'beet' ) );
-            wp_insert_term( __( 'Berry', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'berry' ) );
-            wp_insert_term( __( 'Broccoli', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'broccoli' ) );
-            wp_insert_term( __( 'Brussels Sprout', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'brussels-sprout' ) );
-            wp_insert_term( __( 'Cabbage', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'cabbage' ) );
-            wp_insert_term( __( 'Carrot', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'carrot' ) );
-            wp_insert_term( __( 'Cauliflower', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'cauliflower' ) );
-            wp_insert_term( __( 'Chard', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'chard' ) );
-            wp_insert_term( __( 'Corn', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'corn' ) );
-            wp_insert_term( __( 'Collard', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'collard' ) );
-            wp_insert_term( __( 'Cover Crop', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'cover-crop' ) );
-            wp_insert_term( __( 'Eggplant', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'eggplant' ) );
-            wp_insert_term( __( 'Cucumber', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'cucumber' ) );
-            wp_insert_term( __( 'Fava', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'fava' ) );
-            wp_insert_term( __( 'Flower', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'flower' ) );
-            wp_insert_term( __( 'Gourd', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'gourd' ) );
-            wp_insert_term( __( 'Green', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'green' ) );
-            wp_insert_term( __( 'Herb', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'herb' ) );
-            wp_insert_term( __( 'Kale', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'kale' ) );
-            wp_insert_term( __( 'Kohlrabi', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'kohlrabi' ) );
-            wp_insert_term( __( 'Legume', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'legume' ) );
-            wp_insert_term( __( 'Lettuce', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'lettuce' ) );
-            wp_insert_term( __( 'Melon', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'melon' ) );
-            wp_insert_term( __( 'Mustard', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'mustard' ) );
-            wp_insert_term( __( 'Okra', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'okra' ) );
-            wp_insert_term( __( 'Onion', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'onion' ) );
-            wp_insert_term( __( 'Parsnip/Root Parsley', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'parsnip-root-parsley' ) );
-            wp_insert_term( __( 'Potato', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'potato' ) );
-            wp_insert_term( __( 'Pea', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'pea' ) );
-            wp_insert_term( __( 'Peppers', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'peppers' ) );
-            wp_insert_term( __( 'Pumpkin', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'pumpkin' ) );
-            wp_insert_term( __( 'Radish', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'radish' ) );
-            wp_insert_term( __( 'Strawberry', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'strawberry' ) );
-            wp_insert_term( __( 'Root', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'root' ) );
-            wp_insert_term( __( 'Rutabaga', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'rutabaga' ) );
-            wp_insert_term( __( 'Spinach', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'spinach' ) );
-            wp_insert_term( __( 'Summer Squash', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'summer-squash' ) );
-            wp_insert_term( __( 'Tomatoes', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'tomatoes' ) );
-            wp_insert_term( __( 'Turnip', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'turnip' ) );
-            wp_insert_term( __( 'Winter Squash', 'idealien-rideshare' ), 'wp_seedbank_common_name', array( 'slug' => 'winter-squash' ) );
+            wp_insert_term( __( 'Asian Vegetable', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'asian-vegetable' ) );
+            wp_insert_term( __( 'Bean', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'bean' ) );
+            wp_insert_term( __( 'Beet', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'beet' ) );
+            wp_insert_term( __( 'Berry', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'berry' ) );
+            wp_insert_term( __( 'Broccoli', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'broccoli' ) );
+            wp_insert_term( __( 'Brussels Sprout', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'brussels-sprout' ) );
+            wp_insert_term( __( 'Cabbage', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'cabbage' ) );
+            wp_insert_term( __( 'Carrot', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'carrot' ) );
+            wp_insert_term( __( 'Cauliflower', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'cauliflower' ) );
+            wp_insert_term( __( 'Chard', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'chard' ) );
+            wp_insert_term( __( 'Corn', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'corn' ) );
+            wp_insert_term( __( 'Collard', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'collard' ) );
+            wp_insert_term( __( 'Cover Crop', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'cover-crop' ) );
+            wp_insert_term( __( 'Eggplant', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'eggplant' ) );
+            wp_insert_term( __( 'Cucumber', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'cucumber' ) );
+            wp_insert_term( __( 'Fava', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'fava' ) );
+            wp_insert_term( __( 'Flower', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'flower' ) );
+            wp_insert_term( __( 'Gourd', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'gourd' ) );
+            wp_insert_term( __( 'Green', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'green' ) );
+            wp_insert_term( __( 'Herb', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'herb' ) );
+            wp_insert_term( __( 'Kale', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'kale' ) );
+            wp_insert_term( __( 'Kohlrabi', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'kohlrabi' ) );
+            wp_insert_term( __( 'Legume', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'legume' ) );
+            wp_insert_term( __( 'Lettuce', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'lettuce' ) );
+            wp_insert_term( __( 'Melon', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'melon' ) );
+            wp_insert_term( __( 'Mustard', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'mustard' ) );
+            wp_insert_term( __( 'Okra', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'okra' ) );
+            wp_insert_term( __( 'Onion', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'onion' ) );
+            wp_insert_term( __( 'Parsnip/Root Parsley', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'parsnip-root-parsley' ) );
+            wp_insert_term( __( 'Potato', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'potato' ) );
+            wp_insert_term( __( 'Pea', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'pea' ) );
+            wp_insert_term( __( 'Peppers', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'peppers' ) );
+            wp_insert_term( __( 'Pumpkin', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'pumpkin' ) );
+            wp_insert_term( __( 'Radish', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'radish' ) );
+            wp_insert_term( __( 'Strawberry', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'strawberry' ) );
+            wp_insert_term( __( 'Root', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'root' ) );
+            wp_insert_term( __( 'Rutabaga', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'rutabaga' ) );
+            wp_insert_term( __( 'Spinach', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'spinach' ) );
+            wp_insert_term( __( 'Summer Squash', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'summer-squash' ) );
+            wp_insert_term( __( 'Tomatoes', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'tomatoes' ) );
+            wp_insert_term( __( 'Turnip', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'turnip' ) );
+            wp_insert_term( __( 'Winter Squash', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'winter-squash' ) );
 			
             // Exchange statuses
-			wp_insert_term(__( 'Active', 'idealien-rideshare' ), 'wp_seedbank_status', array('description' => 'New/open seed exchange requests or offers.'));
-			wp_insert_term(__( 'Deleted', 'idealien-rideshare' ), 'wp_seedbank_status', array('description' => 'Expired or completed seed exchanges.'));
+			wp_insert_term(__( 'Active', 'wp-seedbank' ), 'wp_seedbank_status', array('description' => 'New/open seed exchange requests or offers.'));
+			wp_insert_term(__( 'Deleted', 'wp-seedbank' ), 'wp_seedbank_status', array('description' => 'Expired or completed seed exchanges.'));
 		}
 
 		//Update version number in DB
