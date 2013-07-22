@@ -46,6 +46,5 @@ WP_SEEDBANK.init = function () {
     WP_SEEDBANK.UI.hideDeletedExchangeRequests();
     WP_SEEDBANK.UI.toggleBatchExchangeDataSource();
 };
-jQuery(window).load(function() {
-    WP_SEEDBANK.init();
-});
+
+window.addEventListener('DOMContentLoaded', WP_SEEDBANK.init);
