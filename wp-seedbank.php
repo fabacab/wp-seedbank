@@ -1704,7 +1704,7 @@ class WP_SeedbankAdmin {
     <input type="hidden" name="wp-seedbank-batch-exchange-step" value="1" />
     <p>
         My batch exchange file is located on
-        <select>
+        <select id="wp-seedbank-batch-exchange-data-source">
             <option>another website</option>
             <option>my computer</option>
         </select>
