@@ -1623,7 +1623,7 @@ class WP_Seedbank {
             wp_insert_term( __( 'Rutabaga', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'rutabaga' ) );
             wp_insert_term( __( 'Spinach', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'spinach' ) );
             wp_insert_term( __( 'Summer Squash', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'summer-squash' ) );
-            wp_insert_term( __( 'Tomatoes', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'tomatoes' ) );
+            wp_insert_term( __( 'Tomato', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'tomato' ) );
             wp_insert_term( __( 'Turnip', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'turnip' ) );
             wp_insert_term( __( 'Winter Squash', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'winter-squash' ) );
 			
