@@ -532,18 +532,14 @@ class WP_Seedbank {
 		add_action( "admin_print_scripts-post.php", array($this, 'enqueue_admin_scripts') );
         add_action( "admin_print_scripts-post-new.php", array($this, 'enqueue_admin_scripts') );
 		add_action( "admin_print_styles", array($this, 'enqueue_admin_styles') );
-
 	}
 
 	// add scripts for admin UI treatment
-     function enqueue_admin_scripts() {
+    function enqueue_admin_scripts() {
 		global $current_screen;
 		if ($current_screen->post_type == 'wp_seedbank') {
-				wp_register_script('jquery-ui-datepicker', WP_SEEDBANK_PATH . 'jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core') );
 				wp_enqueue_script('jquery-ui-datepicker');
-				
 		}
-
 	}
 
 	 // add css for admin UI treatment
