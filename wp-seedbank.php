@@ -43,7 +43,7 @@ class WP_Seedbank {
 	function WP_Seedbank() {
 		
 		//Register CPT, Taxonomies, etc
-		wp_seedbank::create_data_types();
+		WP_Seedbank::create_data_types();
 		
 		//Setup and customize columns of data on admin list view
 		add_filter("manage_edit-wp_seedbank_columns", array(&$this, "edit_columns"));
@@ -1494,7 +1494,7 @@ class WP_Seedbank {
   	static function activate() {
 		
 		//Register 
-		wp_seedbank::create_data_types();
+		WP_Seedbank::create_data_types();
 		
         // DEV NOTE: For now, forcibly assume we're always doing a new install when we "activate."
 		$version = ""; //get_option('wp_seedbank_version');
@@ -1656,14 +1656,14 @@ class WP_Seedbank {
         		foreach($blogs as $blog) {
             		switch_to_blog($blog['blog_id']);
 					
-					wp_seedbank::uninstall_heavy_lifting();
+					WP_Seedbank::uninstall_heavy_lifting();
 					
         			restore_current_blog();
 				}
     		}
 		} else {
     		
-			wp_seedbank::uninstall_heavy_lifting();
+			WP_Seedbank::uninstall_heavy_lifting();
 		}
 	}
 	
@@ -1899,13 +1899,13 @@ class WP_SeedbankUtilities {
 }
 
 // Initiate the plugin
-add_action("init", "wp_seedbank::initialize");
+add_action("init", "WP_Seedbank::initialize");
 
-register_activation_hook(__FILE__, 'wp_seedbank::activate');
-register_deactivation_hook(__FILE__, 'wp_seedbank::deactivate');
+register_activation_hook(__FILE__, 'WP_Seedbank::activate');
+register_deactivation_hook(__FILE__, 'WP_Seedbank::deactivate');
 
 //FUTURE: Uninstallation routine
-//register_uninstall_hook(__FILE__, 'wp_seedbank::uninstall');
+//register_uninstall_hook(__FILE__, 'WP_Seedbank::uninstall');
 //Uninstall has not been activated because it does not properly activate.
 //If you want to do a proper clean-out of data:
 //	-activate the plugin
