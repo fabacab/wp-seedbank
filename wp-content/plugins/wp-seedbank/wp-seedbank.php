@@ -61,6 +61,10 @@ class idealien_rideshare {
 		//Setup function to instantiate meta boxes and scripts on admin page
 		add_action("admin_init", array(&$this, "admin_init"));
 		
+        // Create new page for import CSV function.
+        // We call a whole new class so we can begin to handle some of this legacy stuff. :(
+        add_action('admin_menu', array('WP_SeedbankAdmin', 'registerAdminMenus'));
+
 		//Add JS for front-end users
 		add_action("wp_enqueue_scripts", array(&$this, "frontend_scripts_init"));
 		
@@ -530,9 +534,9 @@ class idealien_rideshare {
 		add_action( "admin_print_scripts-post.php", array($this, 'enqueue_admin_scripts') );
         add_action( "admin_print_scripts-post-new.php", array($this, 'enqueue_admin_scripts') );
 		add_action( "admin_print_styles", array($this, 'enqueue_admin_styles') );
-		
+
 	}
-	
+
 	// add scripts for admin UI treatment
      function enqueue_admin_scripts() {
 		global $current_screen;
@@ -554,6 +558,7 @@ class idealien_rideshare {
 
 			switch ($current_screen->post_type) {
 				case 'idealien_rideshare':
+                    // TODO: Fix these paths? We've removed some of this for simplicity, causing slight datepicker UI issues.
 					wp_enqueue_style('jquery-ui-theme', WP_SEEDBANK_PATH . 'css/ui-lightness/jquery-ui-1.8.16.custom.css');
 					wp_enqueue_style('idealien_rideshare_admin', WP_SEEDBANK_PATH . 'css/idealien_rideshare_admin.css');
 					break;
@@ -1669,6 +1674,189 @@ class idealien_rideshare {
 	}
 	
 
+}
+
+class WP_SeedbankAdmin {
+    function WP_SeedbankAdmin () {
+        // Do nothing.
+    }
+
+    function registerAdminMenus () {
+        add_submenu_page('edit.php?post_type=idealien_rideshare', 'batch-request', 'Batch Exchange', 'edit_posts', 'seedbank_batch_exchange', array('WP_SeedbankAdmin', 'dispatchBatchExchangePages'));
+    }
+
+    // Dispatcher for batch exchange functionality.
+    function dispatchBatchExchangePages ($step = 0) {
+        $step = (int) $_POST['wp-seedbank-batch-exchange-step'];
+        if (0 === $step) {
+            self::printBatchExchangeForm();
+        } else if (1 === $step) {
+            self::processBatchExchangeForm($_POST);
+        }
+    }
+	
+    // Produce HTML for showing the submenu page.
+    function printBatchExchangeForm () {?>
+<h2>Batch Seed Exchange</h2>
+<p>This page allows you to upload a comma-separated values (CSV) file that will be translated to seed exchange requests or offers. The CSV file should have the structure like <a href="#wp-seedbank-batch-exchange-example">the example shown in the table below</a>.</p>
+<form id="wp-seedbank-batch-exchange-form" name="wp_seedbank_batch_exchange" action="<?php print $_SERVER['PHP_SELF']?>?post_type=idealien_rideshare&amp;page=seedbank_batch_exchange" method="post" enctype="multipart/form-data">
+    <?php wp_nonce_field('wp-seedbank-batch-exchange', 'batch-exchange');?>
+    <input type="hidden" name="wp-seedbank-batch-exchange-step" value="1" />
+    <p>
+        My batch exchange file is located on
+        <select>
+            <option>another website</option>
+            <option>my computer</option>
+        </select>
+        . It <select name="wp-seedbank-batch-exchange-strip-headers"><option value="1">has</option><option value="0">does not have</option></select> column labels (a header row).
+    </p>
+    <fieldset id="wp-seedbank-batch-exchange-web-fetch"><legend>Web fetch options</legend>
+        <p>The address of the file containing my seed exchange data is <input name="wp-seedbank-batch-exchange-file-url" value="" placeholder="http://mysite.com/file.csv" />.</p>
+    </fieldset>
+    <fieldset id="wp-seedbank-batch-exchange-file-upload"><legend>File upload options</legend>
+        <p>The file on my computer containing my seed exchange data is <input type="file" name="wp-seedbank-batch-exchange-file-data" value="" />.</p>
+    </fieldset>
+    <p><label><input type="checkbox" name="wp-seedbank-batch-exchange-post_status" value="draft" /> Let me review each seed exchange before publishing.</label></p>
+    <p><input type="submit" name="wp-seedbank-batch-exchange-submit" value="Make seed exchanges" /></p>
+</form>
+<table summary="Example of batch seed exchange data." id="wp-seedbank-batch-exchange-example">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>Common Name</th>
+            <th>Unit label</th>
+            <th>Seed expiration date</th>
+            <th>Exchange expiration date</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Looking to trade peppers for carrots</td>
+            <td>Trade</td>
+            <td>5</td>
+            <td>Pepper</td>
+            <td>seeds</td>
+            <td>2016-05-01</td>
+            <td>2014-05-01</td>
+            <td>Ideally, I'd like to receive carrot seeds in exchange. Thanks!</td>
+        </tr>
+        <tr>
+            <td>For sale: tomato seed packets, negotiable price</td>
+            <td>Sell</td>
+            <td>100</td>
+            <td>Tomato</td>
+            <td>seed packets</td>
+            <td>2017-01-01</td>
+            <td>2015-06-01</td>
+            <td>Price is negotiable. Reply here or by phone at (555) 555-5555 if interested.</td>
+        </tr>
+        <tr>
+            <td colspan="8">&hellip;</td>
+        </tr>
+        <tr>
+            <td>These are the best bean seeds!</td>
+            <td>Trade</td>
+            <td>20</td>
+            <td>Bean</td>
+            <td>packets</td>
+            <td>2015-03-30</td>
+            <td>2014-05-01</td>
+            <td>These beans are kidney beans. They're delicious and nutritious, but taste nothing like chicken.</td>
+        </tr>
+    <tbody>
+</table>
+<?php
+    }
+
+    function processBatchExchangeForm ($fields) {
+        if (!wp_verify_nonce($_POST['batch-exchange'], 'wp-seedbank-batch-exchange')) { ?>
+            <p>Your batch exchange request has expired or is invalid. Please <a href="<?php print home_url();?>/wp-admin/edit.php?post_type=idealien_rideshare&page=seedbank_batch_exchange">start again</a>.</p>
+<? 
+        }
+        $where = ($_FILES['wp-seedbank-batch-exchange-file-data']['tmp_name']) ?
+            $_FILES['wp-seedbank-batch-exchange-file-data']['tmp_name'] :
+            $_POST['wp-seedbank-batch-exchange-file-url'];
+        if (!$where) { ?>
+            <p>Please let us know where to find your data. You'll need to <a href="<?php print home_url();?>/wp-admin/edit.php?post_type=idealien_rideshare&page=seedbank_batch_exchange">start again</a>.</p>
+<?php
+            return;
+        }
+        $strip = ($_POST['wp-seedbank-batch-exchange-strip-headers']) ? true : false; 
+        $post_status = ($_POST['wp-seedbank-batch-exchange-post_status']) ? 'draft' : 'publish';
+        $data = WP_SeedbankUtilities::csvToMultiArray($where, $strip); // true means "strip headers"
+        $new_post_ids = array();
+        // For each line in the CSV,
+        foreach ($data as $x) {
+            list(
+                $title,
+                $exch_type,
+                $exch_quantity,
+                $exch_common_name,
+                $exch_unit,
+                $exch_seed_expiry,
+                $exch_expiry,
+                $body
+            ) = $x;
+            // convert it into a new seed exchange post.
+            // TODO: Refactor this, along with the idealien_rideshare::wp_insert_post()
+            $post = array(
+                'comment_status' => 'open',
+                'ping_status' => 'open', 
+                'post_author' => get_current_user_id(), // TODO: Get the user ID.
+                'post_content' => $body,
+//                'post_date' => , // should be "now"?
+//                'post_date_gmt' => , // should be "now"?
+//                'post_name' => , // automatic?
+//                'post_parent' => , // automatic?
+                'post_status' => $post_status,
+                'post_title' => $title,
+                'post_type' => 'idealien_rideshare', // this is the "Title" position in the CSV.
+            );
+
+            $p = wp_insert_post($post);
+            if (!$p) {
+                // TODO: Handle error?
+            } else {
+                $new_post_ids[] = $p;
+                update_post_meta($p, 'idealien_rideshare_addInfo', $body);
+                update_post_meta($p, 'idealien_rideshare_event', $exch_common_name);
+                update_post_meta($p, 'idealien_rideshare_spaces', $exch_quantity);
+                update_post_meta($p, 'idealien_rideshare_status', 'Active'); // New posts are always active?
+                update_post_meta($p, 'idealien_rideshare_type', $exch_type);
+                update_post_meta($p, 'idealien_rideshare_username', $exch_unit);
+                update_post_meta($p, 'idealien_rideshare_departureDate', date('m/d/Y', strtotime($exch_seed_expiry)));
+                update_post_meta($p, 'idealien_rideshare_returnDate', date('m/d/Y', strtotime($exch_expiry)));
+            }
+        }
+
+        // Display success message.
+        $n = count($new_post_ids);
+        if ($n) { ?>
+            <p>Successfully imported <?php print $n;?> new <a href="<?php print home_url();?>/wp-admin/edit.php?post_type=idealien_rideshare">seed exchange posts</a>.</p>
+<?php
+        }
+    }
+}
+
+class WP_SeedbankUtilities {
+    function WP_SeedbankUtilities () {
+        // Do nothing.
+    }
+
+    function csvToMultiArray ($infile, $strip_headers = false) {
+        $f = fopen($infile, 'r');
+        $r = array();
+        while (($data = fgetcsv($f)) !== false) {
+            $r[] = $data;
+        }
+        if ($strip_headers) {
+            array_shift($r);
+        }
+        return $r;
+    }
 }
 
 // Initiate the plugin
