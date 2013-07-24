@@ -13,15 +13,15 @@
 
 
 //Modify the following two variables to identify the ID for the comment and delete forms
-define ('IDEALIEN_RIDESHARE_COMMENTFORM_ID' , "REPLACEME");
-define ('IDEALIEN_RIDESHARE_DELETEFORM_ID' , "REPLACEME");
+define ('WP_SEEDBANK_COMMENTFORM_ID' , "REPLACEME");
+define ('WP_SEEDBANK_DELETEFORM_ID' , "REPLACEME");
 
 
 //Do not modify anything else below 
-define ('IDEALIEN_RIDESHARE_PATH', WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)) );
-define ('IDEALIEN_VERSION', "0.2.1");
+define ('WP_SEEDBANK_PATH', WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)) );
+define ('WP_SEEDBANK_VERSION', "0.2.1");
 
-class idealien_rideshare {
+class WP_Seedbank {
 	
 	//Define all meta data fields
 	var $meta_fields = array(
