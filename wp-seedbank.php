@@ -8,7 +8,7 @@
     Author URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/#authors
     License: GPL
     Requires at least: 3.5.2
-    Stable tag: 0.2
+    Stable tag: 0.2.1
 */
 
 //Modify the following two variables to identify the ID for the comment and delete forms
@@ -17,7 +17,7 @@ define ('WP_SEEDBANK_DELETEFORM_ID' , "REPLACEME");
 
 //Do not modify anything else below 
 define ('WP_SEEDBANK_PATH', WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)) );
-define ('WP_SEEDBANK_VERSION', '0.2');
+define ('WP_SEEDBANK_VERSION', '0.2.1');
 
 class WP_Seedbank {
 

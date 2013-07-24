@@ -6,7 +6,7 @@ Donate link: https://npo.justgive.org/nonprofits/donate.jsp?ein=45-3043080
 Tags: custom posts, community, seedbank, ecology, seed swap, trade
 Requires at least: 3.5.2
 Tested up to: 3.5.2
-Stable tag: 0.2
+Stable tag: 0.2.1
 License: GPL3
 
 The WP-Seedbank plugin turns any self-hosted WordPress blog into a community seedbank (or seed library).
@@ -33,6 +33,10 @@ Features include:
 2. The Batch Exchange page lets you upload a file to create many seed exchanges at once.
 
 == Changelog ==
+
+= 0.2.1 =
+* Fix minor JavaScript user interface bugs.
+* Remove unused activation code.
 
 = 0.2 =
 * Make "Swap" the default seed exchange type.
