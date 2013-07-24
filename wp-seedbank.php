@@ -1504,6 +1504,13 @@ class WP_Seedbank {
         // New installation - pre-load some fields
 		if($version == "") {
 
+            // DEV NOTE: We forked from a different plugin. Let's clean that up, just in case.
+            // TODO: Remove this when no longer necessary.
+            $wpdb->query("UPDATE {$wpdb->prefix}options SET option_name='wp_seedbank_version',option_value='WP_SEEDBANK_VERSION' WHERE option_name='idealien_rideshare_version';");
+            $wpdb->query("UPDATE {$wpdb->prefix}postmeta SET meta_key=REPLACE(meta_key, 'idealien_rideshare', 'wp_seedbank');");
+            $wpdb->query("UPDATE {$wpdb->prefix}posts SET post_type='wp_seedbank',guid=REPLACE(guid, 'idealien_rideshare', 'wp_seedbank') WHERE post_type='idealien_rideshare';");
+            $wpdb->query("UPDATE {$wpdb->prefix}term_taxonomy SET taxonomy=REPLACE(taxonomy, 'idealien_rideshare', 'wp_seedbank');");
+
             // Exchange Types (verbs)
 			wp_insert_term(__( 'Give', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges offering free seeds being given away.'));
 			wp_insert_term(__( 'Get', 'idealien-rideshare' ), 'wp_seedbank_type', array('description' => 'Exchanges requesting seeds of a variety not already listed.'));
