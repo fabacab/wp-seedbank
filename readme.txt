@@ -34,16 +34,6 @@ Features include:
 
 == Changelog ==
 
-= 0.2.1 =
-* Fix minor JavaScript user interface bugs.
-* Remove unused activation code.
-
-= 0.2 =
-* Make "Swap" the default seed exchange type.
-* Cleaner interface for viewing seed exchanges and importing from CSV files.
-* More default plant common names.
-* Clean internal code references.
-
 = 0.1 =
 * Initial public release.
 
