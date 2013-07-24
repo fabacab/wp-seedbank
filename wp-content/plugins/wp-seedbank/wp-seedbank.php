@@ -425,36 +425,36 @@ class WP_Seedbank {
 		register_post_type('wp_seedbank', 
 			array(
 				'labels' => array(
-					'name' => __( 'SeedBank', 'idealien-rideshare' ),
-					'singular_label' => __( 'Seed Exchange', 'idealien-rideshare' ),
-					'add_new' => __( 'Add Seed Exchange', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add Seed Exchange', 'idealien-rideshare' ),
-					'edit' => __( 'Edit Seed', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Seed Exchange', 'idealien-rideshare' ),
-					'new_item' => __( 'New Seed Exchange', 'idealien-rideshare' ),
-					'view' => __( 'View Seed Exchange', 'idealien-rideshare' ),
-					'view_item' => __( 'View Seed Exchange', 'idealien-rideshare' ),
-					'search' => __( 'Search SeedBank', 'idealien-rideshare' ),
-					'not_found' => __( 'No Seed Exchanges found', 'idealien-rideshare' ),
-					'not_found_in_trash' => __( 'No Seed Exchanges found in trash', 'idealien-rideshare' )
+					'name' => __( 'SeedBank', 'wp-seedbank' ),
+					'singular_label' => __( 'Seed Exchange', 'wp-seedbank' ),
+					'add_new' => __( 'Add Seed Exchange', 'wp-seedbank' ),
+					'add_new_item' => __( 'Add Seed Exchange', 'wp-seedbank' ),
+					'edit' => __( 'Edit Seed', 'wp-seedbank' ),
+					'edit_item' => __( 'Edit Seed Exchange', 'wp-seedbank' ),
+					'new_item' => __( 'New Seed Exchange', 'wp-seedbank' ),
+					'view' => __( 'View Seed Exchange', 'wp-seedbank' ),
+					'view_item' => __( 'View Seed Exchange', 'wp-seedbank' ),
+					'search' => __( 'Search SeedBank', 'wp-seedbank' ),
+					'not_found' => __( 'No Seed Exchanges found', 'wp-seedbank' ),
+					'not_found_in_trash' => __( 'No Seed Exchanges found in trash', 'wp-seedbank' )
 				),
 				'supports' => array('title', 'custom-fields'),
 				'rewrite' => array('slug' => 'seedbank'),
 				'public' => true,
-				'description' => __( 'SeedBank', 'idealien-rideshare' ),
+				'description' => __( 'SeedBank', 'wp-seedbank' ),
 				'menu_icon' => WP_SEEDBANK_PATH . 'images/rideshare_icon.png'
 			)
 		);
 		
 		register_taxonomy('idealien_rideshare_type', 'idealien_rideshare', array(
 				'labels' => array(
-					'name' => __( 'Types', 'idealien-rideshare' ),
-					'singular_name' => __( 'Type', 'idealien-rideshare' ),
-					'all_items' => __( 'All Types', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Type', 'idealien-rideshare' ),
-					'update_item' => __( 'Update Type', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add New Type', 'idealien-rideshare' ),
-					'new_item_name' => __( 'New Type Name', 'idealien-rideshare' )
+					'name' => __( 'Types', 'wp-seedbank' ),
+					'singular_name' => __( 'Type', 'wp-seedbank' ),
+					'all_items' => __( 'All Types', 'wp-seedbank' ),
+					'edit_item' => __( 'Edit Type', 'wp-seedbank' ),
+					'update_item' => __( 'Update Type', 'wp-seedbank' ),
+					'add_new_item' => __( 'Add New Type', 'wp-seedbank' ),
+					'new_item_name' => __( 'New Type Name', 'wp-seedbank' )
 				),
 				'hierarchical' => false,
 				'label' => 'Rideshare Types'
@@ -463,46 +463,46 @@ class WP_Seedbank {
 		
 		register_taxonomy('idealien_rideshare_event', 'idealien_rideshare', array(
 				'labels' => array(
-					'name' => __( 'Events', 'idealien-rideshare' ),
-					'singular_name' => __( 'Event', 'idealien-rideshare' ),
-					'all_items' => __( 'All Events', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Event', 'idealien-rideshare' ),
-					'update_item' => __( 'Update Event', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add New Event', 'idealien-rideshare' ),
-					'new_item_name' => __( 'New Event Name', 'idealien-rideshare' )
+					'name' => __( 'Events', 'wp-seedbank' ),
+					'singular_name' => __( 'Event', 'wp-seedbank' ),
+					'all_items' => __( 'All Events', 'wp-seedbank' ),
+					'edit_item' => __( 'Edit Event', 'wp-seedbank' ),
+					'update_item' => __( 'Update Event', 'wp-seedbank' ),
+					'add_new_item' => __( 'Add New Event', 'wp-seedbank' ),
+					'new_item_name' => __( 'New Event Name', 'wp-seedbank' )
 				),
 				'hierarchical' => false,
-				'label' => __( 'Rideshare Events', 'idealien-rideshare' )
+				'label' => __( 'Rideshare Events', 'wp-seedbank' )
 			)
 		);
 		
 		register_taxonomy('idealien_rideshare_state_prov', 'idealien_rideshare', array(
 				'labels' => array(
-					'name' => __( 'State/Province', 'idealien-rideshare' ),
-					'singular_name' => __( 'State/Province', 'idealien-rideshare' ),
-					'all_items' => __( 'All States/Provinces', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit State/Province', 'idealien-rideshare' ),
-					'update_item' => __( 'Update State/Province', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add New State/Province', 'idealien-rideshare' ),
-					'new_item_name' => __( 'New State/Province Name', 'idealien-rideshare' )
+					'name' => __( 'State/Province', 'wp-seedbank' ),
+					'singular_name' => __( 'State/Province', 'wp-seedbank' ),
+					'all_items' => __( 'All States/Provinces', 'wp-seedbank' ),
+					'edit_item' => __( 'Edit State/Province', 'wp-seedbank' ),
+					'update_item' => __( 'Update State/Province', 'wp-seedbank' ),
+					'add_new_item' => __( 'Add New State/Province', 'wp-seedbank' ),
+					'new_item_name' => __( 'New State/Province Name', 'wp-seedbank' )
 				),
 				'hierarchical' => false,
-				'label' => __( 'Rideshare State/Province', 'idealien-rideshare' )
+				'label' => __( 'Rideshare State/Province', 'wp-seedbank' )
 			)
 		);
 		
 		register_taxonomy('idealien_rideshare_status', 'idealien_rideshare', array(
 				'labels' => array(
-					'name' => __( 'Status', 'idealien-rideshare' ),
-					'singular_name' => __( 'Status', 'idealien-rideshare' ),
-					'all_items' => __( 'All Status', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Status', 'idealien-rideshare' ),
-					'update_item' => __( 'Update Status', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add New Status', 'idealien-rideshare' ),
-					'new_item_name' => __( 'New Status Name', 'idealien-rideshare' )
+					'name' => __( 'Status', 'wp-seedbank' ),
+					'singular_name' => __( 'Status', 'wp-seedbank' ),
+					'all_items' => __( 'All Status', 'wp-seedbank' ),
+					'edit_item' => __( 'Edit Status', 'wp-seedbank' ),
+					'update_item' => __( 'Update Status', 'wp-seedbank' ),
+					'add_new_item' => __( 'Add New Status', 'wp-seedbank' ),
+					'new_item_name' => __( 'New Status Name', 'wp-seedbank' )
 				),
 				'hierarchical' => false,
-				'label' => __( 'Rideshare Status', 'idealien-rideshare' )
+				'label' => __( 'Rideshare Status', 'wp-seedbank' )
 			)
 		);
 		
@@ -646,7 +646,7 @@ class WP_Seedbank {
 	?>
 	
      <p>
-		<label class="rideshare"><?php _e('Status' , 'idealien-rideshare'); ?>:</label>
+		<label class="rideshare"><?php _e('Status' , 'wp-seedbank'); ?>:</label>
 		<?php // Get all rideshare status terms (taxonomy)
 			$statusOptions = get_terms('idealien_rideshare_status', 'hide_empty=0&order=ASC'); ?>
 			<select name='idealien_rideshare_status' class='rideshare_selectLine'>
@@ -664,7 +664,7 @@ class WP_Seedbank {
 	</p>
     
     <p>
-		<label class="rideshare"><?php _e('Type' , 'idealien-rideshare'); ?>:</label>
+		<label class="rideshare"><?php _e('Type' , 'wp-seedbank'); ?>:</label>
 		<?php // Get all rideshare type terms (taxonomy)
 			$typeOptions = get_terms('idealien_rideshare_type', 'hide_empty=0&order=ASC'); ?>
 			<select name='idealien_rideshare_type' class='rideshare_selectLine'>
@@ -700,7 +700,7 @@ class WP_Seedbank {
 	</p>
     
     <p>
-		<label class="rideshare"><?php _e('To' , 'idealien-rideshare'); ?>:</label>
+		<label class="rideshare"><?php _e('To' , 'wp-seedbank'); ?>:</label>
 		<input name="idealien_rideshare_destinationCity" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_destinationCity; ?>" />
 	
 		<?php // Get all rideshare city terms (taxonomy)
@@ -721,7 +721,7 @@ class WP_Seedbank {
     
 
 	<p>
-		<label class="rideshare"><?php _e('From' , 'idealien-rideshare'); ?>:</label>
+		<label class="rideshare"><?php _e('From' , 'wp-seedbank'); ?>:</label>
 		<input name="idealien_rideshare_departureCity" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_departureCity; ?>" />
 	
 		<?php // Get all rideshare city terms (taxonomy)
@@ -741,17 +741,17 @@ class WP_Seedbank {
 	</p>
     
     <p>
-		<label class="rideshare"><?php _e('Departure Date' , 'idealien-rideshare'); ?>:</label>
+		<label class="rideshare"><?php _e('Departure Date' , 'wp-seedbank'); ?>:</label>
 		<input name="idealien_rideshare_departureDate" class="rideshare_inputLine datepicker" value="<?php echo $idealien_rideshare_departureDate;?>" />
 	</p>
     
     <p>
-		<label class="rideshare"><?php _e('Return Date' , 'idealien-rideshare'); ?>:</label>
+		<label class="rideshare"><?php _e('Return Date' , 'wp-seedbank'); ?>:</label>
 		<input name="idealien_rideshare_returnDate" class="rideshare_inputLine datepicker" value="<?php echo $idealien_rideshare_returnDate;?>" />
 	</p>
     
     <p>
-		<label class="rideshare"><?php _e('Spaces' , 'idealien-rideshare'); ?>:</label>
+		<label class="rideshare"><?php _e('Spaces' , 'wp-seedbank'); ?>:</label>
 		<input name="idealien_rideshare_spaces" class="rideshare_inputLine" value="<?php if ($idealien_rideshare_spaces >= 1) { 
 					echo $idealien_rideshare_spaces;
 				} else {
@@ -761,26 +761,26 @@ class WP_Seedbank {
     <div class="clear"></div>
 	
      <p>
-		<label class="rideshare"><?php _e('Username' , 'idealien-rideshare'); ?>:</label>
+		<label class="rideshare"><?php _e('Username' , 'wp-seedbank'); ?>:</label>
 		<input name="idealien_rideshare_username" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_username;?>" /><br />
 		
 	</p>
     
     <p>
-		<label class="rideshare"><?php _e('Name' , 'idealien-rideshare'); ?>:</label>
+		<label class="rideshare"><?php _e('Name' , 'wp-seedbank'); ?>:</label>
 		<input name="idealien_rideshare_name" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_name;?>" /><br />
 		
 	</p>
     
     <p>
-		<label class="rideshare"><?php _e('Email' , 'idealien-rideshare'); ?>:</label>
+		<label class="rideshare"><?php _e('Email' , 'wp-seedbank'); ?>:</label>
 		<input name="idealien_rideshare_email" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_email;?>" /><br />
 		
 	</p> 
     
     
      <p>
-		<label class="rideshare"><?php _e('Additional Info' , 'idealien-rideshare'); ?>:</label>
+		<label class="rideshare"><?php _e('Additional Info' , 'wp-seedbank'); ?>:</label>
         <textarea name="idealien_rideshare_addInfo" class="rideshare_inputBox"><?php echo $idealien_rideshare_addInfo;?></textarea><br />
 		
 	</p>
@@ -839,13 +839,13 @@ class WP_Seedbank {
 	{
 		$columns = array(
 			"cb" => "<input type=\"checkbox\" />",
-			"title" => __( 'Rideshare', 'idealien-rideshare' ),
-			"idealien_rideshare_status" => __( 'Status', 'idealien-rideshare' ),
-			"idealien_rideshare_type" => __( 'Type', 'idealien-rideshare' ),
-			"idealien_rideshare_departureDate" => __( 'Date', 'idealien-rideshare' ),
-			"idealien_rideshare_spaces" => __( 'Spaces', 'idealien-rideshare' ),
-			"idealien_rideshare_destination" => __( 'Destination', 'idealien-rideshare' ),
-			"idealien_rideshare_departure" => __( 'Departure', 'idealien-rideshare' )
+			"title" => __( 'Rideshare', 'wp-seedbank' ),
+			"idealien_rideshare_status" => __( 'Status', 'wp-seedbank' ),
+			"idealien_rideshare_type" => __( 'Type', 'wp-seedbank' ),
+			"idealien_rideshare_departureDate" => __( 'Date', 'wp-seedbank' ),
+			"idealien_rideshare_spaces" => __( 'Spaces', 'wp-seedbank' ),
+			"idealien_rideshare_destination" => __( 'Destination', 'wp-seedbank' ),
+			"idealien_rideshare_departure" => __( 'Departure', 'wp-seedbank' )
 		);
 		
 		return $columns;
@@ -1246,19 +1246,19 @@ class WP_Seedbank {
 					//Prepare table headers
 					$output .= '<table id="rideshare" class="tablestripe">';
 					$output .= '<tr>';
-					$output .= '<th class="rideshareType">' . __('Type' , 'idealien-rideshare') . '</th>';
-					$output .= '<th class="rideshareEvent">' . __('To' , 'idealien-rideshare') . '</th>';
-					$output .= '<th class="rideshareCity">' . __('From' , 'idealien-rideshare') . '</th>';
-					$output .= '<th class="rideshareSpaces">' . __('For' , 'idealien-rideshare') . '</th>';
-					$output .= '<th class="rideshareDDate">' . __('On' , 'idealien-rideshare') . '</th>';
-					//$output .= '<th class="rideshareRDate">' . __('Return' , 'idealien-rideshare') . '</th>';
-					$output .= '<th class="rideshareInfo">' . __('Add. Info' , 'idealien-rideshare') . '</th>';
+					$output .= '<th class="rideshareType">' . __('Type' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareEvent">' . __('To' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareCity">' . __('From' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareSpaces">' . __('For' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareDDate">' . __('On' , 'wp-seedbank') . '</th>';
+					//$output .= '<th class="rideshareRDate">' . __('Return' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareInfo">' . __('Add. Info' , 'wp-seedbank') . '</th>';
 					
 					//Add Engagement Column based on current user = filtered (profile scenario)
 					if( $current_user->user_login != $username ) {
-						$output .= '<th class="rideshareContact">' . __('Contact' , 'idealien-rideshare') . '</th>';
+						$output .= '<th class="rideshareContact">' . __('Contact' , 'wp-seedbank') . '</th>';
 					} else {
-						$output .= '<th class="rideshareContact">' . __('Actions' , 'idealien-rideshare') . '</th>';
+						$output .= '<th class="rideshareContact">' . __('Actions' , 'wp-seedbank') . '</th>';
 					}
 						
 					$output .= '</tr>';
@@ -1407,7 +1407,7 @@ class WP_Seedbank {
 					
 				else:
 					//Empty rideshare list
-					$output .= '<p>' . __('There are no rideshares available at this time' , 'idealien-rideshare') . '.</p>';
+					$output .= '<p>' . __('There are no rideshares available at this time' , 'wp-seedbank') . '.</p>';
 					
 				endif;
 			
@@ -1443,13 +1443,13 @@ class WP_Seedbank {
 							$output .= '<h2>' . $event->name . '</h2>';
 							$output .= '<table id="rideshare" class="tablestripe">';
 							$output .= '<tr>';
-							$output .= '<th class="rideshareCity">' . __('Location' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareType">' . __('Type' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareSpaces">' . __('Spaces' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareDDate">' . __('Departure' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareRDate">' . __('Return' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareContact">' . __('Contact' , 'idealien-rideshare') . '</th>';
-							$output .= '<th class="rideshareInfo">' . __('Add. Info' , 'idealien-rideshare') . '</th>';
+							$output .= '<th class="rideshareCity">' . __('Location' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareType">' . __('Type' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareSpaces">' . __('Spaces' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareDDate">' . __('Departure' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareRDate">' . __('Return' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareContact">' . __('Contact' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareInfo">' . __('Add. Info' , 'wp-seedbank') . '</th>';
 							$output .= '</tr>';
 					
 							 while ( $IRQuery->have_posts() ) : $IRQuery->the_post(); 
@@ -1513,83 +1513,83 @@ class WP_Seedbank {
 		
 		if($version == "") {
 			//New installation - pre-load some fields
-			wp_insert_term(__( 'Give', 'idealien-rideshare' ), 'idealien_rideshare_type');
-			wp_insert_term(__( 'Get', 'idealien-rideshare' ), 'idealien_rideshare_type');
-			wp_insert_term(__( 'Sell', 'idealien-rideshare' ), 'idealien_rideshare_type');
-			wp_insert_term(__( 'Trade', 'idealien-rideshare' ), 'idealien_rideshare_type');
+			wp_insert_term(__( 'Give', 'wp-seedbank' ), 'idealien_rideshare_type');
+			wp_insert_term(__( 'Get', 'wp-seedbank' ), 'idealien_rideshare_type');
+			wp_insert_term(__( 'Sell', 'wp-seedbank' ), 'idealien_rideshare_type');
+			wp_insert_term(__( 'Trade', 'wp-seedbank' ), 'idealien_rideshare_type');
 
-			wp_insert_term( __( 'Alabama', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AL' ) );
+			wp_insert_term( __( 'Alabama', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AL' ) );
 
-			wp_insert_term( __( 'Alaska', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AK' ) );
-			wp_insert_term( __( 'Arizona', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AZ' ) );
-			wp_insert_term( __( 'Arkansas', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AR' ) );
-			wp_insert_term( __( 'California', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'CA' ) );
-			wp_insert_term( __( 'Colorado', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'CO' ) );
-			wp_insert_term( __( 'Connecticut', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'CT' ) );
-			wp_insert_term( __( 'Delaware', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'DE' ) );
-			wp_insert_term( __( 'Florida', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'FL' ) );
-			wp_insert_term( __( 'Georgia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'GA' ) );
-			wp_insert_term( __( 'Hawaii', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'HI' ) );
-			wp_insert_term( __( 'Idaho', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'ID' ) );
-			wp_insert_term( __( 'Illinois', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'IL' ) );
-			wp_insert_term( __( 'Indiana', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'IN' ) );
-			wp_insert_term( __( 'Iowa', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'IA' ) );
-			wp_insert_term( __( 'Kansas', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'KS' ) );
-			wp_insert_term( __( 'Kentucky', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'KY' ) );
-			wp_insert_term( __( 'Louisiana', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'LA' ) );
-			wp_insert_term( __( 'Maine', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'ME' ) );
-			wp_insert_term( __( 'Maryland', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MD' ) );
-			wp_insert_term( __( 'Massachusetts', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MA' ) );
-			wp_insert_term( __( 'Michigan', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MI' ) );
-			wp_insert_term( __( 'Minnesota', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MN' ) );
-			wp_insert_term( __( 'Mississippi', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MS' ) );
-			wp_insert_term( __( 'Missouri', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MO' ) );
-			wp_insert_term( __( 'Montana', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MT' ) );
-			wp_insert_term( __( 'Nebraska', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NE' ) );
-			wp_insert_term( __( 'Nevada', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NV' ) );
-			wp_insert_term( __( 'New Hampshire', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NH' ) );
-			wp_insert_term( __( 'New Jersey', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NJ' ) );
-			wp_insert_term( __( 'New Mexico', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NM' ) );
-			wp_insert_term( __( 'New York', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NY' ) );
-			wp_insert_term( __( 'North Carolina', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NC' ) );
-			wp_insert_term( __( 'North Dakota', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'ND' ) );
-			wp_insert_term( __( 'Ohio', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'OH' ) );
-			wp_insert_term( __( 'Oklahoma', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'OK' ) );
-			wp_insert_term( __( 'Oregon', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'OR' ) );
-			wp_insert_term( __( 'Pennsylvania', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'PA' ) );
-			wp_insert_term( __( 'Rhode Island', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'RI' ) );
-			wp_insert_term( __( 'South Carolina', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'SC' ) );
-			wp_insert_term( __( 'South Dakota', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'SD' ) );
-			wp_insert_term( __( 'Tennesse', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'TN' ) );
-			wp_insert_term( __( 'Texas', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'TX' ) );
-			wp_insert_term( __( 'Utah', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'UT' ) );
-			wp_insert_term( __( 'Vermont', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'VT' ) );
-			wp_insert_term( __( 'Verginia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'VA' ) );
-			wp_insert_term( __( 'Washington', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'WA' ) );
-			wp_insert_term( __( 'West Virginia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'WV' ) );
-			wp_insert_term( __( 'Wisconsin', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'WI' ) );
-			wp_insert_term( __( 'Wyoming', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'WY' ) );
+			wp_insert_term( __( 'Alaska', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AK' ) );
+			wp_insert_term( __( 'Arizona', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AZ' ) );
+			wp_insert_term( __( 'Arkansas', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AR' ) );
+			wp_insert_term( __( 'California', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'CA' ) );
+			wp_insert_term( __( 'Colorado', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'CO' ) );
+			wp_insert_term( __( 'Connecticut', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'CT' ) );
+			wp_insert_term( __( 'Delaware', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'DE' ) );
+			wp_insert_term( __( 'Florida', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'FL' ) );
+			wp_insert_term( __( 'Georgia', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'GA' ) );
+			wp_insert_term( __( 'Hawaii', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'HI' ) );
+			wp_insert_term( __( 'Idaho', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'ID' ) );
+			wp_insert_term( __( 'Illinois', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'IL' ) );
+			wp_insert_term( __( 'Indiana', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'IN' ) );
+			wp_insert_term( __( 'Iowa', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'IA' ) );
+			wp_insert_term( __( 'Kansas', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'KS' ) );
+			wp_insert_term( __( 'Kentucky', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'KY' ) );
+			wp_insert_term( __( 'Louisiana', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'LA' ) );
+			wp_insert_term( __( 'Maine', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'ME' ) );
+			wp_insert_term( __( 'Maryland', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MD' ) );
+			wp_insert_term( __( 'Massachusetts', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MA' ) );
+			wp_insert_term( __( 'Michigan', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MI' ) );
+			wp_insert_term( __( 'Minnesota', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MN' ) );
+			wp_insert_term( __( 'Mississippi', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MS' ) );
+			wp_insert_term( __( 'Missouri', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MO' ) );
+			wp_insert_term( __( 'Montana', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MT' ) );
+			wp_insert_term( __( 'Nebraska', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NE' ) );
+			wp_insert_term( __( 'Nevada', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NV' ) );
+			wp_insert_term( __( 'New Hampshire', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NH' ) );
+			wp_insert_term( __( 'New Jersey', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NJ' ) );
+			wp_insert_term( __( 'New Mexico', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NM' ) );
+			wp_insert_term( __( 'New York', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NY' ) );
+			wp_insert_term( __( 'North Carolina', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NC' ) );
+			wp_insert_term( __( 'North Dakota', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'ND' ) );
+			wp_insert_term( __( 'Ohio', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'OH' ) );
+			wp_insert_term( __( 'Oklahoma', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'OK' ) );
+			wp_insert_term( __( 'Oregon', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'OR' ) );
+			wp_insert_term( __( 'Pennsylvania', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'PA' ) );
+			wp_insert_term( __( 'Rhode Island', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'RI' ) );
+			wp_insert_term( __( 'South Carolina', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'SC' ) );
+			wp_insert_term( __( 'South Dakota', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'SD' ) );
+			wp_insert_term( __( 'Tennesse', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'TN' ) );
+			wp_insert_term( __( 'Texas', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'TX' ) );
+			wp_insert_term( __( 'Utah', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'UT' ) );
+			wp_insert_term( __( 'Vermont', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'VT' ) );
+			wp_insert_term( __( 'Verginia', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'VA' ) );
+			wp_insert_term( __( 'Washington', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'WA' ) );
+			wp_insert_term( __( 'West Virginia', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'WV' ) );
+			wp_insert_term( __( 'Wisconsin', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'WI' ) );
+			wp_insert_term( __( 'Wyoming', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'WY' ) );
 			
-			wp_insert_term( __( 'Alberta', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AB' ) );
-			wp_insert_term( __( 'British Columnbia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'BC' ) );
-			wp_insert_term( __( 'Manitoba', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MB' ) );
-			wp_insert_term( __( 'New Brunswick', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NB' ) );
-			wp_insert_term( __( 'Newfoundland', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NL' ) );
-			wp_insert_term( __( 'Nova Scotia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NS' ) );
-			wp_insert_term( __( 'Ontario', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'ON' ) );
-			wp_insert_term( __( 'Prince Edward Island', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'PE' ) );
-			wp_insert_term( __( 'Quebec', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'QB' ) );
-			wp_insert_term( __( 'Saskatchewan', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'SK' ) );
+			wp_insert_term( __( 'Alberta', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'AB' ) );
+			wp_insert_term( __( 'British Columnbia', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'BC' ) );
+			wp_insert_term( __( 'Manitoba', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'MB' ) );
+			wp_insert_term( __( 'New Brunswick', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NB' ) );
+			wp_insert_term( __( 'Newfoundland', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NL' ) );
+			wp_insert_term( __( 'Nova Scotia', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'NS' ) );
+			wp_insert_term( __( 'Ontario', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'ON' ) );
+			wp_insert_term( __( 'Prince Edward Island', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'PE' ) );
+			wp_insert_term( __( 'Quebec', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'QB' ) );
+			wp_insert_term( __( 'Saskatchewan', 'wp-seedbank' ), 'idealien_rideshare_state_prov', array( 'slug' => 'SK' ) );
 			
-			wp_insert_term(__( 'Burning Man', 'idealien-rideshare' ), 'idealien_rideshare_event');
-			wp_insert_term(__( 'Occupy Wall Street', 'idealien-rideshare' ), 'idealien_rideshare_event');
-			wp_insert_term(__( 'WordCamp Toronto', 'idealien-rideshare' ), 'idealien_rideshare_event');
-			wp_insert_term(__( 'Coachella', 'idealien-rideshare' ), 'idealien_rideshare_event');
-			wp_insert_term(__( 'New York City Marathon', 'idealien-rideshare' ), 'idealien_rideshare_event');
+			wp_insert_term(__( 'Burning Man', 'wp-seedbank' ), 'idealien_rideshare_event');
+			wp_insert_term(__( 'Occupy Wall Street', 'wp-seedbank' ), 'idealien_rideshare_event');
+			wp_insert_term(__( 'WordCamp Toronto', 'wp-seedbank' ), 'idealien_rideshare_event');
+			wp_insert_term(__( 'Coachella', 'wp-seedbank' ), 'idealien_rideshare_event');
+			wp_insert_term(__( 'New York City Marathon', 'wp-seedbank' ), 'idealien_rideshare_event');
 			
-			wp_insert_term(__( 'Active', 'idealien-rideshare' ), 'idealien_rideshare_status');
-			wp_insert_term(__( 'Connected', 'idealien-rideshare' ), 'idealien_rideshare_status');
-			wp_insert_term(__( 'Deleted', 'idealien-rideshare' ), 'idealien_rideshare_status');
+			wp_insert_term(__( 'Active', 'wp-seedbank' ), 'idealien_rideshare_status');
+			wp_insert_term(__( 'Connected', 'wp-seedbank' ), 'idealien_rideshare_status');
+			wp_insert_term(__( 'Deleted', 'wp-seedbank' ), 'idealien_rideshare_status');
 
 		}
 		
