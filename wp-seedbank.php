@@ -1,60 +1,62 @@
 <?php
 /*
     Plugin Name: WP-SeedBank
-    Plugin URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/
-    Description: Add a seed exchange post type to turn your WordPress install into a community seed bank! :D
-    Author: Cleveland GiveCamp Developers
-    Version: 0.2.1
-    Author URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/#authors
-    License: GPL
-    Requires at least: 3.5.2
-    Stable tag: 0.2.1
+    Plugin URI: http://hummingbirdproject.org/wp-seedbank/
+    Description: Add seed exchange post type to turn a WordPress install into a seed bank! :D
+    Author: Cleveland GiveCamp Developers (meitar@maymay.net)
+    Version: 0.1
+    Author URI: http://hummingbirdproject.org/wp-seedbank/#contributors
+	License: GPL
+	Requires at least: 3.5.2
+	Stable tag: 0.1
 */
+
 
 //Modify the following two variables to identify the ID for the comment and delete forms
 define ('WP_SEEDBANK_COMMENTFORM_ID' , "REPLACEME");
 define ('WP_SEEDBANK_DELETEFORM_ID' , "REPLACEME");
 
+
 //Do not modify anything else below 
 define ('WP_SEEDBANK_PATH', WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)) );
-define ('WP_SEEDBANK_VERSION', '0.2.1');
+define ('WP_SEEDBANK_VERSION', '0.1');
 
-class WP_Seedbank {
-
+class idealien_rideshare {
+	
 	//Define all meta data fields
 	var $meta_fields = array(
-		"wp_seedbank_type",
-		"wp_seedbank_quantity",
-		"wp_seedbank_common_name",
-		"wp_seedbank_departureCity",
-		"wp_seedbank_departureStateProv", 
-		"wp_seedbank_seed_expiry_date", 
-		"wp_seedbank_destinationCity", 
-		"wp_seedbank_destinationStateProv", 
-		"wp_seedbank_exchange_expiry_date",
-		"wp_seedbank_unit",
-		"wp_seedbank_name",
-		"wp_seedbank_email",
-		"wp_seedbank_phone", 
-		"wp_seedbank_addInfo",
-		"wp_seedbank_status"
+		"idealien_rideshare_type",
+		"idealien_rideshare_spaces",
+		"idealien_rideshare_event",
+		"idealien_rideshare_departureCity",
+		"idealien_rideshare_departureStateProv", 
+		"idealien_rideshare_departureDate", 
+		"idealien_rideshare_destinationCity", 
+		"idealien_rideshare_destinationStateProv", 
+		"idealien_rideshare_returnDate",
+		"idealien_rideshare_username",
+		"idealien_rideshare_name",
+		"idealien_rideshare_email",
+		"idealien_rideshare_phone", 
+		"idealien_rideshare_addInfo",
+		"idealien_rideshare_status"
 	);
 	
-	function WP_Seedbank() {
+	function idealien_rideshare() {
 		
 		//Register CPT, Taxonomies, etc
-		WP_Seedbank::create_data_types();
+		idealien_rideshare::create_data_types();
 		
 		//Setup and customize columns of data on admin list view
-		add_filter("manage_edit-wp_seedbank_columns", array(&$this, "edit_columns"));
+		add_filter("manage_edit-idealien_rideshare_columns", array(&$this, "edit_columns"));
 		add_action("manage_posts_custom_column", array(&$this, "custom_columns"));		
-		add_filter("manage_edit-wp_seedbank_sortable_columns", array(&$this, "register_sortable"));
-		add_filter("request", array(&$this, "wp_seedbank_status_column_orderby"));
-		add_filter("request", array(&$this, "wp_seedbank_type_column_orderby"));
-		add_filter("request", array(&$this, "wp_seedbank_quantity_column_orderby"));
+		add_filter("manage_edit-idealien_rideshare_sortable_columns", array(&$this, "register_sortable"));
+		add_filter("request", array(&$this, "idealien_rideshare_status_column_orderby"));
+		add_filter("request", array(&$this, "idealien_rideshare_type_column_orderby"));
+		add_filter("request", array(&$this, "idealien_rideshare_spaces_column_orderby"));
 		
 		//FUTURE: Date columns sortable
-		//add_filter("request", array(&$this, "wp_seedbank_seed_expiry_date_column_orderby"));
+		//add_filter("request", array(&$this, "idealien_rideshare_departureDate_column_orderby"));
 		
 		//Setup function to instantiate meta boxes and scripts on admin page
 		add_action("admin_init", array(&$this, "admin_init"));
@@ -96,11 +98,11 @@ class WP_Seedbank {
 			add_action( "init", array(&$this, "bbg_switch_gf_hooks"), 99 );
 		}
 		
-	//End wp_seedbank constructor function
+	//End idealien_rideshare constructor function
 	}
 	
 	//Ensure all 3 forms are executed if being called from a buddyPress page
-	//Called From: wp_seedbank constructor
+	//Called From: idealien_rideshare constructor
 	function bbg_switch_gf_hooks() {
     	remove_action('wp',  array('RGForms', 'maybe_process_form'), 9);
 		add_action( 'bp_actions', array( 'RGForms', 'maybe_process_form' ), 1 );
@@ -112,7 +114,7 @@ class WP_Seedbank {
 	function populate_rideshare_data($form){
     
 		//Only execute for the primary rideshare form
-		$rideshareFormType = strpos($form['cssClass'], 'wp_seedbank_gf');
+		$rideshareFormType = strpos($form['cssClass'], 'idealien_rideshare_gf');
 
 		if( $rideshareFormType === false)
 			return $form;
@@ -125,38 +127,38 @@ class WP_Seedbank {
 			switch ($field['postCustomFieldName']) {
     			
 				//each case buidls up the list of $terms to display
-				case 'wp_seedbank_status':
-        			$terms = get_terms( 'wp_seedbank_status', array(
+				case 'idealien_rideshare_status':
+        			$terms = get_terms( 'idealien_rideshare_status', array(
  						'hide_empty' => 0
  					) );
 					$choices = array(array('text' => ' ', 'value' => ' '));
 					break;
 					
-				case 'wp_seedbank_type':
-        			$terms = get_terms( 'wp_seedbank_type', array(
+				case 'idealien_rideshare_type':
+        			$terms = get_terms( 'idealien_rideshare_type', array(
  						'hide_empty' => 0
  					) );
 					$choices = array(array('text' => ' ', 'value' => ' '));
 					break;
 					
-				case 'wp_seedbank_common_name':
-        			$terms = get_terms( 'wp_seedbank_common_name', array(
+				case 'idealien_rideshare_event':
+        			$terms = get_terms( 'idealien_rideshare_event', array(
  						'hide_empty' => 0
  					) );
 					$choices = array(array('text' => 'Select', 'value' => ' '));
 					$choices[] = array('text' => 'Add New Common Name', 'value' => 'Add New Event');
 					break;
 					
-				case 'wp_seedbank_destinationStateProv':
-				case 'wp_seedbank_departureStateProv':
-					$terms = get_terms( 'wp_seedbank_genus', array(
+				case 'idealien_rideshare_destinationStateProv':
+				case 'idealien_rideshare_departureStateProv':
+					$terms = get_terms( 'idealien_rideshare_state_prov', array(
 						'hide_empty' => 0
  					) );
 					$choices = array(array('text' => 'Select', 'value' => ' '));
 					break;
 				
-				case 'wp_seedbank_name':
-				case 'wp_seedbank_email':
+				case 'idealien_rideshare_name':
+				case 'idealien_rideshare_email':
 					if(is_user_logged_in() ) { 
 						//Remove name and email fields when dealing with registered & authenticated user
 						unset($form['fields'][$key]);
@@ -190,13 +192,13 @@ class WP_Seedbank {
 	function after_submission_custom_notifications($entry, $form){
 		
 		//Ensure this only applies to the comment form
-		$rideshareFormType = strpos($form['cssClass'], 'wp_seedbankComments');
+		$rideshareFormType = strpos($form['cssClass'], 'idealien_rideshareComments');
 		
 		if( $rideshareFormType !== false) {
 
 				//Retrieve rideshare details
 				$queryParameters = array(
-					'post_type' => 'wp_seedbank',
+					'post_type' => 'idealien_rideshare',
 					'posts_per_page' => '1',
 					'p' => $entry[14]
 				);
@@ -215,16 +217,16 @@ class WP_Seedbank {
 						//Build message				
 						$message =  $user->display_name . " wants to connect with you about the following seed exchange.\r\n";
 						$message .= "Seed exchange: " . $ID . "\r\n";
-						$message .= "Type: " . get_post_meta($ID, "wp_seedbank_type", true) . "\r\n";
-						$message .= "Date: " . get_post_meta($ID, "wp_seedbank_seed_expiry_date", true) . "\r\n";
-						$message .= "Quantity: " . get_post_meta($ID, "wp_seedbank_quantity", true) . "\r\n";
-						$message .= "Seed Expiry Date: " . get_post_meta($ID, "wp_seedbank_departureCity", true) . ", " . get_post_meta($ID, "wp_seedbank_departureStateProv", true) . "\r\n";
+						$message .= "Type: " . get_post_meta($ID, "idealien_rideshare_type", true) . "\r\n";
+						$message .= "Date: " . get_post_meta($ID, "idealien_rideshare_departureDate", true) . "\r\n";
+						$message .= "Quantity: " . get_post_meta($ID, "idealien_rideshare_spaces", true) . "\r\n";
+						$message .= "Seed Expiry Date: " . get_post_meta($ID, "idealien_rideshare_departureCity", true) . ", " . get_post_meta($ID, "idealien_rideshare_departureStateProv", true) . "\r\n";
 						
 						//Display either City/Stave or Event - whichever is populated
-						if (get_post_meta($ID, "wp_seedbank_common_name", true)) {
-							$message .= "Genus/species: " . get_post_meta($ID, "wp_seedbank_common_name", true) . "\r\n";
+						if (get_post_meta($ID, "idealien_rideshare_event", true)) {
+							$message .= "Genus/species: " . get_post_meta($ID, "idealien_rideshare_event", true) . "\r\n";
 						} else {
-							$message .= "Genus/species: " . get_post_meta($ID, "wp_seedbank_destinationCity", true) . ", " . get_post_meta($ID, "wp_seedbank_destinationStateProv", true) . "\r\n";
+							$message .= "Genus/species: " . get_post_meta($ID, "idealien_rideshare_destinationCity", true) . ", " . get_post_meta($ID, "idealien_rideshare_destinationStateProv", true) . "\r\n";
 						}
 						
 						if ($entry[1]) {
@@ -257,11 +259,11 @@ class WP_Seedbank {
 	function after_submission_delete_rideshare($entry, $form){
 		//FUTURE: Validate that Rideshare ID matches user in $entry
 		
-		$rideshareFormType = strpos($form['cssClass'], 'wp_seedbankDelete');
+		$rideshareFormType = strpos($form['cssClass'], 'idealien_rideshareDelete');
 		
 		//Only execute when dealing with the Delete form
 		if( $rideshareFormType !== false) {
-			update_post_meta($entry[14], 'wp_seedbank_status', 'Deleted');
+			update_post_meta($entry[14], 'idealien_rideshare_status', 'Deleted');
 
 		}
 	} 
@@ -273,7 +275,7 @@ class WP_Seedbank {
 		
 		//Ensure this validation only fires on the primary form
 		$form = $validation_result["form"];
-		$rideshareFormType = strpos($form['cssClass'], 'wp_seedbank_gf');
+		$rideshareFormType = strpos($form['cssClass'], 'idealien_rideshare_gf');
 		if( $rideshareFormType === false )
 			return $validation_result;
 
@@ -286,7 +288,7 @@ class WP_Seedbank {
 				switch ($field['postCustomFieldName']) {
     				
 					//Destination City is required
-					case 'wp_seedbank_destinationCity':
+					case 'idealien_rideshare_destinationCity':
 						if( !$_POST["input_25"] ) {
 							$validation_result['is_valid'] = false;
 							$field['failed_validation'] = true;
@@ -295,7 +297,7 @@ class WP_Seedbank {
 					break; 
 					
 					//Destination State / Prov is required
-					case 'wp_seedbank_destinationStateProv':
+					case 'idealien_rideshare_destinationStateProv':
 						if( rgpost("input_19") == ' ' ) {
 							$validation_result['is_valid'] = false;
 							$field['failed_validation'] = true;
@@ -315,7 +317,7 @@ class WP_Seedbank {
 				
 				switch ($field['postCustomFieldName']) {
     				
-					case 'wp_seedbank_common_name':
+					case 'idealien_rideshare_event':
 						
 						//Event is required
 						if( rgpost("input_28") == ' ' ) {
@@ -355,7 +357,7 @@ class WP_Seedbank {
 				
 				switch ($field['postCustomFieldName']) {
     				
-					case 'wp_seedbank_name':
+					case 'idealien_rideshare_name':
 			
 						//Name is required
 						if( !$_POST["input_30"] ) {
@@ -366,7 +368,7 @@ class WP_Seedbank {
 					break;
 					
 					//Email is required	
-					case 'wp_seedbank_email':
+					case 'idealien_rideshare_email':
 						if( !$_POST["input_31"] ) {
 							$validation_result['is_valid'] = false;
 							$field['failed_validation'] = true;
@@ -389,7 +391,7 @@ class WP_Seedbank {
 	function pre_rideshareSubmission($form){
 		
 		//Only modify the primary form output
-		$rideshareFormType = strpos($form['cssClass'], 'wp_seedbank_gf');
+		$rideshareFormType = strpos($form['cssClass'], 'idealien_rideshare_gf');
 		
 		if( $rideshareFormType === false )
 			return $form;
@@ -397,7 +399,7 @@ class WP_Seedbank {
 		//If Add New Event text field has a value - create the term for it and force the drop-down to new value.
 		if( $_POST["input_29"] ) {
 			$newEvent = preg_replace( '/[^a-z]/i', "", $_POST["input_29"]);
-			wp_insert_term( $newEvent , 'wp_seedbank_common_name');
+			wp_insert_term( $newEvent , 'idealien_rideshare_event');
 			$_POST["input_28"] = $newEvent;
 		}
 		
@@ -411,7 +413,7 @@ class WP_Seedbank {
 			$displayName = $current_user->user_login;
 		}
 			
-		//Different title format based on common_name / citystate mode
+		//Different title format based on event / citystate mode
 		if( $_POST["input_27"] == "Event") {
 			//[Name] to [Event] ON [Date] 
 			$_POST["input_6"] = $displayName . " TO " . $_POST["input_28"] . " ON " .  $_POST["input_10"];
@@ -427,93 +429,93 @@ class WP_Seedbank {
 	function create_data_types() {
 		
 		// Register custom post type and taxonomies
-		register_post_type('wp_seedbank',
+		register_post_type('idealien_rideshare', 
 			array(
 				'labels' => array(
-					'name' => __( 'Seed Exchanges', 'wp-seedbank' ),
-					'singular_label' => __( 'Seed Exchange', 'wp-seedbank' ),
-					'add_new' => __( 'Add Seed Exchange', 'wp-seedbank' ),
-					'add_new_item' => __( 'Add Seed Exchange', 'wp-seedbank' ),
-					'edit' => __( 'Edit Seed Exchange', 'wp-seedbank' ),
-					'edit_item' => __( 'Edit Seed Exchange', 'wp-seedbank' ),
-					'new_item' => __( 'New Seed Exchange', 'wp-seedbank' ),
-					'view' => __( 'View Seed Exchange', 'wp-seedbank' ),
-					'view_item' => __( 'View Seed Exchange', 'wp-seedbank' ),
-					'search' => __( 'Search Seed Exchanges', 'wp-seedbank' ),
-					'not_found' => __( 'No Seed Exchanges found', 'wp-seedbank' ),
-					'not_found_in_trash' => __( 'No Seed Exchanges found in trash', 'wp-seedbank' )
+					'name' => __( 'Seed Exchanges', 'idealien-rideshare' ),
+					'singular_label' => __( 'Seed Exchange', 'idealien-rideshare' ),
+					'add_new' => __( 'Add Seed Exchange', 'idealien-rideshare' ),
+					'add_new_item' => __( 'Add Seed Exchange', 'idealien-rideshare' ),
+					'edit' => __( 'Edit Seed Exchange', 'idealien-rideshare' ),
+					'edit_item' => __( 'Edit Seed Exchange', 'idealien-rideshare' ),
+					'new_item' => __( 'New Seed Exchange', 'idealien-rideshare' ),
+					'view' => __( 'View Seed Exchange', 'idealien-rideshare' ),
+					'view_item' => __( 'View Seed Exchange', 'idealien-rideshare' ),
+					'search' => __( 'Search Seed Exchanges', 'idealien-rideshare' ),
+					'not_found' => __( 'No Seed Exchanges found', 'idealien-rideshare' ),
+					'not_found_in_trash' => __( 'No Seed Exchanges found in trash', 'idealien-rideshare' )
 				),
 				'supports' => array('title', 'custom-fields'),
 				'rewrite' => array('slug' => 'rideshare'),
 				'public' => true,
-				'description' => __( 'Seedbank Seed Exchanges', 'wp-seedbank' ),
+				'description' => __( 'Seedbank Seed Exchanges', 'idealien-rideshare' ),
 				'menu_icon' => WP_SEEDBANK_PATH . 'seedexchange_icon.png'
 			)
 		);
 		
-		register_taxonomy('wp_seedbank_type', 'wp_seedbank', array(
+		register_taxonomy('idealien_rideshare_type', 'idealien_rideshare', array(
 				'labels' => array(
-					'name' => __( 'Exchange Types', 'wp-seedbank' ),
-					'singular_name' => __( 'Exchange Type', 'wp-seedbank' ),
-					'all_items' => __( 'All Exchange Types', 'wp-seedbank' ),
-					'edit_item' => __( 'Edit Exchange Type', 'wp-seedbank' ),
-					'update_item' => __( 'Update Exchange Type', 'wp-seedbank' ),
-					'add_new_item' => __( 'Add New Exchange Type', 'wp-seedbank' ),
-					'new_item_name' => __( 'New Exchange Type Name', 'wp-seedbank' )
+					'name' => __( 'Exchange Types', 'idealien-rideshare' ),
+					'singular_name' => __( 'Exchange Type', 'idealien-rideshare' ),
+					'all_items' => __( 'All Exchange Types', 'idealien-rideshare' ),
+					'edit_item' => __( 'Edit Exchange Type', 'idealien-rideshare' ),
+					'update_item' => __( 'Update Exchange Type', 'idealien-rideshare' ),
+					'add_new_item' => __( 'Add New Exchange Type', 'idealien-rideshare' ),
+					'new_item_name' => __( 'New Exchange Type Name', 'idealien-rideshare' )
 				),
 				'hierarchical' => false,
 				'label' => 'Exchange Types'
 			)
 		);
 		
-		register_taxonomy('wp_seedbank_common_name', 'wp_seedbank', array(
+		register_taxonomy('idealien_rideshare_event', 'idealien_rideshare', array(
 				'labels' => array(
-					'name' => __( 'Common Names', 'wp-seedbank' ),
-					'singular_name' => __( 'Common Name', 'wp-seedbank' ),
-					'all_items' => __( 'All Common Names', 'wp-seedbank' ),
-					'edit_item' => __( 'Edit Common Name', 'wp-seedbank' ),
-					'update_item' => __( 'Update Common Name', 'wp-seedbank' ),
-					'add_new_item' => __( 'Add New Common Name', 'wp-seedbank' ),
-					'new_item_name' => __( 'New Common Name', 'wp-seedbank' )
+					'name' => __( 'Common Names', 'idealien-rideshare' ),
+					'singular_name' => __( 'Common Name', 'idealien-rideshare' ),
+					'all_items' => __( 'All Common Names', 'idealien-rideshare' ),
+					'edit_item' => __( 'Edit Common Name', 'idealien-rideshare' ),
+					'update_item' => __( 'Update Common Name', 'idealien-rideshare' ),
+					'add_new_item' => __( 'Add New Common Name', 'idealien-rideshare' ),
+					'new_item_name' => __( 'New Common Name', 'idealien-rideshare' )
 				),
 				'hierarchical' => false,
-				'label' => __( 'Common Names', 'wp-seedbank' )
+				'label' => __( 'Common Names', 'idealien-rideshare' )
 			)
 		);
 		
-		register_taxonomy('wp_seedbank_genus', 'wp_seedbank', array(
+		register_taxonomy('idealien_rideshare_state_prov', 'idealien_rideshare', array(
 				'labels' => array(
-					'name' => __( 'Seed Genera', 'wp-seedbank' ),
-					'singular_name' => __( 'Genus', 'wp-seedbank' ),
-					'all_items' => __( 'All Genera', 'wp-seedbank' ),
-					'edit_item' => __( 'Edit Genera', 'wp-seedbank' ),
-					'update_item' => __( 'Update Genus', 'wp-seedbank' ),
-					'add_new_item' => __( 'Add New Genus', 'wp-seedbank' ),
-					'new_item_name' => __( 'New Genus Name', 'wp-seedbank' )
+					'name' => __( 'Seed Genera', 'idealien-rideshare' ),
+					'singular_name' => __( 'Genus', 'idealien-rideshare' ),
+					'all_items' => __( 'All Genera', 'idealien-rideshare' ),
+					'edit_item' => __( 'Edit Genera', 'idealien-rideshare' ),
+					'update_item' => __( 'Update Genus', 'idealien-rideshare' ),
+					'add_new_item' => __( 'Add New Genus', 'idealien-rideshare' ),
+					'new_item_name' => __( 'New Genus Name', 'idealien-rideshare' )
 				),
 				'hierarchical' => false,
-				'label' => __( 'Seed Genera', 'wp-seedbank' )
+				'label' => __( 'Seed Genera', 'idealien-rideshare' )
 			)
 		);
 		
-		register_taxonomy('wp_seedbank_status', 'wp_seedbank', array(
+		register_taxonomy('idealien_rideshare_status', 'idealien_rideshare', array(
 				'labels' => array(
-					'name' => __( 'Exchange Statuses', 'wp-seedbank' ),
-					'singular_name' => __( 'Exchange Status', 'wp-seedbank' ),
-					'all_items' => __( 'All Exchange Statuses', 'wp-seedbank' ),
-					'edit_item' => __( 'Edit Exchange Status', 'wp-seedbank' ),
-					'update_item' => __( 'Update Exchange Status', 'wp-seedbank' ),
-					'add_new_item' => __( 'Add New Exchange Status', 'wp-seedbank' ),
-					'new_item_name' => __( 'New Exchange Status Name', 'wp-seedbank' )
+					'name' => __( 'Exchange Statuses', 'idealien-rideshare' ),
+					'singular_name' => __( 'Exchange Status', 'idealien-rideshare' ),
+					'all_items' => __( 'All Exchange Statuses', 'idealien-rideshare' ),
+					'edit_item' => __( 'Edit Exchange Status', 'idealien-rideshare' ),
+					'update_item' => __( 'Update Exchange Status', 'idealien-rideshare' ),
+					'add_new_item' => __( 'Add New Exchange Status', 'idealien-rideshare' ),
+					'new_item_name' => __( 'New Exchange Status Name', 'idealien-rideshare' )
 				),
 				'hierarchical' => false,
-				'label' => __( 'Exchange Status', 'wp-seedbank' )
+				'label' => __( 'Exchange Status', 'idealien-rideshare' )
 			)
 		);
 		
 		// instruction to only load shortcode and front-end CSS if it is not the admin area
 		if ( !is_admin() ) { 
-			add_shortcode('ridesharelist', array('wp_seedbank','wp_seedbank_shortcode'));
+			add_shortcode('ridesharelist', array('idealien_rideshare','idealien_rideshare_shortcode'));
 			add_action( "wp_print_styles", array($this, 'enqueue_display_styles') );
 		}
 	}
@@ -522,24 +524,28 @@ class WP_Seedbank {
 	function admin_init() 
 	{
 		// Custom meta boxes for the edit rideshare screen
-		add_meta_box("idealienRideshareDetails-meta", "Seed Exchange Details", array(&$this, "meta_options_details"), "wp_seedbank", "normal", "high");
+		add_meta_box("idealienRideshareDetails-meta", "Seed Exchange Details", array(&$this, "meta_options_details"), "idealien_rideshare", "normal", "high");
 		
 		//Remove meta boxes that are added by default with taxonomy
-		remove_meta_box( 'tagsdiv-wp_seedbank_type', 'wp_seedbank', 'normal' );
-		remove_meta_box( 'tagsdiv-wp_seedbank_common_name', 'wp_seedbank', 'normal' );
+		remove_meta_box( 'tagsdiv-idealien_rideshare_type', 'idealien_rideshare', 'normal' );
+		remove_meta_box( 'tagsdiv-idealien_rideshare_event', 'idealien_rideshare', 'normal' );
 		
 		// Setup scripts / styles for date picker
 		add_action( "admin_print_scripts-post.php", array($this, 'enqueue_admin_scripts') );
         add_action( "admin_print_scripts-post-new.php", array($this, 'enqueue_admin_scripts') );
 		add_action( "admin_print_styles", array($this, 'enqueue_admin_styles') );
+
 	}
 
 	// add scripts for admin UI treatment
-    function enqueue_admin_scripts() {
+     function enqueue_admin_scripts() {
 		global $current_screen;
-		if ($current_screen->post_type == 'wp_seedbank') {
+		if ($current_screen->post_type == 'idealien_rideshare') {
+				wp_register_script('jquery-ui-datepicker', WP_SEEDBANK_PATH . 'jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core') );
 				wp_enqueue_script('jquery-ui-datepicker');
+				
 		}
+
 	}
 
 	 // add css for admin UI treatment
@@ -547,14 +553,14 @@ class WP_Seedbank {
 		 
 	 	global $current_screen;
 
-		//Only apply to the wp_seedbank post type
+		//Only apply to the idealien_rideshare post type
 		if(isset($current_screen->post_type)) {
 
 			switch ($current_screen->post_type) {
-				case 'wp_seedbank':
+				case 'idealien_rideshare':
                     // TODO: Fix these paths? We've removed some of this for simplicity, causing slight datepicker UI issues.
 					wp_enqueue_style('jquery-ui-theme', WP_SEEDBANK_PATH . 'css/ui-lightness/jquery-ui-1.8.16.custom.css');
-					wp_enqueue_style('wp_seedbank_admin', WP_SEEDBANK_PATH . 'css/wp_seedbank_admin.css');
+					wp_enqueue_style('idealien_rideshare_admin', WP_SEEDBANK_PATH . 'css/idealien_rideshare_admin.css');
 					break;
 			}
 		}
@@ -564,14 +570,14 @@ class WP_Seedbank {
 	 //Register & activate the JS to enable comment / delete form functionality
 	 //FUTURE: Only have this fire on pages where the shortcode is in use.
 	 function frontend_scripts_init() {
-		wp_register_script('rideshare-connect', WP_SEEDBANK_PATH . 'wp_seedbank_connect.js', array('jquery') );
+		wp_register_script('rideshare-connect', WP_SEEDBANK_PATH . 'idealien_rideshare_connect.js', array('jquery') );
 		wp_enqueue_script('rideshare-connect');
 	}    
  
  
 	 // add css for admin UI treatment
 	 function enqueue_display_styles() {
-	 	wp_enqueue_style('wp_seedbank_styles', WP_SEEDBANK_PATH . 'css/wp_seedbank.css');
+	 	wp_enqueue_style('idealien_rideshare_styles', WP_SEEDBANK_PATH . 'css/idealien_rideshare.css');
 	 }
 	
 	//Tweak format of datepicker for admin
@@ -579,7 +585,7 @@ class WP_Seedbank {
 		
 	global $current_screen;
 		if(isset($current_screen->post_type)) {
-			if ($current_screen->post_type == 'wp_seedbank') {
+			if ($current_screen->post_type == 'idealien_rideshare') {
 			?>
 			<script type="text/javascript">
 			jQuery(document).ready(function(){
@@ -611,45 +617,45 @@ class WP_Seedbank {
 		
 		//Retrieve meta data fields or set to initial blank state
 		if (isset($custom)){
-			$wp_seedbank_type = $custom["wp_seedbank_type"][0];
-			$wp_seedbank_quantity = $custom["wp_seedbank_quantity"][0];
-			$wp_seedbank_common_name = $custom["wp_seedbank_common_name"][0];
-			$wp_seedbank_departureCity = $custom["wp_seedbank_departureCity"][0];
-			$wp_seedbank_departureStateProv = $custom["wp_seedbank_departureStateProv"][0]; 
-			$wp_seedbank_seed_expiry_date = $custom["wp_seedbank_seed_expiry_date"][0];
-			$wp_seedbank_exchange_expiry_date = $custom["wp_seedbank_exchange_expiry_date"][0];
-			$wp_seedbank_destinationCity = $custom["wp_seedbank_destinationCity"][0];
-			$wp_seedbank_destinationStateProv = $custom["wp_seedbank_destinationStateProv"][0]; 
-			$wp_seedbank_unit = $custom["wp_seedbank_unit"][0];
-			$wp_seedbank_name = $custom["wp_seedbank_name"][0];
-			$wp_seedbank_email = $custom["wp_seedbank_email"][0];
-			$wp_seedbank_phone = $custom["wp_seedbank_phone"][0];
-			$wp_seedbank_addInfo = $custom["wp_seedbank_addInfo"][0];
-			$wp_seedbank_status = $custom["wp_seedbank_status"][0];
+			$idealien_rideshare_type = $custom["idealien_rideshare_type"][0];
+			$idealien_rideshare_spaces = $custom["idealien_rideshare_spaces"][0];
+			$idealien_rideshare_event = $custom["idealien_rideshare_event"][0];
+			$idealien_rideshare_departureCity = $custom["idealien_rideshare_departureCity"][0];
+			$idealien_rideshare_departureStateProv = $custom["idealien_rideshare_departureStateProv"][0]; 
+			$idealien_rideshare_departureDate = $custom["idealien_rideshare_departureDate"][0];
+			$idealien_rideshare_returnDate = $custom["idealien_rideshare_returnDate"][0];
+			$idealien_rideshare_destinationCity = $custom["idealien_rideshare_destinationCity"][0];
+			$idealien_rideshare_destinationStateProv = $custom["idealien_rideshare_destinationStateProv"][0]; 
+			$idealien_rideshare_username = $custom["idealien_rideshare_username"][0];
+			$idealien_rideshare_name = $custom["idealien_rideshare_name"][0];
+			$idealien_rideshare_email = $custom["idealien_rideshare_email"][0];
+			$idealien_rideshare_phone = $custom["idealien_rideshare_phone"][0];
+			$idealien_rideshare_addInfo = $custom["idealien_rideshare_addInfo"][0];
+			$idealien_rideshare_status = $custom["idealien_rideshare_status"][0];
 		} else {
-			$wp_seedbank_type = "";
-			$wp_seedbank_quantity = "";
-			$wp_seedbank_common_name = "";
-			$wp_seedbank_departureCity = "";
-			$wp_seedbank_departureStateProv = ""; 
-			$wp_seedbank_seed_expiry_date = "";
-			$wp_seedbank_exchange_expiry_date = "";
-			$wp_seedbank_destinationCity = "";
-			$wp_seedbank_destinationStateProv = "";
-			$wp_seedbank_unit = "";
-			$wp_seedbank_name = "";
-			$wp_seedbank_email = "";
-			$wp_seedbank_phone = "";
-			$wp_seedbank_addInfo = "";
-			$wp_seedbank_status = "";
+			$idealien_rideshare_type = "";
+			$idealien_rideshare_spaces = "";
+			$idealien_rideshare_event = "";
+			$idealien_rideshare_departureCity = "";
+			$idealien_rideshare_departureStateProv = ""; 
+			$idealien_rideshare_departureDate = "";
+			$idealien_rideshare_returnDate = "";
+			$idealien_rideshare_destinationCity = "";
+			$idealien_rideshare_destinationStateProv = "";
+			$idealien_rideshare_username = "";
+			$idealien_rideshare_name = "";
+			$idealien_rideshare_email = "";
+			$idealien_rideshare_phone = "";
+			$idealien_rideshare_addInfo = "";
+			$idealien_rideshare_status = "";
 		}
 		
         // Create HTML for the drop-down menus.
         ob_start();
-        $typeOptions = get_terms('wp_seedbank_type', 'hide_empty=0&order=ASC');
-        print '<select name="wp_seedbank_type">';
+        $typeOptions = get_terms('idealien_rideshare_type', 'hide_empty=0&order=ASC');
+        print '<select name="idealien_rideshare_type">';
         foreach ($typeOptions as $type) {
-            if ($type->name == $wp_seedbank_type) {
+            if ($type->name == $idealien_rideshare_type) {
                 echo "<option SELECTED value='" . $type->name . "'>" . strtolower($type->name) . "</option>\n";
             } else {
                 echo "<option value='" . $type->name . "'>" . strtolower($type->name) . "</option>\n";
@@ -660,13 +666,13 @@ class WP_Seedbank {
         ob_end_clean();
         
         ob_start();
-        print '<select id="wp-seedbank-common-name" name="wp_seedbank_common_name">';
-        $common_nameOptions = get_terms('wp_seedbank_common_name', 'hide_empty=0&order=ASC');
-        foreach ($common_nameOptions as $common_name) {
-            if ($common_name->name == $wp_seedbank_common_name) {
-                echo "<option SELECTED value='" . $common_name->name . "'>" . $common_name->name . "</option>\n";
+        print '<select id="wp-seedbank-common-name" name="idealien_rideshare_event">';
+        $eventOptions = get_terms('idealien_rideshare_event', 'hide_empty=0&order=ASC');
+        foreach ($eventOptions as $event) {
+            if ($event->name == $idealien_rideshare_event) {
+                echo "<option SELECTED value='" . $event->name . "'>" . $event->name . "</option>\n";
             } else {
-                echo "<option value='" . $common_name->name . "'>" . $common_name->name . "</option>\n";
+                echo "<option value='" . $event->name . "'>" . $event->name . "</option>\n";
             }
         }
         $common_name_select = ob_get_contents();
@@ -674,10 +680,10 @@ class WP_Seedbank {
         ob_end_clean();
 
         ob_start();
-        $statusOptions = get_terms('wp_seedbank_status', 'hide_empty=0&order=ASC');
-        print '<select name="wp_seedbank_status">';
+        $statusOptions = get_terms('idealien_rideshare_status', 'hide_empty=0&order=ASC');
+        print '<select name="idealien_rideshare_status">';
         foreach ($statusOptions as $status) {
-            if ($status->name == $wp_seedbank_status) {
+            if ($status->name == $idealien_rideshare_status) {
                 echo "<option SELECTED value='" . $status->name . "'>" . $status->name . "</option>\n";
             } else {
                 echo "<option value='" . $status->name . "'>" . $status->name . "</option>\n";
@@ -687,13 +693,13 @@ class WP_Seedbank {
         $status_select = ob_get_contents();
         ob_end_clean();
     ?>
-    <p><label>I would like to <?php print $type_select;?></label> <input name="wp_seedbank_quantity" value="<?php print $wp_seedbank_quantity;?>" placeholder="enter a number" /> <?php print $common_name_select;?> <input name="wp_seedbank_unit" value="<?php echo $wp_seedbank_unit;?>" placeholder="packets" />.</p>
-    <p><label>These seeds will expire on or about <input name="wp_seedbank_seed_expiry_date" class="rideshare_inputLine datepicker" value="<?php echo $wp_seedbank_seed_expiry_date;?>" />.</label> <span class="description">(If these seeds are in a packet, the wrapping might have an expiration date. Put that here.)</span></p>
-    <p><label>If I don't hear from anyone by <input name="wp_seedbank_exchange_expiry_date" class="rideshare_inputLine datepicker" value="<?php echo $wp_seedbank_exchange_expiry_date;?>" />, I'll stop being available to make this exchange.</label> <span class="description">(If you don't get a response by this date, your request will automatically close.)</span></p>
+    <p><label>I would like to <?php print $type_select;?></label> <input name="idealien_rideshare_spaces" value="<?php print $idealien_rideshare_spaces;?>" placeholder="enter a number" /> <?php print $common_name_select;?> <input name="idealien_rideshare_username" value="<?php echo $idealien_rideshare_username;?>" placeholder="packets" />.</p>
+    <p><label>These seeds will expire on or about <input name="idealien_rideshare_departureDate" class="rideshare_inputLine datepicker" value="<?php echo $idealien_rideshare_departureDate;?>" />.</label> <span class="description">(If these seeds are in a packet, the wrapping might have an expiration date. Put that here.)</span></p>
+    <p><label>If I don't hear from anyone by <input name="idealien_rideshare_returnDate" class="rideshare_inputLine datepicker" value="<?php echo $idealien_rideshare_returnDate;?>" />, I'll stop being available to make this exchange.</label> <span class="description">(If you don't get a response by this date, your request will automatically close.)</span></p>
     <p>
         <label>Some additional relevant things about this exchange are&hellip;</label><br />
-        <textarea name="wp_seedbank_addInfo" class="rideshare_inputBox" rows="10" cols="90"><?php echo $wp_seedbank_addInfo;?></textarea><br />
-        <span class="description">(Enter any additional details about this exchange here, such as what kinds of seeds you're hoping to swap for, or other ways interested users might be able to contact you.)</span><br />
+        <textarea name="idealien_rideshare_addInfo" class="rideshare_inputBox" rows="10" cols="90"><?php echo $idealien_rideshare_addInfo;?></textarea><br />
+        <span class="description">(Enter any additional details about this exchange here, such as what kinds of seeds you're hoping to trade for, or other ways interested users might be able to contact you.)</span><br />
     </p>
     <p><label>This seed exchange is <?php print $status_select;?>.</label> <span id="wp-seedbank-status-helptext" class="description">(<?php foreach ($statusOptions as $x) :?>The <code><?php echo $x->name;?></code> type is for <?php print strtolower($x->description);?>, <?php endforeach;?>)</span></p>
 
@@ -701,19 +707,19 @@ class WP_Seedbank {
 <!--
     <fieldset id="wp-seedbank-bioclassification"><legend>Seed bioclassifcation</legend>
         <p>
-            <label><?php _e('Species' , 'wp-seedbank'); ?>:</label>
-            <input name="wp_seedbank_destinationCity" class="rideshare_inputLine" value="<?php echo $wp_seedbank_destinationCity; ?>" />
+            <label><?php _e('Species' , 'idealien-rideshare'); ?>:</label>
+            <input name="idealien_rideshare_destinationCity" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_destinationCity; ?>" />
             <span class="description">What specific species of seed is this?</span>
         </p>
         <p>
-            <label><?php _e('Genus' , 'wp-seedbank'); ?>:</label>
+            <label><?php _e('Genus' , 'idealien-rideshare'); ?>:</label>
             <?php // Get all rideshare city terms (taxonomy)
-                $stateProvOptions = get_terms('wp_seedbank_genus', 'hide_empty=0&order=ASC'); ?>
-                <select name='wp_seedbank_destinationStateProv' class='rideshare_selectLine'>
+                $stateProvOptions = get_terms('idealien_rideshare_state_prov', 'hide_empty=0&order=ASC'); ?>
+                <select name='idealien_rideshare_destinationStateProv' class='rideshare_selectLine'>
                 <option value="">I don't know.</option>
                 <?php 
                 foreach ($stateProvOptions as $stateProv) {
-                    if ($stateProv->name == $wp_seedbank_destinationStateProv) {
+                    if ($stateProv->name == $idealien_rideshare_destinationStateProv) {
                         echo "<option SELECTED value='" . $stateProv->name . "'>" . $stateProv->name . "</option>\n";
                     } else {
                         echo "<option value='" . $stateProv->name . "'>" . $stateProv->name . "</option>\n";
@@ -726,16 +732,16 @@ class WP_Seedbank {
     </fieldset>
 
 	<p>
-		<label><?php _e('From' , 'wp-seedbank'); ?>:</label>
-		<input name="wp_seedbank_departureCity" class="rideshare_inputLine" value="<?php echo $wp_seedbank_departureCity; ?>" />
+		<label><?php _e('From' , 'idealien-rideshare'); ?>:</label>
+		<input name="idealien_rideshare_departureCity" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_departureCity; ?>" />
 	
 		<?php // Get all rideshare city terms (taxonomy)
-			$stateProvOptions = get_terms('wp_seedbank_genus', 'hide_empty=0&order=ASC'); ?>
-			<select name='wp_seedbank_departureStateProv' class='rideshare_selectLine'>
+			$stateProvOptions = get_terms('idealien_rideshare_state_prov', 'hide_empty=0&order=ASC'); ?>
+			<select name='idealien_rideshare_departureStateProv' class='rideshare_selectLine'>
 			<option></option>
 			<?php 
 			foreach ($stateProvOptions as $stateProv) {
-				if ($stateProv->name == $wp_seedbank_departureStateProv) {
+				if ($stateProv->name == $idealien_rideshare_departureStateProv) {
 					echo "<option SELECTED value='" . $stateProv->name . "'>" . $stateProv->name . "</option>\n";
 				} else {
 					echo "<option value='" . $stateProv->name . "'>" . $stateProv->name . "</option>\n";
@@ -746,14 +752,14 @@ class WP_Seedbank {
 	</p>
 
     <p>
-		<label><?php _e('Name' , 'wp-seedbank'); ?>:</label>
-		<input name="wp_seedbank_name" class="rideshare_inputLine" value="<?php echo $wp_seedbank_name;?>" /><br />
+		<label><?php _e('Name' , 'idealien-rideshare'); ?>:</label>
+		<input name="idealien_rideshare_name" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_name;?>" /><br />
 		<span class="description">If different from your member name, enter a contact person's name for this exchange here.</span>
 	</p>
     
     <p>
-		<label><?php _e('Email' , 'wp-seedbank'); ?>:</label>
-		<input name="wp_seedbank_email" class="rideshare_inputLine" value="<?php echo $wp_seedbank_email;?>" /><br />
+		<label><?php _e('Email' , 'idealien-rideshare'); ?>:</label>
+		<input name="idealien_rideshare_email" class="rideshare_inputLine" value="<?php echo $idealien_rideshare_email;?>" /><br />
 		<span class="description">Enter your email address if you'd like other members to contact you privately about this exchange.</span>
 	</p> 
 -->
@@ -773,7 +779,7 @@ class WP_Seedbank {
 		if ( defined('DOING_AJAX') )
  		return;
 		//Only execute adjustment for the rideshare CPT
-		if ($post->post_type == "wp_seedbank")
+		if ($post->post_type == "idealien_rideshare")
 		{
 			
 			// Loop through the POST data
@@ -801,7 +807,7 @@ class WP_Seedbank {
 						add_post_meta($post_id, $key, $entry);
 				}
                 // Copy "additional info" into the post body so it becomes searchable with WordPress's default searches.
-                if ('wp_seedbank_addInfo' === $key) {
+                if ('idealien_rideshare_addInfo' === $key) {
                     $post->post_content = $value;
                     $post->comment_status = 'open'; // Comments should be allowed.
                     // Unhook so we avoid infinite loop.
@@ -822,13 +828,13 @@ class WP_Seedbank {
 	{
 		$columns = array(
 			"cb" => "<input type=\"checkbox\" />",
-			"title" => __( 'Seed Exchange', 'wp-seedbank' ),
-			"wp_seedbank_status" => __( 'Status', 'wp-seedbank' ),
-			"wp_seedbank_type" => __( 'Type', 'wp-seedbank' ),
-			"wp_seedbank_seed_expiry_date" => __( 'Seed Expiry Date', 'wp-seedbank' ),
-			"wp_seedbank_quantity" => __( 'Quantity', 'wp-seedbank' ),
-			"wp_seedbank_destination" => __( 'Common Name', 'wp-seedbank' ),
-			//"wp_seedbank_departure" => __( 'Departure', 'wp-seedbank' )
+			"title" => __( 'Seed Exchange', 'idealien-rideshare' ),
+			"idealien_rideshare_status" => __( 'Status', 'idealien-rideshare' ),
+			"idealien_rideshare_type" => __( 'Type', 'idealien-rideshare' ),
+			"idealien_rideshare_departureDate" => __( 'Seed Expiry Date', 'idealien-rideshare' ),
+			"idealien_rideshare_spaces" => __( 'Quantity', 'idealien-rideshare' ),
+			"idealien_rideshare_destination" => __( 'Common Name', 'idealien-rideshare' ),
+			//"idealien_rideshare_departure" => __( 'Departure', 'idealien-rideshare' )
 		);
 		
 		return $columns;
@@ -842,20 +848,20 @@ class WP_Seedbank {
 		
 		switch($column) {
 			
-			//Build destination from city, state and common_name meta data
-			case 'wp_seedbank_destination':
-				$destinationEvent = get_post_meta($post->ID, 'wp_seedbank_common_name', "true");
+			//Build destination from city, state and event meta data
+			case 'idealien_rideshare_destination':
+				$destinationEvent = get_post_meta($post->ID, 'idealien_rideshare_event', "true");
 				if ($destinationEvent) {
 					echo $destinationEvent;
 				} else {
-					$destinationCityState = get_post_meta($post->ID, 'wp_seedbank_departureCity', "true") . ", " . get_post_meta($post->ID, 'wp_seedbank_departureStateProv', "true");
+					$destinationCityState = get_post_meta($post->ID, 'idealien_rideshare_departureCity', "true") . ", " . get_post_meta($post->ID, 'idealien_rideshare_departureStateProv', "true");
 					echo $destinationCityState;
 				}
 				break; 
 			
 			//Build departure from city, state meta data
-			case 'wp_seedbank_departure':
-				echo get_post_meta($post->ID, 'wp_seedbank_departureCity', "true") . ", " . get_post_meta($post->ID, 'wp_seedbank_departureStateProv', "true");
+			case 'idealien_rideshare_departure':
+				echo get_post_meta($post->ID, 'idealien_rideshare_departureCity', "true") . ", " . get_post_meta($post->ID, 'idealien_rideshare_departureStateProv', "true");
 				break;
 			
 			//Show custom field direct
@@ -869,19 +875,19 @@ class WP_Seedbank {
 	//Make specific columns sortable where data makes sense
 	function register_sortable( $columns ) {
 		
-		$columns['wp_seedbank_status'] = 'wp_seedbank_status';
-		$columns['wp_seedbank_type'] = 'wp_seedbank_type';
-		$columns['wp_seedbank_quantity'] = 'wp_seedbank_quantity';
+		$columns['idealien_rideshare_status'] = 'idealien_rideshare_status';
+		$columns['idealien_rideshare_type'] = 'idealien_rideshare_type';
+		$columns['idealien_rideshare_spaces'] = 'idealien_rideshare_spaces';
 		//FUTURE: When WP supports custom field orderby date, make it sortable
-		//$columns['wp_seedbank_seed_expiry_date'] = 'wp_seedbank_seed_expiry_date';
+		//$columns['idealien_rideshare_departureDate'] = 'idealien_rideshare_departureDate';
 		return $columns;	
 	}
 	
-	//Augment the sort query for custom field - wp_seedbank_status
-	function wp_seedbank_status_column_orderby( $vars ) {
-		if ( isset( $vars['orderby'] ) && 'wp_seedbank_status' == $vars['orderby'] ) {
+	//Augment the sort query for custom field - idealien_rideshare_status
+	function idealien_rideshare_status_column_orderby( $vars ) {
+		if ( isset( $vars['orderby'] ) && 'idealien_rideshare_status' == $vars['orderby'] ) {
 			$vars = array_merge( $vars, array(
-				'meta_key' => 'wp_seedbank_status',
+				'meta_key' => 'idealien_rideshare_status',
 				'orderby' => 'meta_value'
 			) );
 		}
@@ -889,11 +895,11 @@ class WP_Seedbank {
 		return $vars;
 	}
 	
-	//Augment the sort query for custom field - wp_seedbank_type
-	function wp_seedbank_type_column_orderby( $vars ) {
-		if ( isset( $vars['orderby'] ) && 'wp_seedbank_type' == $vars['orderby'] ) {
+	//Augment the sort query for custom field - idealien_rideshare_type
+	function idealien_rideshare_type_column_orderby( $vars ) {
+		if ( isset( $vars['orderby'] ) && 'idealien_rideshare_type' == $vars['orderby'] ) {
 			$vars = array_merge( $vars, array(
-				'meta_key' => 'wp_seedbank_type',
+				'meta_key' => 'idealien_rideshare_type',
 				'orderby' => 'meta_value'
 			) );
 		}
@@ -901,11 +907,11 @@ class WP_Seedbank {
 		return $vars;
 	}
 	
-	//Augment the sort query for custom field - wp_seedbank_quantity
-	function wp_seedbank_quantity_column_orderby( $vars ) {
-		if ( isset( $vars['orderby'] ) && 'wp_seedbank_quantity' == $vars['orderby'] ) {
+	//Augment the sort query for custom field - idealien_rideshare_spaces
+	function idealien_rideshare_spaces_column_orderby( $vars ) {
+		if ( isset( $vars['orderby'] ) && 'idealien_rideshare_spaces' == $vars['orderby'] ) {
 			$vars = array_merge( $vars, array(
-				'meta_key' => 'wp_seedbank_quantity',
+				'meta_key' => 'idealien_rideshare_spaces',
 				'orderby' => 'meta_value_num'
 			) );
 		}
@@ -914,10 +920,10 @@ class WP_Seedbank {
 	}
 
 	//FUTURE: Revisit when WP has orderby option for dates
-	function wp_seedbank_seed_expiry_date_column_orderby( $vars ) {
-		if ( isset( $vars['orderby'] ) && 'wp_seedbank_seed_expiry_date' == $vars['orderby'] ) {
+	function idealien_rideshare_departureDate_column_orderby( $vars ) {
+		if ( isset( $vars['orderby'] ) && 'idealien_rideshare_departureDate' == $vars['orderby'] ) {
 			$vars = array_merge( $vars, array(
-				'meta_key' => 'wp_seedbank_seed_expiry_date',
+				'meta_key' => 'idealien_rideshare_departureDate',
 				'orderby' => 'meta_value_num'
 			) );
 		}
@@ -927,19 +933,19 @@ class WP_Seedbank {
 
 
 	//Generate the table list of rideshares with parameters for filtering and dynamic filtering
-	function wp_seedbank_shortcode( $atts ) {
+	function idealien_rideshare_shortcode( $atts ) {
 		extract( shortcode_atts( array(
-			'style' => 'full', //full, common_names
+			'style' => 'full', //full, events
 			'dynamic' => 'off', //off, on
 			'type' => 'all', //all, give, get
-			'destination' => 'all', //all, city, state, common_name
-			'destination_filter' => null, //Populate if destination = city, state or common_name - overridden by dynamic
+			'destination' => 'all', //all, city, state, event
+			'destination_filter' => null, //Populate if destination = city, state or event - overridden by dynamic
 			'departure' => 'all', //all, state, city
 			'departure_filter' => null, //Populate if departure = city or state - overridden by dynamic
 			'date' => 'current', //all, past, current, single
 			'date_filter' => null, //Populate if date = single
-			'unit' => 'all', //all or specific WP unit
-			'quantity' => 'all', //all or 1 - 5
+			'username' => 'all', //all or specific WP username
+			'spaces' => 'all', //all or 1 - 5
 			'contact' => 'email' //email, form, buddypress
 			//'status' => 'active' //active or deleted
 	      ), $atts ) );
@@ -953,8 +959,8 @@ class WP_Seedbank {
 		$departure_filter = esc_attr(strtolower($departure_filter));
 		$date = esc_attr(strtolower($date));
 		$date_filter = esc_attr(strtolower($date_filter));
-		$unit = esc_attr(strtolower($unit));
-		$quantity = esc_attr(strtolower($quantity));
+		$username = esc_attr(strtolower($username));
+		$spaces = esc_attr(strtolower($spaces));
 		$contact = esc_attr(strtolower($contact));
 		//$status = esc_attr(strtolower($status));
 		
@@ -962,7 +968,7 @@ class WP_Seedbank {
 		
 		//Filter meta_query based on rideshare status - always != deleted
 		$statusMetaQuery = array(
-			'key' => 'wp_seedbank_status',
+			'key' => 'idealien_rideshare_status',
 			'value' => 'Deleted',
 			'compare' => '!='
 		);
@@ -970,7 +976,7 @@ class WP_Seedbank {
 		//Filter meta_query based on rideshare type from shortcode
 		if($type != 'all') {
 			$typeMetaQuery = array(
-				'key' => 'wp_seedbank_type',
+				'key' => 'idealien_rideshare_type',
 				'value' => $type,
 				'compare' => '='
 			);
@@ -980,13 +986,13 @@ class WP_Seedbank {
 		if($destination != 'all') {
 			 switch($destination) {
 				case 'city':
-					$destinationKey = 'wp_seedbank_destinationCity';
+					$destinationKey = 'idealien_rideshare_destinationCity';
 					break; 
 				case 'state':
-					$destinationKey = 'wp_seedbank_destinationStateProv';
+					$destinationKey = 'idealien_rideshare_destinationStateProv';
 					break; 
-				case 'common_name';
-					$destinationKey = 'wp_seedbank_common_name';
+				case 'event';
+					$destinationKey = 'idealien_rideshare_event';
 					break;
 			 }
 			
@@ -1003,10 +1009,10 @@ class WP_Seedbank {
 		if($departure != 'all') {
 			 switch($departure) {
 				case 'city':
-					$departureKey = 'wp_seedbank_departureCity';
+					$departureKey = 'idealien_rideshare_departureCity';
 					break; 
 				case 'state':
-					$departureKey = 'wp_seedbank_departureStateProv';
+					$departureKey = 'idealien_rideshare_departureStateProv';
 					break; 
 			 }
 			
@@ -1037,26 +1043,26 @@ class WP_Seedbank {
 					break;
 			}
 			$dateMetaQuery = array(
-				'key' => 'wp_seedbank_seed_expiry_date',
+				'key' => 'idealien_rideshare_departureDate',
 				'value' => $dateValue,
 				'compare' => $dateCompare
 			);
 		}
 		
 		//Filter meta_query based on date from shortcode
-		if($unit != 'all') {
+		if($username != 'all') {
 			$userMetaQuery = array(
-				'key' => 'wp_seedbank_unit',
-				'value' => $unit,
+				'key' => 'idealien_rideshare_username',
+				'value' => $username,
 				'compare' => '='
 			);
 		} 
 		
 		//Filter meta_query based on rideshare type from shortcode
-		if($quantity != 'all') {
+		if($spaces != 'all') {
 			$typeSpacesQuery = array(
-				'key' => 'wp_seedbank_quantity',
-				'value' => $quantity,
+				'key' => 'idealien_rideshare_spaces',
+				'value' => $spaces,
 				'compare' => '='
 			);
 		} 
@@ -1069,7 +1075,7 @@ class WP_Seedbank {
 			$dType = esc_attr(strtolower($_GET['type']));
 			if($dDestination) {
 				$typeMetaQuery = array(
-					'key' => 'wp_seedbank_type',
+					'key' => 'idealien_rideshare_type',
 					'value' => $dType,
 					'compare' => '='
 				);
@@ -1080,13 +1086,13 @@ class WP_Seedbank {
 			if($dDestination != 'all') {
 				switch($dDestination) {
 					case 'city':
-						$destinationKey = 'wp_seedbank_destinationCity';
+						$destinationKey = 'idealien_rideshare_destinationCity';
 						break; 
 					case 'state':
-						$destinationKey = 'wp_seedbank_destinationStateProv';
+						$destinationKey = 'idealien_rideshare_destinationStateProv';
 						break; 
-					case 'common_name';
-						$destinationKey = 'wp_seedbank_common_name';
+					case 'event';
+						$destinationKey = 'idealien_rideshare_event';
 						break;
 				 }
 			
@@ -1105,10 +1111,10 @@ class WP_Seedbank {
 			if($dDeparture != 'all') {
 				switch($dDDeparture) {
 					case 'city':
-						$departureKey = 'wp_seedbank_departureCity';
+						$departureKey = 'idealien_rideshare_departureCity';
 						break; 
 					case 'state':
-						$departureKey = 'wp_seedbank_departureStateProv';
+						$departureKey = 'idealien_rideshare_departureStateProv';
 						break; 
 				 }
 			
@@ -1142,27 +1148,27 @@ class WP_Seedbank {
 						break;
 				}
 				$dateMetaQuery = array(
-					'key' => 'wp_seedbank_seed_expiry_date',
+					'key' => 'idealien_rideshare_departureDate',
 					'value' => $dateValue,
 					'compare' => $dateCompare
 				);
 			}
 		
-			//Filter meta_query based on unit type from querystring
-			$dUsername = esc_attr(strtolower($_GET['unit']));
+			//Filter meta_query based on username type from querystring
+			$dUsername = esc_attr(strtolower($_GET['username']));
 			if($dUsername) {
 				$userMetaQuery = array(
-					'key' => 'wp_seedbank_unit',
+					'key' => 'idealien_rideshare_username',
 					'value' => $dUsername,
 					'compare' => '='
 				);
 			}
 			
 			//Filter meta_query based on rideshare type from querystring
-			$dSpaces = esc_attr(strtolower($_GET['quantity']));
+			$dSpaces = esc_attr(strtolower($_GET['spaces']));
 			if($dSpaces) {
-				$quantityMetaQuery = array(
-					'key' => 'wp_seedbank_quantity',
+				$spacesMetaQuery = array(
+					'key' => 'idealien_rideshare_spaces',
 					'value' => $dSpaces,
 					'compare' => '='
 				);
@@ -1177,7 +1183,7 @@ class WP_Seedbank {
 		if ( $departureMetaQuery ) { $meta_query[] = $departureMetaQuery; }
 		if ( $dateMetaQuery ) { $meta_query[] = $dateMetaQuery; }
 		if ( $userMetaQuery ) { $meta_query[] = $userMetaQuery; }
-		if ( $quantityMetaQuery ) { $meta_query[] = $quantityMetaQuery; }
+		if ( $spacesMetaQuery ) { $meta_query[] = $spacesMetaQuery; }
 
 
 		//$output .= print_r($meta_query,true);
@@ -1187,20 +1193,20 @@ class WP_Seedbank {
 				
 				if ($meta_query == null) {
 					$queryParameters = array(
-					'post_type' => 'wp_seedbank',
+					'post_type' => 'idealien_rideshare',
 					'posts_per_page' => '-1',
     				'orderby' => 'meta_value',
-					'meta_key' => 'wp_seedbank_type',
+					'meta_key' => 'idealien_rideshare_type',
 					'order' => 'ASC'
 					);
 				} else {
 					
 					$queryParameters = array(
-						'post_type' => 'wp_seedbank',
+						'post_type' => 'idealien_rideshare',
 						'posts_per_page' => '-1',
 						'meta_query' => $meta_query,
     					'orderby' => 'meta_value',
-						'meta_key' => 'wp_seedbank_type',
+						'meta_key' => 'idealien_rideshare_type',
 						'order' => 'ASC'
 					);	
 					
@@ -1213,7 +1219,7 @@ class WP_Seedbank {
 				
 				//Loop through results
 				if ( $IRQuery->have_posts() ) :
-					//Create single instances of the sub-forms to be tweaked based on wp_seedbank_connect.js on button click
+					//Create single instances of the sub-forms to be tweaked based on idealien_rideshare_connect.js on button click
 					if(IDEALIEN_RIDESHARE_COMMENTFORM_ID != "REPLACEME") {
 						$output .= do_shortcode('[gravityform id="' . IDEALIEN_RIDESHARE_COMMENTFORM_ID . '" title="false" description="false"]');
 					}
@@ -1229,19 +1235,19 @@ class WP_Seedbank {
 					//Prepare table headers
 					$output .= '<table id="rideshare" class="tablestripe">';
 					$output .= '<tr>';
-					$output .= '<th class="rideshareType">' . __('Type' , 'wp-seedbank') . '</th>';
-					$output .= '<th class="rideshareEvent">' . __('To' , 'wp-seedbank') . '</th>';
-					$output .= '<th class="rideshareCity">' . __('From' , 'wp-seedbank') . '</th>';
-					$output .= '<th class="rideshareSpaces">' . __('For' , 'wp-seedbank') . '</th>';
-					$output .= '<th class="rideshareDDate">' . __('On' , 'wp-seedbank') . '</th>';
-					//$output .= '<th class="rideshareRDate">' . __('Return' , 'wp-seedbank') . '</th>';
-					$output .= '<th class="rideshareInfo">' . __('Add. Info' , 'wp-seedbank') . '</th>';
+					$output .= '<th class="rideshareType">' . __('Type' , 'idealien-rideshare') . '</th>';
+					$output .= '<th class="rideshareEvent">' . __('To' , 'idealien-rideshare') . '</th>';
+					$output .= '<th class="rideshareCity">' . __('From' , 'idealien-rideshare') . '</th>';
+					$output .= '<th class="rideshareSpaces">' . __('For' , 'idealien-rideshare') . '</th>';
+					$output .= '<th class="rideshareDDate">' . __('On' , 'idealien-rideshare') . '</th>';
+					//$output .= '<th class="rideshareRDate">' . __('Return' , 'idealien-rideshare') . '</th>';
+					$output .= '<th class="rideshareInfo">' . __('Add. Info' , 'idealien-rideshare') . '</th>';
 					
 					//Add Engagement Column based on current user = filtered (profile scenario)
-					if( $current_user->user_login != $unit ) {
-						$output .= '<th class="rideshareContact">' . __('Contact' , 'wp-seedbank') . '</th>';
+					if( $current_user->user_login != $username ) {
+						$output .= '<th class="rideshareContact">' . __('Contact' , 'idealien-rideshare') . '</th>';
 					} else {
-						$output .= '<th class="rideshareContact">' . __('Actions' , 'wp-seedbank') . '</th>';
+						$output .= '<th class="rideshareContact">' . __('Actions' , 'idealien-rideshare') . '</th>';
 					}
 						
 					$output .= '</tr>';
@@ -1253,49 +1259,49 @@ class WP_Seedbank {
 						$output .= '<tr>';
 
 						//Type
-						$output .= '<td class="rideshareType">' . get_post_meta($ID, "wp_seedbank_type", true) . '</td>';
+						$output .= '<td class="rideshareType">' . get_post_meta($ID, "idealien_rideshare_type", true) . '</td>';
 						
 						//Destination
 						$output .= '<td class="rideshareEvent">';
 						//Event for City, State
-						if (get_post_meta($ID, "wp_seedbank_common_name", true)) {
-							$destinationOutput = get_post_meta($ID, "wp_seedbank_common_name", true);
+						if (get_post_meta($ID, "idealien_rideshare_event", true)) {
+							$destinationOutput = get_post_meta($ID, "idealien_rideshare_event", true);
 						} else {
-							$destinationOutput = 	get_post_meta($ID, "wp_seedbank_destinationCity", true) . ", " . 
-								   get_post_meta($ID, "wp_seedbank_destinationStateProv", true);
+							$destinationOutput = 	get_post_meta($ID, "idealien_rideshare_destinationCity", true) . ", " . 
+								   get_post_meta($ID, "idealien_rideshare_destinationStateProv", true);
 						}
 						$output .= $destinationOutput;
 						$output .='</td>';
 						
 						//Departure
-						$departureOutput = get_post_meta($ID, "wp_seedbank_departureCity", true) . ', ' . get_post_meta($ID, "wp_seedbank_departureStateProv", true);
+						$departureOutput = get_post_meta($ID, "idealien_rideshare_departureCity", true) . ', ' . get_post_meta($ID, "idealien_rideshare_departureStateProv", true);
 						$output .= '<td class="rideshareCity">' . $departureOutput . '</td>';
 						
 						//Spaces
-						$quantityOutput = get_post_meta($ID, "wp_seedbank_quantity", true);
-						$output .= '<td class="rideshareSpaces">' . $quantityOutput . '</td>';
+						$spacesOutput = get_post_meta($ID, "idealien_rideshare_spaces", true);
+						$output .= '<td class="rideshareSpaces">' . $spacesOutput . '</td>';
 						
 						//Departure Date
-						$dateOutput = get_post_meta($ID, "wp_seedbank_seed_expiry_date", true);
+						$dateOutput = get_post_meta($ID, "idealien_rideshare_departureDate", true);
 						$output .= '<td class="rideshareDDate">' . $dateOutput . '</td>';
-						//$output .= '<td class="rideshareRDate">' . get_post_meta($ID, "wp_seedbank_exchange_expiry_date", true) . '</td>';
+						//$output .= '<td class="rideshareRDate">' . get_post_meta($ID, "idealien_rideshare_returnDate", true) . '</td>';
 						
 						//FUTURE: Return Date
 						
 						//Add Info
 						$output .= '<td class="rideshareInfo">';
-							$addInfoOutput = get_post_meta($ID, "wp_seedbank_addInfo", true);
+							$addInfoOutput = get_post_meta($ID, "idealien_rideshare_addInfo", true);
 							if ($addInfoOutput) { $output .=  $addInfoOutput; } else { $output .= '&nbsp;'; }
 						$output .= '</td>';
 						
 						
 						//Contact Info
-						$selected_rideshare_unit = get_post_meta($ID, "wp_seedbank_unit", true);
+						$selected_rideshare_username = get_post_meta($ID, "idealien_rideshare_username", true);
 						
-						if($selected_rideshare_unit) {
-							if($current_user->user_login != $selected_rideshare_unit) {
+						if($selected_rideshare_username) {
+							if($current_user->user_login != $selected_rideshare_username) {
 								//Viewer is not the creator of the rideshare
-								$userData = get_user_by('login', $selected_rideshare_unit);
+								$userData = get_user_by('login', $selected_rideshare_username);
 								$name = $userData->display_name;
 								$emailAddress = $userData->user_email;
 							} else {
@@ -1306,8 +1312,8 @@ class WP_Seedbank {
 										
 						} else {
 							//A non-registered user entry
-							$name = get_post_meta($ID, "wp_seedbank_name", true);
-							$emailAddress = get_post_meta($ID, "wp_seedbank_email", true);
+							$name = get_post_meta($ID, "idealien_rideshare_name", true);
+							$emailAddress = get_post_meta($ID, "idealien_rideshare_email", true);
 						}
 						
 						
@@ -1332,8 +1338,8 @@ class WP_Seedbank {
 											$output .= 'onclick="rideshare_delete(\'' . $ID . '\', \'' . $current_user->user_login . '\')" />';$output .= do_shortcode('[gravityform id="' . IDEALIEN_RIDESHARE_COMMENTFORM_ID . '" title="false" description="false"]');
 									} else { 
 										//Generic implementation
-										$name = get_post_meta($ID, "wp_seedbank_name", true);
-										$emailAddress = get_post_meta($ID, "wp_seedbank_email", true);
+										$name = get_post_meta($ID, "idealien_rideshare_name", true);
+										$emailAddress = get_post_meta($ID, "idealien_rideshare_email", true);
 
 										$output .= 'Name: ' . $name . '<br/>';
 										$output .= 'Email: ' . antispambot($emailAddress) . '';
@@ -1348,14 +1354,14 @@ class WP_Seedbank {
 							case 'buddypress':
 								
 								//confirm buddypress is active to send message
-								if ($selected_rideshare_unit && function_exists('bp_core_get_userid')) {
+								if ($selected_rideshare_username && function_exists('bp_core_get_userid')) {
 							
 									//Which user generated rideshare
-									$userID = bp_core_get_userid( $selected_rideshare_unit );
+									$userID = bp_core_get_userid( $selected_rideshare_username );
 									$bp_displayName=bp_core_get_user_displayname( $userID );
 									$bp_userDomain = bp_core_get_user_domain( $userID );
 							
-									if( $current_user->user_login != $selected_rideshare_unit ) {
+									if( $current_user->user_login != $selected_rideshare_username ) {
 										//Not being displayed on profile page or filtered for current signed-in user
 										$output .= '<td class="rideshareContact">';
 								
@@ -1364,8 +1370,8 @@ class WP_Seedbank {
 								
 										//Button to display comment / connect form
 										$output .= '<input type="button" value="Connect!" id="rideshare_' . $ID . '" ';
-										$output .= 'onclick="rideshare_connect(\'' . $ID . '\', \'buddypress\', \'' . $selected_rideshare_unit . '\', \'' . $current_user->user_login . '\', ';
-										$output .= '\'' . $destinationOutput . '\', \'' . $departureOutput . '\', \'' . $dateOutput . '\', \'' . $quantityOutput . '\' )" />';
+										$output .= 'onclick="rideshare_connect(\'' . $ID . '\', \'buddypress\', \'' . $selected_rideshare_username . '\', \'' . $current_user->user_login . '\', ';
+										$output .= '\'' . $destinationOutput . '\', \'' . $departureOutput . '\', \'' . $dateOutput . '\', \'' . $spacesOutput . '\' )" />';
 										$output .= '</td>';
 									}
 									
@@ -1390,29 +1396,29 @@ class WP_Seedbank {
 					
 				else:
 					//Empty rideshare list
-					$output .= '<p>' . __('There are no seed exchanges available at this time' , 'wp-seedbank') . '.</p>';
+					$output .= '<p>' . __('There are no seed exchanges available at this time' , 'idealien-rideshare') . '.</p>';
 					
 				endif;
 			
 			break;
 				
-			case 'common_names':
+			case 'events':
 				//FUTURE: Refactor this to match updated 'full' version logic, perhaps even incorporating into the output generation of columns.
-				$terms = get_terms( 'wp_seedbank_common_name', 'hide_empty=0&order=ASC' );
+				$terms = get_terms( 'idealien_rideshare_event', 'hide_empty=0&order=ASC' );
 				
 				if (isset($terms)) :
 					
 					$output = "";
 					
-					foreach ( $terms as $common_name ) {
+					foreach ( $terms as $event ) {
 					
-						//Retrieve all rideshares by common_name
+						//Retrieve all rideshares by event
 						$queryParameters = array(
-							'post_type' => 'wp_seedbank',
+							'post_type' => 'idealien_rideshare',
 							'posts_per_page' => '-1',
 							'orderby' => 'meta_value',
-							'meta_key' => 'wp_seedbank_common_name',
-							'meta_value' => $common_name->name
+							'meta_key' => 'idealien_rideshare_event',
+							'meta_value' => $event->name
 						);
 				
 			
@@ -1423,42 +1429,42 @@ class WP_Seedbank {
 						
 						if ( $IRQuery->have_posts() ) :
 				
-							$output .= '<h2>' . $common_name->name . '</h2>';
+							$output .= '<h2>' . $event->name . '</h2>';
 							$output .= '<table id="rideshare" class="tablestripe">';
 							$output .= '<tr>';
-							$output .= '<th class="rideshareCity">' . __('Location' , 'wp-seedbank') . '</th>';
-							$output .= '<th class="rideshareType">' . __('Type' , 'wp-seedbank') . '</th>';
-							$output .= '<th class="rideshareSpaces">' . __('Quantity' , 'wp-seedbank') . '</th>';
-							$output .= '<th class="rideshareDDate">' . __('Seed Expiry Date' , 'wp-seedbank') . '</th>';
-							$output .= '<th class="rideshareRDate">' . __('Expiry Date' , 'wp-seedbank') . '</th>';
-							$output .= '<th class="rideshareContact">' . __('Contact' , 'wp-seedbank') . '</th>';
-							$output .= '<th class="rideshareInfo">' . __('Additional Info' , 'wp-seedbank') . '</th>';
+							$output .= '<th class="rideshareCity">' . __('Location' , 'idealien-rideshare') . '</th>';
+							$output .= '<th class="rideshareType">' . __('Type' , 'idealien-rideshare') . '</th>';
+							$output .= '<th class="rideshareSpaces">' . __('Quantity' , 'idealien-rideshare') . '</th>';
+							$output .= '<th class="rideshareDDate">' . __('Seed Expiry Date' , 'idealien-rideshare') . '</th>';
+							$output .= '<th class="rideshareRDate">' . __('Expiry Date' , 'idealien-rideshare') . '</th>';
+							$output .= '<th class="rideshareContact">' . __('Contact' , 'idealien-rideshare') . '</th>';
+							$output .= '<th class="rideshareInfo">' . __('Additional Info' , 'idealien-rideshare') . '</th>';
 							$output .= '</tr>';
 					
 							 while ( $IRQuery->have_posts() ) : $IRQuery->the_post(); 
 		
 								$ID = get_the_ID();
 								$output .= '<tr>';
-								$output .= '<td class="rideshareCity">' . get_post_meta($ID, "wp_seedbank_departureCity", true) . '</td>';
-								$output .= '<td class="rideshareType">' . get_post_meta($ID, "wp_seedbank_type", true) . '</td>';
-								$output .= '<td class="rideshareSpaces">' . get_post_meta($ID, "wp_seedbank_quantity", true) . '</td>';
-								$output .= '<td class="rideshareDDate">' . get_post_meta($ID, "wp_seedbank_seed_expiry_date", true) . '</td>';
-								$output .= '<td class="rideshareRDate">' . get_post_meta($ID, "wp_seedbank_exchange_expiry_date", true) . '</td>';
+								$output .= '<td class="rideshareCity">' . get_post_meta($ID, "idealien_rideshare_departureCity", true) . '</td>';
+								$output .= '<td class="rideshareType">' . get_post_meta($ID, "idealien_rideshare_type", true) . '</td>';
+								$output .= '<td class="rideshareSpaces">' . get_post_meta($ID, "idealien_rideshare_spaces", true) . '</td>';
+								$output .= '<td class="rideshareDDate">' . get_post_meta($ID, "idealien_rideshare_departureDate", true) . '</td>';
+								$output .= '<td class="rideshareRDate">' . get_post_meta($ID, "idealien_rideshare_returnDate", true) . '</td>';
 								$output .= '<td class="rideshareContact">';
 								
-									$output .= '<span class="name">' . get_post_meta($ID, "wp_seedbank_name", true) . '</span>';
+									$output .= '<span class="name">' . get_post_meta($ID, "idealien_rideshare_name", true) . '</span>';
 									
 									$output .= '<span class="email">';
-										$emailAddress = get_post_meta($ID, "wp_seedbank_email", true);
+										$emailAddress = get_post_meta($ID, "idealien_rideshare_email", true);
 										$output .= '<a href="mailto:' . antispambot($emailAddress) . '">' . antispambot($emailAddress) . '</a>';
 									$output .= '</span>';
 									
-									$phone = get_post_meta($ID, "wp_seedbank_phone", true);
-									if ($phone) { $output .=  '<span class="phone">' . get_post_meta($ID, "wp_seedbank_phone", true) . '</span>'; }					
+									$phone = get_post_meta($ID, "idealien_rideshare_phone", true);
+									if ($phone) { $output .=  '<span class="phone">' . get_post_meta($ID, "idealien_rideshare_phone", true) . '</span>'; }					
 								
 								$output .= '</td>';
 								$output .= '<td class="rideshareInfo">';
-									$addInfo = get_post_meta($ID, "wp_seedbank_addInfo", true);
+									$addInfo = get_post_meta($ID, "idealien_rideshare_addInfo", true);
 									if ($addInfo) { $output .=  $addInfo; } else { $output .= '&nbsp;'; }
 								$output .= '</td>';
 								//$output .= '<td>' . get_the_title() . '</td>';
@@ -1469,8 +1475,8 @@ class WP_Seedbank {
 							$output .= '</table>';
 							
 						else: 
-							$output .= '<h2>' . $common_name->name . '</h2>';
-							$output .= "<p>There are no exchanges available for {$common_name->name} seeds at this time.</p>";
+							$output .= '<h2>' . $event->name . '</h2>';
+							$output .= "<p>There are no exchanges available for {$event->name} seeds at this time.</p>";
 							
 						endif;
 						
@@ -1490,158 +1496,117 @@ class WP_Seedbank {
   	static function activate() {
 		
 		//Register 
-		WP_Seedbank::create_data_types();
+		idealien_rideshare::create_data_types();
 		
         // DEV NOTE: For now, forcibly assume we're always doing a new install when we "activate."
-		$version = ""; //get_option('wp_seedbank_version');
+		$version = ""; //get_option('idealien_rideshare_version');
 		
-        // New installation - pre-load some fields
 		if($version == "") {
+			//New installation - pre-load some fields
+			wp_insert_term(__( 'Give', 'idealien-rideshare' ), 'idealien_rideshare_type', array('description' => 'Exchanges offering free seeds being given away.'));
+			wp_insert_term(__( 'Get', 'idealien-rideshare' ), 'idealien_rideshare_type', array('description' => 'Exchanges requesting seeds of a variety not already listed.'));
+			wp_insert_term(__( 'Sell', 'idealien-rideshare' ), 'idealien_rideshare_type', array('description' => 'Exchanges offering seeds for money.'));
+			wp_insert_term(__( 'Trade', 'idealien-rideshare' ), 'idealien_rideshare_type', array('description' => 'Exchanges offering seeds for other seeds.'));
+			
+            wp_insert_term( __( 'Abelmoschus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'abelmoschus' ) );
+            wp_insert_term( __( 'Agastache', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'agastache' ) );
+            wp_insert_term( __( 'Allium', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'allium' ) );
+            wp_insert_term( __( 'Amaranthus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'amaranthus' ) );
+            wp_insert_term( __( 'Anagallis', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'anagallis' ) );
+            wp_insert_term( __( 'Anethum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'anethum' ) );
+            wp_insert_term( __( 'Anthenum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'anthenum' ) );
+            wp_insert_term( __( 'Antirrhinum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'antirrhinum' ) );
+            wp_insert_term( __( 'Apium', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'apium' ) );
+            wp_insert_term( __( 'Asclepias', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'asclepias' ) );
+            wp_insert_term( __( 'Basella', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'basella' ) );
+            wp_insert_term( __( 'Beta', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'beta' ) );
+            wp_insert_term( __( 'Brassica', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'brassica' ) );
+            wp_insert_term( __( 'Calendula', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'calendula' ) );
+            wp_insert_term( __( 'Capsicum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'capsicum' ) );
+            wp_insert_term( __( 'Cardiospermum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'cardiospermum' ) );
+            wp_insert_term( __( 'Centaurea', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'centaurea' ) );
+            wp_insert_term( __( 'Chrysanthemum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'chrysanthemum' ) );
+            wp_insert_term( __( 'Cichorium', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'cichorium' ) );
+            wp_insert_term( __( 'Citrullus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'citrullus' ) );
+            wp_insert_term( __( 'Cleome', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'cleome' ) );
+            wp_insert_term( __( 'Cobaea', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'cobaea' ) );
+            wp_insert_term( __( 'Consolida', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'consolida' ) );
+            wp_insert_term( __( 'Convolvulus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'convolvulus' ) );
+            wp_insert_term( __( 'Coreopsis', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'coreopsis' ) );
+            wp_insert_term( __( 'Coriandrum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'coriandrum' ) );
+            wp_insert_term( __( 'Cosmos', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'cosmos' ) );
+            wp_insert_term( __( 'Cucumis', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'cucumis' ) );
+            wp_insert_term( __( 'Cucurbita', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'cucurbita' ) );
+            wp_insert_term( __( 'Dalea', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'dalea' ) );
+            wp_insert_term( __( 'Daucus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'daucus' ) );
+            wp_insert_term( __( 'Diplotaxis', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'diplotaxis' ) );
+            wp_insert_term( __( 'Dolichos', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'dolichos' ) );
+            wp_insert_term( __( 'Echinacea', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'echinacea' ) );
+            wp_insert_term( __( 'Eruca', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'eruca' ) );
+            wp_insert_term( __( 'Eschscholzia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'eschscholzia' ) );
+            wp_insert_term( __( 'Foeniculum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'foeniculum' ) );
+            wp_insert_term( __( 'Fragaria', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'fragaria' ) );
+            wp_insert_term( __( 'Gaillardia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'gaillardia' ) );
+            wp_insert_term( __( 'Glycine', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'glycine' ) );
+            wp_insert_term( __( 'Helianthus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'helianthus' ) );
+            wp_insert_term( __( 'Ipomoea', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'ipomoea' ) );
+            wp_insert_term( __( 'Koeleria', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'koeleria' ) );
+            wp_insert_term( __( 'Lactuca', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'lactuca' ) );
+            wp_insert_term( __( 'Lagenaria', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'lagenaria' ) );
+            wp_insert_term( __( 'Lathyrus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'lathyrus' ) );
+            wp_insert_term( __( 'Lupinus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'lupinus' ) );
+            wp_insert_term( __( 'Lycopersicon', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'lycopersicon' ) );
+            wp_insert_term( __( 'Malope', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'malope' ) );
+            wp_insert_term( __( 'Matricaria', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'matricaria' ) );
+            wp_insert_term( __( 'Mentha', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'mentha' ) );
+            wp_insert_term( __( 'Mirabilis', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'mirabilis' ) );
+            wp_insert_term( __( 'Nigella', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'nigella' ) );
+            wp_insert_term( __( 'Ocimum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'ocimum' ) );
+            wp_insert_term( __( 'Origanum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'origanum' ) );
+            wp_insert_term( __( 'Papaver', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'papaver' ) );
+            wp_insert_term( __( 'Passiflora', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'passiflora' ) );
+            wp_insert_term( __( 'Penstemon', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'penstemon' ) );
+            wp_insert_term( __( 'Petrolselinum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'petrolselinum' ) );
+            wp_insert_term( __( 'Phaseolus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'phaseolus' ) );
+            wp_insert_term( __( 'Physalis', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'physalis' ) );
+            wp_insert_term( __( 'Pisum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'pisum' ) );
+            wp_insert_term( __( 'Poterium', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'poterium' ) );
+            wp_insert_term( __( 'Raphanus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'raphanus' ) );
+            wp_insert_term( __( 'Rosmarinus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'rosmarinus' ) );
+            wp_insert_term( __( 'Rudbeckia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'rudbeckia' ) );
+            wp_insert_term( __( 'Salvia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'salvia' ) );
+            wp_insert_term( __( 'Scorpiurus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'scorpiurus' ) );
+            wp_insert_term( __( 'Solanum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'solanum' ) );
+            wp_insert_term( __( 'Spinachia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'spinachia' ) );
+            wp_insert_term( __( 'Tagetes', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'tagetes' ) );
+            wp_insert_term( __( 'Thunbergia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'thunbergia' ) );
+            wp_insert_term( __( 'Thymus', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'thymus' ) );
+            wp_insert_term( __( 'Triticum ', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'triticum ' ) );
+            wp_insert_term( __( 'Tropaeolum', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'tropaeolum' ) );
+            wp_insert_term( __( 'Zea', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'zea' ) );
+            wp_insert_term( __( 'Zinnia', 'idealien-rideshare' ), 'idealien_rideshare_state_prov', array( 'slug' => 'zinnia' ) );
+			
+			wp_insert_term(__( 'Bean', 'idealien-rideshare' ), 'idealien_rideshare_event');
+			wp_insert_term(__( 'Lettuce', 'idealien-rideshare' ), 'idealien_rideshare_event');
+			wp_insert_term(__( 'Pepper', 'idealien-rideshare' ), 'idealien_rideshare_event');
+			wp_insert_term(__( 'Pumpkin', 'idealien-rideshare' ), 'idealien_rideshare_event');
+			wp_insert_term(__( 'Tomato', 'idealien-rideshare' ), 'idealien_rideshare_event');
+			
+			wp_insert_term(__( 'Active', 'idealien-rideshare' ), 'idealien_rideshare_status', array('description' => 'New/open seed exchange requests or offers.'));
+			wp_insert_term(__( 'Deleted', 'idealien-rideshare' ), 'idealien_rideshare_status', array('description' => 'Expired or completed seed exchanges.'));
 
-            // Exchange Types (verbs)
-			wp_insert_term(__( 'Swap', 'wp-seedbank' ), 'wp_seedbank_type', array('description' => 'Exchanges offering seeds for other seeds.'));
-			wp_insert_term(__( 'Sell', 'wp-seedbank' ), 'wp_seedbank_type', array('description' => 'Exchanges offering seeds for money.'));
-			wp_insert_term(__( 'Give', 'wp-seedbank' ), 'wp_seedbank_type', array('description' => 'Exchanges offering free seeds being given away.'));
-			wp_insert_term(__( 'Get', 'wp-seedbank' ), 'wp_seedbank_type', array('description' => 'Exchanges requesting seeds of a variety not already listed.'));
-			
-            // Genera
-            wp_insert_term( __( 'Abelmoschus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'abelmoschus' ) );
-            wp_insert_term( __( 'Agastache', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'agastache' ) );
-            wp_insert_term( __( 'Allium', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'allium' ) );
-            wp_insert_term( __( 'Amaranthus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'amaranthus' ) );
-            wp_insert_term( __( 'Anagallis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'anagallis' ) );
-            wp_insert_term( __( 'Anethum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'anethum' ) );
-            wp_insert_term( __( 'Anthenum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'anthenum' ) );
-            wp_insert_term( __( 'Antirrhinum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'antirrhinum' ) );
-            wp_insert_term( __( 'Apium', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'apium' ) );
-            wp_insert_term( __( 'Asclepias', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'asclepias' ) );
-            wp_insert_term( __( 'Basella', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'basella' ) );
-            wp_insert_term( __( 'Beta', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'beta' ) );
-            wp_insert_term( __( 'Brassica', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'brassica' ) );
-            wp_insert_term( __( 'Calendula', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'calendula' ) );
-            wp_insert_term( __( 'Capsicum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'capsicum' ) );
-            wp_insert_term( __( 'Cardiospermum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cardiospermum' ) );
-            wp_insert_term( __( 'Centaurea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'centaurea' ) );
-            wp_insert_term( __( 'Chrysanthemum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'chrysanthemum' ) );
-            wp_insert_term( __( 'Cichorium', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cichorium' ) );
-            wp_insert_term( __( 'Citrullus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'citrullus' ) );
-            wp_insert_term( __( 'Cleome', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cleome' ) );
-            wp_insert_term( __( 'Cobaea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cobaea' ) );
-            wp_insert_term( __( 'Consolida', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'consolida' ) );
-            wp_insert_term( __( 'Convolvulus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'convolvulus' ) );
-            wp_insert_term( __( 'Coreopsis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'coreopsis' ) );
-            wp_insert_term( __( 'Coriandrum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'coriandrum' ) );
-            wp_insert_term( __( 'Cosmos', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cosmos' ) );
-            wp_insert_term( __( 'Cucumis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cucumis' ) );
-            wp_insert_term( __( 'Cucurbita', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'cucurbita' ) );
-            wp_insert_term( __( 'Dalea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'dalea' ) );
-            wp_insert_term( __( 'Daucus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'daucus' ) );
-            wp_insert_term( __( 'Diplotaxis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'diplotaxis' ) );
-            wp_insert_term( __( 'Dolichos', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'dolichos' ) );
-            wp_insert_term( __( 'Echinacea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'echinacea' ) );
-            wp_insert_term( __( 'Eruca', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'eruca' ) );
-            wp_insert_term( __( 'Eschscholzia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'eschscholzia' ) );
-            wp_insert_term( __( 'Foeniculum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'foeniculum' ) );
-            wp_insert_term( __( 'Fragaria', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'fragaria' ) );
-            wp_insert_term( __( 'Gaillardia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'gaillardia' ) );
-            wp_insert_term( __( 'Glycine', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'glycine' ) );
-            wp_insert_term( __( 'Helianthus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'helianthus' ) );
-            wp_insert_term( __( 'Ipomoea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'ipomoea' ) );
-            wp_insert_term( __( 'Koeleria', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'koeleria' ) );
-            wp_insert_term( __( 'Lactuca', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'lactuca' ) );
-            wp_insert_term( __( 'Lagenaria', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'lagenaria' ) );
-            wp_insert_term( __( 'Lathyrus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'lathyrus' ) );
-            wp_insert_term( __( 'Lupinus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'lupinus' ) );
-            wp_insert_term( __( 'Lycopersicon', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'lycopersicon' ) );
-            wp_insert_term( __( 'Malope', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'malope' ) );
-            wp_insert_term( __( 'Matricaria', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'matricaria' ) );
-            wp_insert_term( __( 'Mentha', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'mentha' ) );
-            wp_insert_term( __( 'Mirabilis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'mirabilis' ) );
-            wp_insert_term( __( 'Nigella', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'nigella' ) );
-            wp_insert_term( __( 'Ocimum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'ocimum' ) );
-            wp_insert_term( __( 'Origanum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'origanum' ) );
-            wp_insert_term( __( 'Papaver', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'papaver' ) );
-            wp_insert_term( __( 'Passiflora', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'passiflora' ) );
-            wp_insert_term( __( 'Penstemon', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'penstemon' ) );
-            wp_insert_term( __( 'Petrolselinum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'petrolselinum' ) );
-            wp_insert_term( __( 'Phaseolus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'phaseolus' ) );
-            wp_insert_term( __( 'Physalis', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'physalis' ) );
-            wp_insert_term( __( 'Pisum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'pisum' ) );
-            wp_insert_term( __( 'Poterium', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'poterium' ) );
-            wp_insert_term( __( 'Raphanus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'raphanus' ) );
-            wp_insert_term( __( 'Rosmarinus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'rosmarinus' ) );
-            wp_insert_term( __( 'Rudbeckia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'rudbeckia' ) );
-            wp_insert_term( __( 'Salvia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'salvia' ) );
-            wp_insert_term( __( 'Scorpiurus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'scorpiurus' ) );
-            wp_insert_term( __( 'Solanum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'solanum' ) );
-            wp_insert_term( __( 'Spinachia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'spinachia' ) );
-            wp_insert_term( __( 'Tagetes', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'tagetes' ) );
-            wp_insert_term( __( 'Thunbergia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'thunbergia' ) );
-            wp_insert_term( __( 'Thymus', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'thymus' ) );
-            wp_insert_term( __( 'Triticum ', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'triticum ' ) );
-            wp_insert_term( __( 'Tropaeolum', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'tropaeolum' ) );
-            wp_insert_term( __( 'Zea', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'zea' ) );
-            wp_insert_term( __( 'Zinnia', 'wp-seedbank' ), 'wp_seedbank_genus', array( 'slug' => 'zinnia' ) );
-			
-            // Common Names
-            wp_insert_term( __( 'Asian Vegetable', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'asian-vegetable' ) );
-            wp_insert_term( __( 'Bean', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'bean' ) );
-            wp_insert_term( __( 'Beet', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'beet' ) );
-            wp_insert_term( __( 'Berry', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'berry' ) );
-            wp_insert_term( __( 'Broccoli', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'broccoli' ) );
-            wp_insert_term( __( 'Brussels Sprout', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'brussels-sprout' ) );
-            wp_insert_term( __( 'Cabbage', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'cabbage' ) );
-            wp_insert_term( __( 'Carrot', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'carrot' ) );
-            wp_insert_term( __( 'Cauliflower', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'cauliflower' ) );
-            wp_insert_term( __( 'Chard', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'chard' ) );
-            wp_insert_term( __( 'Corn', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'corn' ) );
-            wp_insert_term( __( 'Collard', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'collard' ) );
-            wp_insert_term( __( 'Cover Crop', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'cover-crop' ) );
-            wp_insert_term( __( 'Eggplant', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'eggplant' ) );
-            wp_insert_term( __( 'Cucumber', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'cucumber' ) );
-            wp_insert_term( __( 'Fava', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'fava' ) );
-            wp_insert_term( __( 'Flower', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'flower' ) );
-            wp_insert_term( __( 'Gourd', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'gourd' ) );
-            wp_insert_term( __( 'Green', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'green' ) );
-            wp_insert_term( __( 'Herb', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'herb' ) );
-            wp_insert_term( __( 'Kale', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'kale' ) );
-            wp_insert_term( __( 'Kohlrabi', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'kohlrabi' ) );
-            wp_insert_term( __( 'Legume', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'legume' ) );
-            wp_insert_term( __( 'Lettuce', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'lettuce' ) );
-            wp_insert_term( __( 'Melon', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'melon' ) );
-            wp_insert_term( __( 'Mustard', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'mustard' ) );
-            wp_insert_term( __( 'Okra', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'okra' ) );
-            wp_insert_term( __( 'Onion', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'onion' ) );
-            wp_insert_term( __( 'Parsnip/Root Parsley', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'parsnip-root-parsley' ) );
-            wp_insert_term( __( 'Potato', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'potato' ) );
-            wp_insert_term( __( 'Pea', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'pea' ) );
-            wp_insert_term( __( 'Peppers', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'peppers' ) );
-            wp_insert_term( __( 'Pumpkin', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'pumpkin' ) );
-            wp_insert_term( __( 'Radish', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'radish' ) );
-            wp_insert_term( __( 'Strawberry', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'strawberry' ) );
-            wp_insert_term( __( 'Root', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'root' ) );
-            wp_insert_term( __( 'Rutabaga', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'rutabaga' ) );
-            wp_insert_term( __( 'Spinach', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'spinach' ) );
-            wp_insert_term( __( 'Summer Squash', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'summer-squash' ) );
-            wp_insert_term( __( 'Tomato', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'tomato' ) );
-            wp_insert_term( __( 'Turnip', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'turnip' ) );
-            wp_insert_term( __( 'Winter Squash', 'wp-seedbank' ), 'wp_seedbank_common_name', array( 'slug' => 'winter-squash' ) );
-			
-            // Exchange statuses
-			wp_insert_term(__( 'Active', 'wp-seedbank' ), 'wp_seedbank_status', array('description' => 'New/open seed exchange requests or offers.'));
-			wp_insert_term(__( 'Deleted', 'wp-seedbank' ), 'wp_seedbank_status', array('description' => 'Expired or completed seed exchanges.'));
 		}
-
+		
 		//Update version number in DB
-		update_option('wp_seedbank_version', WP_SEEDBANK_VERSION);
-
+		update_option('idealien_rideshare_version', IDEALIEN_VERSION);
+		
 	}
-
+  
   	// Deactivating the plugin
   	static function deactivate() {
 		//FUTURE: Delete CPT is too risky - what else shoudl happen?
 	}
-
+  
   	// FUTURE: This is not yet called in any meaningful way.
   	static function uninstall() {
 
@@ -1652,24 +1617,24 @@ class WP_Seedbank {
         		foreach($blogs as $blog) {
             		switch_to_blog($blog['blog_id']);
 					
-					WP_Seedbank::uninstall_heavy_lifting();
+					idealien_rideshare::uninstall_heavy_lifting();
 					
         			restore_current_blog();
 				}
     		}
 		} else {
     		
-			WP_Seedbank::uninstall_heavy_lifting();
+			idealien_rideshare::uninstall_heavy_lifting();
 		}
 	}
 	
 	static function uninstall_heavy_lifting() {
 		//FUTURE: Extend this to delete all taxonomies
 		//Delete options
-		delete_option('wp_seedbank_version');
+		delete_option('idealien_rideshare_version');
 		
 		//Delete all terms in the taxonomies which are rideshare specific.
-		$taxonomies = array('wp_seedbank_common_name', 'wp_seedbank_city', 'wp_seedbank_type');
+		$taxonomies = array('idealien_rideshare_event', 'idealien_rideshare_city', 'idealien_rideshare_type');
 		
 		foreach ( $taxonomies as $taxonomy ) {
 			
@@ -1684,9 +1649,9 @@ class WP_Seedbank {
 			endif;
 		}
 		
-		//Delete all posts of type wp_seedbank
+		//Delete all posts of type idealien_rideshare
 		$queryParameters = array(
-		'post_type' => 'wp_seedbank',
+		'post_type' => 'idealien_rideshare',
 		'posts_per_page' => '-1',
 		);
 
@@ -1704,8 +1669,8 @@ class WP_Seedbank {
 
 	//Instantiate the Constructor
 	static function initialize() {
-		global $wp_seedbank;
-		$wp_seedbank = new WP_Seedbank();
+		global $idealien_rideshare;
+		$idealien_rideshare = new idealien_rideshare();
 	}
 	
 
@@ -1717,7 +1682,7 @@ class WP_SeedbankAdmin {
     }
 
     function registerAdminMenus () {
-        add_submenu_page('edit.php?post_type=wp_seedbank', 'batch-request', 'Batch Exchange', 'edit_posts', 'seedbank_batch_exchange', array('WP_SeedbankAdmin', 'dispatchBatchExchangePages'));
+        add_submenu_page('edit.php?post_type=idealien_rideshare', 'batch-request', 'Batch Exchange', 'edit_posts', 'seedbank_batch_exchange', array('WP_SeedbankAdmin', 'dispatchBatchExchangePages'));
     }
 
     // Dispatcher for batch exchange functionality.
@@ -1734,12 +1699,12 @@ class WP_SeedbankAdmin {
     function printBatchExchangeForm () {?>
 <h2>Batch Seed Exchange</h2>
 <p>This page allows you to upload a comma-separated values (CSV) file that will be translated to seed exchange requests or offers. The CSV file should have the structure like <a href="#wp-seedbank-batch-exchange-example">the example shown in the table below</a>.</p>
-<form id="wp-seedbank-batch-exchange-form" name="wp_seedbank_batch_exchange" action="<?php print $_SERVER['PHP_SELF']?>?post_type=wp_seedbank&amp;page=seedbank_batch_exchange" method="post" enctype="multipart/form-data">
+<form id="wp-seedbank-batch-exchange-form" name="wp_seedbank_batch_exchange" action="<?php print $_SERVER['PHP_SELF']?>?post_type=idealien_rideshare&amp;page=seedbank_batch_exchange" method="post" enctype="multipart/form-data">
     <?php wp_nonce_field('wp-seedbank-batch-exchange', 'batch-exchange');?>
     <input type="hidden" name="wp-seedbank-batch-exchange-step" value="1" />
     <p>
         My batch exchange file is located on
-        <select id="wp-seedbank-batch-exchange-data-source">
+        <select>
             <option>another website</option>
             <option>my computer</option>
         </select>
@@ -1769,8 +1734,8 @@ class WP_SeedbankAdmin {
     </thead>
     <tbody>
         <tr>
-            <td>Looking to swap peppers for carrots</td>
-            <td>Swap</td>
+            <td>Looking to trade peppers for carrots</td>
+            <td>Trade</td>
             <td>5</td>
             <td>Pepper</td>
             <td>seeds</td>
@@ -1793,7 +1758,7 @@ class WP_SeedbankAdmin {
         </tr>
         <tr>
             <td>These are the best bean seeds!</td>
-            <td>Swap</td>
+            <td>Trade</td>
             <td>20</td>
             <td>Bean</td>
             <td>packets</td>
@@ -1808,14 +1773,14 @@ class WP_SeedbankAdmin {
 
     function processBatchExchangeForm ($fields) {
         if (!wp_verify_nonce($_POST['batch-exchange'], 'wp-seedbank-batch-exchange')) { ?>
-            <p>Your batch exchange request has expired or is invalid. Please <a href="<?php print home_url();?>/wp-admin/edit.php?post_type=wp_seedbank&page=seedbank_batch_exchange">start again</a>.</p>
+            <p>Your batch exchange request has expired or is invalid. Please <a href="<?php print home_url();?>/wp-admin/edit.php?post_type=idealien_rideshare&page=seedbank_batch_exchange">start again</a>.</p>
 <? 
         }
         $where = ($_FILES['wp-seedbank-batch-exchange-file-data']['tmp_name']) ?
             $_FILES['wp-seedbank-batch-exchange-file-data']['tmp_name'] :
             $_POST['wp-seedbank-batch-exchange-file-url'];
         if (!$where) { ?>
-            <p>Please let us know where to find your data. You'll need to <a href="<?php print home_url();?>/wp-admin/edit.php?post_type=wp_seedbank&page=seedbank_batch_exchange">start again</a>.</p>
+            <p>Please let us know where to find your data. You'll need to <a href="<?php print home_url();?>/wp-admin/edit.php?post_type=idealien_rideshare&page=seedbank_batch_exchange">start again</a>.</p>
 <?php
             return;
         }
@@ -1836,7 +1801,7 @@ class WP_SeedbankAdmin {
                 $body
             ) = $x;
             // convert it into a new seed exchange post.
-            // TODO: Refactor this, along with the wp_seedbank::wp_insert_post()
+            // TODO: Refactor this, along with the idealien_rideshare::wp_insert_post()
             $post = array(
                 'comment_status' => 'open',
                 'ping_status' => 'open', 
@@ -1848,7 +1813,7 @@ class WP_SeedbankAdmin {
 //                'post_parent' => , // automatic?
                 'post_status' => $post_status,
                 'post_title' => $title,
-                'post_type' => 'wp_seedbank', // this is the "Title" position in the CSV.
+                'post_type' => 'idealien_rideshare', // this is the "Title" position in the CSV.
             );
 
             $p = wp_insert_post($post);
@@ -1856,21 +1821,21 @@ class WP_SeedbankAdmin {
                 // TODO: Handle error?
             } else {
                 $new_post_ids[] = $p;
-                update_post_meta($p, 'wp_seedbank_addInfo', $body);
-                update_post_meta($p, 'wp_seedbank_common_name', $exch_common_name);
-                update_post_meta($p, 'wp_seedbank_quantity', $exch_quantity);
-                update_post_meta($p, 'wp_seedbank_status', 'Active'); // New posts are always active?
-                update_post_meta($p, 'wp_seedbank_type', $exch_type);
-                update_post_meta($p, 'wp_seedbank_unit', $exch_unit);
-                update_post_meta($p, 'wp_seedbank_seed_expiry_date', date('m/d/Y', strtotime($exch_seed_expiry)));
-                update_post_meta($p, 'wp_seedbank_exchange_expiry_date', date('m/d/Y', strtotime($exch_expiry)));
+                update_post_meta($p, 'idealien_rideshare_addInfo', $body);
+                update_post_meta($p, 'idealien_rideshare_event', $exch_common_name);
+                update_post_meta($p, 'idealien_rideshare_spaces', $exch_quantity);
+                update_post_meta($p, 'idealien_rideshare_status', 'Active'); // New posts are always active?
+                update_post_meta($p, 'idealien_rideshare_type', $exch_type);
+                update_post_meta($p, 'idealien_rideshare_username', $exch_unit);
+                update_post_meta($p, 'idealien_rideshare_departureDate', date('m/d/Y', strtotime($exch_seed_expiry)));
+                update_post_meta($p, 'idealien_rideshare_returnDate', date('m/d/Y', strtotime($exch_expiry)));
             }
         }
 
         // Display success message.
         $n = count($new_post_ids);
         if ($n) { ?>
-            <p>Successfully imported <?php print $n;?> new <a href="<?php print home_url();?>/wp-admin/edit.php?post_type=wp_seedbank">seed exchange posts</a>.</p>
+            <p>Successfully imported <?php print $n;?> new <a href="<?php print home_url();?>/wp-admin/edit.php?post_type=idealien_rideshare">seed exchange posts</a>.</p>
 <?php
         }
     }
@@ -1895,13 +1860,13 @@ class WP_SeedbankUtilities {
 }
 
 // Initiate the plugin
-add_action("init", "WP_Seedbank::initialize");
+add_action("init", "idealien_rideshare::initialize");
 
-register_activation_hook(__FILE__, 'WP_Seedbank::activate');
-register_deactivation_hook(__FILE__, 'WP_Seedbank::deactivate');
+register_activation_hook(__FILE__, 'idealien_rideshare::activate');
+register_deactivation_hook(__FILE__, 'idealien_rideshare::deactivate');
 
 //FUTURE: Uninstallation routine
-//register_uninstall_hook(__FILE__, 'WP_Seedbank::uninstall');
+//register_uninstall_hook(__FILE__, 'idealien_rideshare::uninstall');
 //Uninstall has not been activated because it does not properly activate.
 //If you want to do a proper clean-out of data:
 //	-activate the plugin
