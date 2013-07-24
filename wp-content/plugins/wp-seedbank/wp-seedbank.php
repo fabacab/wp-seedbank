@@ -19,7 +19,7 @@ define ('WP_SEEDBANK_DELETEFORM_ID' , "REPLACEME");
 
 //Do not modify anything else below 
 define ('WP_SEEDBANK_PATH', WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)) );
-define ('WP_SEEDBANK_VERSION', "0.2.1");
+define ('WP_SEEDBANK_VERSION', '0.1');
 
 class WP_Seedbank {
 	
