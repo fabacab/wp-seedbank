@@ -85,6 +85,9 @@ class idealien_rideshare {
 
 		//Change data on primary form before rideshare CPT post is created
 		add_filter("gform_pre_submission", array(&$this, "pre_rideshareSubmission"), 10, 2);
+
+        wp_register_script('seedbank_exchange', IDEALIEN_RIDESHARE_PATH . 'seedbank_exchange.js', array('jquery') );
+        wp_enqueue_script('seedbank_exchange');
 		
 		//Ensure all 3 forms are executed if being called from a buddyPress page
 		if(function_exists('bp_core_get_userid')) {
