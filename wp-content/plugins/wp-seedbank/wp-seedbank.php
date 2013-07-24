@@ -827,6 +827,16 @@ class WP_Seedbank {
 					foreach ($value as $entry)
 						add_post_meta($post_id, $key, $entry);
 				}
+                // Copy "additional info" into the post body so it becomes searchable with WordPress's default searches.
+                if ('idealien_rideshare_addInfo' === $key) {
+                    $post->post_content = $value;
+                    $post->comment_status = 'open'; // Comments should be allowed.
+                    // Unhook so we avoid infinite loop.
+                    // See: http://codex.wordpress.org/Plugin_API/Action_Reference/save_post#Avoiding_infinite_loops
+                    remove_action('wp_insert_post', array(&$this, 'wp_insert_post'));
+                    $seedbank_post_id = wp_insert_post($post);
+                    add_action('wp_insert_post', array(&$this, 'wp_insert_post'));
+                }
 			}
 		}
 	}
