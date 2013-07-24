@@ -870,7 +870,7 @@ class idealien_rideshare {
 			"idealien_rideshare_type" => __( 'Type', 'idealien-rideshare' ),
 			"idealien_rideshare_departureDate" => __( 'Seed Expiry Date', 'idealien-rideshare' ),
 			"idealien_rideshare_spaces" => __( 'Quantity', 'idealien-rideshare' ),
-			"idealien_rideshare_destination" => __( 'Species, Genus', 'idealien-rideshare' ),
+			"idealien_rideshare_destination" => __( 'Common Name', 'idealien-rideshare' ),
 			//"idealien_rideshare_departure" => __( 'Departure', 'idealien-rideshare' )
 		);
 		
