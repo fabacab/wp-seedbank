@@ -1519,7 +1519,8 @@ class WP_Seedbank {
 		//Register 
 		idealien_rideshare::create_data_types();
 		
-		$version = get_option('idealien_rideshare_version');
+        // DEV NOTE: For now, forcibly assume we're always doing a new install when we "activate."
+		$version = ""; //get_option('idealien_rideshare_version');
 		
 		if($version == "") {
 			//New installation - pre-load some fields
