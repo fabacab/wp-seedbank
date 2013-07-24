@@ -1,0 +1,31 @@
+/*
+ * Idealien Rideshare Admin Console CSS
+ *
+ * http://rideshare.idealienstudios.com
+ */
+
+	label.rideshare {
+		font-weight: bold;
+		width: 9em;
+		float: left;
+	}
+	
+	div.rideshareInfo {
+		clear:both;
+		margin-left: 9em;
+		font-style: italic;
+		
+	}
+
+	.rideshare_inputLine {
+		width: 29%;
+		float: left;
+	}
+	
+	.rideshare_selectLine {
+		width: 30%;
+	}
+	.rideshare_inputBox {
+		width: 74%;
+		height: 7em;
+	}

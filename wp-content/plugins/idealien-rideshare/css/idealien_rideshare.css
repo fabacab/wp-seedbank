@@ -1,0 +1,101 @@
+/*
+ * Idealien Rideshare CSS
+ *
+ * http://rideshare.idealienstudios.com
+ * Notes:
+ * Got your own style you want to use from your theme CSS?
+ * Add the following line to your theme functions.php and all will be well
+ *		wp_dequeue_style('idealien_rideshare_styles');
+ *		wp_deregister_style('idealien_rideshare_styles');
+ */
+
+#rideshare { width: 685px; font-size: 11px; }
+
+#rideshare td, #rideshare th { padding: 2px 4px; border: 1px solid #CCC;}
+#rideshare th { background: #CCC; border: 1px solid #666;}
+#rideshare .rideshareEvent { font-weight: bold;  width:120px;}
+#rideshare .rideshareCity {  width:120px; }
+#rideshare .rideshareType { width: 50px; }
+#rideshare .rideshareSpaces { width:30px; }
+#rideshare .rideshareDDate { width:50px;}
+#rideshare .rideshareRDate { width:50px;}
+#rideshare .rideshareContact { width:115px; text-align: center;}
+#rideshare .rideshareInfo {  width:130px; }
+
+#rideshare .rideshareContact .name { display: block; font-weight: bold; }
+#rideshare .rideshareContact .email { display: block; }
+#rideshare .rideshareContact .phone { display: block; }
+
+#rideshare tr.odd { background: #CCC; }
+
+
+/* Remove #Wrapper on all entries below here */
+.idealien_rideshare_gf_wrapper ul li.rideshareMode { display: none; }
+.idealien_rideshare_gf_wrapper ul li.rideshareStatus { display: none; }
+
+.idealien_rideshare_gf_wrapper ul li.rideshareType {  }
+.idealien_rideshare_gf_wrapper ul li.rideshareType .ginput_container { width:  120px; }
+.idealien_rideshare_gf_wrapper ul li.rideshareType .ginput_container select { width:  100px; }
+
+.idealien_rideshare_gf_wrapper ul li.rideshareCity { float: left; clear: left; width: 100px;}
+.idealien_rideshare_gf_wrapper ul li.rideshareCity .ginput_container { width: 90px; }
+
+.idealien_rideshare_gf_wrapper ul li.rideshareStateProv  { float: left; clear: none; }
+.idealien_rideshare_gf_wrapper ul li.rideshareStateProv .ginput_container { width: 170px; }
+.idealien_rideshare_gf_wrapper ul li.rideshareStateProv .ginput_container  select { width: 170px; }
+
+.idealien_rideshare_gf_wrapper ul li.rideshare_event { width:  300px; }
+.idealien_rideshare_gf_wrapper ul li.rideshare_event .ginput_container { width: 280px; }
+.idealien_rideshare_gf_wrapper ul li.rideshare_event .ginput_container select { width: 280px; }
+
+.idealien_rideshare_gf_wrapper ul li.rideshare_newEvent { width:  300px; }
+.idealien_rideshare_gf_wrapper ul li.rideshare_newEvent .ginput_container { width: 280px; }
+.idealien_rideshare_gf_wrapper ul li.rideshare_newEvent .ginput_container input { width: 280px; }
+
+.idealien_rideshare_gf_wrapper ul li.rideshareSpaces { float: left; clear: left;}
+.idealien_rideshare_gf_wrapper ul li.rideshareSpaces .ginput_container { width:  140px; }
+.idealien_rideshare_gf_wrapper ul li.rideshareSpaces .ginput_container select { width:  120px; }
+
+.idealien_rideshare_gf_wrapper ul li.rideshareDate { float: left; clear: none;}
+.idealien_rideshare_gf_wrapper ul li.rideshareDate .ginput_container { width:  240px; }
+
+.idealien_rideshare_gf_wrapper ul li.rideshare_name { width:  300px; }
+.idealien_rideshare_gf_wrapper ul li.rideshare_name .ginput_container { width: 280px; }
+.idealien_rideshare_gf_wrapper ul li.rideshare_name .ginput_container input { width: 280px; }
+
+.idealien_rideshare_gf_wrapper ul li.rideshare_email { width:  300px; }
+.idealien_rideshare_gf_wrapper ul li.rideshare_email .ginput_container { width: 280px; }
+.idealien_rideshare_gf_wrapper ul li.rideshare_email .ginput_container input { width: 280px; }
+
+.idealien_rideshare_gf_wrapper ul li.rideshareAddInfo { width:  222px; }
+.idealien_rideshare_gf_wrapper ul li.rideshareAddInfo .ginput_container { width: 220px; }
+.idealien_rideshare_gf_wrapper ul li.rideshareAddInfo .ginput_container textarea { width: 220px; }
+
+.idealien_rideshare_gf_wrapper ul .gfield_required { display: none; } 
+
+.idealien_rideshare_gf_wrapper .gform_body ul li.gfield_error { width: auto; min-height: 110px; margin: 0 5px 0 0; max-width: 300px;}
+
+.idealien_rideshareComments_wrapper, .idealien_rideshareDelete_wrapper {
+	display: none;
+	position: absolute;
+	background: #CCC;
+	padding: 0px 30px;
+	z-index:5000;
+	
+}
+
+.idealien_rideshareComments_wrapper ul li { width: 280px; }
+.idealien_rideshareComments_wrapper ul li .ginput_container { width: 280px; }
+.idealien_rideshareComments_wrapper ul li .ginput_container input.medium { width: 245px; }
+
+.idealien_rideshareComments_wrapper ul li.connect_comments .ginput_container textarea { width: 245px; }
+.idealien_rideshareComments_wrapper ul li.connect_comments .gfield_description { width: 245px; }
+
+.idealien_rideshareComments_wrapper ul li.gfield_html { text-align: right; }
+.idealien_rideshareComments_wrapper ul li.connect_details { text-align: left; }
+
+.idealien_rideshareComments_wrapper ul li.gfield_html dl div { float: left; margin: 0 10px 20px 0; width: 130px; }
+ .idealien_rideshareComments_wrapper ul li.gfield_html dl, .idealien_rideshareComments_wrapper ul li.gfield_html dt, .idealien_rideshareComments_wrapper ul li.gfield_html dd { 
+	text-align:center;
+	margin: 0; padding: 0;
+}
