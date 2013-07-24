@@ -651,9 +651,9 @@ class idealien_rideshare {
         print '<select name="idealien_rideshare_type">';
         foreach ($typeOptions as $type) {
             if ($type->name == $idealien_rideshare_type) {
-                echo "<option SELECTED value='" . $type->name . "'>" . $type->name . "</option>\n";
+                echo "<option SELECTED value='" . $type->name . "'>" . strtolower($type->name) . "</option>\n";
             } else {
-                echo "<option value='" . $type->name . "'>" . $type->name . "</option>\n";
+                echo "<option value='" . $type->name . "'>" . strtolower($type->name) . "</option>\n";
             }
         }
         print '</select>';
