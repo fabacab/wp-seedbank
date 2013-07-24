@@ -422,27 +422,27 @@ class WP_Seedbank {
 	function create_data_types() {
 		
 		// Register custom post type and taxonomies
-		register_post_type('idealien_rideshare', 
+		register_post_type('wp_seedbank', 
 			array(
 				'labels' => array(
-					'name' => __( 'Rideshares', 'idealien-rideshare' ),
-					'singular_label' => __( 'Rideshare', 'idealien-rideshare' ),
-					'add_new' => __( 'Add Rideshare', 'idealien-rideshare' ),
-					'add_new_item' => __( 'Add Rideshare', 'idealien-rideshare' ),
-					'edit' => __( 'Edit Rideshares', 'idealien-rideshare' ),
-					'edit_item' => __( 'Edit Rideshare', 'idealien-rideshare' ),
-					'new_item' => __( 'New Rideshare', 'idealien-rideshare' ),
-					'view' => __( 'View Rideshares', 'idealien-rideshare' ),
-					'view_item' => __( 'View Rideshare', 'idealien-rideshare' ),
-					'search' => __( 'Search Rideshares', 'idealien-rideshare' ),
-					'not_found' => __( 'No Rideshares found', 'idealien-rideshare' ),
-					'not_found_in_trash' => __( 'No Rideshare found in trash', 'idealien-rideshare' )
+					'name' => __( 'SeedBank', 'idealien-rideshare' ),
+					'singular_label' => __( 'Seed Exchange', 'idealien-rideshare' ),
+					'add_new' => __( 'Add Seed Exchange', 'idealien-rideshare' ),
+					'add_new_item' => __( 'Add Seed Exchange', 'idealien-rideshare' ),
+					'edit' => __( 'Edit Seed', 'idealien-rideshare' ),
+					'edit_item' => __( 'Edit Seed Exchange', 'idealien-rideshare' ),
+					'new_item' => __( 'New Seed Exchange', 'idealien-rideshare' ),
+					'view' => __( 'View Seed Exchange', 'idealien-rideshare' ),
+					'view_item' => __( 'View Seed Exchange', 'idealien-rideshare' ),
+					'search' => __( 'Search SeedBank', 'idealien-rideshare' ),
+					'not_found' => __( 'No Seed Exchanges found', 'idealien-rideshare' ),
+					'not_found_in_trash' => __( 'No Seed Exchanges found in trash', 'idealien-rideshare' )
 				),
 				'supports' => array('title', 'custom-fields'),
-				'rewrite' => array('slug' => 'rideshare'),
+				'rewrite' => array('slug' => 'seedbank'),
 				'public' => true,
-				'description' => __( 'Idealien Rideshare', 'idealien-rideshare' ),
-				'menu_icon' => IDEALIEN_RIDESHARE_PATH . 'images/rideshare_icon.png'
+				'description' => __( 'SeedBank', 'idealien-rideshare' ),
+				'menu_icon' => WP_SEEDBANK_PATH . 'images/rideshare_icon.png'
 			)
 		);
 		
@@ -1601,6 +1601,7 @@ class WP_Seedbank {
   	// Deactivating the plugin
   	static function deactivate() {
 		//FUTURE: Delete CPT is too risky - what else shoudl happen?
+		delete_option('idealien_rideshare_version');
 	}
   
   	// FUTURE: This is not yet called in any meaningful way.
