@@ -537,7 +537,7 @@ class idealien_rideshare {
      function enqueue_admin_scripts() {
 		global $current_screen;
 		if ($current_screen->post_type == 'idealien_rideshare') {
-				wp_register_script('jquery-ui-datepicker', WP_SEEDBANK_PATH . 'jquery/jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core') );
+				wp_register_script('jquery-ui-datepicker', WP_SEEDBANK_PATH . 'jquery.ui.datepicker.min.js', array('jquery', 'jquery-ui-core') );
 				wp_enqueue_script('jquery-ui-datepicker');
 				
 		}
@@ -565,7 +565,7 @@ class idealien_rideshare {
 	 //Register & activate the JS to enable comment / delete form functionality
 	 //FUTURE: Only have this fire on pages where the shortcode is in use.
 	 function frontend_scripts_init() {
-    	wp_register_script('rideshare-connect', WP_SEEDBANK_PATH . 'jquery/idealien_rideshare_connect.js', array('jquery') );
+		wp_register_script('rideshare-connect', WP_SEEDBANK_PATH . 'idealien_rideshare_connect.js', array('jquery') );
 		wp_enqueue_script('rideshare-connect');
 	}    
  
@@ -588,7 +588,7 @@ class idealien_rideshare {
 					jQuery( ".datepicker" ).datepicker({ 
 						dateFormat : 'mm/dd/yy',
 						showOn: "button",
-						buttonImage: "<?php echo WP_SEEDBANK_PATH; ?>/images/calendar.gif",
+						buttonImage: "<?php echo WP_SEEDBANK_PATH; ?>/calendar.gif",
 						buttonImageOnly: true,
 						minDate: 0
 					});
