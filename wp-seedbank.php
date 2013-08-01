@@ -444,7 +444,7 @@ class WP_Seedbank {
 					'not_found_in_trash' => __( 'No Seed Exchanges found in trash', 'wp-seedbank' )
 				),
 				'supports' => array('title', 'custom-fields'),
-				'rewrite' => array('slug' => 'rideshare'),
+				'rewrite' => array('slug' => 'seed-exchange'),
 				'public' => true,
 				'description' => __( 'Seedbank Seed Exchanges', 'wp-seedbank' ),
 				'menu_icon' => WP_SEEDBANK_PATH . 'seedexchange_icon.png'
@@ -1497,6 +1497,9 @@ class WP_Seedbank {
 		
         // New installation - pre-load some fields
 		if($version == "") {
+
+            // Flush rewrite rules (post slugs, permalinks).
+            flush_rewrite_rules();
 
             // Exchange Types (verbs)
 			wp_insert_term(__( 'Swap', 'wp-seedbank' ), 'wp_seedbank_type', array('description' => 'Exchanges offering seeds for other seeds.'));
