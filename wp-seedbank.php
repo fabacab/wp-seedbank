@@ -4,11 +4,11 @@
     Plugin URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/
     Description: Add a seed exchange post type to turn your WordPress install into a community seed bank! :D
     Author: Cleveland GiveCamp Developers
-    Version: 0.2.2
+    Version: 0.2.3
     Author URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/#authors
     License: GPL
     Requires at least: 3.5.2
-    Stable tag: 0.2.2
+    Stable tag: 0.2.3
 */
 
 //Modify the following two variables to identify the ID for the comment and delete forms
@@ -17,7 +17,7 @@ define ('WP_SEEDBANK_DELETEFORM_ID' , "REPLACEME");
 
 //Do not modify anything else below 
 define ('WP_SEEDBANK_PATH', WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)) );
-define ('WP_SEEDBANK_VERSION', '0.2.2');
+define ('WP_SEEDBANK_VERSION', '0.2.3');
 
 class WP_Seedbank {
 
@@ -431,7 +431,7 @@ class WP_Seedbank {
 			array(
 				'labels' => array(
 					'name' => __( 'Seed Exchanges', 'wp-seedbank' ),
-					'singular_label' => __( 'Seed Exchange', 'wp-seedbank' ),
+					'singular_name' => __( 'Seed Exchange', 'wp-seedbank' ),
 					'add_new' => __( 'Add Seed Exchange', 'wp-seedbank' ),
 					'add_new_item' => __( 'Add Seed Exchange', 'wp-seedbank' ),
 					'edit' => __( 'Edit Seed Exchange', 'wp-seedbank' ),
@@ -443,7 +443,14 @@ class WP_Seedbank {
 					'not_found' => __( 'No Seed Exchanges found', 'wp-seedbank' ),
 					'not_found_in_trash' => __( 'No Seed Exchanges found in trash', 'wp-seedbank' )
 				),
-				'supports' => array('title', 'custom-fields'),
+				'supports' => array(
+					'title',
+					//'editor', // TODO: This enables the post editor, but commented out due to overloading "Additional info" field with this for now.
+					'author',
+					'comments',
+					'thumbnail'
+				),
+				'has_archive' => true,
 				'rewrite' => array('slug' => 'seed-exchange'),
 				'public' => true,
 				'description' => __( 'Seedbank Seed Exchanges', 'wp-seedbank' ),
