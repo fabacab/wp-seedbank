@@ -443,7 +443,14 @@ class WP_Seedbank {
 					'not_found' => __( 'No Seed Exchanges found', 'wp-seedbank' ),
 					'not_found_in_trash' => __( 'No Seed Exchanges found in trash', 'wp-seedbank' )
 				),
-				'supports' => array('title', 'custom-fields'),
+				'supports' => array(
+					'title',
+					//'editor', // TODO: This enables the post editor, but commented out due to overloading "Additional info" field with this for now.
+					'author',
+					'comments',
+					'thumbnail'
+				),
+				'has_archive' => true,
 				'rewrite' => array('slug' => 'seed-exchange'),
 				'public' => true,
 				'description' => __( 'Seedbank Seed Exchanges', 'wp-seedbank' ),
