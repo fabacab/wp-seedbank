@@ -5,8 +5,8 @@ Plugin URL: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/
 Donate link: https://npo.justgive.org/nonprofits/donate.jsp?ein=45-3043080
 Tags: custom posts, community, seedbank, ecology, seed swap, trade
 Requires at least: 3.5.2
-Tested up to: 3.5.2
-Stable tag: 0.2.2
+Tested up to: 3.6
+Stable tag: 0.2.3
 License: GPL3
 
 The WP-Seedbank plugin turns any self-hosted WordPress blog into a community seedbank (or seed library).
@@ -33,6 +33,13 @@ Features include:
 2. The Batch Exchange page lets you upload a file to create many seed exchanges at once.
 
 == Changelog ==
+
+= 0.2.3 =
+* Simpler seed exchange editing screen for typical users.
+* Manage comments (public replies to seed exchange posts) on the post edit screen itself.
+* Allow admins to reassign seed exchange author.
+* Seed exchange posts can now be viewed as their own archive category.
+* Fix bug where singular post type name wasn't correctly set or displayed.
 
 = 0.2.2 =
 * Fix bug where permalink structure did not reflect seed exchange post types.
