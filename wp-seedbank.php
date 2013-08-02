@@ -431,7 +431,7 @@ class WP_Seedbank {
 			array(
 				'labels' => array(
 					'name' => __( 'Seed Exchanges', 'wp-seedbank' ),
-					'singular_label' => __( 'Seed Exchange', 'wp-seedbank' ),
+					'singular_name' => __( 'Seed Exchange', 'wp-seedbank' ),
 					'add_new' => __( 'Add Seed Exchange', 'wp-seedbank' ),
 					'add_new_item' => __( 'Add Seed Exchange', 'wp-seedbank' ),
 					'edit' => __( 'Edit Seed Exchange', 'wp-seedbank' ),
