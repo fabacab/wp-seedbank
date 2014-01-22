@@ -38,6 +38,7 @@ class WP_SeedBank {
         add_action('admin_init', array($this, 'registerCustomSettings'));
         add_action('admin_menu', array($this, 'registerAdminMenus'));
         add_action('admin_enqueue_scripts', array($this, 'registerAdminScripts'));
+        add_action('admin_head', array($this, 'registerCustomHelp'));
 
         add_filter('the_content', array($this, 'displayContent'));
     }
@@ -276,6 +277,43 @@ class WP_SeedBank {
             wp_register_script('seedbank_exchange', plugins_url(basename(__DIR__) . '/seedbank_exchange.js'), array('jquery') );
             wp_enqueue_script('seedbank_exchange');
         }
+    }
+
+    // TODO: i18n this.
+    public function registerCustomHelp () {
+        $screen = get_current_screen();
+        if ($screen->post_type !== $this->post_type) { return; }
+        // Tabs for specific screens.
+        switch ($screen->id) {
+            case 'seedbank':
+                $html = <<<END_HTML
+<p>Make a new Seed Exchange on this page. A Seed Exchange is just like a blog post, but tailored specifically for the Seedbank. Have some seeds to share, or trying to find seeds to grow? Let others know by posting here!</p>
+<p>To make a new Seed Exchange, follow these steps:</p>
+<ol>
+    <li><strong>Write a title.</strong> Short, descriptive summaries are best. <a href="#" onclick="document.getElementById('title').focus()">Click here and then type your title.</a></li>
+    <li><strong>Explain your request or offer.</strong> In your own words, describe what you're looking for or what you're hoping to get, or both. Be sure to include any important words you think others might use to find your post when they're searching the website. Include any additional information relevant to your posting. <a href="#" onclick="document.getElementById('content').focus()">Click here and then type your message.</a></strong></li>
+    <li><strong>Fill in the details.</strong> In the "<a href="#{$this->post_type}-details-meta">Seed Exchange Details</a>" box, there are some fields you should fill in to help other people find your post by organizing it in a sensible place in the Seedbank. Simply complete the sentences of the fill-in-the-blank paragraph.</li>
+</ol>
+<p>When you've done this click the "Publish" (or "Submit for review") button. Congratulations! And thank you for spreading the seed love!</p>
+END_HTML;
+                $screen->add_help_tab(array(
+                    'id' => $this->post_type . '-' . $screen->base . '-help',
+                    'title' => __('Adding a Seed Exchange', $this->textdomain),
+                    'content' => $html
+                ));
+            break;
+            default:
+            break;
+        }
+        // Tabs for all screens.
+        $html = <<<END_HTML
+<p><a href="https://wordpress.org/plugins/wp-seedbank/" title="WP-SeedBank on the WordPress Plugin Repository" rel="bookmark">The WP-SeedBank plugin</a> is a labor of love, and passion. Conceived by <a href="http://www.hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/" title="The HummingBird Project's WP-SeedBank Initiative">The HummingBird Project</a> and <a href="http://permaculturenews.org/2013/09/25/an-open-source-community-model-to-save-seeds-a-wordpress-seedbank-plugin/" title="An Open Source Community Model to Save Seeds – a WordPress Seedbank Plugin" rel="bookmark">initially developed at Cleveland GiveCamp</a>, it is maintained by <a href="http://meitar.moscovitz.name/" title="Who is this person?">a houseless, jobless, nomadic "vigilante programmer"</a> who loves fresh food and hates Monsanto. <a href="http://wordpress.org/plugins/wp-seedbank/other_notes/" title="Credits for WP-SeedBank">Donations are appreciated</a>.</p>
+END_HTML;
+        $screen->add_help_tab(array(
+            'id' => $this->post_type . '-' . $screen->base . '-about-help',
+            'title' => __('About the WP-SeedBank', $this->textdomain),
+            'content' => $html
+        ));
     }
 
     public function activate () {
