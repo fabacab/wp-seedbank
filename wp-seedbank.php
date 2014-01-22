@@ -45,6 +45,9 @@ class WP_SeedBank {
 
         add_action($this->post_type . '_expire_exchange', array($this, 'expireExchangePost'));
 
+        add_action('manage_' . $this->post_type . '_posts_custom_column', array($this, 'displayCustomColumn'), 10, 2);
+        add_filter('manage_' . $this->post_type . '_posts_columns', array($this, 'registerCustomColumns'));
+
         add_filter('the_content', array($this, 'displayContent'));
     }
 
@@ -341,6 +344,23 @@ class WP_SeedBank {
         wp_enqueue_script('wp-seedbank');
         $x = $wp_scripts->query('jquery-ui-core');
         wp_enqueue_style('jquery-ui-smoothness', "//ajax.googleapis.com/ajax/libs/jqueryui/{$x->ver}/themes/smoothness/jquery-ui.min.css", false, null);
+    }
+
+    public function registerCustomColumns ($columns) {
+        $my_columns = array();
+        foreach ($this->taxonomies as $taxonomy) {
+            $my_columns[$this->post_type . '_' . $taxonomy[0]] = ucwords(str_replace('_', ' ', $taxonomy[0]));
+        }
+        return array_merge($columns, $my_columns);
+    }
+
+    public function displayCustomColumn ($column, $post_id) {
+        foreach ($this->taxonomies as $taxonomy) {
+            if ($column !== $this->post_type . '_' . $taxonomy[0]) {
+                continue;
+            }
+            the_terms($post_id, $this->post_type . '_' . $taxonomy[0]);
+        }
     }
 
     // TODO: i18n this.
