@@ -37,12 +37,9 @@ class WP_SeedBank {
         add_action('save_post', array($this, 'saveMeta'));
         add_action('admin_init', array($this, 'registerCustomSettings'));
         add_action('admin_menu', array($this, 'registerAdminMenus'));
+        add_action('admin_enqueue_scripts', array($this, 'registerAdminScripts'));
 
         add_filter('the_content', array($this, 'displayContent'));
-
-        // TODO: Enqueue these only when needed, rather than always.
-        wp_register_script('seedbank_exchange', plugins_url(basename(__DIR__) . '/seedbank_exchange.js'), array('jquery') );
-        wp_enqueue_script('seedbank_exchange');
     }
 
     public function createDataTypes () {
@@ -271,6 +268,14 @@ class WP_SeedBank {
             }
         }
         return $content;
+    }
+
+    public function registerAdminScripts ($hook) {
+        // Load only on the Batch Exchange page.
+        if ($hook === $this->post_type . '_page_' . $this->post_type . '_batch_exchange') {
+            wp_register_script('seedbank_exchange', plugins_url(basename(__DIR__) . '/seedbank_exchange.js'), array('jquery') );
+            wp_enqueue_script('seedbank_exchange');
+        }
     }
 
     public function activate () {
