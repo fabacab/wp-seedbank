@@ -48,18 +48,21 @@ class WP_SeedBank {
         array('seed_genus', 'plural' => 'seed_genera'),
         array('exchange_status', 'plural' => 'exchange_statuses')
     );
-//    private $meta_fields = array(
-//        'type',
-//        'quantity',
-//        'common_name',
-//        'unit',
-//        'seed_expiry_date',
-//    );
+    private $meta_fields = array(
+        'exchange_type',
+        'quantity',
+        'common_name',
+        'unit',
+        'seed_expiry_date',
+        'exchange_expiry_date',
+        'exchange_status'
+    );
 
     public function __construct () {
         register_activation_hook(__FILE__, array($this, 'activate'));
         add_action('init', array($this, 'createDataTypes'));
         add_action('add_meta_boxes_' . $this->post_type, array($this, 'addMetaBoxes'));
+        add_action('save_post', array($this, 'saveMeta'));
     }
 
     public function createDataTypes () {
@@ -142,7 +145,6 @@ class WP_SeedBank {
 
         // Retrieve meta data fields, or set to initial blank slates.
         $custom = get_post_custom($post->ID);
-        //var_dump($custom);
 
         // Create HTML for the drop-down menus.
         ob_start();
@@ -203,6 +205,18 @@ class WP_SeedBank {
         <label>This seed exchange is <?php print $status_select;?>.</label> <span class="description">(<?php foreach ($status_options as $x) :?>The <code><?php _e($x->name, $this->textdomain);?></code> type is for <?php print strtolower($x->description);?> <?php endforeach;?>)</span>
     </p>
 <?php
+    }
+
+    public function saveMeta ($post_id) {
+        if ($this->post_type !== $_POST['post_type']) { return; }
+        if (!wp_verify_nonce($_POST[$this->post_type . '_meta_box_details_nonce'], 'editing_' . $this->post_type)) { return; }
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) { return; }
+        foreach ($this->meta_fields as $f) {
+            if (isset($_REQUEST[$this->post_type . '_' . $f])) {
+                update_post_meta($post_id, $this->post_type . '_' . $f, sanitize_text_field($_REQUEST[$this->post_type . '_' . $f]));
+                wp_set_object_terms($post_id, sanitize_text_field($_REQUEST[$this->post_type . '_' . $f]), $this->post_type . '_' . $f);
+            }
+        }
     }
 
     public function activate () {
