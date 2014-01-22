@@ -2,6 +2,15 @@ WP_SEEDBANK = {};
 WP_SEEDBANK.UI = {};
 
 // User Interface functions.
+WP_SEEDBANK.UI.attachDatepicker = function () {
+    var x = jQuery('.datepicker');
+    if (x.length) {
+        x.each(function () {
+            jQuery(this).datepicker();
+        });
+    }
+};
+
 WP_SEEDBANK.UI.hideDeletedExchangeRequests = function () {
     var el = document.createElement('button');
     el.innerHTML = 'Hide Deleted Seed Exchanges';
@@ -41,6 +50,7 @@ WP_SEEDBANK.UI.toggleBatchExchangeDataSource = function () {
 }
 
 WP_SEEDBANK.init = function () {
+    WP_SEEDBANK.UI.attachDatepicker();
     // TODO: Filter these out of the result set from the PHP at some point, eh?
     WP_SEEDBANK.UI.hideDeletedExchangeRequests();
     // TODO: Run this only on the appropriate page.

@@ -227,10 +227,10 @@ class WP_SeedBank {
         <input name="<?php print $this->post_type;?>_unit" value="<?php print esc_attr($custom["{$this->post_type}_unit"][0]);?>" placeholder="<?php _e('packets', $this->textdomain);?>" />.
     </p>
     <p>
-        <label>These seeds will expire on or about <input name="<?php print $this->post_type;?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr($custom["{$this->post_type}_seed_expiry_date"][0]);?>" />.</label> <span class="description">(<?php _e('If these seeds are in a packet, the wrapping might have an expiration date. Put that here.', $this->textdomain);?>)</span>
+        <label>These seeds will expire on or about <input name="<?php print $this->post_type;?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr($custom["{$this->post_type}_seed_expiry_date"][0]);?>" placeholder="<?php _e('enter a date', $this->textdomain);?>" />.</label> <span class="description">(<?php _e('If these seeds are in a packet, the wrapping might have an expiration date. Put that here.', $this->textdomain);?>)</span>
     </p>
     <p>
-        <label>If I don't hear from anyone by <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr($custom["{$this->post_type}_exchange_expiry_date"][0]);?>" />, I'll stop being available to make this exchange.</label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", $this->textdomain);?>)</span>
+        <label>If I don't hear from anyone by <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr($custom["{$this->post_type}_exchange_expiry_date"][0]);?>" placeholder="<?php _e('enter a date', $this->textdomain);?>" />, I'll stop being available to make this exchange.</label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", $this->textdomain);?>)</span>
     </p>
     <p>
         <label>This seed exchange is <?php print $status_select;?>.</label> <span class="description">(<?php foreach ($status_options as $x) :?>The <code><?php _e($x->name, $this->textdomain);?></code> type is for <?php print strtolower($x->description);?> <?php endforeach;?>)</span>
@@ -279,11 +279,14 @@ class WP_SeedBank {
     }
 
     public function registerAdminScripts () {
+        global $wp_scripts;
         $screen = get_current_screen();
         // Only load this plugin's JS on this plugin's own screens.
         if (false === strpos($screen->id, $this->post_type)) { return; }
         wp_register_script('wp-seedbank', plugins_url(basename(__DIR__) . '/wp-seedbank.js'), array('jquery', 'jquery-ui-datepicker'));
         wp_enqueue_script('wp-seedbank');
+        $x = $wp_scripts->query('jquery-ui-core');
+        wp_enqueue_style('jquery-ui-smoothness', "//ajax.googleapis.com/ajax/libs/jqueryui/{$x->ver}/themes/smoothness/jquery-ui.min.css", false, null);
     }
 
     // TODO: i18n this.
