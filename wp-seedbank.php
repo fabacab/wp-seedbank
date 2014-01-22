@@ -227,15 +227,27 @@ class WP_SeedBank {
         <input name="<?php print $this->post_type;?>_unit" value="<?php print esc_attr($custom["{$this->post_type}_unit"][0]);?>" placeholder="<?php _e('packets', $this->textdomain);?>" />.
     </p>
     <p>
-        <label>These seeds will expire on or about <input name="<?php print $this->post_type;?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr($custom["{$this->post_type}_seed_expiry_date"][0]);?>" placeholder="<?php _e('enter a date', $this->textdomain);?>" />.</label> <span class="description">(<?php _e('If these seeds are in a packet, the wrapping might have an expiration date. Put that here.', $this->textdomain);?>)</span>
+        <label>These seeds will expire on or about <input name="<?php print $this->post_type;?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', $this->textdomain);?>" />.</label> <span class="description">(<?php _e('If these seeds are in a packet, the wrapping might have an expiration date. Put that here.', $this->textdomain);?>)</span>
     </p>
     <p>
-        <label>If I don't hear from anyone by <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr($custom["{$this->post_type}_exchange_expiry_date"][0]);?>" placeholder="<?php _e('enter a date', $this->textdomain);?>" />, I'll stop being available to make this exchange.</label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", $this->textdomain);?>)</span>
+        <label>If I don't hear from anyone by <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', $this->textdomain);?>" />, I'll stop being available to make this exchange.</label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", $this->textdomain);?>)</span>
     </p>
     <p>
         <label>This seed exchange is <?php print $status_select;?>.</label> <span class="description">(<?php foreach ($status_options as $x) :?>The <code><?php _e($x->name, $this->textdomain);?></code> type is for <?php print strtolower($x->description);?> <?php endforeach;?>)</span>
     </p>
 <?php
+    }
+
+    /**
+     * Utility function to determine whether this meta field is one
+     * of our "date" or "time" fields.
+     *
+     * @param string $key The meta field key to check.
+     * @return bool True if the field is one we're using for a date or time, false otherwise.
+     */
+    private function isDateOrTimeMeta ($key) {
+        $x = substr($key, -5);
+        return ($x === '_date' || $x === '_time') ? true : false;
     }
 
     public function saveMeta ($post_id) {
@@ -244,7 +256,14 @@ class WP_SeedBank {
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) { return; }
         foreach ($this->meta_fields as $f) {
             if (isset($_REQUEST[$this->post_type . '_' . $f])) {
-                update_post_meta($post_id, $this->post_type . '_' . $f, sanitize_text_field($_REQUEST[$this->post_type . '_' . $f]));
+                $val = $_REQUEST[$this->post_type . '_' . $f];
+                // For meta fields that end in '_date' or '_time',
+                if ($this->isDateOrTimeMeta($f)) {
+                    // convert their value to a UTC'ed unix timestamp
+                    $val = gmdate('U', strtotime($val));
+                }
+                update_post_meta($post_id, $this->post_type . '_' . $f, sanitize_text_field($val));
+                // TODO: Only do wp_set_object_terms on taxonomies.
                 wp_set_object_terms($post_id, sanitize_text_field($_REQUEST[$this->post_type . '_' . $f]), $this->post_type . '_' . $f);
             }
         }
@@ -257,9 +276,14 @@ class WP_SeedBank {
             $append = '<ul id="' . esc_attr($this->post_type . '-meta-' . $post->ID) . '" class="' . esc_attr($this->post_type) . '-meta">';
             $custom = get_post_custom($post->ID);
             foreach ($this->meta_fields as $f) {
-                $x = $custom[$this->post_type . '_' . $f];
-                if ($x) {
-                    $append .= '<li><strong>' . esc_html(ucwords(str_replace('_', ' ', $f))) . ':</strong> ' . esc_html($x[0]) . ' </li>';
+                $val = $custom[$this->post_type . '_' . $f][0];
+                // For meta fields that end in '_date' or '_time',
+                if ($this->isDateOrTimeMeta($f)) {
+                    // convert their value to blog's local date format
+                    $val = date(get_option('date_format'), $val);
+                }
+                if ($val) {
+                    $append .= '<li><strong>' . esc_html(ucwords(str_replace('_', ' ', $f))) . ':</strong> ' . esc_html($val) . ' </li>';
                 }
             }
             $append .= '</ul>';
@@ -741,9 +765,8 @@ END_HTML;
                 update_post_meta($p, $this->post_type . '_exchange_status', sanitize_text_field('Active')); // New posts are always active?
                 update_post_meta($p, $this->post_type . '_exchange_type', sanitize_text_field($exchange_type));
                 update_post_meta($p, $this->post_type . '_unit', sanitize_text_field($unit));
-                // TODO: Change the format of these dates to unix timestamps?
-                update_post_meta($p, $this->post_type . '_seed_expiry_date', date('m/d/Y', strtotime($seed_expiry_date)));
-                update_post_meta($p, $this->post_type . '_exchange_expiry_date', date('m/d/Y', strtotime($exchange_expiry_date)));
+                update_post_meta($p, $this->post_type . '_seed_expiry_date', gmdate('U', strtotime($seed_expiry_date)));
+                update_post_meta($p, $this->post_type . '_exchange_expiry_date', gmdate('U', strtotime($exchange_expiry_date)));
             }
         }
 
