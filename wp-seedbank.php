@@ -273,6 +273,95 @@ class WP_SeedBank {
     }
 
     public function activate () {
+        // If the old version 0.2.3 exists
+        if ('0.2.3' === get_option('wp_seedbank_version')) {
+            global $wpdb;
+            $errors = array();
+
+            // we need to do some database & option cleanup that looks
+            // something like the following SQL:
+            // NOTE: This SQL is a bit blunt. Any safer ways to do it?
+            // UPDATE wp_posts SET post_type = 'seedbank' WHERE post_type = 'wp_seedbank';
+            $sql = $wpdb->prepare(
+                "UPDATE {$wpdb->posts} SET post_type = %s WHERE post_type = %s",
+                $this->post_type,
+                'wp_seedbank'
+            );
+            if (false === $wpdb->query($sql)) {
+                $errors[] = array($wpdb->last_query, $wpdb->last_error);
+            }
+            // UPDATE wp_term_taxonomy SET taxonomy = REPLACE(taxonomy, 'wp_seedbank', 'seedbank');
+            $sql = $wpdb->prepare(
+                "UPDATE {$wpdb->term_taxonomy} SET taxonomy = REPLACE(taxonomy, %s, %s)",
+                'wp_seedbank',
+                $this->post_type
+            );
+            if (false === $wpdb->query($sql)) {
+                $errors[] = array($wpdb->last_query, $wpdb->last_error);
+            }
+            // UPDATE wp_term_taxonomy SET taxonomy = REPLACE(taxonomy, 'seedbank_type', 'seedbank_exchange_type');
+            $sql = $wpdb->prepare(
+                "UPDATE {$wpdb->term_taxonomy} SET taxonomy = REPLACE(taxonomy, %s, %s)",
+                $this->post_type . '_type',
+                $this->post_type . '_exchange_type'
+            );
+            if (false === $wpdb->query($sql)) {
+                $errors[] = array($wpdb->last_query, $wpdb->last_error);
+            }
+            // UPDATE wp_term_taxonomy SET taxonomy = REPLACE(taxonomy, 'seedbank_genus', 'seedbank_seed_genus');
+            $sql = $wpdb->prepare(
+                "UPDATE {$wpdb->term_taxonomy} SET taxonomy = REPLACE(taxonomy, %s, %s)",
+                $this->post_type . '_genus',
+                $this->post_type . '_seed_genus'
+            );
+            if (false === $wpdb->query($sql)) {
+                $errors[] = array($wpdb->last_query, $wpdb->last_error);
+            }
+            // UPDATE wp_term_taxonomy SET taxonomy = REPLACE(taxonomy, 'seedbank_status', 'seedbank_exchange_status');
+            $sql = $wpdb->prepare(
+                "UPDATE {$wpdb->term_taxonomy} SET taxonomy = REPLACE(taxonomy, %s, %s)",
+                $this->post_type . '_status',
+                $this->post_type . '_exchange_status'
+            );
+            if (false === $wpdb->query($sql)) {
+                $errors[] = array($wpdb->last_query, $wpdb->last_error);
+            }
+            // UPDATE wp_postmeta SET meta_key = REPLACE(meta_key, 'wp_seedbank', 'seedbank');
+            $sql = $wpdb->prepare(
+                "UPDATE {$wpdb->postmeta} SET meta_key = REPLACE(meta_key, %s, %s)",
+                'wp_seedbank',
+                $this->post_type
+            );
+            if (false === $wpdb->query($sql)) {
+                $errors[] = array($wpdb->last_query, $wpdb->last_error);
+            }
+            // UPDATE wp_postmeta SET meta_key = REPLACE(meta_key, 'seedbank_type', 'seedbank_exchange_type');
+            $sql = $wpdb->prepare(
+                "UPDATE {$wpdb->postmeta} SET meta_key = REPLACE(meta_key, %s, %s)",
+                $this->post_type . '_type',
+                $this->post_type . '_exchange_type'
+            );
+            if (false === $wpdb->query($sql)) {
+                $errors[] = array($wpdb->last_query, $wpdb->last_error);
+            }
+            // UPDATE wp_postmeta SET meta_key = REPLACE(meta_key, 'seedbank_status', 'seedbank_exchange_status');
+            $sql = $wpdb->prepare(
+                "UPDATE {$wpdb->postmeta} SET meta_key = REPLACE(meta_key, %s, %s)",
+                $this->post_type . '_status',
+                $this->post_type . '_exchange_status'
+            );
+            if (false === $wpdb->query($sql)) {
+                $errors[] = array($wpdb->last_query, $wpdb->last_error);
+            }
+            // -- Then we need to associate the posts with the taxonomies to fix bug #6.
+
+            if (empty($errors)) {
+                delete_option('wp_seedbank_version'); // No longer used.
+            } else {
+                // TODO: Handle errors?
+            }
+        }
+
         $this->createDataTypes();
         flush_rewrite_rules();
 
