@@ -9,6 +9,8 @@
     License: GPL
     Requires at least: 3.5.2
     Stable tag: 0.3
+    Text Domain: wp-seedbank
+    Domain Path: /languages
 */
 
 class WP_SeedBank {
@@ -32,6 +34,7 @@ class WP_SeedBank {
 
     public function __construct () {
         register_activation_hook(__FILE__, array($this, 'activate'));
+        add_action('plugins_loaded', array($this, 'registerL10n'));
         add_action('init', array($this, 'createDataTypes'));
         add_action('add_meta_boxes_' . $this->post_type, array($this, 'addMetaBoxes'));
         add_action('save_post', array($this, 'saveMeta'));
@@ -41,6 +44,10 @@ class WP_SeedBank {
         add_action('admin_head', array($this, 'registerCustomHelp'));
 
         add_filter('the_content', array($this, 'displayContent'));
+    }
+
+    public function registerL10n () {
+        load_plugin_textdomain($this->textdomain, false, dirname(plugin_basename(__FILE__)) . '/languages/');
     }
 
     public function createDataTypes () {
