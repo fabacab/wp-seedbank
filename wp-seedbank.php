@@ -254,7 +254,7 @@ class WP_SeedBank {
         global $post;
         $options = get_option($this->post_type . '_settings');
         if ($this->post_type === get_post_type($post->ID)) {
-            $append .= '<ul id="' . esc_attr($this->post_type . '-meta-' . $post->ID) . '" class="' . esc_attr($this->post_type) . '-meta">';
+            $append = '<ul id="' . esc_attr($this->post_type . '-meta-' . $post->ID) . '" class="' . esc_attr($this->post_type) . '-meta">';
             $custom = get_post_custom($post->ID);
             foreach ($this->meta_fields as $f) {
                 $x = $custom[$this->post_type . '_' . $f];
