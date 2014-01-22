@@ -280,7 +280,9 @@ class WP_SeedBank {
             $errors = array();
 
             // we need to do some database & option cleanup that looks
-            // something like the following SQL:
+            // something like the following:
+            // delete the no longer used "addInfo" meta key globally.
+            delete_post_meta_by_key('wp_seedbank_addInfo');
             // NOTE: This SQL is a bit blunt. Any safer ways to do it?
             // UPDATE wp_posts SET post_type = 'seedbank' WHERE post_type = 'wp_seedbank';
             $sql = $wpdb->prepare(
