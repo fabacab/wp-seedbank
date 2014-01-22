@@ -274,6 +274,8 @@ class WP_SeedBank {
     }
 
     public function activate () {
+        $this->createDataTypes(); // This registers new taxonomies.
+
         // If the old version 0.2.3 exists
         if ('0.2.3' === get_option('wp_seedbank_version')) {
             global $wpdb;
@@ -356,7 +358,26 @@ class WP_SeedBank {
             if (false === $wpdb->query($sql)) {
                 $errors[] = array($wpdb->last_query, $wpdb->last_error);
             }
-            // -- Then we need to associate the posts with the taxonomies to fix bug #6.
+            // Now we need to associate the posts with our taxonomies.
+            $sql = $wpdb->prepare(
+                "SELECT * FROM {$wpdb->postmeta} WHERE meta_key LIKE '%s'",
+                like_escape($this->post_type) . '%'
+            );
+            $results = $wpdb->get_results($sql);
+            foreach ($results as $row) {
+                // Find all posts with one of our taxonomies,
+                // and for each of those posts, relate them to terms.
+                foreach ($this->taxonomies as $taxonomy) {
+                    $key = $this->post_type . '_' . $taxonomy[0];
+                    if ($row->meta_key === $key) {
+                        wp_set_object_terms(
+                            (int) $row->post_id,
+                            sanitize_text_field($row->meta_value),
+                            sanitize_text_field($this->post_type . '_' . $taxonomy[0])
+                        );
+                    }
+                }
+            }
 
             if (empty($errors)) {
                 delete_option('wp_seedbank_version'); // No longer used.
@@ -365,7 +386,6 @@ class WP_SeedBank {
             }
         }
 
-        $this->createDataTypes();
         flush_rewrite_rules();
 
         // Exchange Types (verbs)
