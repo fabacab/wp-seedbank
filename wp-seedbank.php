@@ -4,11 +4,8 @@
     Plugin URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/
     Description: Add a seed exchange post type to turn your WordPress website into a community seedbank or seed library! :D
     Author: Cleveland GiveCamp Developers
-    Version: 0.3
     Author URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/#authors
-    License: GPL
-    Requires at least: 3.5.2
-    Stable tag: 0.3
+    Version: 0.3
     Text Domain: wp-seedbank
     Domain Path: /languages
 */

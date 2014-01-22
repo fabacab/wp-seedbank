@@ -1,13 +1,12 @@
 === WP-Seedbank ===
-Author: The Hummingbird Project
 Contributors: meitar
-Plugin URL: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/
 Donate link: https://npo.justgive.org/nonprofits/donate.jsp?ein=45-3043080
 Tags: custom posts, community, seedbank, ecology, seed swap, trade
 Requires at least: 3.5.2
 Tested up to: 3.8
 Stable tag: 0.3
-License: GPL3
+License: GPLv3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 The WP-SeedBank plugin turns any self-hosted WordPress blog into a community seedbank (or seed library). :D
 
