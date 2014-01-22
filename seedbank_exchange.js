@@ -20,19 +20,19 @@ WP_SEEDBANK.UI.hideDeletedExchangeRequests = function () {
 };
 
 WP_SEEDBANK.UI.toggleBatchExchangeDataSource = function () {
-    document.querySelectorAll('#wp-seedbank-batch-exchange-form fieldset')[1].style.display = 'none';
-    jQuery('#wp-seedbank-batch-exchange-data-source').change(function (e) {
+    document.querySelectorAll('#seedbank-batch-exchange-form fieldset')[1].style.display = 'none';
+    jQuery('#seedbank-batch-exchange-data-source').change(function (e) {
         var x = e.target.querySelectorAll('option');
         for (var i = 0; i < x.length; i++) {
             if (x[i].selected) {
                 switch (x[i].value) {
                     case 'another website':
-                        jQuery('#wp-seedbank-batch-exchange-file-upload').hide();
-                        jQuery('#wp-seedbank-batch-exchange-web-fetch').show();
+                        jQuery('#seedbank-batch-exchange-file-upload').hide();
+                        jQuery('#seedbank-batch-exchange-web-fetch').show();
                     break;
                     case 'my computer':
-                        jQuery('#wp-seedbank-batch-exchange-file-upload').show();
-                        jQuery('#wp-seedbank-batch-exchange-web-fetch').hide();
+                        jQuery('#seedbank-batch-exchange-file-upload').show();
+                        jQuery('#seedbank-batch-exchange-web-fetch').hide();
                     break;
                 }
             }
