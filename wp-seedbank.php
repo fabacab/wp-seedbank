@@ -37,11 +37,13 @@ class WP_SeedBank {
         add_action('plugins_loaded', array($this, 'registerL10n'));
         add_action('init', array($this, 'createDataTypes'));
         add_action('add_meta_boxes_' . $this->post_type, array($this, 'addMetaBoxes'));
-        add_action('save_post', array($this, 'saveMeta'));
+        add_action('save_post', array($this, 'savePost'));
         add_action('admin_init', array($this, 'registerCustomSettings'));
         add_action('admin_menu', array($this, 'registerAdminMenus'));
         add_action('admin_enqueue_scripts', array($this, 'registerAdminScripts'));
         add_action('admin_head', array($this, 'registerCustomHelp'));
+
+        add_action($this->post_type . '_expire_exchange', array($this, 'expireExchangePost'));
 
         add_filter('the_content', array($this, 'displayContent'));
     }
@@ -250,10 +252,18 @@ class WP_SeedBank {
         return ($x === '_date' || $x === '_time') ? true : false;
     }
 
-    public function saveMeta ($post_id) {
+    /**
+     * Runs when we save a Seed Exchange post.
+     */
+    public function savePost ($post_id) {
         if ($this->post_type !== $_POST['post_type']) { return; }
-        if (!wp_verify_nonce($_POST[$this->post_type . '_meta_box_details_nonce'], 'editing_' . $this->post_type)) { return; }
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) { return; }
+        if (!wp_verify_nonce($_POST[$this->post_type . '_meta_box_details_nonce'], 'editing_' . $this->post_type)) { return; }
+        $this->saveMeta($post_id);
+        $this->scheduleExpiration($post_id);
+    }
+
+    private function saveMeta ($post_id) {
         foreach ($this->meta_fields as $f) {
             if (isset($_REQUEST[$this->post_type . '_' . $f])) {
                 $val = $_REQUEST[$this->post_type . '_' . $f];
@@ -267,6 +277,26 @@ class WP_SeedBank {
                 wp_set_object_terms($post_id, sanitize_text_field($_REQUEST[$this->post_type . '_' . $f]), $this->post_type . '_' . $f);
             }
         }
+    }
+
+    /**
+     * Uses WP Cron to schedule setting exchange_status to 'Deleted'
+     * once the time in exchange_expiry_date meta field is reached.
+     */
+    private function scheduleExpiration ($post_id) {
+        wp_clear_scheduled_hook($this->post_type . '_expire_exchange', array($post_id));
+
+        $time = (int) get_post_meta($post_id, $this->post_type . '_exchange_expiry_date', true);
+        wp_schedule_single_event($time, $this->post_type . '_expire_exchange', array($post_id));
+    }
+
+    public function expireExchangePost ($post_id) {
+        update_post_meta($post_id, $this->post_type . '_exchange_status', 'Deleted');
+        wp_set_object_terms(
+            $post_id,
+            sanitize_text_field(get_post_meta($post_id, $this->post_type . '_exchange_status', true)),
+            $this->post_type . '_exchange_status'
+        );
     }
 
     public function displayContent ($content) {
