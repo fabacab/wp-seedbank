@@ -11,34 +11,6 @@
     Stable tag: 0.3
 */
 
-// WordPress SeedBank works by making a new post type, "wp_seedbank".
-// This new post type has its own post interface that provides a more
-// structured way to create a post. It stores the following data in
-// post meta fields:
-//
-//     * exchange action ("type"):
-//     ** Swap
-//     ** Sell
-//     ** Give
-//     ** Get
-//     * quantity (a number)
-//     * common name (arugula, lettuce, etc.)
-//     * unit (seeds, packets, etc.)
-//     * seed expiration date
-//     * posting expiration date
-//     * status:
-//     ** Active
-//     ** Inactive ("deleted")
-//
-// It also uses tags and categories to organize postings.
-//
-// In addition to the meta fields described above, an open text field
-// for post content is also available.
-//
-// A preference setting should allow a template with no special meta
-// field variables to be visible in a seed exchange post either above
-// or below the general post content.
-
 class WP_SeedBank {
     private $post_type = 'seedbank';
     private $textdomain = 'wp-seedbank';

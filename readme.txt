@@ -44,7 +44,17 @@ Follow these steps to get your seed exchange website up and running quickly:
 
 2. The Batch Exchange page lets you upload a file to create many seed exchanges at once.
 
+== Frequently Asked Questions ==
+
+= Why doesn't my post for, say, Cauliflower show up in the WordPress search? =
+
+The Seed Exchange posts you're creating use WordPress taxonomies, which WordPress doesn't include in search results by default. This means that if you're creating a Seed Exchange post for a given vegetable, but the only place the name of this vegetable appears is in the plugin's custom "Common Name" field (and not in the post's title or content), then WordPress can't find that posting based on a simple keyword search. If you'd like to make the WP-SeedBank's taxonomies searchable, too, we recommend the [Search Everything plugin](https://wordpress.org/plugins/search-everything/).
+
 == Changelog ==
+
+= 0.3 =
+* Complete internal rewrite to improve code quality, security, and maintainability.
+* [Bugfix](https://github.com/meitar/wp-seedbank/issues/6): Seed Exchange posts are now correctly linked to their respective category pages.
 
 = 0.2.3 =
 * Simpler seed exchange editing screen for typical users.
