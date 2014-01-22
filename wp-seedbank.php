@@ -435,13 +435,21 @@ END_HTML;
             if (false === $wpdb->query($sql)) {
                 $errors[] = array($wpdb->last_query, $wpdb->last_error);
             }
-            // Now we need to associate the posts with our taxonomies.
+            // Now we need to associate the posts with our taxonomies,
+            // and update expiry date fields to their Unix timestamps.
             $sql = $wpdb->prepare(
                 "SELECT * FROM {$wpdb->postmeta} WHERE meta_key LIKE '%s'",
                 like_escape($this->post_type) . '%'
             );
             $results = $wpdb->get_results($sql);
             foreach ($results as $row) {
+                if ($this->isDateOrTimeMeta($row->meta_key)) {
+                    update_post_meta(
+                        (int) $row->post_id,
+                        $row->meta_key,
+                        gmdate('U', strtotime($row->meta_value))
+                    );
+                }
                 // Find all posts with one of our taxonomies,
                 // and for each of those posts, relate them to terms.
                 foreach ($this->taxonomies as $taxonomy) {
