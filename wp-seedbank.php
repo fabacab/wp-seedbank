@@ -248,7 +248,7 @@ class WP_SeedBank {
     public function displayContent ($content) {
         global $post;
         $options = get_option($this->post_type . '_settings');
-        if ($this->post_type === get_post_type($post->ID) && (0 !== $options['display_meta'])) {
+        if ($this->post_type === get_post_type($post->ID)) {
             $append .= '<ul id="' . esc_attr($this->post_type . '-meta-' . $post->ID) . '" class="' . esc_attr($this->post_type) . '-meta">';
             $custom = get_post_custom($post->ID);
             foreach ($this->meta_fields as $f) {
@@ -260,16 +260,17 @@ class WP_SeedBank {
             $append .= '</ul>';
             switch ($options['display_meta']) {
                 case 1: // Position meta list above content.
-                    return $append . $content;
+                    $content = $append . $content;
                     break;
                 case 2: // Position meta list below content.
+                    $content = $content . $append;
+                case 0:
                 default:
-                    return $content . $append;
+                    // Don't modify $content at all.
                 break;
             }
-        } else {
-            return $content;
         }
+        return $content;
     }
 
     public function activate () {
