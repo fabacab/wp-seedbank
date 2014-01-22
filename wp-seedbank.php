@@ -510,7 +510,7 @@ class WP_SeedBank {
         wp_insert_term(__('Parsnip/Root Parsley', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'parsnip-root-parsley' ) );
         wp_insert_term(__('Potato', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'potato' ) );
         wp_insert_term(__('Pea', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'pea' ) );
-        wp_insert_term(__('Peppers', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'peppers' ) );
+        wp_insert_term(__('Pepper', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'pepper' ) );
         wp_insert_term(__('Pumpkin', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'pumpkin' ) );
         wp_insert_term(__('Radish', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'radish' ) );
         wp_insert_term(__('Strawberry', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'strawberry' ) );
