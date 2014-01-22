@@ -63,6 +63,9 @@ class WP_SeedBank {
         add_action('init', array($this, 'createDataTypes'));
         add_action('add_meta_boxes_' . $this->post_type, array($this, 'addMetaBoxes'));
         add_action('save_post', array($this, 'saveMeta'));
+        add_action('admin_init', array($this, 'registerCustomSettings'));
+
+        add_filter('the_content', array($this, 'displayContent'));
     }
 
     public function createDataTypes () {
@@ -124,6 +127,52 @@ class WP_SeedBank {
             );
             register_taxonomy_for_object_type($taxonomy[0], $this->post_type);
         }
+    }
+
+    public function registerCustomSettings () {
+        register_setting($this->post_type . '_settings', $this->post_type . '_settings', array($this, 'validateSettings'));
+
+        add_settings_section(
+            $this->post_type . '_settings',
+            ucwords(str_replace('_', ' ', $this->post_type . '_settings')),
+            array($this, 'renderReadingSettingsSection'),
+            'reading'
+        );
+
+        add_settings_field(
+            $this->post_type . '_display_meta',
+            __('Display Seed Exchange details using', $this->textdomain),
+            array($this, 'renderDisplayMetaSetting'),
+            'reading',
+            $this->post_type . '_settings'
+        );
+    }
+
+    public function validateSettings ($input) {
+        switch ($input['display_meta']) {
+            case '2':
+            case '1':
+            case '0':
+            default:
+                $input['display_meta'] = (int) $input['display_meta'];
+            break;
+        }
+        return $input;
+    }
+
+    public function renderReadingSettingsSection () {
+        settings_fields($this->post_type . '_settings');
+    }
+    public function renderDisplayMetaSetting () {
+        $options = get_option($this->post_type . '_settings');
+?>
+    <select name="<?php print esc_attr($this->post_type);?>_settings[display_meta]">
+        <option value="2"<?php if (2 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('this plugin (below content)', $this->textdomain);?></option>
+        <option value="1"<?php if (1 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('this plugin (above content)', $this->textdomain);?></option>
+        <option value="0"<?php if (0 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('my own template', $this->textdomain);?></option>
+    </select>
+    <p class="description"><?php _e('Choosing your own template without writing your own template code may result in the Seed Exchange details not appearing on your website.', $this->textdomain);?></p>
+<?php
     }
 
     public function addMetaBoxes ($post) {
@@ -216,6 +265,33 @@ class WP_SeedBank {
                 update_post_meta($post_id, $this->post_type . '_' . $f, sanitize_text_field($_REQUEST[$this->post_type . '_' . $f]));
                 wp_set_object_terms($post_id, sanitize_text_field($_REQUEST[$this->post_type . '_' . $f]), $this->post_type . '_' . $f);
             }
+        }
+    }
+
+    public function displayContent ($content) {
+        global $post;
+        $options = get_option($this->post_type . '_settings');
+        if ($this->post_type === get_post_type($post->ID) && (0 !== $options['display_meta'])) {
+            $append .= '<ul id="' . esc_attr($this->post_type . '-meta-' . $post->ID) . '" class="' . esc_attr($this->post_type) . '-meta">';
+            $custom = get_post_custom($post->ID);
+            foreach ($this->meta_fields as $f) {
+                $x = $custom[$this->post_type . '_' . $f];
+                if ($x) {
+                    $append .= '<li><strong>' . esc_html(ucwords(str_replace('_', ' ', $f))) . ':</strong> ' . esc_html($x[0]) . ' </li>';
+                }
+            }
+            $append .= '</ul>';
+            switch ($options['display_meta']) {
+                case 1: // Position meta list above content.
+                    return $append . $content;
+                    break;
+                case 2: // Position meta list below content.
+                default:
+                    return $content . $append;
+                break;
+            }
+        } else {
+            return $content;
         }
     }
 
