@@ -96,6 +96,7 @@ class WP_SeedBank {
             $t_plural   = ucwords(str_replace('_', ' ', $pluralize));
             $t_singular = ucwords(str_replace('_', ' ', $taxonomy[0]));
             register_taxonomy($this->post_type . '_' . $taxonomy[0], $this->post_type, array(
+                    // TODO: Will these variables cause an i18n bug? Unroll this loop?
                     'labels' => array(
                         'name'          => __($t_plural, 'wp-seedbank'),
                         'singular_name' => __($t_singular, 'wp-seedbank'),
@@ -168,7 +169,7 @@ class WP_SeedBank {
         );
     }
 
-    // TODO: i18n this stuff
+    // TODO: Fix the i18n of the fill-in-the-blank web form?
     public function renderMetaBoxDetails () {
         global $post;
 
@@ -221,19 +222,20 @@ class WP_SeedBank {
         ob_end_clean();
 ?>
     <p>
-        <label>I would like to <?php print $type_select;?></label>
+        <label><?php _e('I would like to', 'wp-seedbank');?> <?php print $type_select;?></label>
         <input name="<?php print $this->post_type;?>_quantity" value="<?php print esc_attr($custom["{$this->post_type}_quantity"][0]);?>" placeholder="<?php _e('enter a number', 'wp-seedbank');?>" />
         <?php print $common_name_select;?>
         <input name="<?php print $this->post_type;?>_unit" value="<?php print esc_attr($custom["{$this->post_type}_unit"][0]);?>" placeholder="<?php _e('packets', 'wp-seedbank');?>" />.
     </p>
     <p>
-        <label>These seeds will expire on or about <input name="<?php print $this->post_type;?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" />.</label> <span class="description">(<?php _e('If these seeds are in a packet, the wrapping might have an expiration date. Put that here.', 'wp-seedbank');?>)</span>
+        <label><?php _e('These seeds will expire on or about', 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" />.</label> <span class="description">(<?php _e('If these seeds are in a packet, the wrapping might have an expiration date. Put that here.', 'wp-seedbank');?>)</span>
     </p>
     <p>
-        <label>If I don't hear from anyone by <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" />, I'll stop being available to make this exchange.</label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", 'wp-seedbank');?>)</span>
+        <label><?php _e("If I don't hear from anyone by", 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" />, <?php _e("I'll stop being available to make this exchange.", 'wp-seedbank');?></label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", 'wp-seedbank');?>)</span>
     </p>
     <p>
-        <label>This seed exchange is <?php print $status_select;?>.</label> <span class="description">(<?php foreach ($status_options as $x) :?>The <code><?php _e($x->name, 'wp-seedbank');?></code> type is for <?php print strtolower($x->description);?> <?php endforeach;?>)</span>
+        <?php // TODO: i18n this? See question concerning madlibs style forms, at function signature. ?>
+        <label><?php _e('This seed exchange is', 'wp-seedbank');?> <?php print $status_select;?>.</label> <span class="description">(<?php foreach ($status_options as $x) :?>The <code><?php _e($x->name, 'wp-seedbank');?></code> type is for <?php print strtolower($x->description);?> <?php endforeach;?>)</span>
     </p>
 <?php
     }
@@ -341,6 +343,7 @@ class WP_SeedBank {
         wp_enqueue_style('jquery-ui-smoothness', "//ajax.googleapis.com/ajax/libs/jqueryui/{$x->ver}/themes/smoothness/jquery-ui.min.css", false, null);
     }
 
+    // TODO: i18n these column names. Unroll taxonomy loop?
     public function registerCustomColumns ($columns) {
         $my_columns = array();
         foreach ($this->taxonomies as $taxonomy) {
@@ -358,22 +361,38 @@ class WP_SeedBank {
         }
     }
 
-    // TODO: i18n this.
     public function registerCustomHelp () {
         $screen = get_current_screen();
         if ($screen->post_type !== $this->post_type) { return; }
         // Tabs for specific screens.
         switch ($screen->id) {
             case 'seedbank':
+                $p1 = __('Make a new Seed Exchange on this page. A Seed Exchange is just like a blog post, but tailored specifically for the Seedbank. Have some seeds to share, or trying to find seeds to grow? Let others know by posting here!', 'wp-seedbank');
+                $p2 = __('To make a new Seed Exchange, follow these steps:', 'wp-seedbank');
+                $ol1_str1 = esc_html__('Write a title.', 'wp-seedbank');
+                $ol1_str2 = esc_html__('Short, descriptive summaries are best.', 'wp-seedbank');
+                $ol1_str3 = esc_html__('Click here and then type your title.', 'wp-seedbank');
+                $ol1 = "<strong>$ol1_str1</strong> $ol1_str2 <a href=\"#\" onclick=\"document.getElementById('title').focus()\">$ol1_str3</a>";
+                $ol2_str1 = esc_html__('Explain your request or offer.', 'wp-seedbank');
+                $ol2_str2 = esc_html__("In your own words, describe what you're looking for or what you're hoping to get, or both. Be sure to include any important words you think others might use to find your post when they're searching the website. Include any additional information relevant to your posting.", 'wp-seedbank');
+                $ol2_str3 = esc_html__('Click here and then type your message.', 'wp-seedbank');
+                $ol2 = "<strong>$ol2_str1</strong> $ol2_str2 <a href=\"#\" onclick=\"document.getElementById('content').focus()\">$ol2_str3</a>";
+                $ol3_str1 = esc_html__('Fill in the details.', 'wp-seedbank');
+                $ol3_str2 = sprintf(
+                    esc_html__('In the %1$s box, there are some fields you should fill in to help other people find your post by organizing it in a sensible place in the Seedbank. Simply complete the sentences of the fill-in-the-blank paragraph.', 'wp-seedbank'),
+                    '<a href="#' . $this->post_type . '-details-meta">' . __('Seed Exchange Details', 'wp-seedbank') . '</a>'
+                );
+                $ol3 = "<strong>$ol3_str1</strong> $ol3_str2";
+                $p3 = esc_html__('When you have done this, click the "Publish" (or "Submit for review") button. Congratulations! And thank you for spreading the seed love!', 'wp-seedbank');
                 $html = <<<END_HTML
-<p>Make a new Seed Exchange on this page. A Seed Exchange is just like a blog post, but tailored specifically for the Seedbank. Have some seeds to share, or trying to find seeds to grow? Let others know by posting here!</p>
-<p>To make a new Seed Exchange, follow these steps:</p>
+<p>$p1</p>
+<p>$p2</p>
 <ol>
-    <li><strong>Write a title.</strong> Short, descriptive summaries are best. <a href="#" onclick="document.getElementById('title').focus()">Click here and then type your title.</a></li>
-    <li><strong>Explain your request or offer.</strong> In your own words, describe what you're looking for or what you're hoping to get, or both. Be sure to include any important words you think others might use to find your post when they're searching the website. Include any additional information relevant to your posting. <a href="#" onclick="document.getElementById('content').focus()">Click here and then type your message.</a></strong></li>
-    <li><strong>Fill in the details.</strong> In the "<a href="#{$this->post_type}-details-meta">Seed Exchange Details</a>" box, there are some fields you should fill in to help other people find your post by organizing it in a sensible place in the Seedbank. Simply complete the sentences of the fill-in-the-blank paragraph.</li>
+    <li>$ol1</li>
+    <li>$ol2</li>
+    <li>$ol3</li>
 </ol>
-<p>When you've done this click the "Publish" (or "Submit for review") button. Congratulations! And thank you for spreading the seed love!</p>
+<p>$p3</p>
 END_HTML;
                 $screen->add_help_tab(array(
                     'id' => $this->post_type . '-' . $screen->base . '-help',
@@ -385,13 +404,17 @@ END_HTML;
             break;
         }
         // Tabs for all screens.
-        $html = <<<END_HTML
-<p><a href="https://wordpress.org/plugins/wp-seedbank/" title="WP-SeedBank on the WordPress Plugin Repository" rel="bookmark">The WP-SeedBank plugin</a> is a labor of love, and passion. Conceived by <a href="http://www.hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/" title="The HummingBird Project's WP-SeedBank Initiative">The HummingBird Project</a> and <a href="http://permaculturenews.org/2013/09/25/an-open-source-community-model-to-save-seeds-a-wordpress-seedbank-plugin/" title="An Open Source Community Model to Save Seeds – a WordPress Seedbank Plugin" rel="bookmark">initially developed at Cleveland GiveCamp</a>, it is maintained by <a href="http://meitar.moscovitz.name/" title="Who is this person?">a houseless, jobless, nomadic "vigilante programmer"</a> who loves fresh food and hates Monsanto. <a href="http://wordpress.org/plugins/wp-seedbank/other_notes/" title="Credits for WP-SeedBank">Donations are appreciated</a>.</p>
-END_HTML;
         $screen->add_help_tab(array(
             'id' => $this->post_type . '-' . $screen->base . '-about-help',
             'title' => __('About the WP-SeedBank', 'wp-seedbank'),
-            'content' => $html
+            'content' => '<p>' . sprintf(
+                esc_html__('The %1$s is a labor of love, and passion. Conceived by %2$s and %3$s, it is maintained by %4$s who loves fresh food and hates Monsanto. %5$s'),
+                '<a href="https://wordpress.org/plugins/wp-seedbank/" title="' . __('WP-SeedBank on the WordPress Plugin Repository', 'wp-seedbank') . '">' . __('WP-SeedBank plugin', 'wp-seedbank') . '</a>',
+                '<a href="http://www.hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/" title="' . __('The HummingBird Project\'s WP-SeedBank Initiative', 'wp-seedbank') . '">' . __('The Hummingbird Project', 'wp-seedbank') . '</a>',
+                '<a href="http://permaculturenews.org/2013/09/25/an-open-source-community-model-to-save-seeds-a-wordpress-seedbank-plugin/" title="An Open Source Community Model to Save Seeds &mdash; a WordPress Seedbank Plugin" rel="bookmark">' . __('initially developed at Cleveland GiveCamp', 'wp-seedbank') . '</a>',
+                '<a href="http://meitar.moscovitz.name/" title="' . __('Who is this person?', 'wp-seedbank') . '">' . __('a houseless, jobless, nomadic "vigilante programmer"', 'wp-seedbank') . '</a>',
+                '<a href="http://wordpress.org/plugins/wp-seedbank/other_notes/" title="' . __('Credits for WP-SeedBank', 'wp-seedbank') . '">' . __('Donations are appreciated.', 'wp-seedbank') . '</a>'
+            ) . '</p>'
         ));
     }
 
@@ -525,127 +548,129 @@ END_HTML;
         wp_insert_term(__( 'Get', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges requesting seeds of a variety not already listed.', 'wp-seedbank')));
 
         // Genera
-        wp_insert_term(__('Abelmoschus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'abelmoschus' ) );
-        wp_insert_term(__('Agastache', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'agastache' ) );
-        wp_insert_term(__('Allium', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'allium' ) );
-        wp_insert_term(__('Amaranthus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'amaranthus' ) );
-        wp_insert_term(__('Anagallis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'anagallis' ) );
-        wp_insert_term(__('Anethum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'anethum' ) );
-        wp_insert_term(__('Anthenum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'anthenum' ) );
-        wp_insert_term(__('Antirrhinum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'antirrhinum' ) );
-        wp_insert_term(__('Apium', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'apium' ) );
-        wp_insert_term(__('Asclepias', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'asclepias' ) );
-        wp_insert_term(__('Basella', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'basella' ) );
-        wp_insert_term(__('Beta', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'beta' ) );
-        wp_insert_term(__('Brassica', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'brassica' ) );
-        wp_insert_term(__('Calendula', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'calendula' ) );
-        wp_insert_term(__('Capsicum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'capsicum' ) );
-        wp_insert_term(__('Cardiospermum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cardiospermum' ) );
-        wp_insert_term(__('Centaurea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'centaurea' ) );
-        wp_insert_term(__('Chrysanthemum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'chrysanthemum' ) );
-        wp_insert_term(__('Cichorium', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cichorium' ) );
-        wp_insert_term(__('Citrullus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'citrullus' ) );
-        wp_insert_term(__('Cleome', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cleome' ) );
-        wp_insert_term(__('Cobaea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cobaea' ) );
-        wp_insert_term(__('Consolida', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'consolida' ) );
-        wp_insert_term(__('Convolvulus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'convolvulus' ) );
-        wp_insert_term(__('Coreopsis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'coreopsis' ) );
-        wp_insert_term(__('Coriandrum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'coriandrum' ) );
-        wp_insert_term(__('Cosmos', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cosmos' ) );
-        wp_insert_term(__('Cucumis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cucumis' ) );
-        wp_insert_term(__('Cucurbita', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cucurbita' ) );
-        wp_insert_term(__('Dalea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'dalea' ) );
-        wp_insert_term(__('Daucus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'daucus' ) );
-        wp_insert_term(__('Diplotaxis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'diplotaxis' ) );
-        wp_insert_term(__('Dolichos', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'dolichos' ) );
-        wp_insert_term(__('Echinacea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'echinacea' ) );
-        wp_insert_term(__('Eruca', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'eruca' ) );
-        wp_insert_term(__('Eschscholzia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'eschscholzia' ) );
-        wp_insert_term(__('Foeniculum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'foeniculum' ) );
-        wp_insert_term(__('Fragaria', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'fragaria' ) );
-        wp_insert_term(__('Gaillardia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'gaillardia' ) );
-        wp_insert_term(__('Glycine', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'glycine' ) );
-        wp_insert_term(__('Helianthus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'helianthus' ) );
-        wp_insert_term(__('Ipomoea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'ipomoea' ) );
-        wp_insert_term(__('Koeleria', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'koeleria' ) );
-        wp_insert_term(__('Lactuca', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'lactuca' ) );
-        wp_insert_term(__('Lagenaria', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'lagenaria' ) );
-        wp_insert_term(__('Lathyrus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'lathyrus' ) );
-        wp_insert_term(__('Lupinus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'lupinus' ) );
-        wp_insert_term(__('Lycopersicon', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'lycopersicon' ) );
-        wp_insert_term(__('Malope', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'malope' ) );
-        wp_insert_term(__('Matricaria', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'matricaria' ) );
-        wp_insert_term(__('Mentha', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'mentha' ) );
-        wp_insert_term(__('Mirabilis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'mirabilis' ) );
-        wp_insert_term(__('Nigella', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'nigella' ) );
-        wp_insert_term(__('Ocimum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'ocimum' ) );
-        wp_insert_term(__('Origanum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'origanum' ) );
-        wp_insert_term(__('Papaver', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'papaver' ) );
-        wp_insert_term(__('Passiflora', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'passiflora' ) );
-        wp_insert_term(__('Penstemon', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'penstemon' ) );
-        wp_insert_term(__('Petrolselinum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'petrolselinum' ) );
-        wp_insert_term(__('Phaseolus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'phaseolus' ) );
-        wp_insert_term(__('Physalis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'physalis' ) );
-        wp_insert_term(__('Pisum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'pisum' ) );
-        wp_insert_term(__('Poterium', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'poterium' ) );
-        wp_insert_term(__('Raphanus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'raphanus' ) );
-        wp_insert_term(__('Rosmarinus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'rosmarinus' ) );
-        wp_insert_term(__('Rudbeckia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'rudbeckia' ) );
-        wp_insert_term(__('Salvia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'salvia' ) );
-        wp_insert_term(__('Scorpiurus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'scorpiurus' ) );
-        wp_insert_term(__('Solanum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'solanum' ) );
-        wp_insert_term(__('Spinachia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'spinachia' ) );
-        wp_insert_term(__('Tagetes', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'tagetes' ) );
-        wp_insert_term(__('Thunbergia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'thunbergia' ) );
-        wp_insert_term(__('Thymus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'thymus' ) );
-        wp_insert_term(__('Triticum ', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'triticum ' ) );
-        wp_insert_term(__('Tropaeolum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'tropaeolum' ) );
-        wp_insert_term(__('Zea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'zea' ) );
-        wp_insert_term(__('Zinnia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'zinnia' ) );
+        // Empty slugs so we calculate the slug form the i18n'd term name.
+        wp_insert_term(__('Abelmoschus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Agastache', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Allium', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Amaranthus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Anagallis', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Anethum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Anthenum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Antirrhinum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Apium', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Asclepias', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Basella', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Beta', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Brassica', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Calendula', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Capsicum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Cardiospermum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Centaurea', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Chrysanthemum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Cichorium', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Citrullus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Cleome', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Cobaea', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Consolida', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Convolvulus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Coreopsis', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Coriandrum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Cosmos', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Cucumis', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Cucurbita', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Dalea', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Daucus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Diplotaxis', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Dolichos', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Echinacea', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Eruca', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Eschscholzia', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Foeniculum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Fragaria', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Gaillardia', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Glycine', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Helianthus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Ipomoea', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Koeleria', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Lactuca', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Lagenaria', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Lathyrus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Lupinus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Lycopersicon', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Malope', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Matricaria', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Mentha', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Mirabilis', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Nigella', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Ocimum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Origanum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Papaver', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Passiflora', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Penstemon', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Petrolselinum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Phaseolus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Physalis', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Pisum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Poterium', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Raphanus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Rosmarinus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Rudbeckia', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Salvia', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Scorpiurus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Solanum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Spinachia', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Tagetes', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Thunbergia', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Thymus', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Triticum ', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Tropaeolum', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Zea', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
+        wp_insert_term(__('Zinnia', 'wp-seedbank'), $this->post_type . '_seed_genus', array('slug' => ''));
 
         // Common Names
-        wp_insert_term(__('Asian Vegetable', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'asian-vegetable' ) );
-        wp_insert_term(__('Bean', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'bean' ) );
-        wp_insert_term(__('Beet', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'beet' ) );
-        wp_insert_term(__('Berry', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'berry' ) );
-        wp_insert_term(__('Broccoli', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'broccoli' ) );
-        wp_insert_term(__('Brussels Sprout', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'brussels-sprout' ) );
-        wp_insert_term(__('Cabbage', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'cabbage' ) );
-        wp_insert_term(__('Carrot', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'carrot' ) );
-        wp_insert_term(__('Cauliflower', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'cauliflower' ) );
-        wp_insert_term(__('Chard', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'chard' ) );
-        wp_insert_term(__('Corn', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'corn' ) );
-        wp_insert_term(__('Collard', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'collard' ) );
-        wp_insert_term(__('Cover Crop', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'cover-crop' ) );
-        wp_insert_term(__('Eggplant', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'eggplant' ) );
-        wp_insert_term(__('Cucumber', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'cucumber' ) );
-        wp_insert_term(__('Fava', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'fava' ) );
-        wp_insert_term(__('Flower', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'flower' ) );
-        wp_insert_term(__('Gourd', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'gourd' ) );
-        wp_insert_term(__('Green', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'green' ) );
-        wp_insert_term(__('Herb', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'herb' ) );
-        wp_insert_term(__('Kale', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'kale' ) );
-        wp_insert_term(__('Kohlrabi', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'kohlrabi' ) );
-        wp_insert_term(__('Legume', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'legume' ) );
-        wp_insert_term(__('Lettuce', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'lettuce' ) );
-        wp_insert_term(__('Melon', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'melon' ) );
-        wp_insert_term(__('Mustard', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'mustard' ) );
-        wp_insert_term(__('Okra', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'okra' ) );
-        wp_insert_term(__('Onion', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'onion' ) );
-        wp_insert_term(__('Parsnip/Root Parsley', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'parsnip-root-parsley' ) );
-        wp_insert_term(__('Potato', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'potato' ) );
-        wp_insert_term(__('Pea', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'pea' ) );
-        wp_insert_term(__('Pepper', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'pepper' ) );
-        wp_insert_term(__('Pumpkin', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'pumpkin' ) );
-        wp_insert_term(__('Radish', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'radish' ) );
-        wp_insert_term(__('Strawberry', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'strawberry' ) );
-        wp_insert_term(__('Root', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'root' ) );
-        wp_insert_term(__('Rutabaga', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'rutabaga' ) );
-        wp_insert_term(__('Spinach', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'spinach' ) );
-        wp_insert_term(__('Summer Squash', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'summer-squash' ) );
-        wp_insert_term(__('Tomato', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'tomato' ) );
-        wp_insert_term(__('Turnip', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'turnip' ) );
-        wp_insert_term(__('Winter Squash', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'winter-squash' ) );
+        // Empty slugs so we calculate the slug form the i18n'd term name.
+        wp_insert_term(__('Asian Vegetable', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Bean', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Beet', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Berry', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Broccoli', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Brussels Sprout', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Cabbage', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Carrot', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Cauliflower', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Chard', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Corn', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Collard', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Cover Crop', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Eggplant', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Cucumber', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Fava', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Flower', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Gourd', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Green', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Herb', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Kale', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Kohlrabi', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Legume', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Lettuce', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Melon', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Mustard', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Okra', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Onion', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Parsnip/Root Parsley', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Potato', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Pea', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Pepper', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Pumpkin', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Radish', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Strawberry', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Root', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Rutabaga', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Spinach', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Summer Squash', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Tomato', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Turnip', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+        wp_insert_term(__('Winter Squash', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
 
         // Exchange statuses
         wp_insert_term(__( 'Active', 'wp-seedbank'), $this->post_type . '_exchange_status', array('description' => __('New or open seed exchange requests or offers.', 'wp-seedbank')));
@@ -655,8 +680,8 @@ END_HTML;
     public function registerAdminMenus () {
         add_submenu_page(
             'edit.php?post_type=' . $this->post_type,
-            'Batch Seed Exchange',
-            'Batch Exchange',
+            __('Batch Seed Exchange', 'wp-seedbank'),
+            __('Batch Exchange', 'wp-seedbank'),
             'edit_posts',
             $this->post_type . '_batch_exchange',
             array($this, 'dispatchBatchExchangePages')
@@ -673,80 +698,81 @@ END_HTML;
     }
 
     // Produce HTML for showing the submenu page.
-    // TODO: i18n this.
-    public function printBatchExchangeForm () { ?>
-<h2>Batch Seed Exchange</h2>
-<p>This page allows you to upload a comma-separated values (CSV) file that will be translated to seed exchange requests or offers. The CSV file should have the structure like <a href="#wp-seedbank-batch-exchange-example">the example shown in the table below</a>.</p>
+    public function printBatchExchangeForm () {
+?>
+<h2><?php _e('Batch Seed Exchange', 'wp-seedbank');?></h2>
+<p><?php _e('This page allows you to upload a comma-separated values (CSV) file that will be translated to seed exchange requests or offers.', 'wp-seedbank');?> <?php _e('The CSV file should have the structure like', 'wp-seedbank');?> <a href="#wp-seedbank-batch-exchange-example"><?php _e('the example shown in the table below', 'wp-seedbank');?></a>.</p>
 <form id="<?php print esc_attr($this->post_type)?>-batch-exchange-form" name="<?php print esc_attr($this->post_type);?>_batch_exchange" action="<?php print esc_url($_SERVER['PHP_SELF'] . '?post_type=' . $this->post_type . '&amp;page=' . $this->post_type . '_batch_exchange');?>" method="post" enctype="multipart/form-data">
     <?php wp_nonce_field($this->post_type . '-batch-exchange', 'batch-exchange');?>
     <input type="hidden" name="<?php print esc_attr($this->post_type);?>-batch-exchange-step" value="1" />
     <p>
-        My batch exchange file is located on
+        <?php _e('My batch exchange file is located on', 'wp-seedbank');?>
         <select id="seedbank-batch-exchange-data-source">
-            <option>another website</option>
-            <option>my computer</option>
+            <option value="another website"><?php _e('another website', 'wp-seedbank');?></option>
+            <option value="my computer"><?php _e('my computer', 'wp-seedbank');?></option>
         </select>.
+        <?php // TODO: Figure out how to i18n this madlibs style thing. ?>
         It
         <select name="<?php print esc_attr($this->post_type);?>-batch-exchange-strip-headers">
                 <option value="1">has</option>
                 <option value="0">does not have</option>
         </select> column labels (a header row).
     </p>
-    <fieldset id="seedbank-batch-exchange-web-fetch"><legend>Web fetch options</legend>
-        <p>The address of the file containing my seed exchange data is <input name="<?php print esc_attr($this->post_type);?>-batch-exchange-file-url" value="" placeholder="http://mysite.com/file.csv" />.</p>
+    <fieldset id="seedbank-batch-exchange-web-fetch"><legend><?php _e('Web fetch options', 'wp-seedbank');?></legend>
+        <p><label><?php _e('The address of the file containing my seed exchange data is', 'wp-seedbank');?> <input name="<?php print esc_attr($this->post_type);?>-batch-exchange-file-url" value="" placeholder="<?php esc_attr_e('http://mysite.com/file.csv', 'wp-seedbank');?>" />.</label></p>
     </fieldset>
-    <fieldset id="seedbank-batch-exchange-file-upload"><legend>File upload options</legend>
-        <p>The file on my computer containing my seed exchange data is <input type="file" name="<?php print esc_attr($this->post_type);?>-batch-exchange-file-data" value="" />.</p>
+    <fieldset id="seedbank-batch-exchange-file-upload"><legend><?php _e('File upload options', 'wp-seedbank');?></legend>
+        <p><label><?php _e('The file on my computer containing my seed exchange data is', 'wp-seedbank');?> <input type="file" name="<?php print esc_attr($this->post_type);?>-batch-exchange-file-data" value="" />.</label></p>
     </fieldset>
-    <p><label><input type="checkbox" name="<?php print esc_attr($this->post_type);?>-batch-exchange-post_status" value="draft" /> Let me review each seed exchange before publishing.</label></p>
-    <p><input type="submit" name="<?php print esc_attr($this->post_type);?>-batch-exchange-submit" value="Make Seed Exchanges" /></p>
+    <p><label><input type="checkbox" name="<?php print esc_attr($this->post_type);?>-batch-exchange-post_status" value="draft" /> <?php _e('Let me review each seed exchange before publishing.', 'wp-seedbank');?></label></p>
+    <p><input type="submit" name="<?php print esc_attr($this->post_type);?>-batch-exchange-submit" value="<?php esc_attr_e('Make Seed Exchanges', 'wp-seedbank');?>" /></p>
 </form>
-<table summary="Example of batch seed exchange data." id="wp-seedbank-batch-exchange-example">
+<table summary="<?php esc_attr_e('Example of batch seed exchange data.', 'wp-seedbank');?>" id="wp-seedbank-batch-exchange-example">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Type</th>
-            <th>Quantity</th>
-            <th>Common Name</th>
-            <th>Unit label</th>
-            <th>Seed expiration date</th>
-            <th>Exchange expiration date</th>
-            <th>Notes</th>
+            <th><?php _e('Title', 'wp-seedbank');?></th>
+            <th><?php _e('Type', 'wp-seedbank');?></th>
+            <th><?php _e('Quantity', 'wp-seedbank');?></th>
+            <th><?php _e('Common Name', 'wp-seedbank');?></th>
+            <th><?php _e('Unit label', 'wp-seedbank');?></th>
+            <th><?php _e('Seed expiration date', 'wp-seedbank');?></th>
+            <th><?php _e('Exchange expiration date', 'wp-seedbank');?></th>
+            <th><?php _e('Notes', 'wp-seedbank');?></th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>Looking to swap peppers for carrots</td>
-            <td>Swap</td>
-            <td>5</td>
-            <td>Pepper</td>
-            <td>seeds</td>
-            <td>2016-05-01</td>
-            <td>2014-05-01</td>
-            <td>Ideally, I'd like to receive carrot seeds in exchange. Thanks!</td>
+            <td><?php _e('Looking to swap peppers for carrots', 'wp-seedbank');?></td>
+            <td><?php _e('Swap', 'wp-seedbank');?></td>
+            <td><?php _e('5', 'wp-seedbank');?></td>
+            <td><?php _e('Pepper', 'wp-seedbank');?></td>
+            <td><?php _e('seeds', 'wp-seedbank');?></td>
+            <td><?php _e('2016-05-01', 'wp-seedbank');?></td>
+            <td><?php _e('2014-05-01', 'wp-seedbank');?></td>
+            <td><?php _e('Ideally, I would like to receive carrot seeds in exchange. Thanks!', 'wp-seedbank');?></td>
         </tr>
         <tr>
-            <td>For sale: tomato seed packets, negotiable price</td>
-            <td>Sell</td>
-            <td>100</td>
-            <td>Tomato</td>
-            <td>seed packets</td>
-            <td>2017-01-01</td>
-            <td>2015-06-01</td>
-            <td>Price is negotiable. Reply here or by phone at (555) 555-5555 if interested.</td>
+            <td><?php _e('For sale: tomato seed packets, negotiable price', 'wp-seedbank');?></td>
+            <td><?php _e('Sell', 'wp-seedbank');?></td>
+            <td><?php _e('100', 'wp-seedbank');?></td>
+            <td><?php _e('Tomato', 'wp-seedbank');?></td>
+            <td><?php _e('seed packets', 'wp-seedbank');?></td>
+            <td><?php _e('2017-01-01', 'wp-seedbank');?></td>
+            <td><?php _e('2015-06-01', 'wp-seedbank');?></td>
+            <td><?php _e('Price is negotiable. Reply here or by phone at (555) 555-5555 if interested.', 'wp-seedbank');?></td>
         </tr>
         <tr>
             <td colspan="8">&hellip;</td>
         </tr>
         <tr>
-            <td>These are the best bean seeds!</td>
-            <td>Swap</td>
-            <td>20</td>
-            <td>Bean</td>
-            <td>packets</td>
-            <td>2015-03-30</td>
-            <td>2014-05-01</td>
-            <td>These beans are kidney beans. They're delicious and nutritious, but taste nothing like chicken.</td>
+            <td><?php _e('These are the best bean seeds!', 'wp-seedbank');?></td>
+            <td><?php _e('Swap', 'wp-seedbank');?></td>
+            <td><?php _e('20', 'wp-seedbank');?></td>
+            <td><?php _e('Bean', 'wp-seedbank');?></td>
+            <td><?php _e('packets', 'wp-seedbank');?></td>
+            <td><?php _e('2015-03-30', 'wp-seedbank');?></td>
+            <td><?php _e('2014-05-01', 'wp-seedbank');?></td>
+            <td><?php _e('These beans are kidney beans. They are delicious and nutritious, but taste nothing like chicken.', 'wp-seedbank');?></td>
         </tr>
     <tbody>
 </table>
@@ -755,18 +781,29 @@ END_HTML;
 
     // TODO: i18n this.
     public function processBatchExchangeForm ($fields) {
-        if (!wp_verify_nonce($_POST['batch-exchange'], $this->post_type . '-batch-exchange')) { ?>
-            <p>Your batch exchange request has expired or is invalid. Please <a href="<?php print admin_url('edit.php?post_type=' . $this->post_type . '&page=' . $this->post_type . '_batch_exchange');?>">start again</a>.</p>
-<? 
+        $error_msgs = array(
+            'bad_nonce' => sprintf(
+                __('Your batch exchange request has expired or is invalid. Please %s start again %s.', 'wp-seedbank'),
+                '<a href="' . admin_url('edit.php?post_type=' . $this->post_type . '&page=' . $this->post_type . '_batch_exchange') . '">',
+                '</a>'
+            ),
+            'no_source' => sprintf(
+                __('Please let us know where to find your data. You will need to %s start again %s.', 'wp-seedbank'),
+                '<a href="' . admin_url('edit.php?post_type=' . $this->post_type . '&page=' . $this->post_type . '_batch_exchange') . '">',
+                '</a>'
+            )
+
+        );
+        if (!wp_verify_nonce($_POST['batch-exchange'], $this->post_type . '-batch-exchange')) {
+            print $error_msgs['bad_nonce'];
             return;
         }
 
         $where = ($_FILES[$this->post_type . '-batch-exchange-file-data']['tmp_name']) ?
             $_FILES[$this->post_type . '-batch-exchange-file-data']['tmp_name'] :
             $_POST[$this->post_type . '-batch-exchange-file-url'];
-        if (!$where) { ?>
-            <p>Please let us know where to find your data. You'll need to <a href="<?php print admin_url('edit.php?post_type=' . $this->post_type . '&page=' . $this->post_type . '_batch_exchange');?>">start again</a>.</p>
-<?php
+        if (!$where) {
+            print $error_msgs['no_source'];
             return;
         }
 
@@ -826,7 +863,8 @@ END_HTML;
         // Display success message.
         $n = count($new_post_ids);
         if ($n) { ?>
-            <p>Successfully imported <?php print $n;?> new <a href="<?php print admin_url('edit.php?post_type=' . $this->post_type);?>">seed exchange posts</a>.</p>
+            <p><?php print sprintf(esc_html__('Successfully imported %d new Seed Exchange Posts.', 'wp-seedbank'), $n);?></p>
+            <p><a href="<?php print admin_url('edit.php?post_type=' . $this->post_type);?>"><?php esc_html_e('All Seed Exchanges', 'wp-seedbank');?></a>.</p>
 <?php
         }
     }
