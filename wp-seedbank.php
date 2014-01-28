@@ -11,7 +11,6 @@
 
 class WP_SeedBank {
     private $post_type = 'seedbank';
-    private $textdomain = 'wp-seedbank';
     private $taxonomies = array(
         array('exchange_type'),
         array('common_name'),
@@ -48,7 +47,7 @@ class WP_SeedBank {
     }
 
     public function registerL10n () {
-        load_plugin_textdomain($this->textdomain, false, dirname(plugin_basename(__FILE__)) . '/languages/');
+        load_plugin_textdomain('wp-seedbank', false, dirname(plugin_basename(__FILE__)) . '/languages/');
     }
 
     public function createDataTypes () {
@@ -58,25 +57,25 @@ class WP_SeedBank {
 
     private function registerCustomPostType () {
         $labels = array(
-            'name'               => __('Seed Exchanges', $this->textdomain),
-            'singular_name'      => __('Seed Exchange', $this->textdomain),
-            'add_new'            => __('Add Seed Exchange', $this->textdomain),
-            'add_new_item'       => __('Add Seed Exchange', $this->textdomain),
-            'edit'               => __('Edit Seed Exchange', $this->textdomain),
-            'edit_item'          => __('Edit Seed Exchange', $this->textdomain),
-            'new_item'           => __('New Seed Exchange', $this->textdomain),
-            'view'               => __('View Seed Exchange', $this->textdomain),
-            'view_item'          => __('View Seed Exchange', $this->textdomain),
-            'search'             => __('Search Seed Exchanges', $this->textdomain),
-            'not_found'          => __('No Seed Exchanges found', $this->textdomain),
-            'not_found_in_trash' => __('No Seed Exchanges found in trash', $this->textdomain)
+            'name'               => __('Seed Exchanges', 'wp-seedbank'),
+            'singular_name'      => __('Seed Exchange', 'wp-seedbank'),
+            'add_new'            => __('Add Seed Exchange', 'wp-seedbank'),
+            'add_new_item'       => __('Add Seed Exchange', 'wp-seedbank'),
+            'edit'               => __('Edit Seed Exchange', 'wp-seedbank'),
+            'edit_item'          => __('Edit Seed Exchange', 'wp-seedbank'),
+            'new_item'           => __('New Seed Exchange', 'wp-seedbank'),
+            'view'               => __('View Seed Exchange', 'wp-seedbank'),
+            'view_item'          => __('View Seed Exchange', 'wp-seedbank'),
+            'search'             => __('Search Seed Exchanges', 'wp-seedbank'),
+            'not_found'          => __('No Seed Exchanges found', 'wp-seedbank'),
+            'not_found_in_trash' => __('No Seed Exchanges found in trash', 'wp-seedbank')
         );
         $url_rewrites = array(
             'slug' => 'seed-exchange'
         );
         $args = array(
             'labels' => $labels,
-            'description' => __('Postings to the SeedBank', $this->textdomain),
+            'description' => __('Postings to the SeedBank', 'wp-seedbank'),
             'public' => true,
             'menu_icon' => plugins_url(basename(__DIR__) . '/images/seedexchange_icon.png'),
             'has_archive' => true,
@@ -98,13 +97,13 @@ class WP_SeedBank {
             $t_singular = ucwords(str_replace('_', ' ', $taxonomy[0]));
             register_taxonomy($this->post_type . '_' . $taxonomy[0], $this->post_type, array(
                     'labels' => array(
-                        'name'          => __($t_plural, $this->textdomain),
-                        'singular_name' => __($t_singular, $this->textdomain),
-                        'all_items'     => __("All $t_plural", $this->textdomain),
-                        'edit_item'     => __("Edit $t_singular", $this->textdomain),
-                        'update_item'   => __("Edit $t_singular", $this->textdomain),
-                        'add_new_item'  => __("Add New $t_singular", $this->textdomain),
-                        'new_item_name' => __("New $t_singular", $this->textdomain),
+                        'name'          => __($t_plural, 'wp-seedbank'),
+                        'singular_name' => __($t_singular, 'wp-seedbank'),
+                        'all_items'     => __("All $t_plural", 'wp-seedbank'),
+                        'edit_item'     => __("Edit $t_singular", 'wp-seedbank'),
+                        'update_item'   => __("Edit $t_singular", 'wp-seedbank'),
+                        'add_new_item'  => __("Add New $t_singular", 'wp-seedbank'),
+                        'new_item_name' => __("New $t_singular", 'wp-seedbank'),
                     )
                 )
             );
@@ -124,7 +123,7 @@ class WP_SeedBank {
 
         add_settings_field(
             $this->post_type . '_display_meta',
-            __('Display Seed Exchange details using', $this->textdomain),
+            __('Display Seed Exchange details using', 'wp-seedbank'),
             array($this, 'renderDisplayMetaSetting'),
             'reading',
             $this->post_type . '_settings'
@@ -150,18 +149,18 @@ class WP_SeedBank {
         $options = get_option($this->post_type . '_settings');
 ?>
     <select name="<?php print esc_attr($this->post_type);?>_settings[display_meta]">
-        <option value="2"<?php if (2 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('this plugin (below content)', $this->textdomain);?></option>
-        <option value="1"<?php if (1 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('this plugin (above content)', $this->textdomain);?></option>
-        <option value="0"<?php if (0 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('my own template', $this->textdomain);?></option>
+        <option value="2"<?php if (2 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('this plugin (below content)', 'wp-seedbank');?></option>
+        <option value="1"<?php if (1 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('this plugin (above content)', 'wp-seedbank');?></option>
+        <option value="0"<?php if (0 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('my own template', 'wp-seedbank');?></option>
     </select>
-    <p class="description"><?php _e('Choosing your own template without writing your own template code may result in the Seed Exchange details not appearing on your website.', $this->textdomain);?></p>
+    <p class="description"><?php _e('Choosing your own template without writing your own template code may result in the Seed Exchange details not appearing on your website.', 'wp-seedbank');?></p>
 <?php
     }
 
     public function addMetaBoxes ($post) {
         add_meta_box(
             $this->post_type . '-details-meta',
-            __('Seed Exchange Details', $this->textdomain),
+            __('Seed Exchange Details', 'wp-seedbank'),
             array($this, 'renderMetaBoxDetails'),
             $this->post_type,
             'normal',
@@ -223,18 +222,18 @@ class WP_SeedBank {
 ?>
     <p>
         <label>I would like to <?php print $type_select;?></label>
-        <input name="<?php print $this->post_type;?>_quantity" value="<?php print esc_attr($custom["{$this->post_type}_quantity"][0]);?>" placeholder="<?php _e('enter a number', $this->textdomain);?>" />
+        <input name="<?php print $this->post_type;?>_quantity" value="<?php print esc_attr($custom["{$this->post_type}_quantity"][0]);?>" placeholder="<?php _e('enter a number', 'wp-seedbank');?>" />
         <?php print $common_name_select;?>
-        <input name="<?php print $this->post_type;?>_unit" value="<?php print esc_attr($custom["{$this->post_type}_unit"][0]);?>" placeholder="<?php _e('packets', $this->textdomain);?>" />.
+        <input name="<?php print $this->post_type;?>_unit" value="<?php print esc_attr($custom["{$this->post_type}_unit"][0]);?>" placeholder="<?php _e('packets', 'wp-seedbank');?>" />.
     </p>
     <p>
-        <label>These seeds will expire on or about <input name="<?php print $this->post_type;?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', $this->textdomain);?>" />.</label> <span class="description">(<?php _e('If these seeds are in a packet, the wrapping might have an expiration date. Put that here.', $this->textdomain);?>)</span>
+        <label>These seeds will expire on or about <input name="<?php print $this->post_type;?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" />.</label> <span class="description">(<?php _e('If these seeds are in a packet, the wrapping might have an expiration date. Put that here.', 'wp-seedbank');?>)</span>
     </p>
     <p>
-        <label>If I don't hear from anyone by <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', $this->textdomain);?>" />, I'll stop being available to make this exchange.</label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", $this->textdomain);?>)</span>
+        <label>If I don't hear from anyone by <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" />, I'll stop being available to make this exchange.</label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", 'wp-seedbank');?>)</span>
     </p>
     <p>
-        <label>This seed exchange is <?php print $status_select;?>.</label> <span class="description">(<?php foreach ($status_options as $x) :?>The <code><?php _e($x->name, $this->textdomain);?></code> type is for <?php print strtolower($x->description);?> <?php endforeach;?>)</span>
+        <label>This seed exchange is <?php print $status_select;?>.</label> <span class="description">(<?php foreach ($status_options as $x) :?>The <code><?php _e($x->name, 'wp-seedbank');?></code> type is for <?php print strtolower($x->description);?> <?php endforeach;?>)</span>
     </p>
 <?php
     }
@@ -378,7 +377,7 @@ class WP_SeedBank {
 END_HTML;
                 $screen->add_help_tab(array(
                     'id' => $this->post_type . '-' . $screen->base . '-help',
-                    'title' => __('Adding a Seed Exchange', $this->textdomain),
+                    'title' => __('Adding a Seed Exchange', 'wp-seedbank'),
                     'content' => $html
                 ));
             break;
@@ -391,7 +390,7 @@ END_HTML;
 END_HTML;
         $screen->add_help_tab(array(
             'id' => $this->post_type . '-' . $screen->base . '-about-help',
-            'title' => __('About the WP-SeedBank', $this->textdomain),
+            'title' => __('About the WP-SeedBank', 'wp-seedbank'),
             'content' => $html
         ));
     }
@@ -520,137 +519,137 @@ END_HTML;
         flush_rewrite_rules();
 
         // Exchange Types (verbs)
-        wp_insert_term(__( 'Swap', $this->textdomain), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering seeds for other seeds.', $this->textdomain)));
-        wp_insert_term(__( 'Sell', $this->textdomain), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering seeds for money.', $this->textdomain)));
-        wp_insert_term(__( 'Give', $this->textdomain), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering free seeds being given away.', $this->textdomain)));
-        wp_insert_term(__( 'Get', $this->textdomain), $this->post_type . '_exchange_type', array('description' => __('Exchanges requesting seeds of a variety not already listed.', $this->textdomain)));
+        wp_insert_term(__( 'Swap', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering seeds for other seeds.', 'wp-seedbank')));
+        wp_insert_term(__( 'Sell', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering seeds for money.', 'wp-seedbank')));
+        wp_insert_term(__( 'Give', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering free seeds being given away.', 'wp-seedbank')));
+        wp_insert_term(__( 'Get', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges requesting seeds of a variety not already listed.', 'wp-seedbank')));
 
         // Genera
-        wp_insert_term(__('Abelmoschus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'abelmoschus' ) );
-        wp_insert_term(__('Agastache', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'agastache' ) );
-        wp_insert_term(__('Allium', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'allium' ) );
-        wp_insert_term(__('Amaranthus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'amaranthus' ) );
-        wp_insert_term(__('Anagallis', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'anagallis' ) );
-        wp_insert_term(__('Anethum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'anethum' ) );
-        wp_insert_term(__('Anthenum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'anthenum' ) );
-        wp_insert_term(__('Antirrhinum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'antirrhinum' ) );
-        wp_insert_term(__('Apium', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'apium' ) );
-        wp_insert_term(__('Asclepias', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'asclepias' ) );
-        wp_insert_term(__('Basella', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'basella' ) );
-        wp_insert_term(__('Beta', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'beta' ) );
-        wp_insert_term(__('Brassica', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'brassica' ) );
-        wp_insert_term(__('Calendula', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'calendula' ) );
-        wp_insert_term(__('Capsicum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'capsicum' ) );
-        wp_insert_term(__('Cardiospermum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'cardiospermum' ) );
-        wp_insert_term(__('Centaurea', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'centaurea' ) );
-        wp_insert_term(__('Chrysanthemum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'chrysanthemum' ) );
-        wp_insert_term(__('Cichorium', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'cichorium' ) );
-        wp_insert_term(__('Citrullus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'citrullus' ) );
-        wp_insert_term(__('Cleome', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'cleome' ) );
-        wp_insert_term(__('Cobaea', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'cobaea' ) );
-        wp_insert_term(__('Consolida', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'consolida' ) );
-        wp_insert_term(__('Convolvulus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'convolvulus' ) );
-        wp_insert_term(__('Coreopsis', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'coreopsis' ) );
-        wp_insert_term(__('Coriandrum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'coriandrum' ) );
-        wp_insert_term(__('Cosmos', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'cosmos' ) );
-        wp_insert_term(__('Cucumis', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'cucumis' ) );
-        wp_insert_term(__('Cucurbita', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'cucurbita' ) );
-        wp_insert_term(__('Dalea', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'dalea' ) );
-        wp_insert_term(__('Daucus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'daucus' ) );
-        wp_insert_term(__('Diplotaxis', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'diplotaxis' ) );
-        wp_insert_term(__('Dolichos', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'dolichos' ) );
-        wp_insert_term(__('Echinacea', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'echinacea' ) );
-        wp_insert_term(__('Eruca', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'eruca' ) );
-        wp_insert_term(__('Eschscholzia', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'eschscholzia' ) );
-        wp_insert_term(__('Foeniculum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'foeniculum' ) );
-        wp_insert_term(__('Fragaria', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'fragaria' ) );
-        wp_insert_term(__('Gaillardia', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'gaillardia' ) );
-        wp_insert_term(__('Glycine', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'glycine' ) );
-        wp_insert_term(__('Helianthus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'helianthus' ) );
-        wp_insert_term(__('Ipomoea', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'ipomoea' ) );
-        wp_insert_term(__('Koeleria', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'koeleria' ) );
-        wp_insert_term(__('Lactuca', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'lactuca' ) );
-        wp_insert_term(__('Lagenaria', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'lagenaria' ) );
-        wp_insert_term(__('Lathyrus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'lathyrus' ) );
-        wp_insert_term(__('Lupinus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'lupinus' ) );
-        wp_insert_term(__('Lycopersicon', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'lycopersicon' ) );
-        wp_insert_term(__('Malope', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'malope' ) );
-        wp_insert_term(__('Matricaria', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'matricaria' ) );
-        wp_insert_term(__('Mentha', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'mentha' ) );
-        wp_insert_term(__('Mirabilis', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'mirabilis' ) );
-        wp_insert_term(__('Nigella', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'nigella' ) );
-        wp_insert_term(__('Ocimum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'ocimum' ) );
-        wp_insert_term(__('Origanum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'origanum' ) );
-        wp_insert_term(__('Papaver', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'papaver' ) );
-        wp_insert_term(__('Passiflora', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'passiflora' ) );
-        wp_insert_term(__('Penstemon', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'penstemon' ) );
-        wp_insert_term(__('Petrolselinum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'petrolselinum' ) );
-        wp_insert_term(__('Phaseolus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'phaseolus' ) );
-        wp_insert_term(__('Physalis', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'physalis' ) );
-        wp_insert_term(__('Pisum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'pisum' ) );
-        wp_insert_term(__('Poterium', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'poterium' ) );
-        wp_insert_term(__('Raphanus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'raphanus' ) );
-        wp_insert_term(__('Rosmarinus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'rosmarinus' ) );
-        wp_insert_term(__('Rudbeckia', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'rudbeckia' ) );
-        wp_insert_term(__('Salvia', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'salvia' ) );
-        wp_insert_term(__('Scorpiurus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'scorpiurus' ) );
-        wp_insert_term(__('Solanum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'solanum' ) );
-        wp_insert_term(__('Spinachia', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'spinachia' ) );
-        wp_insert_term(__('Tagetes', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'tagetes' ) );
-        wp_insert_term(__('Thunbergia', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'thunbergia' ) );
-        wp_insert_term(__('Thymus', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'thymus' ) );
-        wp_insert_term(__('Triticum ', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'triticum ' ) );
-        wp_insert_term(__('Tropaeolum', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'tropaeolum' ) );
-        wp_insert_term(__('Zea', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'zea' ) );
-        wp_insert_term(__('Zinnia', $this->textdomain), $this->post_type . '_seed_genus', array( 'slug' => 'zinnia' ) );
+        wp_insert_term(__('Abelmoschus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'abelmoschus' ) );
+        wp_insert_term(__('Agastache', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'agastache' ) );
+        wp_insert_term(__('Allium', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'allium' ) );
+        wp_insert_term(__('Amaranthus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'amaranthus' ) );
+        wp_insert_term(__('Anagallis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'anagallis' ) );
+        wp_insert_term(__('Anethum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'anethum' ) );
+        wp_insert_term(__('Anthenum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'anthenum' ) );
+        wp_insert_term(__('Antirrhinum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'antirrhinum' ) );
+        wp_insert_term(__('Apium', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'apium' ) );
+        wp_insert_term(__('Asclepias', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'asclepias' ) );
+        wp_insert_term(__('Basella', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'basella' ) );
+        wp_insert_term(__('Beta', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'beta' ) );
+        wp_insert_term(__('Brassica', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'brassica' ) );
+        wp_insert_term(__('Calendula', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'calendula' ) );
+        wp_insert_term(__('Capsicum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'capsicum' ) );
+        wp_insert_term(__('Cardiospermum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cardiospermum' ) );
+        wp_insert_term(__('Centaurea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'centaurea' ) );
+        wp_insert_term(__('Chrysanthemum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'chrysanthemum' ) );
+        wp_insert_term(__('Cichorium', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cichorium' ) );
+        wp_insert_term(__('Citrullus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'citrullus' ) );
+        wp_insert_term(__('Cleome', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cleome' ) );
+        wp_insert_term(__('Cobaea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cobaea' ) );
+        wp_insert_term(__('Consolida', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'consolida' ) );
+        wp_insert_term(__('Convolvulus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'convolvulus' ) );
+        wp_insert_term(__('Coreopsis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'coreopsis' ) );
+        wp_insert_term(__('Coriandrum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'coriandrum' ) );
+        wp_insert_term(__('Cosmos', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cosmos' ) );
+        wp_insert_term(__('Cucumis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cucumis' ) );
+        wp_insert_term(__('Cucurbita', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'cucurbita' ) );
+        wp_insert_term(__('Dalea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'dalea' ) );
+        wp_insert_term(__('Daucus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'daucus' ) );
+        wp_insert_term(__('Diplotaxis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'diplotaxis' ) );
+        wp_insert_term(__('Dolichos', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'dolichos' ) );
+        wp_insert_term(__('Echinacea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'echinacea' ) );
+        wp_insert_term(__('Eruca', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'eruca' ) );
+        wp_insert_term(__('Eschscholzia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'eschscholzia' ) );
+        wp_insert_term(__('Foeniculum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'foeniculum' ) );
+        wp_insert_term(__('Fragaria', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'fragaria' ) );
+        wp_insert_term(__('Gaillardia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'gaillardia' ) );
+        wp_insert_term(__('Glycine', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'glycine' ) );
+        wp_insert_term(__('Helianthus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'helianthus' ) );
+        wp_insert_term(__('Ipomoea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'ipomoea' ) );
+        wp_insert_term(__('Koeleria', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'koeleria' ) );
+        wp_insert_term(__('Lactuca', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'lactuca' ) );
+        wp_insert_term(__('Lagenaria', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'lagenaria' ) );
+        wp_insert_term(__('Lathyrus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'lathyrus' ) );
+        wp_insert_term(__('Lupinus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'lupinus' ) );
+        wp_insert_term(__('Lycopersicon', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'lycopersicon' ) );
+        wp_insert_term(__('Malope', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'malope' ) );
+        wp_insert_term(__('Matricaria', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'matricaria' ) );
+        wp_insert_term(__('Mentha', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'mentha' ) );
+        wp_insert_term(__('Mirabilis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'mirabilis' ) );
+        wp_insert_term(__('Nigella', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'nigella' ) );
+        wp_insert_term(__('Ocimum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'ocimum' ) );
+        wp_insert_term(__('Origanum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'origanum' ) );
+        wp_insert_term(__('Papaver', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'papaver' ) );
+        wp_insert_term(__('Passiflora', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'passiflora' ) );
+        wp_insert_term(__('Penstemon', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'penstemon' ) );
+        wp_insert_term(__('Petrolselinum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'petrolselinum' ) );
+        wp_insert_term(__('Phaseolus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'phaseolus' ) );
+        wp_insert_term(__('Physalis', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'physalis' ) );
+        wp_insert_term(__('Pisum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'pisum' ) );
+        wp_insert_term(__('Poterium', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'poterium' ) );
+        wp_insert_term(__('Raphanus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'raphanus' ) );
+        wp_insert_term(__('Rosmarinus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'rosmarinus' ) );
+        wp_insert_term(__('Rudbeckia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'rudbeckia' ) );
+        wp_insert_term(__('Salvia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'salvia' ) );
+        wp_insert_term(__('Scorpiurus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'scorpiurus' ) );
+        wp_insert_term(__('Solanum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'solanum' ) );
+        wp_insert_term(__('Spinachia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'spinachia' ) );
+        wp_insert_term(__('Tagetes', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'tagetes' ) );
+        wp_insert_term(__('Thunbergia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'thunbergia' ) );
+        wp_insert_term(__('Thymus', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'thymus' ) );
+        wp_insert_term(__('Triticum ', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'triticum ' ) );
+        wp_insert_term(__('Tropaeolum', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'tropaeolum' ) );
+        wp_insert_term(__('Zea', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'zea' ) );
+        wp_insert_term(__('Zinnia', 'wp-seedbank'), $this->post_type . '_seed_genus', array( 'slug' => 'zinnia' ) );
 
         // Common Names
-        wp_insert_term(__('Asian Vegetable', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'asian-vegetable' ) );
-        wp_insert_term(__('Bean', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'bean' ) );
-        wp_insert_term(__('Beet', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'beet' ) );
-        wp_insert_term(__('Berry', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'berry' ) );
-        wp_insert_term(__('Broccoli', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'broccoli' ) );
-        wp_insert_term(__('Brussels Sprout', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'brussels-sprout' ) );
-        wp_insert_term(__('Cabbage', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'cabbage' ) );
-        wp_insert_term(__('Carrot', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'carrot' ) );
-        wp_insert_term(__('Cauliflower', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'cauliflower' ) );
-        wp_insert_term(__('Chard', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'chard' ) );
-        wp_insert_term(__('Corn', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'corn' ) );
-        wp_insert_term(__('Collard', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'collard' ) );
-        wp_insert_term(__('Cover Crop', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'cover-crop' ) );
-        wp_insert_term(__('Eggplant', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'eggplant' ) );
-        wp_insert_term(__('Cucumber', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'cucumber' ) );
-        wp_insert_term(__('Fava', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'fava' ) );
-        wp_insert_term(__('Flower', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'flower' ) );
-        wp_insert_term(__('Gourd', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'gourd' ) );
-        wp_insert_term(__('Green', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'green' ) );
-        wp_insert_term(__('Herb', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'herb' ) );
-        wp_insert_term(__('Kale', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'kale' ) );
-        wp_insert_term(__('Kohlrabi', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'kohlrabi' ) );
-        wp_insert_term(__('Legume', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'legume' ) );
-        wp_insert_term(__('Lettuce', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'lettuce' ) );
-        wp_insert_term(__('Melon', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'melon' ) );
-        wp_insert_term(__('Mustard', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'mustard' ) );
-        wp_insert_term(__('Okra', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'okra' ) );
-        wp_insert_term(__('Onion', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'onion' ) );
-        wp_insert_term(__('Parsnip/Root Parsley', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'parsnip-root-parsley' ) );
-        wp_insert_term(__('Potato', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'potato' ) );
-        wp_insert_term(__('Pea', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'pea' ) );
-        wp_insert_term(__('Pepper', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'pepper' ) );
-        wp_insert_term(__('Pumpkin', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'pumpkin' ) );
-        wp_insert_term(__('Radish', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'radish' ) );
-        wp_insert_term(__('Strawberry', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'strawberry' ) );
-        wp_insert_term(__('Root', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'root' ) );
-        wp_insert_term(__('Rutabaga', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'rutabaga' ) );
-        wp_insert_term(__('Spinach', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'spinach' ) );
-        wp_insert_term(__('Summer Squash', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'summer-squash' ) );
-        wp_insert_term(__('Tomato', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'tomato' ) );
-        wp_insert_term(__('Turnip', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'turnip' ) );
-        wp_insert_term(__('Winter Squash', $this->textdomain), $this->post_type . '_common_name', array( 'slug' => 'winter-squash' ) );
+        wp_insert_term(__('Asian Vegetable', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'asian-vegetable' ) );
+        wp_insert_term(__('Bean', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'bean' ) );
+        wp_insert_term(__('Beet', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'beet' ) );
+        wp_insert_term(__('Berry', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'berry' ) );
+        wp_insert_term(__('Broccoli', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'broccoli' ) );
+        wp_insert_term(__('Brussels Sprout', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'brussels-sprout' ) );
+        wp_insert_term(__('Cabbage', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'cabbage' ) );
+        wp_insert_term(__('Carrot', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'carrot' ) );
+        wp_insert_term(__('Cauliflower', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'cauliflower' ) );
+        wp_insert_term(__('Chard', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'chard' ) );
+        wp_insert_term(__('Corn', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'corn' ) );
+        wp_insert_term(__('Collard', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'collard' ) );
+        wp_insert_term(__('Cover Crop', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'cover-crop' ) );
+        wp_insert_term(__('Eggplant', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'eggplant' ) );
+        wp_insert_term(__('Cucumber', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'cucumber' ) );
+        wp_insert_term(__('Fava', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'fava' ) );
+        wp_insert_term(__('Flower', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'flower' ) );
+        wp_insert_term(__('Gourd', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'gourd' ) );
+        wp_insert_term(__('Green', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'green' ) );
+        wp_insert_term(__('Herb', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'herb' ) );
+        wp_insert_term(__('Kale', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'kale' ) );
+        wp_insert_term(__('Kohlrabi', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'kohlrabi' ) );
+        wp_insert_term(__('Legume', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'legume' ) );
+        wp_insert_term(__('Lettuce', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'lettuce' ) );
+        wp_insert_term(__('Melon', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'melon' ) );
+        wp_insert_term(__('Mustard', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'mustard' ) );
+        wp_insert_term(__('Okra', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'okra' ) );
+        wp_insert_term(__('Onion', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'onion' ) );
+        wp_insert_term(__('Parsnip/Root Parsley', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'parsnip-root-parsley' ) );
+        wp_insert_term(__('Potato', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'potato' ) );
+        wp_insert_term(__('Pea', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'pea' ) );
+        wp_insert_term(__('Pepper', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'pepper' ) );
+        wp_insert_term(__('Pumpkin', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'pumpkin' ) );
+        wp_insert_term(__('Radish', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'radish' ) );
+        wp_insert_term(__('Strawberry', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'strawberry' ) );
+        wp_insert_term(__('Root', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'root' ) );
+        wp_insert_term(__('Rutabaga', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'rutabaga' ) );
+        wp_insert_term(__('Spinach', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'spinach' ) );
+        wp_insert_term(__('Summer Squash', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'summer-squash' ) );
+        wp_insert_term(__('Tomato', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'tomato' ) );
+        wp_insert_term(__('Turnip', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'turnip' ) );
+        wp_insert_term(__('Winter Squash', 'wp-seedbank'), $this->post_type . '_common_name', array( 'slug' => 'winter-squash' ) );
 
         // Exchange statuses
-        wp_insert_term(__( 'Active', $this->textdomain), $this->post_type . '_exchange_status', array('description' => __('New or open seed exchange requests or offers.', $this->textdomain)));
-        wp_insert_term(__( 'Deleted', $this->textdomain), $this->post_type . '_exchange_status', array('description' => __('Expired or completed seed exchanges.', $this->textdomain)));
+        wp_insert_term(__( 'Active', 'wp-seedbank'), $this->post_type . '_exchange_status', array('description' => __('New or open seed exchange requests or offers.', 'wp-seedbank')));
+        wp_insert_term(__( 'Deleted', 'wp-seedbank'), $this->post_type . '_exchange_status', array('description' => __('Expired or completed seed exchanges.', 'wp-seedbank')));
     }
 
     public function registerAdminMenus () {
