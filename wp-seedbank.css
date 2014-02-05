@@ -1,0 +1,6 @@
+.seedbank_page_seedbank_seed_inventory table {
+    text-align: left;
+}
+.seedbank_page_seedbank_seed_inventory th::after {
+    content: ":";
+}

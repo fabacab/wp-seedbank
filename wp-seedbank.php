@@ -337,6 +337,10 @@ class WP_SeedBank {
         $screen = get_current_screen();
         // Only load this plugin's JS on this plugin's own screens.
         if (false === strpos($screen->id, $this->post_type)) { return; }
+
+        wp_register_style('wp-seedbank', plugins_url(basename(__DIR__) . '/wp-seedbank.css'));
+        wp_enqueue_style('wp-seedbank');
+
         wp_register_script('wp-seedbank', plugins_url(basename(__DIR__) . '/wp-seedbank.js'), array('jquery', 'jquery-ui-datepicker'));
         wp_enqueue_script('wp-seedbank');
         $x = $wp_scripts->query('jquery-ui-core');
@@ -686,6 +690,16 @@ END_HTML;
             $this->post_type . '_batch_exchange',
             array($this, 'dispatchBatchExchangePages')
         );
+
+        add_submenu_page(
+            'edit.php?post_type=' . $this->post_type,
+            __('Seed Inventory', 'wp-seedbank'),
+            __('Seed Inventory', 'wp-seedbank'),
+            // TODO: Should we start using real WP Roles/Capabilities?
+            'moderate_comments', // Allow "Editors" and above, on default install
+            $this->post_type . '_seed_inventory',
+            array($this, 'dispatchSeedInventory')
+        );
     }
 
     public function dispatchBatchExchangePages () {
@@ -779,7 +793,6 @@ END_HTML;
 <?php
     }
 
-    // TODO: i18n this.
     public function processBatchExchangeForm ($fields) {
         $error_msgs = array(
             'bad_nonce' => sprintf(
@@ -867,6 +880,168 @@ END_HTML;
             <p><a href="<?php print admin_url('edit.php?post_type=' . $this->post_type);?>"><?php esc_html_e('All Seed Exchanges', 'wp-seedbank');?></a>.</p>
 <?php
         }
+    }
+
+    public function dispatchSeedInventory () {
+        $data = $this->getInventoryReportData();
+        $this->renderInventoryReport($data);
+    }
+
+    private function getInventoryReportData () {
+        // Load the data we need.
+        $args = array(
+            'post_type' => $this->post_type,
+            'nopaging' => true,
+            // Get all active seed exchanges
+            // that also have a "quantity" meta field
+            'meta_query' => array(
+                'relation' => 'AND',
+                array(
+                    'key' => $this->post_type . '_exchange_status',
+                    'value' => 'Active'
+                ),
+                array(
+                    'key' => $this->post_type . '_quantity',
+                )
+            )
+        );
+        $q = new WP_Query($args);
+
+        // Buckets.
+        $buckets = array();
+        foreach ($this->meta_fields as $f) {
+            $buckets[$this->post_type . '_' . $f] = array();
+        }
+
+        $posts = $q->get_posts();
+        // Put each post
+        foreach ($posts as $post) {
+            $custom = get_post_custom($post->ID);
+            // in its appropriate bucket(s).
+            foreach ($custom as $k => $v) {
+                if (!isset($buckets[$k][$v[0]])) {
+                    $buckets[$k][$v[0]] = array();
+                }
+                $buckets[$k][$v[0]][] = $post->ID;
+            }
+        }
+
+        // Calculate totals for the desired buckets.
+        // TODO: Optimize this slowness!
+        $total_quantity = 0;
+        foreach ($buckets[$this->post_type . '_quantity'] as $k => $v) {
+            // E.g., $k is a bucket number (like 5), and $v is an
+            // array of posts that have this quantity, so we need
+            // to multiply the number of posts by the bucket's number.
+            $total_quantity += $k * count($v);
+        }
+
+        $total_by_exchange_type = array();
+        foreach ($buckets[$this->post_type . '_exchange_type'] as $k => $v) {
+            $total_by_exchange_type[$k] = 0;
+            $n = 0;
+            foreach ($v as $id) {
+                $n += get_post_meta($id, $this->post_type . '_quantity', true);
+            }
+            $total_by_exchange_type[$k] += $n;
+        }
+
+        $total_by_common_name = array();
+        foreach ($buckets[$this->post_type . '_common_name'] as $k => $v) {
+            $total_by_common_name[$k] = 0;
+            $n = 0;
+            foreach ($v as $id) {
+                $n += get_post_meta($id, $this->post_type . '_quantity', true);
+            }
+            $total_by_common_name[$k] += $n;
+        }
+
+        $total_by_unit = array();
+        foreach ($buckets[$this->post_type . '_unit'] as $k => $v) {
+            $total_by_unit[$k] = 0;
+            $n = 0;
+            foreach ($v as $id) {
+                $n += get_post_meta($id, $this->post_type . '_quantity', true);
+            }
+            $total_by_unit[$k] += $n;
+        }
+
+        return array(
+            'total_quantity' => $total_quantity,
+            'total_by_exchange_type' => $total_by_exchange_type,
+            'total_by_common_name' => $total_by_common_name,
+            'total_by_unit' => $total_by_unit
+        );
+    }
+
+    /**
+     * Dispatches the "Seed Inventory" report to a renderer.
+     *
+     * @param array $data A multidimensional array of the report data. See getInventoryReportData.
+     * @param string $format The output format for the report. Defaults to 'html'.
+     */
+    private function renderInventoryReport ($data, $format = 'html') {
+        switch (mb_strtolower($format)) {
+            case 'html':
+            default:
+                print $this->renderInventoryReportAsHtml($data);
+            break;
+        }
+    }
+
+    /**
+     * Prints the "Seed Inventory" report as HTML table(s).
+     *
+     * @param array $data A multidimensional array of the report data. See getInventoryReportData.
+     */
+    // TODO: Maybe use the WP_List_table class now?
+    private function renderInventoryReportAsHtml ($data) {
+?>
+<h2><?php esc_html_e('Seed Inventory', 'wp-seedbank');?></h2>
+<p><?php esc_html_e('This page displays a simple report of exchange activity happening on your website.', 'wp-seedbank');?></p>
+<h3><?php esc_attr_e('Total Active Inventory', 'wp-seedbank');?></h3>
+<table summary="" id="seedbank-inventory-totals-active">
+    <tbody>
+        <tr>
+            <th><?php esc_html_e('Total active quantity', 'wp-seedbank');?></th>
+            <td><?php print esc_html($data['total_quantity']);?></td>
+        </tr>
+    </tbody>
+</table>
+<h3><?php esc_attr_e('Totals by Common Name', 'wp-seedbank');?></h3>
+<table summary="" id="seedbank-inventory-totals-by-common-name">
+    <tbody>
+        <?php foreach ($data['total_by_common_name'] as $k => $v) { ?>
+        <tr>
+            <th><?php print esc_html($k);?></th>
+            <td><?php print esc_html($v);?></td>
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
+<h3><?php esc_attr_e('Totals by Exchange Type', 'wp-seedbank');?></h3>
+<table summary="" id="seedbank-inventory-totals-by-exchange-type">
+    <tbody>
+        <?php foreach ($data['total_by_exchange_type'] as $k => $v) { ?>
+        <tr>
+            <th><?php print esc_html($k);?></th>
+            <td><?php print esc_html($v);?></td>
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
+<h3><?php esc_attr_e('Totals by Unit', 'wp-seedbank');?></h3>
+<table summary="" id="seedbank-inventory-totals-by-unit">
+    <tbody>
+        <?php foreach ($data['total_by_unit'] as $k => $v) { ?>
+        <tr>
+            <th><?php print esc_html(ucwords($k));?></th>
+            <td><?php print esc_html($v);?></td>
+        </tr>
+        <?php } ?>
+    </tbody>
+</table>
+<?php
     }
 
 }
