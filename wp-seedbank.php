@@ -691,14 +691,14 @@ END_HTML;
     public function dispatchBatchExchangePages () {
         $step = (int) $_POST[$this->post_type . '-batch-exchange-step'];
         if (0 === $step) {
-            self::printBatchExchangeForm();
+            $this->printBatchExchangeForm();
         } else if (1 === $step) {
-            self::processBatchExchangeForm($_POST);
+            $this->processBatchExchangeForm($_POST);
         }
     }
 
     // Produce HTML for showing the submenu page.
-    public function printBatchExchangeForm () {
+    private function printBatchExchangeForm () {
 ?>
 <h2><?php _e('Batch Seed Exchange', 'wp-seedbank');?></h2>
 <p><?php _e('This page allows you to upload a comma-separated values (CSV) file that will be translated to seed exchange requests or offers.', 'wp-seedbank');?> <?php _e('The CSV file should have the structure like', 'wp-seedbank');?> <a href="#wp-seedbank-batch-exchange-example"><?php _e('the example shown in the table below', 'wp-seedbank');?></a>.</p>
