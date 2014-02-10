@@ -228,10 +228,10 @@ class WP_SeedBank {
         <input name="<?php print $this->post_type;?>_unit" value="<?php print esc_attr($custom["{$this->post_type}_unit"][0]);?>" placeholder="<?php _e('packets', 'wp-seedbank');?>" />.
     </p>
     <p>
-        <label><?php _e('These seeds will expire on or about', 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" />.</label> <span class="description">(<?php _e('If these seeds are in a packet, the wrapping might have an expiration date. Put that here.', 'wp-seedbank');?>)</span>
+        <label><?php _e('These seeds will expire on or about', 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" required="required" />.</label> <span class="description">(<?php _e('If these seeds are in a packet, the wrapping might have an expiration date. Put that here.', 'wp-seedbank');?>)</span>
     </p>
     <p>
-        <label><?php _e("If I don't hear from anyone by", 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" />, <?php _e("I'll stop being available to make this exchange.", 'wp-seedbank');?></label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", 'wp-seedbank');?>)</span>
+        <label><?php _e("If I don't hear from anyone by", 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" required="required" />, <?php _e("I'll stop being available to make this exchange.", 'wp-seedbank');?></label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", 'wp-seedbank');?>)</span>
     </p>
     <p>
         <?php // TODO: i18n this? See question concerning madlibs style forms, at function signature. ?>
