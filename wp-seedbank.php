@@ -15,7 +15,7 @@ class WP_SeedBank {
         array('exchange_type'),
         array('common_name'),
         array('scientific_name'),
-        array('exchange_status', 'plural' => 'exchange_statuses')
+        array('exchange_status')
     );
     private $meta_fields = array(
         'exchange_type',
@@ -94,52 +94,72 @@ class WP_SeedBank {
     }
 
     private function registerCustomTaxonomies () {
-        foreach ($this->taxonomies as $taxonomy) {
-            switch ($taxonomy[0]) {
-                case 'scientific_name':
-                    register_taxonomy($this->post_type . '_scientific_name', $this->post_type, array(
-                            'labels' => array(
-                                'name'          => __('Scientific Names', 'wp-seedbank'),
-                                'singular_name' => __('Scientific Name', 'wp-seedbank'),
-                                'all_items'     => __('All Scientific Names', 'wp-seedbank'),
-                                'edit_item'     => __('Edit Scientific Name', 'wp-seedbank'),
-                                'update_item'   => __('Update Scientific Name', 'wp-seedbank'),
-                                'add_new_item'  => __('Add New Scientific Name', 'wp-seedbank'),
-                                'new_item_name' => __('New Scientific Name', 'wp-seedbank'),
-                                'parent_item'   => __('Parent Classification', 'wp-seedbank'),
-                                'parent_item_colon' => __('Parent Classification:', 'wp-seedbank'),
-                                'search_items'  => __('Search Scientific Names', 'wp-seedbank'),
-                            ),
-                            'hierarchical' => true,
-                            'rewrite' => array(
-                                'slug' => 'scientific-name',
-                                'hierarchical' => true
-                            )
-                        )
-                    );
-                    register_taxonomy_for_object_type($this->post_type . '_scientific_name', $this->post_type);
-                    break;
-                default:
-                    $pluralize  = (isset($taxonomy['plural'])) ? $taxonomy['plural'] : "{$taxonomy[0]}s";
-                    $t_plural   = ucwords(str_replace('_', ' ', $pluralize));
-                    $t_singular = ucwords(str_replace('_', ' ', $taxonomy[0]));
-                    register_taxonomy($this->post_type . '_' . $taxonomy[0], $this->post_type, array(
-                            // TODO: These variables cause an i18n bug. Unroll this loop.
-                            'labels' => array(
-                                'name'          => __($t_plural, 'wp-seedbank'),
-                                'singular_name' => __($t_singular, 'wp-seedbank'),
-                                'all_items'     => __("All $t_plural", 'wp-seedbank'),
-                                'edit_item'     => __("Edit $t_singular", 'wp-seedbank'),
-                                'update_item'   => __("Edit $t_singular", 'wp-seedbank'),
-                                'add_new_item'  => __("Add New $t_singular", 'wp-seedbank'),
-                                'new_item_name' => __("New $t_singular", 'wp-seedbank'),
-                            )
-                        )
-                    );
-                    register_taxonomy_for_object_type($taxonomy[0], $this->post_type);
-                    break;
-            }
-        }
+        register_taxonomy($this->post_type . '_exchange_type', $this->post_type, array(
+                'labels' => array(
+                    'name'          => __('Exchange Types', 'wp-seedbank'),
+                    'singular_name' => __('Exchange Type', 'wp-seedbank'),
+                    'all_items'     => __('All Exchange Types', 'wp-seedbank'),
+                    'edit_item'     => __('Edit Exchange Type', 'wp-seedbank'),
+                    'update_item'   => __('Update Exchange Type', 'wp-seedbank'),
+                    'add_new_item'  => __('Add New Exchange Type', 'wp-seedbank'),
+                    'new_item_name' => __('New Exchange Type', 'wp-seedbank'),
+                    'search_items'  => __('Search Exchange Types', 'wp-seedbank'),
+                )
+            )
+        );
+        register_taxonomy_for_object_type($this->post_type . '_exchange_type', $this->post_type);
+
+        register_taxonomy($this->post_type . '_common_name', $this->post_type, array(
+                'labels' => array(
+                    'name'          => __('Common Names', 'wp-seedbank'),
+                    'singular_name' => __('Common Name', 'wp-seedbank'),
+                    'all_items'     => __('All Common Names', 'wp-seedbank'),
+                    'edit_item'     => __('Edit Common Name', 'wp-seedbank'),
+                    'update_item'   => __('Update Common Name', 'wp-seedbank'),
+                    'add_new_item'  => __('Add New Common Name', 'wp-seedbank'),
+                    'new_item_name' => __('New Common Name', 'wp-seedbank'),
+                    'search_items'  => __('Search Common Names', 'wp-seedbank'),
+                )
+            )
+        );
+        register_taxonomy_for_object_type($this->post_type . '_common_name', $this->post_type);
+
+        register_taxonomy($this->post_type . '_scientific_name', $this->post_type, array(
+                'labels' => array(
+                    'name'          => __('Scientific Names', 'wp-seedbank'),
+                    'singular_name' => __('Scientific Name', 'wp-seedbank'),
+                    'all_items'     => __('All Scientific Names', 'wp-seedbank'),
+                    'edit_item'     => __('Edit Scientific Name', 'wp-seedbank'),
+                    'update_item'   => __('Update Scientific Name', 'wp-seedbank'),
+                    'add_new_item'  => __('Add New Scientific Name', 'wp-seedbank'),
+                    'new_item_name' => __('New Scientific Name', 'wp-seedbank'),
+                    'parent_item'   => __('Parent Classification', 'wp-seedbank'),
+                    'parent_item_colon' => __('Parent Classification:', 'wp-seedbank'),
+                    'search_items'  => __('Search Scientific Names', 'wp-seedbank'),
+                ),
+                'hierarchical' => true,
+                'rewrite' => array(
+                    'slug' => 'scientific-name',
+                    'hierarchical' => true
+                )
+            )
+        );
+        register_taxonomy_for_object_type($this->post_type . '_scientific_name', $this->post_type);
+
+        register_taxonomy($this->post_type . '_exchange_status', $this->post_type, array(
+                'labels' => array(
+                    'name'          => __('Exchange Statuses', 'wp-seedbank'),
+                    'singular_name' => __('Exchange Status', 'wp-seedbank'),
+                    'all_items'     => __('All Exchange Statuses', 'wp-seedbank'),
+                    'edit_item'     => __('Edit Exchange Status', 'wp-seedbank'),
+                    'update_item'   => __('Update Exchange Status', 'wp-seedbank'),
+                    'add_new_item'  => __('Add New Exchange Status', 'wp-seedbank'),
+                    'new_item_name' => __('New Exchange Status', 'wp-seedbank'),
+                    'search_items'  => __('Search Exchange Statuses', 'wp-seedbank'),
+                )
+            )
+        );
+        register_taxonomy_for_object_type($this->post_type . '_exchange_status', $this->post_type);
     }
 
     public function registerCustomSettings () {
