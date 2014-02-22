@@ -285,7 +285,7 @@ class WP_SeedBank {
         <input name="<?php print $this->post_type;?>_unit" value="<?php print esc_attr($custom["{$this->post_type}_unit"][0]);?>" placeholder="<?php _e('packets', 'wp-seedbank');?>" />.
     </p>
     <p>
-        <label><?php _e('These seeds will expire on or about', 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" />.</label> <span class="description">(<?php _e('If your seeds are in a packet, the wrapping might have an expiration date, so put that here. If you are requesting seeds, you can leave this blank.', 'wp-seedbank');?>)</span>
+        <label><?php _e('These seeds will expire on or about', 'wp-seedbank');?> <input id="<?php print esc_attr($this->post_type);?>_seed_expiry_date" name="<?php print esc_attr($this->post_type);?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" />.</label> <span class="description">(<?php _e('If you are requesting seeds, you can leave this blank.', 'wp-seedbank');?>)</span>
     </p>
     <p>
         <label><?php _e("If I don't hear from anyone by", 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" required="required" />, <?php _e("I'll stop being available to make this exchange.", 'wp-seedbank');?></label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", 'wp-seedbank');?>)</span>
@@ -464,6 +464,10 @@ class WP_SeedBank {
                     '<a href="#' . $this->post_type . '-details-meta">' . __('Seed Exchange Details', 'wp-seedbank') . '</a>'
                 );
                 $ol3 = "<strong>$ol3_str1</strong> $ol3_str2";
+                $ul1 = sprintf(
+                    esc_html__('If your seeds are in a packet, the wrapping might have an expiration date. Put that in the "%s" field.', 'wp-seedbank'),
+                    '<a href="#seedbank_seed_expiry_date">' . esc_html__('These seeds will expire on or about', 'wp-seedbank') . '</a>'
+                );
                 $p3 = sprintf(
                     esc_html__('If you know the scientific name (genus, species, variety, etc.) of your seed, you can also select it from the list of %s.', 'wp-seedbank'),
                     '<a href="#seedbank_scientific_namediv">' . esc_html__('Scientific Names', 'wp-seedbank') . '</a>'
@@ -475,7 +479,12 @@ class WP_SeedBank {
 <ol>
     <li>$ol1</li>
     <li>$ol2</li>
-    <li>$ol3</li>
+    <li>
+        $ol3
+        <ul>
+            <li>$ul1</li>
+        </ul>
+    </li>
 </ol>
 <p>$p3</p>
 <p>$p4</p>
