@@ -167,6 +167,13 @@ class WP_SeedBank {
             'normal',
             'high'
         );
+
+        // Since we create the above "Seed Exchange Details" meta box
+        // ourselves, we can remove the default meta boxes WordPress
+        // gives us with our default taxonomies.
+        foreach ($this->taxonomies as $taxonomy) {
+            remove_meta_box('tagsdiv-' . $this->post_type . '_' . $taxonomy[0], $this->post_type, 'side');
+        }
     }
 
     // TODO: Fix the i18n of the fill-in-the-blank web form?
