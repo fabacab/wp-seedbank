@@ -464,7 +464,11 @@ class WP_SeedBank {
                     '<a href="#' . $this->post_type . '-details-meta">' . __('Seed Exchange Details', 'wp-seedbank') . '</a>'
                 );
                 $ol3 = "<strong>$ol3_str1</strong> $ol3_str2";
-                $p3 = esc_html__('When you have done this, click the "Publish" (or "Submit for review") button. Congratulations! And thank you for spreading the seed love!', 'wp-seedbank');
+                $p3 = sprintf(
+                    esc_html__('If you know the scientific name (genus, species, variety, etc.) of your seed, you can also select it from the list of %s.', 'wp-seedbank'),
+                    '<a href="#seedbank_scientific_namediv">' . esc_html__('Scientific Names', 'wp-seedbank') . '</a>'
+                );
+                $p4 = esc_html__('When you have done this, click the "Publish" (or "Submit for review") button. Congratulations! And thank you for spreading the seed love!', 'wp-seedbank');
                 $html = <<<END_HTML
 <p>$p1</p>
 <p>$p2</p>
@@ -474,15 +478,62 @@ class WP_SeedBank {
     <li>$ol3</li>
 </ol>
 <p>$p3</p>
+<p>$p4</p>
 END_HTML;
                 $screen->add_help_tab(array(
                     'id' => $this->post_type . '-' . $screen->base . '-help',
                     'title' => __('Adding a Seed Exchange', 'wp-seedbank'),
                     'content' => $html
                 ));
-            break;
+                break;
+            case 'edit-seedbank_scientific_name':
+                $html = '<p>'
+                    . esc_html__('You can use scientific names to communicate about the kind of seed you have in a more precise way. A scientific name contains information about the genus and species of your seed, as well as any applicable more specific classification (called an "infraspecific name"). The WordPress SeedBank plugin expects scientific names to match the accepted names in the International Code of Nomenclature for Cultivated Plants (ICNCP). Several dozen genera and various species, subspecies, varieties, and cultivar Groups are already included.', 'wp-seedbank')
+                    . '</p>';
+                $screen->add_help_tab(array(
+                    'id' => $this->post_type . '-' . $screen->id . '-help-overview',
+                    'title' => __('Overview', 'wp-seedbank'),
+                    'content' => $html
+                ));
+                $html = '<p>'
+                    . esc_html__('To add a new scientific name on this screen, enter the following information:', 'wp-seedbank')
+                    . '</p>';
+                $html .= '<ol>';
+                $html .= '<li>'
+                    . sprintf(
+                        '<strong>' . esc_html__('Name:', 'wp-seedbank') . '</strong> '
+                        . esc_html__('The name is the full scientific name for your seed. Be as specific as you know how and try to follow the examples already listed.', 'wp-seedbank')
+                    )
+                    . '</li>';
+                $html .= '<li>'
+                    . sprintf(
+                        '<strong>' . esc_html__('Slug:', 'wp-seedbank') . '</strong> '
+                        . esc_html__('The slug is the URL-friendly version of the scientific name. You can leave this blank to automatically fill it in from the Name field you entered in the previous step.', 'wp-seedbank')
+                    )
+                    . '</li>';
+                $html .= '<li>'
+                    . sprintf(
+                        '<strong>' . esc_html__('Parent:', 'wp-seedbank') . '</strong> '
+                        . esc_html__('The parent is the higher-level rank for this scientific name. Each new scientific name should be added to the proper place in the hierarchy of biological classification. For instance, if you are adding a new species, like %1$s, be sure to set the correct genus (%2$s) as its parent. If the appropriate higher-level rank does not yet exist, create it first and then come back to enter the lower-level scientific name. (WP-SeedBank expects the top-level category to be the seed genus.)', 'wp-seedbank'),
+                            '<em class="scientific_name">' . esc_html__('Allium cepa', 'wp-seedbank') . '</em>',
+                            '<em class="scientific_name">' . esc_html__('Allium', 'wp-seedbank') . '</em>'
+                    )
+                    . '</li>';
+                $html .= '<li>'
+                    . sprintf(
+                        '<strong>' . esc_html__('Description:', 'wp-seedbank') . '</strong> '
+                        . esc_html__('You can enter a short explanation of what this scientific name means for laypeople who are more familiar with common vernacular than scientific terms. You can also provide any extra information about this specific seed, such as scientific name synonyms or other custom notes. This provides a good teaching opportunity for those in your community who want to learn more about seed saving. You can also leave this field blank.', 'wp-seedbank')
+                    )
+                    . '</li>';
+                $html .= '</ol>';
+                $screen->add_help_tab(array(
+                    'id' => $this->post_type . '-' . $screen->id . '-help-adding',
+                    'title' => __('Adding new Scientific Names', 'wp-seedbank'),
+                    'content' => $html
+                ));
+                break;
             default:
-            break;
+                break;
         }
         // Tabs for all screens.
         $screen->add_help_tab(array(
@@ -497,6 +548,15 @@ END_HTML;
                 '<a href="http://wordpress.org/plugins/wp-seedbank/other_notes/" title="' . __('Credits for WP-SeedBank', 'wp-seedbank') . '">' . __('Donations are appreciated.', 'wp-seedbank') . '</a>'
             ) . '</p>'
         ));
+
+        $sidebar = '<p><strong>' . esc_html__('More WP-SeedBank help:', 'wp-seedbank') . '</strong></p>';
+        $sidebar .= '<p><a href="https://wordpress.org/support/plugin/wp-seedbank" target="_blank">' . esc_html__('WP-SeedBank support forum', 'wp-seedbank') . '</a></p>';
+        $sidebar .= '<p><a href="https://github.org/meitar/wp-seedbank/issues/new" target="_blank">' . esc_html__('WP-SeedBank bug report form (for programmers)', 'wp-seedbank') . '</a></p>';
+        $sidebar .= '<p>' . sprintf(
+            esc_html__('WP-SeedBank is free software, but sadly grocery stores do not offer free food. Please consider %sdonating some food to the plugin maintainer%s. %s', 'wp-seedbank'),
+            '<strong><a href="http://maybemaimed.com/cyberbusking/#food">', '</a></strong>', '&hearts;'
+        ) . '</p>';
+        $screen->set_help_sidebar($screen->get_help_sidebar() . $sidebar);
     }
 
     public function activate () {
