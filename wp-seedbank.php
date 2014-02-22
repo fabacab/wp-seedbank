@@ -620,6 +620,23 @@ END_HTML;
             }
         }
 
+        // Detect existence of obsolete taxonomy and remove it.
+        $sql = $wpdb->prepare(
+            "SELECT DISTINCT taxonomy FROM {$wpdb->term_taxonomy} WHERE taxonomy=%s",
+            $this->post_type . '_seed_genus'
+        );
+        $results = $wpdb->get_results($sql);
+        if (!empty($results)) {
+            register_taxonomy($this->post_type . '_seed_genus', $this->post_type);
+            register_taxonomy_for_object_type($this->post_type . '_exchange_type', $this->post_type);
+            $terms = get_terms($this->post_type . '_seed_genus', array('hide_empty' => false));
+            foreach ($terms as $t) {
+                wp_delete_term($t->term_id, $this->post_type . '_seed_genus');
+            }
+            global $wp_taxonomies; // hacky way to unregister taxonomy
+            unset($wp_taxonomies[$this->post_type . '_seed_genus']);
+        }
+
         flush_rewrite_rules();
 
         // Exchange Types (verbs)
@@ -628,36 +645,132 @@ END_HTML;
         wp_insert_term(__( 'Give', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering free seeds being given away.', 'wp-seedbank')));
         wp_insert_term(__( 'Get', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges requesting seeds of a variety not already listed.', 'wp-seedbank')));
 
-        // Scientific names
-        // Empty slugs so we calculate the slug form the i18n'd term name.
-        wp_insert_term(__('Abelmoschus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Agastache', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        if ($arr = wp_insert_term(__('Allium', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
-            if (is_array($arr)) {
+        // Scientific names (as defined by ICNCP, 8th Ed.)
+        // International Code of Nomenclature for Cultivated Plants 8th Ed.
+        // That means hierarchical levels map to the following ranks:
+        //
+        //     Genus (top-level "category" or "rank")
+        //        |
+        //        -- species
+        //                |
+        //                -- Group (cultivar Group) OR subspecies OR variety
+        //                       |
+        //                       -- cultivar
+        //
+        // Empty slugs to calculate the slug from the i18n'd term name.
+        if ($genus = wp_insert_term(__('Abelmoschus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
                 // WordPress taxonomy cache is still not invalidating properly.
                 // See
                 //     https://wordpress.stackexchange.com/questions/8357/inserting-terms-in-an-hierarchical-taxonomy/8921#8921
                 delete_option($this->post_type . '_scientific_name_children');
-                wp_insert_term(__('Cepa', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $arr['term_id']));
+                wp_insert_term(__('Abelmoschus esculentus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
             }
         }
-        wp_insert_term(__('Amaranthus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        wp_insert_term(__('Agastache', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Allium', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Allium cepa', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+                wp_insert_term(__('Allium porrum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+                wp_insert_term(__('Allium sativum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+        if ($genus = wp_insert_term(__('Amaranthus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Amaranthus tricolor', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
         wp_insert_term(__('Anagallis', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Anethum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Anthenum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Antirrhinum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Apium', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Apium', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                if ($species = wp_insert_term(__('Apium graveolens', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']))) {
+                    if (is_array($species)) {
+                        delete_option($this->post_type . '_scientific_name_children');
+                        wp_insert_term(__('Apium graveolens var. dulce', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                        wp_insert_term(__('Apium graveolens var. rapaceum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                    }
+                }
+            }
+        }
+        if ($genus = wp_insert_term(__('Arachis', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Arachis hypogaea', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+        if ($genus = wp_insert_term(__('Asparagus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Asparagus officinalis', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
         wp_insert_term(__('Asclepias', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Basella', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Beta', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Brassica', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
+        if ($genus = wp_insert_term(__('Basella', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Basella rubra', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+        if ($genus = wp_insert_term(__('Beta', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                if ($species = wp_insert_term(__('Beta vulgaris', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']))) {
+                    if (is_array($species)) {
+                        delete_option($this->post_type . '_scientific_name_children');
+                        wp_insert_term(__('Beta vulgaris subsp. cicla', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                    }
+                }
+            }
+        }
+        if ($genus = wp_insert_term(__('Brassica', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Brassica napus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+                if ($species = wp_insert_term(__('Brassica oleracea', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']))) {
+                    if (is_array($species)) {
+                        delete_option($this->post_type . '_scientific_name_children');
+                        wp_insert_term(__('Brassica oleracea Acephala Group', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                        wp_insert_term(__('Brassica oleracea Botrytis Group', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                        wp_insert_term(__('Brassica oleracea Capitata Group', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                        wp_insert_term(__('Brassica oleracea Gemmifera Group', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                        wp_insert_term(__('Brassica oleracea Gongylodes Group', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                        wp_insert_term(__('Brassica oleracea Italica group', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                    }
+                }
+                wp_insert_term(__('Brassica rapa', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+
         wp_insert_term(__('Calendula', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Capsicum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Capsicum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Capsicum annuum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
         wp_insert_term(__('Cardiospermum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Centaurea', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Chrysanthemum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Cichorium', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Citrullus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Cichorium', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Cichorium endivia', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+                wp_insert_term(__('Cichorium intybus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+        if ($genus = wp_insert_term(__('Citrullus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Citrullus lanatus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
         wp_insert_term(__('Cleome', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Cobaea', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Consolida', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
@@ -665,59 +778,210 @@ END_HTML;
         wp_insert_term(__('Coreopsis', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Coriandrum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Cosmos', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Cucumis', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Cucurbita', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Cucumis', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Cucumis melo', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+                wp_insert_term(__('Cucumis sativa', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+        if ($genus = wp_insert_term(__('Cucurbita', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Cucurbita pepo', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+                wp_insert_term(__('Cucurbita maxima', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+        if ($genus = wp_insert_term(__('Cynara', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Cynara scolymus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+
         wp_insert_term(__('Dalea', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Daucus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Daucus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                if ($species = wp_insert_term(__('Daucus carota', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']))) {
+                    if (is_array($species)) {
+                        delete_option($this->post_type . '_scientific_name_children');
+                        wp_insert_term(__('Daucus carota subsp. sativus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                    }
+                }
+            }
+        }
         wp_insert_term(__('Diplotaxis', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Dolichos', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
         wp_insert_term(__('Echinacea', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Eruca', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Eruca', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                if ($species = wp_insert_term(__('Eruca vesicaria', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']))) {
+                    if (is_array($species)) {
+                        delete_option($this->post_type . '_scientific_name_children');
+                        wp_insert_term(__('Eruca vesicaria subsp. sativa', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                    }
+                }
+            }
+        }
         wp_insert_term(__('Eschscholzia', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Foeniculum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
+        if ($genus = wp_insert_term(__('Foeniculum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                if ($species = wp_insert_term(__('Foeniculum vulgare', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']))) {
+                    if (is_array($species)) {
+                        delete_option($this->post_type . '_scientific_name_children');
+                        wp_insert_term(__('Foeniculum vulgare var. azoricum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                    }
+                }
+            }
+        }
         wp_insert_term(__('Fragaria', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
         wp_insert_term(__('Gaillardia', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Glycine', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Helianthus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Ipomoea', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
+        if ($genus = wp_insert_term(__('Helianthus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Helianthus tuberosus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+
+        if ($genus = wp_insert_term(__('Ipomoea', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Ipomoea batatas', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+
         wp_insert_term(__('Koeleria', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Lactuca', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
+        if ($genus = wp_insert_term(__('Lactuca', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Lactuca sativa', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
         wp_insert_term(__('Lagenaria', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Lathyrus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Lupinus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Lycopersicon', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Lycopersicon', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Lycopersicon esculentum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+
         wp_insert_term(__('Malope', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Matricaria', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Mentha', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Mirabilis', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
         wp_insert_term(__('Nigella', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
         wp_insert_term(__('Ocimum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Origanum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
         wp_insert_term(__('Papaver', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Pastinaca', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Pastinaca sativa', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
         wp_insert_term(__('Passiflora', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Penstemon', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Petrolselinum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Phaseolus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Physalis', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Pisum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Phaseolus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Phaseolus lunatus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+                wp_insert_term(__('Phaseolus vulgaris', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+        if ($genus = wp_insert_term(__('Physalis', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Physalis ixocarpa', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+        if ($genus = wp_insert_term(__('Pisum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Pisum sativum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
         wp_insert_term(__('Poterium', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Raphanus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
+        if ($genus = wp_insert_term(__('Rhaphanus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Rhaphanus sativus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+        if ($genus = wp_insert_term(__('Rheum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Rheum rhabarbarum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
         wp_insert_term(__('Rosmarinus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Rudbeckia', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
         wp_insert_term(__('Salvia', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Scorpiurus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Solanum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Spinachia', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Solanum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Solanum melongena', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+                wp_insert_term(__('Solanum tuberosum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+        if ($genus = wp_insert_term(__('Spinacia', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Spinacia oleracea', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+
         wp_insert_term(__('Tagetes', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Tetragonia', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Tetragonia tetragonioides', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
         wp_insert_term(__('Thunbergia', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Thymus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Triticum ', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Tropaeolum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Zea', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+
+        if ($genus = wp_insert_term(__('Valerianella', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Valerianella locusta', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+        if ($genus = wp_insert_term(__('Vigna', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Vigna unguiculata', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
+
+        if ($genus = wp_insert_term(__('Zea', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Zea mays', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
         wp_insert_term(__('Zinnia', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
 
         // Common Names
-        // Empty slugs so we calculate the slug form the i18n'd term name.
         wp_insert_term(__('Asian Vegetable', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
         wp_insert_term(__('Bean', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
         wp_insert_term(__('Beet', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
