@@ -81,10 +81,20 @@ WP_SEEDBANK.UI.toggleBatchExchangeDataSource = function () {
 }
 
 WP_SEEDBANK.UI.prefillScientificName = function () {
-    jQuery('.taxonomy-seedbank_scientific_name #parent').change(function () {
+    var el = (jQuery('.taxonomy-seedbank_scientific_name #parent').length)
+        ? jQuery('.taxonomy-seedbank_scientific_name #parent')
+        : jQuery('#newseedbank_scientific_name_parent');
+    el.change(function () {
         var x = jQuery(this);
         var n = x.children('option:selected').text().trim();
-        var t = jQuery('#tag-name');
+        var t;
+        if (jQuery('#newseedbank_scientific_name').length) {
+            var t = jQuery('#newseedbank_scientific_name');
+        } else if (jQuery('#tag-name').length) {
+            var t = jQuery('#tag-name');
+        } else if (jQuery('#name').length) {
+            var t = jQuery('#name');
+        }
         // If not "None" or does not begin with what's being selected
         if (x.val().trim() !== '-1' && t.val().trim().indexOf(n) !== 0) {
             t.val(n + ' ' + t.val());
