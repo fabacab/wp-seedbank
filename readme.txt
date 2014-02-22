@@ -3,8 +3,8 @@ Contributors: meitar
 Donate link: https://npo.justgive.org/nonprofits/donate.jsp?ein=45-3043080
 Tags: custom posts, community, seedbank, ecology, seed swap, trade
 Requires at least: 3.5.2
-Tested up to: 3.8
-Stable tag: 0.3
+Tested up to: 3.8.1
+Stable tag: 0.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -51,34 +51,43 @@ The Seed Exchange posts you're creating use WordPress taxonomies, which WordPres
 
 == Changelog ==
 
-= 0.3 =
+= Version 0.4 =
+
+* Feature: The "Seed Genera" taxonomy has been completely removed, and replaced with a "Scientific Names" taxonomy.
+    * The "Add Seed Exchange" screen now has a "Scientific Names" selection box where you can select the scientific name for the kind of seed you're making a post about. The scientific names are organized according to their hierarchical biological classification: Genus, then species, then subspecies or variety or cultivar Group. Unlike built-in WordPress categories, the user interface for selecting a scientific name only allows you to choose one per post.
+    * **This update will delete all "Seed Genera" tags.** If you are using the "Seed Genera" taxonomy, you will need to reapply the genera you've entered in the new Scientific Names taxonomy.
+* Feature: Cleaner editing interface; meta boxes that duplicated "Seed Exchange Details" fields have been removed.
+* Bugfix: Exchange expiry date is now required. Leaving this blank caused your exchange post to be "Deleted" immediately.
+* Bugfix: Perform database migration from very old 0.2.x versions.
+
+= Version 0.3 =
 * Complete internal rewrite to improve code quality, security, and maintainability.
 * [Bugfix](https://github.com/meitar/wp-seedbank/issues/6): Seed Exchange posts are now correctly linked to their respective category pages.
 * Feature: Seed Exchange posts can now be composed in "visual" (WYSIWYG) mode.
 * Feature: Show information entered into the Seed Exchange Details box on the post itself, without needing to write your own template. If not already active on your website, go to WordPress's "Settings -> Reading" screen, and choose whether to position the details above or below the post content in the new "Seedbank Settings" section.
 * Feature: Contextual help offers step-by-step instructions for use. Click the "Help" button on any SeedBank page for help with that page.
 
-= 0.2.3 =
+= Version 0.2.3 =
 * Simpler seed exchange editing screen for typical users.
 * Manage comments (public replies to seed exchange posts) on the post edit screen itself.
 * Allow admins to reassign seed exchange author.
 * Seed exchange posts can now be viewed as their own archive category.
 * Fix bug where singular post type name wasn't correctly set or displayed.
 
-= 0.2.2 =
+= Version 0.2.2 =
 * Fix bug where permalink structure did not reflect seed exchange post types.
 
-= 0.2.1 =
+= Version 0.2.1 =
 * Fix minor JavaScript user interface bugs.
 * Remove unused activation code.
 
-= 0.2 =
+= Version 0.2 =
 * Make "Swap" the default seed exchange type.
 * Cleaner interface for viewing seed exchanges and importing from CSV files.
 * More default plant common names.
 * Clean internal code references.
 
-= 0.1 =
+= Version 0.1 =
 * Initial public release.
 
 == Credits ==
