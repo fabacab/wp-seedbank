@@ -1162,6 +1162,7 @@ END_HTML;
             <th><?php _e('Seed expiration date', 'wp-seedbank');?></th>
             <th><?php _e('Exchange expiration date', 'wp-seedbank');?></th>
             <th><?php _e('Notes', 'wp-seedbank');?></th>
+            <th><?php _e('Scientific Name', 'wp-seedbank');?></th>
         </tr>
     </thead>
     <tbody>
@@ -1174,6 +1175,7 @@ END_HTML;
             <td><?php _e('2016-05-01', 'wp-seedbank');?></td>
             <td><?php _e('2014-05-01', 'wp-seedbank');?></td>
             <td><?php _e('Ideally, I would like to receive carrot seeds in exchange. Thanks!', 'wp-seedbank');?></td>
+            <td><?php _e('Capsicum', 'wp-seedbank');?></td>
         </tr>
         <tr>
             <td><?php _e('For sale: tomato seed packets, negotiable price', 'wp-seedbank');?></td>
@@ -1184,6 +1186,7 @@ END_HTML;
             <td><?php _e('2017-01-01', 'wp-seedbank');?></td>
             <td><?php _e('2015-06-01', 'wp-seedbank');?></td>
             <td><?php _e('Price is negotiable. Reply here or by phone at (555) 555-5555 if interested.', 'wp-seedbank');?></td>
+            <td><?php _e('Solanum', 'wp-seedbank');?></td>
         </tr>
         <tr>
             <td colspan="8">&hellip;</td>
@@ -1197,6 +1200,7 @@ END_HTML;
             <td><?php _e('2015-03-30', 'wp-seedbank');?></td>
             <td><?php _e('2014-05-01', 'wp-seedbank');?></td>
             <td><?php _e('These beans are kidney beans. They are delicious and nutritious, but taste nothing like chicken.', 'wp-seedbank');?></td>
+            <td><?php _e('Phaseolus', 'wp-seedbank');?></td>
         </tr>
     <tbody>
 </table>
@@ -1248,12 +1252,22 @@ END_HTML;
                 $unit,
                 $seed_expiry_date,
                 $exchange_expiry_date,
-                $body
+                $body,
+                $scientific_name
             ) = $x;
             // convert it into a new seed exchange post.
             $taxs = array();
             foreach ($this->taxonomies as $taxonomy) {
-                $taxs[$this->post_type . '_' . $taxonomy[0]] = $$taxonomy[0];
+                $taxs[$this->post_type . '_' . $taxonomy[0]] = trim($$taxonomy[0]);
+            }
+            // Convert Scientific Name string to category ID.
+            if (!empty($taxs[$this->post_type . '_scientific_name'])) {
+                // search by name or, if that's not found, by slug
+                if ($t = get_term_by('name', $taxs[$this->post_type . '_scientific_name'], $this->post_type . '_scientific_name')) {
+                    $taxs[$this->post_type . '_scientific_name'] = $t->term_id;
+                } else if ($t = get_term_by('slug', sanitize_title_with_dashes($taxs[$this->post_type . '_scientific_name']), $this->post_type . '_scientific_name')) {
+                    $taxs[$this->post_type . '_scientific_name'] = $t->term_id;
+                }
             }
             $post = array(
                 'comment_status' => 'open',
@@ -1262,8 +1276,6 @@ END_HTML;
                 'post_content' => $body,
 //                'post_date' => , // should be "now"?
 //                'post_date_gmt' => , // should be "now"?
-//                'post_name' => , // automatic?
-//                'post_parent' => , // automatic?
                 'post_status' => $post_status,
                 'post_title' => $title,
                 'post_type' => $this->post_type,
