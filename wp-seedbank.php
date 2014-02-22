@@ -15,6 +15,7 @@ class WP_SeedBank {
         array('exchange_type'),
         array('common_name'),
         array('scientific_name'),
+        // TODO: Exchange statuses shouldn't be taxonomies.
         array('exchange_status')
     );
     private $meta_fields = array(
@@ -156,7 +157,8 @@ class WP_SeedBank {
                     'add_new_item'  => __('Add New Exchange Status', 'wp-seedbank'),
                     'new_item_name' => __('New Exchange Status', 'wp-seedbank'),
                     'search_items'  => __('Search Exchange Statuses', 'wp-seedbank'),
-                )
+                ),
+                'show_ui' => false
             )
         );
         register_taxonomy_for_object_type($this->post_type . '_exchange_status', $this->post_type);
@@ -291,7 +293,7 @@ class WP_SeedBank {
         <label><?php _e("If I don't hear from anyone by", 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" required="required" />, <?php _e("I'll stop being available to make this exchange.", 'wp-seedbank');?></label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", 'wp-seedbank');?>)</span>
     </p>
     <p>
-        <?php // TODO: i18n this? See question concerning madlibs style forms, at function signature. ?>
+        <?php // TODO: This shouldn't be a taxonomy, but a meta field. ?>
         <label><?php _e('This seed exchange is', 'wp-seedbank');?> <?php print $status_select;?>.</label> <span class="description">(<?php foreach ($status_options as $x) :?>The <code><?php _e($x->name, 'wp-seedbank');?></code> type is for <?php print strtolower($x->description);?> <?php endforeach;?>)</span>
     </p>
 <?php
