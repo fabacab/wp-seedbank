@@ -502,9 +502,9 @@ END_HTML;
     public function activate () {
         $this->createDataTypes(); // This registers new taxonomies.
 
-        // If the old version 0.2.3 exists
-        if ('0.2.3' === get_option('wp_seedbank_version')) {
-            global $wpdb;
+        global $wpdb;
+        // If any old 0.2.x versions exist
+        if ('0.2' === substr(get_option('wp_seedbank_version'), 0, 3)) {
             $errors = array();
 
             // we need to do some database & option cleanup that looks
