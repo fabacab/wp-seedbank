@@ -1235,8 +1235,8 @@ END_HTML;
             return;
         }
 
-        $strip = ($_POST[$this->post_type . '-batch-exchange-strip-headers']) ? true : false; 
-        $post_status = ($_POST[$this->post_type . '-batch-exchange-post_status']) ? 'draft' : 'publish';
+        $strip = (isset($_POST[$this->post_type . '-batch-exchange-strip-headers'])) ? true : false;
+        $post_status = (isset($_POST[$this->post_type . '-batch-exchange-post_status'])) ? 'draft' : 'publish';
 
         $data = WP_SeedBank_Utilities::csvToMultiArray($where, $strip); // true means "strip headers"
 
