@@ -57,7 +57,7 @@ WP_SEEDBANK.UI.toggleDeletedExchangePostVisibility = function (state) {
             WP_SEEDBANK.UI.showDeletedExchangeRequests();
         break;
     }
-}
+};
 
 WP_SEEDBANK.UI.toggleBatchExchangeDataSource = function () {
     jQuery('#seedbank-batch-exchange-file-upload').hide();
@@ -80,12 +80,25 @@ WP_SEEDBANK.UI.toggleBatchExchangeDataSource = function () {
     });
 }
 
+WP_SEEDBANK.UI.prefillScientificName = function () {
+    jQuery('.taxonomy-seedbank_scientific_name #parent').change(function () {
+        var x = jQuery(this);
+        var n = x.children('option:selected').text().trim();
+        var t = jQuery('#tag-name');
+        // If not "None" or does not begin with what's being selected
+        if (x.val().trim() !== '-1' && t.val().trim().indexOf(n) !== 0) {
+            t.val(n + ' ' + t.val());
+        }
+    });
+};
+
 WP_SEEDBANK.init = function () {
     // TODO: Run these only on the appropriate page.
     WP_SEEDBANK.UI.attachDatepicker();
     WP_SEEDBANK.UI.toggleBatchExchangeDataSource();
     // TODO: Filter these out of the result set from the PHP at some point, eh?
     WP_SEEDBANK.UI.toggleDeletedExchangePostVisibility('hide');
+    WP_SEEDBANK.UI.prefillScientificName();
 };
 
 window.addEventListener('DOMContentLoaded', WP_SEEDBANK.init);

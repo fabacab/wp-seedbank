@@ -801,7 +801,7 @@ END_HTML;
                         wp_insert_term(__('Brassica oleracea Capitata Group', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
                         wp_insert_term(__('Brassica oleracea Gemmifera Group', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
                         wp_insert_term(__('Brassica oleracea Gongylodes Group', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
-                        wp_insert_term(__('Brassica oleracea Italica group', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
+                        wp_insert_term(__('Brassica oleracea Italica Group', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $species['term_id']));
                     }
                 }
                 wp_insert_term(__('Brassica rapa', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
