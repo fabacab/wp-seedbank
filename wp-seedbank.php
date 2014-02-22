@@ -281,16 +281,16 @@ class WP_SeedBank {
         ob_end_clean();
 ?>
     <p>
-        <label><?php _e('I would like to', 'wp-seedbank');?> <?php print $type_select;?></label>
-        <input name="<?php print $this->post_type;?>_quantity" value="<?php print esc_attr($custom["{$this->post_type}_quantity"][0]);?>" placeholder="<?php _e('enter a number', 'wp-seedbank');?>" />
+        <label><?php esc_html_e('I would like to', 'wp-seedbank');?> <?php print $type_select;?></label>
+        <input name="<?php print esc_attr($this->post_type);?>_quantity" value="<?php print esc_attr($custom["{$this->post_type}_quantity"][0]);?>" placeholder="<?php _e('enter a number', 'wp-seedbank');?>" />
         <?php print $common_name_select;?>
-        <input name="<?php print $this->post_type;?>_unit" value="<?php print esc_attr($custom["{$this->post_type}_unit"][0]);?>" placeholder="<?php _e('packets', 'wp-seedbank');?>" />.
+        <input name="<?php print esc_attr($this->post_type);?>_unit" value="<?php print esc_attr($custom["{$this->post_type}_unit"][0]);?>" placeholder="<?php esc_attr_e('packets', 'wp-seedbank');?>" />.
     </p>
     <p>
-        <label><?php _e('These seeds will expire on or about', 'wp-seedbank');?> <input id="<?php print esc_attr($this->post_type);?>_seed_expiry_date" name="<?php print esc_attr($this->post_type);?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" />.</label> <span class="description">(<?php _e('If you are requesting seeds, you can leave this blank.', 'wp-seedbank');?>)</span>
+        <label><?php esc_html_e('These seeds will expire on or about', 'wp-seedbank');?> <input id="<?php print esc_attr($this->post_type);?>_seed_expiry_date" name="<?php print esc_attr($this->post_type);?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php esc_attr_e('enter a date', 'wp-seedbank');?>" />.</label> <span class="description"><?php esc_html_e('(If you are requesting seeds, you can leave this blank.)', 'wp-seedbank');?></span>
     </p>
     <p>
-        <label><?php _e("If I don't hear from anyone by", 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" required="required" />, <?php _e("I'll stop being available to make this exchange.", 'wp-seedbank');?></label> <span class="description">(<?php _e("If you don't get a response by this date, your request will automatically close.", 'wp-seedbank');?>)</span>
+        <label><?php esc_html_e('If I don\'t hear from anyone by', 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" required="required" />, <?php esc_html_e('I\'ll stop being available to make this exchange.', 'wp-seedbank');?></label> <span class="description"><?php esc_html_e('(If you do not get a response by this date, your request will automatically close.)', 'wp-seedbank');?></span>
     </p>
     <p>
         <?php // TODO: This shouldn't be a taxonomy, but a meta field. ?>
