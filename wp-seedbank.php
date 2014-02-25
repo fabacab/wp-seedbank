@@ -1174,61 +1174,61 @@ END_HTML;
         <p><label><?php esc_html_e('The address of the file containing my seed exchange data is', 'wp-seedbank');?> <input name="<?php print esc_attr($this->post_type);?>-batch-exchange-file-url" value="" placeholder="<?php esc_attr_e('http://mysite.com/file.csv', 'wp-seedbank');?>" />.</label></p>
     </fieldset>
     <fieldset id="seedbank-batch-exchange-file-upload"><legend><?php _e('File upload options', 'wp-seedbank');?></legend>
-        <p><label><?php _e('The file on my computer containing my seed exchange data is', 'wp-seedbank');?> <input type="file" name="<?php print esc_attr($this->post_type);?>-batch-exchange-file-data" value="" />.</label></p>
+        <p><label><?php esc_html_e('The file on my computer containing my seed exchange data is', 'wp-seedbank');?> <input type="file" name="<?php print esc_attr($this->post_type);?>-batch-exchange-file-data" value="" />.</label></p>
     </fieldset>
-    <p><label><input type="checkbox" name="<?php print esc_attr($this->post_type);?>-batch-exchange-post_status" value="draft" /> <?php _e('Let me review each seed exchange before publishing.', 'wp-seedbank');?></label></p>
+    <p><label><input type="checkbox" name="<?php print esc_attr($this->post_type);?>-batch-exchange-post_status" value="draft" /> <?php esc_html_e('Let me review each seed exchange before publishing.', 'wp-seedbank');?></label></p>
     <p><input type="submit" name="<?php print esc_attr($this->post_type);?>-batch-exchange-submit" value="<?php esc_attr_e('Make Seed Exchanges', 'wp-seedbank');?>" /></p>
 </form>
 <table summary="<?php esc_attr_e('Example of batch seed exchange data.', 'wp-seedbank');?>" id="wp-seedbank-batch-exchange-example">
     <thead>
         <tr>
-            <th><?php _e('Title', 'wp-seedbank');?></th>
-            <th><?php _e('Type', 'wp-seedbank');?></th>
-            <th><?php _e('Quantity', 'wp-seedbank');?></th>
-            <th><?php _e('Common Name', 'wp-seedbank');?></th>
-            <th><?php _e('Unit label', 'wp-seedbank');?></th>
-            <th><?php _e('Seed expiration date', 'wp-seedbank');?></th>
-            <th><?php _e('Exchange expiration date', 'wp-seedbank');?></th>
-            <th><?php _e('Notes', 'wp-seedbank');?></th>
-            <th><?php _e('Scientific Name', 'wp-seedbank');?></th>
+            <th><?php esc_html_e('Title', 'wp-seedbank');?></th>
+            <th><?php esc_html_e('Type', 'wp-seedbank');?></th>
+            <th><?php esc_html_e('Quantity', 'wp-seedbank');?></th>
+            <th><?php esc_html_e('Common Name', 'wp-seedbank');?></th>
+            <th><?php esc_html_e('Unit label', 'wp-seedbank');?></th>
+            <th><?php esc_html_e('Seed expiration date', 'wp-seedbank');?></th>
+            <th><?php esc_html_e('Exchange expiration date', 'wp-seedbank');?></th>
+            <th><?php esc_html_e('Notes', 'wp-seedbank');?></th>
+            <th><?php esc_html_e('Scientific Name', 'wp-seedbank');?></th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><?php _e('Looking to swap peppers for carrots', 'wp-seedbank');?></td>
-            <td><?php _e('Swap', 'wp-seedbank');?></td>
-            <td><?php _e('5', 'wp-seedbank');?></td>
-            <td><?php _e('Pepper', 'wp-seedbank');?></td>
-            <td><?php _e('seeds', 'wp-seedbank');?></td>
-            <td><?php _e('2016-05-01', 'wp-seedbank');?></td>
-            <td><?php _e('2014-05-01', 'wp-seedbank');?></td>
-            <td><?php _e('Ideally, I would like to receive carrot seeds in exchange. Thanks!', 'wp-seedbank');?></td>
-            <td><?php _e('Capsicum', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Looking to swap peppers for carrots', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Swap', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('5', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Pepper', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('seeds', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('2016-05-01', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('2014-05-01', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Ideally, I would like to receive carrot seeds in exchange. Thanks!', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Capsicum', 'wp-seedbank');?></td>
         </tr>
         <tr>
-            <td><?php _e('For sale: tomato seed packets, negotiable price', 'wp-seedbank');?></td>
-            <td><?php _e('Sell', 'wp-seedbank');?></td>
-            <td><?php _e('100', 'wp-seedbank');?></td>
-            <td><?php _e('Tomato', 'wp-seedbank');?></td>
-            <td><?php _e('seed packets', 'wp-seedbank');?></td>
-            <td><?php _e('2017-01-01', 'wp-seedbank');?></td>
-            <td><?php _e('2015-06-01', 'wp-seedbank');?></td>
-            <td><?php _e('Price is negotiable. Reply here or by phone at (555) 555-5555 if interested.', 'wp-seedbank');?></td>
-            <td><?php _e('Solanum', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('For sale: tomato seed packets, negotiable price', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Sell', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('100', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Tomato', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('seed packets', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('2017-01-01', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('2015-06-01', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Price is negotiable. Reply here or by phone at (555) 555-5555 if interested.', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Solanum', 'wp-seedbank');?></td>
         </tr>
         <tr>
             <td colspan="8">&hellip;</td>
         </tr>
         <tr>
-            <td><?php _e('These are the best bean seeds!', 'wp-seedbank');?></td>
-            <td><?php _e('Swap', 'wp-seedbank');?></td>
-            <td><?php _e('20', 'wp-seedbank');?></td>
-            <td><?php _e('Bean', 'wp-seedbank');?></td>
-            <td><?php _e('packets', 'wp-seedbank');?></td>
-            <td><?php _e('2015-03-30', 'wp-seedbank');?></td>
-            <td><?php _e('2014-05-01', 'wp-seedbank');?></td>
-            <td><?php _e('These beans are kidney beans. They are delicious and nutritious, but taste nothing like chicken.', 'wp-seedbank');?></td>
-            <td><?php _e('Phaseolus', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('These are the best bean seeds!', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Swap', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('20', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Bean', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('packets', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('2015-03-30', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('2014-05-01', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('These beans are kidney beans. They are delicious and nutritious, but taste nothing like chicken.', 'wp-seedbank');?></td>
+            <td><?php esc_html_e('Phaseolus', 'wp-seedbank');?></td>
         </tr>
     <tbody>
 </table>
@@ -1242,7 +1242,7 @@ END_HTML;
                    TRANSLATORS:
                    Ignore these placeholders, they are for HTML code.
                  */
-                esc_html__('Your batch exchange request has expired or is invalid. Please %s start again %s.', 'wp-seedbank'),
+                esc_html__('Your batch exchange request has expired or is invalid. Please %sstart again%s.', 'wp-seedbank'),
                 '<a href="' . admin_url('edit.php?post_type=' . $this->post_type . '&page=' . $this->post_type . '_batch_exchange') . '">',
                 '</a>'
             ),
@@ -1251,7 +1251,7 @@ END_HTML;
                    TRANSLATORS:
                    Ignore these placeholders, they are for HTML code.
                  */
-                __('Please let us know where to find your data. You will need to %s start again %s.', 'wp-seedbank'),
+                __('Please let us know where to find your data. You will need to %sstart again%s.', 'wp-seedbank'),
                 '<a href="' . admin_url('edit.php?post_type=' . $this->post_type . '&page=' . $this->post_type . '_batch_exchange') . '">',
                 '</a>'
             )
