@@ -81,7 +81,7 @@ class WP_SeedBank {
             'labels' => $labels,
             'description' => __('Postings to the SeedBank', 'wp-seedbank'),
             'public' => true,
-            'menu_icon' => plugins_url(basename(__DIR__) . '/images/seedexchange_icon.png'),
+            'menu_icon' => plugins_url('images/seedexchange_icon.png', __FILE__),
             'has_archive' => true,
             'supports' => array(
                 'title',
@@ -420,7 +420,7 @@ class WP_SeedBank {
         $screen = get_current_screen();
         // Only load this plugin's JS on this plugin's own screens.
         if (false === strpos($screen->id, $this->post_type)) { return; }
-        wp_register_script('wp-seedbank', plugins_url(basename(__DIR__) . '/wp-seedbank.js'), array('jquery', 'jquery-ui-datepicker'));
+        wp_register_script('wp-seedbank', plugins_url('wp-seedbank.js', __FILE__), array('jquery', 'jquery-ui-datepicker'));
         wp_enqueue_script('wp-seedbank');
         $x = $wp_scripts->query('jquery-ui-core');
         wp_enqueue_style('jquery-ui-smoothness', "//ajax.googleapis.com/ajax/libs/jqueryui/{$x->ver}/themes/smoothness/jquery-ui.min.css", false, null);
