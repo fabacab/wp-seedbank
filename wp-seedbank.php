@@ -382,7 +382,7 @@ class WP_SeedBank {
     }
 
     public function expireExchangePost ($post_id) {
-        update_post_meta($post_id, $this->post_type . '_exchange_status', 'Deleted');
+        update_post_meta($post_id, $this->post_type . '_exchange_status', __('Deleted', 'wp-seedbank'));
         wp_set_object_terms(
             $post_id,
             sanitize_text_field(get_post_meta($post_id, $this->post_type . '_exchange_status', true)),
