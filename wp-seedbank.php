@@ -1145,7 +1145,7 @@ END_HTML;
          */
         print sprintf(
             esc_html__('It %s column labels (a header row).', 'wp-seedbank'),
-            '<select name="<?php print esc_attr($this->post_type);?>-batch-exchange-strip-headers">'
+            '<select name="' . esc_attr($this->post_type) . '-batch-exchange-strip-headers">'
             . '<option value="1">' . esc_html_x('has', 'This is the "has" in "It has column labels (a header row).', 'wp-seedbank') . '</option>'
             . '<option value="0">' . esc_html_x('does not have', 'This is the "does not have" in "It does not have column labels (a header row).', 'wp-seedbank') . '</option>'
             . '</select>'
@@ -1315,7 +1315,7 @@ END_HTML;
         // Display success message.
         $n = count($new_post_ids);
         if ($n) { ?>
-            <p><?php print sprintf(esc_html_n('Successfully imported %d new Seed Exchange Posts.', 'Successfully imported %d new Seed Exchange Post.', $n, 'wp-seedbank'), $n);?></p>
+            <p><?php print sprintf(esc_html(_n('Successfully imported %d new Seed Exchange Post.', 'Successfully imported %d new Seed Exchange Posts.', $n, 'wp-seedbank')), $n);?></p>
             <p><a href="<?php print admin_url('edit.php?post_type=' . $this->post_type);?>"><?php esc_html_e('All Seed Exchanges', 'wp-seedbank');?></a>.</p>
 <?php
         }
