@@ -1175,6 +1175,7 @@ END_HTML;
     </fieldset>
     <fieldset id="seedbank-batch-exchange-file-upload"><legend><?php _e('File upload options', 'wp-seedbank');?></legend>
         <p><label><?php esc_html_e('The file on my computer containing my seed exchange data is', 'wp-seedbank');?> <input type="file" name="<?php print esc_attr($this->post_type);?>-batch-exchange-file-data" value="" />.</label></p>
+        <p><span class="description"><?php esc_html_e('For the best results, ensure your file is encoded as "Unicode" or "UTF-8," especially if it contains diacritics or special characters. UTF-8 encoding is usually available as one of the "Character encoding" options in the "Save As" window of the application you used to create this file.');?></span></p>
     </fieldset>
     <p><label><input type="checkbox" name="<?php print esc_attr($this->post_type);?>-batch-exchange-post_status" value="draft" /> <?php esc_html_e('Let me review each seed exchange before publishing.', 'wp-seedbank');?></label></p>
     <p><input type="submit" name="<?php print esc_attr($this->post_type);?>-batch-exchange-submit" value="<?php esc_attr_e('Make Seed Exchanges', 'wp-seedbank');?>" /></p>
