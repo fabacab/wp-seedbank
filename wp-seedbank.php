@@ -310,6 +310,15 @@ class WP_SeedBank {
         return ($x === '_date' || $x === '_time') ? true : false;
     }
 
+    /**
+     * Utility function to determine whether this name is one of our
+     * taxonomies. Useful for detecting duplication between existing
+     * meta fields and custom taxonomies (until that's worked out).
+     */
+    private function isTaxonomy ($key) {
+       return (in_array(array($key), $this->taxonomies)) ? true : false;
+    }
+
     public function radioIzeTaxonomyInterface () {
         $screen = get_current_screen();
         if (false === strpos($screen->id, 'seedbank')) { return; }
@@ -386,6 +395,9 @@ class WP_SeedBank {
         $options = get_option($this->post_type . '_settings');
         if ($this->post_type === get_post_type($post->ID)) {
             $append = '<ul id="' . esc_attr($this->post_type . '-meta-' . $post->ID) . '" class="' . esc_attr($this->post_type) . '-meta">';
+            if ($val = get_the_term_list($post->ID, $this->post_type . '_scientific_name')) {
+                $append .= '<li><strong>' . __('Scientific Name:', 'wp-seedbank') . '</strong> ' . $val . '</li>';
+            }
             $custom = get_post_custom($post->ID);
             foreach ($this->meta_fields as $f) {
                 $val = $custom[$this->post_type . '_' . $f][0];
@@ -395,7 +407,13 @@ class WP_SeedBank {
                     $val = date(get_option('date_format'), $val);
                 }
                 if ($val) {
-                    $append .= '<li><strong>' . esc_html(ucwords(str_replace('_', ' ', $f))) . ':</strong> ' . esc_html($val) . ' </li>';
+                    $append .= '<li><strong>' . esc_html(ucwords(str_replace('_', ' ', $f))) . ':</strong> ';
+                    if ($this->isTaxonomy($f)) {
+                        $append .= get_the_term_list($post->ID, $this->post_type . '_' . $this->taxonomies[array_search(array($f), $this->taxonomies)][0]);
+                    } else {
+                        $append .= esc_html($val);
+                    }
+                    $append .= '</li>';
                 }
             }
             $append .= '</ul>';
@@ -1304,7 +1322,12 @@ END_HTML;
                 $new_post_ids[] = $p;
                 update_post_meta($p, $this->post_type . '_common_name', sanitize_text_field($common_name));
                 update_post_meta($p, $this->post_type . '_quantity', sanitize_text_field($quantity));
-                update_post_meta($p, $this->post_type . '_exchange_status', sanitize_text_field('Active')); // New posts are always active?
+                // New posts are always active?
+                update_post_meta($p, $this->post_type . '_exchange_status', sanitize_text_field(__('Active', 'wp-seedbank')));
+                if (empty($post['tax_input'][$this->post_type . '_exchange_status'])) {
+                    $tx = get_term_by('name', __('Active', 'wp-seedbank'), $this->post_type . '_exchange_status');
+                    wp_set_object_terms($p, $tx->term_id, $this->post_type . '_exchange_status');
+                }
                 update_post_meta($p, $this->post_type . '_exchange_type', sanitize_text_field($exchange_type));
                 update_post_meta($p, $this->post_type . '_unit', sanitize_text_field($unit));
                 update_post_meta($p, $this->post_type . '_seed_expiry_date', gmdate('U', strtotime($seed_expiry_date)));
