@@ -140,8 +140,7 @@ class WP_SeedBank {
                 ),
                 'hierarchical' => true,
                 'rewrite' => array(
-                    'slug' => 'scientific-name',
-                    'hierarchical' => true
+                    'slug' => 'scientific-name'
                 )
             )
         );
