@@ -4,7 +4,7 @@ Donate link: https://npo.justgive.org/nonprofits/donate.jsp?ein=45-3043080
 Tags: custom posts, community, seedbank, ecology, seed swap, trade
 Requires at least: 3.5.2
 Tested up to: 3.8.1
-Stable tag: 0.4
+Stable tag: 0.4.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -50,6 +50,15 @@ Follow these steps to get your seed exchange website up and running quickly:
 The Seed Exchange posts you're creating use WordPress taxonomies, which WordPress doesn't include in search results by default. This means that if you're creating a Seed Exchange post for a given vegetable, but the only place the name of this vegetable appears is in the plugin's custom "Common Name" field (and not in the post's title or content), then WordPress can't find that posting based on a simple keyword search. If you'd like to make the WP-SeedBank's taxonomies searchable, too, we recommend the [Search Everything plugin](https://wordpress.org/plugins/search-everything/).
 
 == Changelog ==
+
+= Version 0.4.1 =
+
+* Feature: Taxonomies for Seed Exchange Details are now linked when they are displayed.
+* Bugfix: Correctly load image and JavaScript assets on PHP 5.2.x installs.
+* Translations for Swedish (`sv_SE`) and Italian (`it_IT`) are now available.
+    * Activate your language translation by [configuring your WordPress to use your language](http://codex.wordpress.org/WordPress_in_Your_Language).
+    * Want WP-SeedBank in your language? [Join our team of translators](https://www.transifex.com/signup/contributor/?next=/projects/p/wp-seedbank/)!
+
 
 = Version 0.4 =
 
