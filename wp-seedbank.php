@@ -281,7 +281,7 @@ class WP_SeedBank {
 ?>
     <p>
         <label><?php esc_html_e('I would like to', 'wp-seedbank');?> <?php print $type_select;?></label>
-        <input name="<?php print esc_attr($this->post_type);?>_quantity" value="<?php print esc_attr($custom["{$this->post_type}_quantity"][0]);?>" placeholder="<?php _e('enter a number', 'wp-seedbank');?>" />
+        <input name="<?php print esc_attr($this->post_type);?>_quantity" value="<?php print esc_attr($custom["{$this->post_type}_quantity"][0]);?>" placeholder="<?php esc_attr_e('enter a number', 'wp-seedbank');?>" />
         <?php print $common_name_select;?>
         <input name="<?php print esc_attr($this->post_type);?>_unit" value="<?php print esc_attr($custom["{$this->post_type}_unit"][0]);?>" placeholder="<?php esc_attr_e('packets', 'wp-seedbank');?>" />.
     </p>
@@ -289,7 +289,7 @@ class WP_SeedBank {
         <label><?php esc_html_e('These seeds will expire on or about', 'wp-seedbank');?> <input id="<?php print esc_attr($this->post_type);?>_seed_expiry_date" name="<?php print esc_attr($this->post_type);?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php esc_attr_e('enter a date', 'wp-seedbank');?>" />.</label> <span class="description"><?php esc_html_e('(If you are requesting seeds, you can leave this blank.)', 'wp-seedbank');?></span>
     </p>
     <p>
-        <label><?php esc_html_e('If I don\'t hear from anyone by', 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php _e('enter a date', 'wp-seedbank');?>" required="required" />, <?php esc_html_e('I\'ll stop being available to make this exchange.', 'wp-seedbank');?></label> <span class="description"><?php esc_html_e('(If you do not get a response by this date, your request will automatically close.)', 'wp-seedbank');?></span>
+        <label><?php esc_html_e('If I don\'t hear from anyone by', 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php esc_attr_e('enter a date', 'wp-seedbank');?>" required="required" />, <?php esc_html_e('I\'ll stop being available to make this exchange.', 'wp-seedbank');?></label> <span class="description"><?php esc_html_e('(If you do not get a response by this date, your request will automatically close.)', 'wp-seedbank');?></span>
     </p>
     <p>
         <?php // TODO: This shouldn't be a taxonomy, but a meta field. ?>
@@ -710,10 +710,10 @@ END_HTML;
         flush_rewrite_rules();
 
         // Exchange Types (verbs)
-        wp_insert_term(__( 'Swap', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering seeds for other seeds.', 'wp-seedbank')));
-        wp_insert_term(__( 'Sell', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering seeds for money.', 'wp-seedbank')));
-        wp_insert_term(__( 'Give', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering free seeds being given away.', 'wp-seedbank')));
-        wp_insert_term(__( 'Get', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges requesting seeds of a variety not already listed.', 'wp-seedbank')));
+        wp_insert_term(_x( 'Swap', 'verb', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering seeds for other seeds.', 'wp-seedbank')));
+        wp_insert_term(_x( 'Sell', 'verb', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering seeds for money.', 'wp-seedbank')));
+        wp_insert_term(_x( 'Give', 'verb', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges offering free seeds being given away.', 'wp-seedbank')));
+        wp_insert_term(_x( 'Get', 'verb', 'wp-seedbank'), $this->post_type . '_exchange_type', array('description' => __('Exchanges requesting seeds of a variety not already listed.', 'wp-seedbank')));
 
         // Scientific names (as defined by ICNCP, 8th Ed.)
         // International Code of Nomenclature for Cultivated Plants 8th Ed.
@@ -1123,26 +1123,36 @@ END_HTML;
     // Produce HTML for showing the submenu page.
     private function printBatchExchangeForm () {
 ?>
-<h2><?php _e('Batch Seed Exchange', 'wp-seedbank');?></h2>
-<p><?php _e('This page allows you to upload a comma-separated values (CSV) file that will be translated to seed exchange requests or offers.', 'wp-seedbank');?> <?php _e('The CSV file should have the structure like', 'wp-seedbank');?> <a href="#wp-seedbank-batch-exchange-example"><?php _e('the example shown in the table below', 'wp-seedbank');?></a>.</p>
+<h2><?php esc_html_e('Batch Seed Exchange', 'wp-seedbank');?></h2>
+<p><?php esc_html_e('This page allows you to upload a comma-separated values (CSV) file that will be translated to seed exchange requests or offers.', 'wp-seedbank');?> <?php print sprintf(esc_html__('The CSV file should have the structure like %sthe example shown in the table below%s.', 'wp-seedbank'), '<a href="#wp-seedbank-batch-exchange-example">', '</a>');?></p>
 <form id="<?php print esc_attr($this->post_type)?>-batch-exchange-form" name="<?php print esc_attr($this->post_type);?>_batch_exchange" action="<?php print esc_url($_SERVER['PHP_SELF'] . '?post_type=' . $this->post_type . '&amp;page=' . $this->post_type . '_batch_exchange');?>" method="post" enctype="multipart/form-data">
     <?php wp_nonce_field($this->post_type . '-batch-exchange', 'batch-exchange');?>
     <input type="hidden" name="<?php print esc_attr($this->post_type);?>-batch-exchange-step" value="1" />
     <p>
-        <?php _e('My batch exchange file is located on', 'wp-seedbank');?>
+        <?php esc_html_e('My batch exchange file is located on', 'wp-seedbank');?>
         <select id="seedbank-batch-exchange-data-source">
             <option value="another website"><?php _e('another website', 'wp-seedbank');?></option>
             <option value="my computer"><?php _e('my computer', 'wp-seedbank');?></option>
         </select>.
-        <?php // TODO: Figure out how to i18n this madlibs style thing. ?>
-        It
-        <select name="<?php print esc_attr($this->post_type);?>-batch-exchange-strip-headers">
-                <option value="1">has</option>
-                <option value="0">does not have</option>
-        </select> column labels (a header row).
+        <?php
+        /*
+           TRANSLATORS:
+           This string becomes a Web form. The placeholder (%s) will
+           contain words that indicate whether or not the file being
+           uploaded contains column labels. When you translate this
+           string, put the placeholder in the appropriate spot for
+           either "has" or "does not have" column labels.
+         */
+        print sprintf(
+            esc_html__('It %s column labels (a header row).', 'wp-seedbank'),
+            '<select name="<?php print esc_attr($this->post_type);?>-batch-exchange-strip-headers">'
+            . '<option value="1">' . esc_html_x('has', 'This is the "has" in "It has column labels (a header row).', 'wp-seedbank') . '</option>'
+            . '<option value="0">' . esc_html_x('does not have', 'This is the "does not have" in "It does not have column labels (a header row).', 'wp-seedbank') . '</option>'
+            . '</select>'
+        );?>
     </p>
     <fieldset id="seedbank-batch-exchange-web-fetch"><legend><?php _e('Web fetch options', 'wp-seedbank');?></legend>
-        <p><label><?php _e('The address of the file containing my seed exchange data is', 'wp-seedbank');?> <input name="<?php print esc_attr($this->post_type);?>-batch-exchange-file-url" value="" placeholder="<?php esc_attr_e('http://mysite.com/file.csv', 'wp-seedbank');?>" />.</label></p>
+        <p><label><?php esc_html_e('The address of the file containing my seed exchange data is', 'wp-seedbank');?> <input name="<?php print esc_attr($this->post_type);?>-batch-exchange-file-url" value="" placeholder="<?php esc_attr_e('http://mysite.com/file.csv', 'wp-seedbank');?>" />.</label></p>
     </fieldset>
     <fieldset id="seedbank-batch-exchange-file-upload"><legend><?php _e('File upload options', 'wp-seedbank');?></legend>
         <p><label><?php _e('The file on my computer containing my seed exchange data is', 'wp-seedbank');?> <input type="file" name="<?php print esc_attr($this->post_type);?>-batch-exchange-file-data" value="" />.</label></p>
@@ -1206,15 +1216,22 @@ END_HTML;
 <?php
     }
 
-    // TODO: i18n this.
     public function processBatchExchangeForm ($fields) {
         $error_msgs = array(
             'bad_nonce' => sprintf(
-                __('Your batch exchange request has expired or is invalid. Please %s start again %s.', 'wp-seedbank'),
+                /*
+                   TRANSLATORS:
+                   Ignore these placeholders, they are for HTML code.
+                 */
+                esc_html__('Your batch exchange request has expired or is invalid. Please %s start again %s.', 'wp-seedbank'),
                 '<a href="' . admin_url('edit.php?post_type=' . $this->post_type . '&page=' . $this->post_type . '_batch_exchange') . '">',
                 '</a>'
             ),
             'no_source' => sprintf(
+                /*
+                   TRANSLATORS:
+                   Ignore these placeholders, they are for HTML code.
+                 */
                 __('Please let us know where to find your data. You will need to %s start again %s.', 'wp-seedbank'),
                 '<a href="' . admin_url('edit.php?post_type=' . $this->post_type . '&page=' . $this->post_type . '_batch_exchange') . '">',
                 '</a>'
@@ -1298,7 +1315,7 @@ END_HTML;
         // Display success message.
         $n = count($new_post_ids);
         if ($n) { ?>
-            <p><?php print sprintf(esc_html__('Successfully imported %d new Seed Exchange Posts.', 'wp-seedbank'), $n);?></p>
+            <p><?php print sprintf(esc_html_n('Successfully imported %d new Seed Exchange Posts.', 'Successfully imported %d new Seed Exchange Post.', $n, 'wp-seedbank'), $n);?></p>
             <p><a href="<?php print admin_url('edit.php?post_type=' . $this->post_type);?>"><?php esc_html_e('All Seed Exchanges', 'wp-seedbank');?></a>.</p>
 <?php
         }
