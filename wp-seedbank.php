@@ -588,6 +588,7 @@ END_HTML;
     }
 
     public function activate () {
+        $this->registerL10n();
         $this->createDataTypes(); // This registers new taxonomies.
 
         global $wpdb;
