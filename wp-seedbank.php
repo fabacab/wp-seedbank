@@ -14,8 +14,9 @@ class WP_SeedBank {
     private $taxonomies = array(
         array('exchange_type'),
         array('common_name'),
+        array('unit'),
         array('scientific_name'),
-        // TODO: Exchange statuses shouldn't be taxonomies.
+        // TODO: Exchange statuses shouldn't be taxonomies?
         array('exchange_status')
     );
     private $meta_fields = array(
@@ -129,6 +130,23 @@ class WP_SeedBank {
         );
         register_taxonomy_for_object_type($this->post_type . '_common_name', $this->post_type);
 
+        register_taxonomy($this->post_type . '_unit', $this->post_type, array(
+                'labels' => array(
+                    'menu_name'     => __('Inventory Units', 'wp-seedbank'),
+                    'name'          => __('Units', 'wp-seedbank'),
+                    'singular_name' => __('Unit', 'wp-seedbank'),
+                    'all_items'     => __('All Units', 'wp-seedbank'),
+                    'edit_item'     => __('Edit Unit', 'wp-seedbank'),
+                    'update_item'   => __('Update Unit', 'wp-seedbank'),
+                    'add_new_item'  => __('Add New Units', 'wp-seedbank'),
+                    'new_item_name' => __('New Unit', 'wp-seedbank'),
+                    'search_items'  => __('Search Units', 'wp-seedbank'),
+                ),
+                'show_admin_column' => true
+            )
+        );
+        register_taxonomy_for_object_type($this->post_type . '_unit', $this->post_type);
+
         register_taxonomy($this->post_type . '_scientific_name', $this->post_type, array(
                 'labels' => array(
                     'name'          => __('Scientific Names', 'wp-seedbank'),
@@ -241,67 +259,80 @@ class WP_SeedBank {
 
         // Retrieve meta data fields, or set to initial blank slates.
         $custom = get_post_custom($post->ID);
-
-        // Create HTML for the drop-down menus.
-        ob_start();
-        $type_options = get_terms($this->post_type . '_exchange_type', 'hide_empty=0&order=ASC');
-        print '<select id="' . $this->post_type . '-exchange-type" name="' . $this->post_type . '_exchange_type">';
-        foreach ($type_options as $type) {
-            if ($type->name == $custom["{$this->post_type}_exchange_type"][0]) {
-                print '<option selected="selected" value="' . esc_attr($type->name) . '">' . esc_html(strtolower($type->name)) . "</option>\n";
-            } else {
-                print '<option value="' . esc_attr($type->name) . '">' . esc_html(strtolower($type->name)) . "</option>\n";
+        foreach ($this->meta_fields as $f) {
+            if (!isset($custom[$this->post_type . '_' . $f])) {
+                $custom[$this->post_type . '_' . $f] = array('');
             }
         }
-        print '</select>';
-        $type_select = ob_get_contents();
-        ob_end_clean();
 
-        ob_start();
-        $common_name_options = get_terms($this->post_type . '_common_name', 'hide_empty=0&order=ASC');
-        print '<select id="' . $this->post_type . '-common-name" name="' . $this->post_type . '_common_name">';
-        foreach ($common_name_options as $common_name) {
-            if ($common_name->name == $custom["{$this->post_type}_common_name"][0]) {
-                print '<option selected="selected" value="' . esc_attr($common_name->name) . '">' . esc_html($common_name->name) . "</option>\n";
-            } else {
-                print '<option value="' . esc_attr($common_name->name) . '">' . esc_html($common_name->name) . "</option>\n";
-            }
+        // Create HTML
+        $select_elements = array();
+        $datalists = array();
+        foreach ($this->taxonomies as $taxonomy) {
+            $select_elements[$taxonomy[0]] = $this->taxonomyAsHtmlSelect($taxonomy[0], $post);
+            $datalists[$taxonomy[0]] = $this->taxonomyAsHtmlDatalist($taxonomy[0], $post);
         }
-        print '</select>';
-        $common_name_select = ob_get_contents();
-        ob_end_clean();
-
-        ob_start();
-        $status_options = get_terms($this->post_type . '_exchange_status', 'hide_empty=0&order=ASC');
-        print '<select id="' . $this->post_type . '-exchange-status" name="' . $this->post_type . '_exchange_status">';
-        foreach ($status_options as $status) {
-            if ($status->name == $custom["{$this->post_type}_exchange_status"][0]) {
-                print '<option selected="selected" value="' . esc_attr($status->name) . '">' . esc_html($status->name) . "</option>\n";
-            } else {
-                print '<option value="' . esc_attr($status->name) . '">' . esc_html($status->name) . "</option>\n";
-            }
-        }
-        print '</select>';
-        $status_select = ob_get_contents();
-        ob_end_clean();
 ?>
     <p>
-        <label><?php esc_html_e('I would like to', 'wp-seedbank');?> <?php print $type_select;?></label>
+        <label><?php esc_html_e('I would like to', 'wp-seedbank');?> <?php print $select_elements['exchange_type'];?></label>
         <input name="<?php print esc_attr($this->post_type);?>_quantity" value="<?php print esc_attr($custom["{$this->post_type}_quantity"][0]);?>" placeholder="<?php esc_attr_e('enter a number', 'wp-seedbank');?>" />
-        <?php print $common_name_select;?>
-        <input name="<?php print esc_attr($this->post_type);?>_unit" value="<?php print esc_attr($custom["{$this->post_type}_unit"][0]);?>" placeholder="<?php esc_attr_e('packets', 'wp-seedbank');?>" />.
+        <?php print $datalists['common_name'];?>
+        <?php print $select_elements['unit'];?>.
     </p>
     <p>
-        <label><?php esc_html_e('These seeds will expire on or about', 'wp-seedbank');?> <input id="<?php print esc_attr($this->post_type);?>_seed_expiry_date" name="<?php print esc_attr($this->post_type);?>_seed_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php esc_attr_e('enter a date', 'wp-seedbank');?>" />.</label> <span class="description"><?php esc_html_e('(If you are requesting seeds, you can leave this blank.)', 'wp-seedbank');?></span>
+        <label><?php esc_html_e('These seeds will expire on or about', 'wp-seedbank');?> <input id="<?php print esc_attr($this->post_type);?>_seed_expiry_date" name="<?php print esc_attr($this->post_type);?>_seed_expiry_date" class="datepicker" value="<?php (empty($custom["{$this->post_type}_seed_expiry_date"][0])) ? '' : print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_seed_expiry_date"][0]));?>" placeholder="<?php esc_attr_e('enter a date', 'wp-seedbank');?>" />.</label> <span class="description"><?php esc_html_e('(If you are requesting seeds, you can leave this blank.)', 'wp-seedbank');?></span>
     </p>
     <p>
-        <label><?php esc_html_e('If I don\'t hear from anyone by', 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php esc_attr_e('enter a date', 'wp-seedbank');?>" required="required" />, <?php esc_html_e('I\'ll stop being available to make this exchange.', 'wp-seedbank');?></label> <span class="description"><?php esc_html_e('(If you do not get a response by this date, your request will automatically close.)', 'wp-seedbank');?></span>
+        <label><?php esc_html_e('If I don\'t hear from anyone by', 'wp-seedbank');?> <input name="<?php print $this->post_type;?>_exchange_expiry_date" class="datepicker" value="<?php (empty($custom["{$this->post_type}_exchange_expiry_date"][0])) ? print '' : print esc_attr(date(get_option('date_format'), $custom["{$this->post_type}_exchange_expiry_date"][0]));?>" placeholder="<?php esc_attr_e('enter a date', 'wp-seedbank');?>" required="required" />, <?php esc_html_e('I\'ll stop being available to make this exchange.', 'wp-seedbank');?></label> <span class="description"><?php esc_html_e('(If you do not get a response by this date, your request will automatically close.)', 'wp-seedbank');?></span>
     </p>
     <p>
-        <?php // TODO: This shouldn't be a taxonomy, but a meta field. ?>
-        <label><?php _e('This seed exchange is', 'wp-seedbank');?> <?php print $status_select;?>.</label> <span class="description">(<?php foreach ($status_options as $x) :?>The <code><?php _e($x->name, 'wp-seedbank');?></code> type is for <?php print strtolower($x->description);?> <?php endforeach;?>)</span>
+        <?php // TODO: i18n this ?>
+        <label><?php esc_html_e('This seed exchange is', 'wp-seedbank');?> <?php print $select_elements['exchange_status'];?>.</label> <span class="description">(<?php foreach (get_terms($this->post_type . '_exchange_status', 'hide_empty=0&order=ASC') as $x) :?>The <code><?php print esc_html(strtolower($x->name), 'wp-seedbank');?></code> type is for <?php print esc_html(strtolower($x->description));?> <?php endforeach;?>)</span>
     </p>
 <?php
+    }
+
+    private function taxonomyAsHtmlSelect ($taxonomy, $post) {
+        $custom = get_post_custom($post->ID);
+        $these_options = get_terms($this->post_type . '_' . $taxonomy, 'hide_empty=0&order=ASC');
+
+        ob_start();
+        print '<select id="' . esc_attr($this->post_type) . '-' . esc_attr(str_replace('_', '-', $taxonomy)) . '" '
+            . 'name="' . esc_attr($this->post_type) . '_' . esc_attr($taxonomy) . '">';
+        foreach ($these_options as $t) {
+            print '<option ';
+            if (isset($custom["{$this->post_type}_{$taxonomy}"][0]) && $t->name == $custom["{$this->post_type}_{$taxonomy}"][0]) {
+                print 'selected="selected" ';
+            }
+            print 'value="' . esc_attr($t->name) .'">' . esc_html(strtolower($t->name)) . '</option>' . PHP_EOL;
+        }
+        print '</select>';
+        $el = ob_get_contents();
+        ob_end_clean();
+
+        return $el;
+    }
+
+    private function taxonomyAsHtmlDatalist ($taxonomy, $post) {
+        $custom = get_post_custom($post->ID);
+        $these_options = get_terms($this->post_type . '_' . $taxonomy, 'hide_empty=0&order=ASC');
+
+        ob_start();
+        print '<input list="' . esc_attr($this->post_type) . '-' . esc_attr($taxonomy) . '-datalist" ';
+        print 'name="'. esc_attr($this->post_type) .'_' . esc_attr($taxonomy) . '" ';
+        print 'value="';
+        (empty($custom[$this->post_type . '_' . $taxonomy][0])) ? print '' : print esc_attr($custom[$this->post_type . '_' . $taxonomy][0]);
+        print '" ';
+        print 'placeholder="' . esc_attr($these_options[0]->name) . '" />' . PHP_EOL;
+        print '<datalist id="' . esc_attr($this->post_type) . '-' . esc_attr($taxonomy). '-datalist">';
+        foreach ($these_options as $t) {
+            print '<option value="' . esc_attr($t->name) . '" />' . PHP_EOL;
+        }
+        print '</datalist>';
+        $el = ob_get_contents();
+        ob_end_clean();
+
+        return $el;
     }
 
     /**
@@ -1151,6 +1182,9 @@ END_HTML;
         wp_insert_term(__('Tomato', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
         wp_insert_term(__('Turnip', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
         wp_insert_term(__('Winter Squash', 'wp-seedbank'), $this->post_type . '_common_name', array('slug' => ''));
+
+        // Inventory units
+        wp_insert_term(__( 'Packets', 'wp-seedbank'), $this->post_type . '_unit', array('description' => __('A package containing enough seeds for a single germination attempt.', 'wp-seedbank')));
 
         // Exchange statuses
         wp_insert_term(__( 'Active', 'wp-seedbank'), $this->post_type . '_exchange_status', array('description' => __('New or open seed exchange requests or offers.', 'wp-seedbank')));
