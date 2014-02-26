@@ -16,7 +16,7 @@ WP_SEEDBANK.UI.hideDeletedExchangeRequests = function () {
     el.innerHTML = 'Hide Deleted Seed Exchanges';
     jQuery(el).click(function (e) {
         e.preventDefault();
-        jQuery('.seedbank_exchange_status').each(function() {
+        jQuery('.taxonomy-seedbank_exchange_status').each(function() {
             if(jQuery(this).text() != "Active") {
                 jQuery(this).parent().hide();
             }
@@ -34,7 +34,7 @@ WP_SEEDBANK.UI.showDeletedExchangeRequests = function () {
     el.innerHTML = 'Show Deleted Seed Exchanges';
     jQuery(el).click(function (e) {
         e.preventDefault();
-        jQuery('.seedbank_exchange_status').each(function() {
+        jQuery('.taxonomy-seedbank_exchange_status').each(function() {
             if(jQuery(this).text() == "Deleted") {
                 jQuery(this).parent().show();
             }
