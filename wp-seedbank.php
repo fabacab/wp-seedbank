@@ -162,7 +162,8 @@ class WP_SeedBank {
                     'new_item_name' => __('New Exchange Status', 'wp-seedbank'),
                     'search_items'  => __('Search Exchange Statuses', 'wp-seedbank'),
                 ),
-                'show_ui' => false
+                'show_ui' => false,
+                'show_admin_column' => true
             )
         );
         register_taxonomy_for_object_type($this->post_type . '_exchange_status', $this->post_type);
