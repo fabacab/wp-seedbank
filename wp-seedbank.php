@@ -795,6 +795,19 @@ END_HTML;
             unset($wp_taxonomies[$this->post_type . '_seed_genus']);
         }
 
+        // Detect lack of unit taxonomy and copy any unit post meta values.
+        $unit_terms = get_terms($this->post_type . '_unit', 'hide_empty=0');
+        if (empty($unit_terms)) {
+            $posts_with_unit_meta = get_posts(array(
+                'posts_per_page' => -1,
+                'post_type' => $this->post_type,
+                'meta_key' => $this->post_type . '_unit'
+            ));
+            foreach ($posts_with_unit_meta as $p) {
+                wp_set_object_terms($p->ID, get_post_meta($p->ID, $this->post_type . '_unit', true), $this->post_type . '_unit');
+            }
+        }
+
         flush_rewrite_rules();
 
         // Exchange Types (verbs)
