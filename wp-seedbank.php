@@ -39,6 +39,7 @@ class WP_SeedBank {
             add_action("load-$hook", array($this, 'radioIzeTaxonomyInterface'));
         }
         add_action('admin_menu', array($this, 'registerAdminMenus'));
+        add_action('pre_get_posts', array($this, 'registerCustomOrdering'));
         add_action('admin_enqueue_scripts', array($this, 'registerAdminScripts'));
         add_action('admin_head', array($this, 'registerCustomHelp'));
 
@@ -46,6 +47,7 @@ class WP_SeedBank {
 
         add_action('manage_' . $this->post_type . '_posts_custom_column', array($this, 'displayCustomColumn'), 10, 2);
         add_filter('manage_' . $this->post_type . '_posts_columns', array($this, 'registerCustomColumns'));
+        add_filter('manage_edit-' . $this->post_type . '_sortable_columns', array($this, 'registerSortableColumns'));
 
         add_filter('the_content', array($this, 'displayContent'));
     }
@@ -105,7 +107,8 @@ class WP_SeedBank {
                     'add_new_item'  => __('Add New Exchange Type', 'wp-seedbank'),
                     'new_item_name' => __('New Exchange Type', 'wp-seedbank'),
                     'search_items'  => __('Search Exchange Types', 'wp-seedbank'),
-                )
+                ),
+                'show_admin_column' => true
             )
         );
         register_taxonomy_for_object_type($this->post_type . '_exchange_type', $this->post_type);
@@ -120,7 +123,8 @@ class WP_SeedBank {
                     'add_new_item'  => __('Add New Common Name', 'wp-seedbank'),
                     'new_item_name' => __('New Common Name', 'wp-seedbank'),
                     'search_items'  => __('Search Common Names', 'wp-seedbank'),
-                )
+                ),
+                'show_admin_column' => true
             )
         );
         register_taxonomy_for_object_type($this->post_type . '_common_name', $this->post_type);
@@ -141,7 +145,8 @@ class WP_SeedBank {
                 'hierarchical' => true,
                 'rewrite' => array(
                     'slug' => 'scientific-name'
-                )
+                ),
+                'show_admin_column' => true
             )
         );
         register_taxonomy_for_object_type($this->post_type . '_scientific_name', $this->post_type);
@@ -443,21 +448,53 @@ class WP_SeedBank {
         wp_enqueue_style('jquery-ui-smoothness', "//ajax.googleapis.com/ajax/libs/jqueryui/{$x->ver}/themes/smoothness/jquery-ui.min.css", false, null);
     }
 
-    // TODO: i18n these column names. Unroll taxonomy loop?
     public function registerCustomColumns ($columns) {
         $my_columns = array();
-        foreach ($this->taxonomies as $taxonomy) {
-            $my_columns[$this->post_type . '_' . $taxonomy[0]] = ucwords(str_replace('_', ' ', $taxonomy[0]));
+        foreach ($this->meta_fields as $f) {
+            switch ($f) {
+                case 'quantity':
+                    $my_columns[$this->post_type . '_quantity'] = esc_html__('Quantity', 'wp-seedbank');
+                    break;
+                case 'seed_expiry_date':
+                    $my_columns[$this->post_type . '_seed_expiry_date'] = esc_html__('Seed Expiry Date', 'wp-seedbank');
+                    break;
+                case 'exchange_expiry_date':
+                    $my_columns[$this->post_type . '_exchange_expiry_date'] = esc_html__('Exchange Expiry Date', 'wp-seedbank');
+                    break;
+            }
         }
         return array_merge($columns, $my_columns);
     }
 
     public function displayCustomColumn ($column, $post_id) {
-        foreach ($this->taxonomies as $taxonomy) {
-            if ($column !== $this->post_type . '_' . $taxonomy[0]) {
+        foreach ($this->meta_fields as $f) {
+            if ($column !== $this->post_type . '_' . $f) {
                 continue;
             }
-            the_terms($post_id, $this->post_type . '_' . $taxonomy[0]);
+            if ($this->isDateOrTimeMeta($f)) {
+                print esc_html(date(get_option('date_format'), get_post_meta($post_id, $this->post_type . '_' . $f, true)));
+            } else {
+                print esc_html(get_post_meta($post_id, $this->post_type . '_' . $f, true));
+            }
+        }
+    }
+
+    public function registerSortableColumns ($columns) {
+        $my_columns = array();
+        foreach ($this->meta_fields as $f) {
+            $my_columns[$this->post_type . '_' . $f] = $this->post_type . '_' . $f;
+        }
+        return array_merge($columns, $my_columns);
+    }
+
+    public function registerCustomOrdering ($query) {
+        switch ($query->get('orderby')) {
+            case $this->post_type . '_quantity':
+            case $this->post_type . '_seed_expiry_date':
+            case $this->post_type . '_exchange_expiry_date':
+                $query->set('meta_key', $query->get('orderby'));
+                $query->set('orderby', 'meta_value_num');
+                break;
         }
     }
 
