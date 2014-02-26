@@ -1,13 +1,13 @@
 <?php
-/*
-    Plugin Name: WP-SeedBank
-    Plugin URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/
-    Description: Add a seed exchange post type to turn your WordPress website into a community seedbank or seed library! :D
-    Author: <a href="http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/#authors">The Hummingbird Project</a> and <a href="http://Cyberbusking.org/">Meitar "maymay" Moscovitz</a>
-    Version: 0.4.1
-    Text Domain: wp-seedbank
-    Domain Path: /languages
-*/
+/**
+ * Plugin Name: WP-SeedBank
+ * Plugin URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/
+ * Description: Add a seed exchange post type to turn your WordPress website into a community seedbank or seed library! :D
+ * Author: <a href="http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/#authors">The Hummingbird Project</a> and <a href="http://Cyberbusking.org/">Meitar "maymay" Moscovitz</a>
+ * Version: 0.4.2
+ * Text Domain: wp-seedbank
+ * Domain Path: /languages
+ */
 
 class WP_SeedBank {
     private $post_type = 'seedbank';

@@ -4,7 +4,7 @@ Donate link: https://npo.justgive.org/nonprofits/donate.jsp?ein=45-3043080
 Tags: custom posts, community, seedbank, ecology, seed swap, trade
 Requires at least: 3.5.2
 Tested up to: 3.8.1
-Stable tag: 0.4.1
+Stable tag: 0.4.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -14,10 +14,16 @@ The WP-SeedBank plugin turns any self-hosted WordPress blog into a community see
 
 Add a seedbank (or seed library) to your WordPress-powered website. Registered users can post seed offers and requests (called "seed exchange posts") for others to search, making it easier to swap seeds and grow your community.
 
-Features include:
+Some key Features include:
 
-* Ability to import a comma-separated values file to create seed exchanges in batches.
-* Ability to customize verbage to suit a specific community's needs.
+* Customize numerous metadata fields to suit your specific community's needs.
+* Import a comma-separated values file to create seed exchange postings in batches.
+* Search, filter, and sort through seed exchanges with a detailed heads-up display of available postings.
+* Available in multiple languages, including:
+    * Swedish
+    * Italian
+
+Want WP-SeedBank in your language? [Join our team of translators](https://www.transifex.com/signup/contributor/?next=/projects/p/wp-seedbank/)!
 
 = Quick start guide =
 
@@ -31,6 +37,10 @@ Follow these steps to get your seed exchange website up and running quickly:
 1. Periodically check your website for seed exchange posts created by members of your community, review, and publish them. (The same process that you use for [reviewing and publishing regular posts applies here](https://codex.wordpress.org/Writing_Posts).)
 1. Optionally, you can promote members of your community who have created seed exchange posts in the past to the Author role, so that they no longer need your approval to publish seed exchange posts. Learn more about [WordPress's user roles and capabilities](https://codex.wordpress.org/Roles_and_Capabilities).
 
+See also:
+
+* [WP-SeedBank plugin: a mini user's guide](http://maymay.net/blog/2014/01/23/wp-seedbank-plugin-a-mini-users-guide/)
+
 == Installation ==
 
 1. Download the plugin file.
@@ -39,9 +49,11 @@ Follow these steps to get your seed exchange website up and running quickly:
 
 == Screenshots ==
 
-1. The new Seed Exchange request/offer page.
+1. The new Seed Exchange request/offer screen. In addition to your post title and content, you use the "Seed Exchange Details" box to fill in the details of your seed exchange posting in a madlibs-style form. You can also use the "Scientific Names" box to categorize your seed according to its biological classification, if you know it.
 
 2. The Batch Exchange page lets you upload a file to create many seed exchanges at once.
+
+3. The "Seed Exchanges" screen gives you a heads-up display of all the seed exchange postings. You can click on the links in the column to filter your view; in this screenshot, clicking on "Swap" in the "Exchange Types" link will filter the list so it only displays seed swaps. You can also sort the list according to the Quantity, Seed Expiry Date, or Exchange Expiry Date by clicking on those column headers.
 
 == Frequently Asked Questions ==
 
@@ -50,6 +62,12 @@ Follow these steps to get your seed exchange website up and running quickly:
 The Seed Exchange posts you're creating use WordPress taxonomies, which WordPress doesn't include in search results by default. This means that if you're creating a Seed Exchange post for a given vegetable, but the only place the name of this vegetable appears is in the plugin's custom "Common Name" field (and not in the post's title or content), then WordPress can't find that posting based on a simple keyword search. If you'd like to make the WP-SeedBank's taxonomies searchable, too, we recommend the [Search Everything plugin](https://wordpress.org/plugins/search-everything/).
 
 == Changelog ==
+
+= Version 0.4.2 =
+
+* Feature: Add a new common name directly from the Seed Exchange Details box. Simply type the common name you're posting about and, if it already exists, it will automatically be filled in. If it doesn't exist, saving your post will add it to the list of available common names.
+* Feature: Seed Exchanges listing page now has additional columns that allow you to filter and sort your view of the seed exchange postings.
+* Feature: Admins can now edit the inventory units just like they can with the other fields such as Common Name.
 
 = Version 0.4.1 =
 
