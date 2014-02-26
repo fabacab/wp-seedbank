@@ -207,11 +207,11 @@ class WP_SeedBank {
         $options = get_option($this->post_type . '_settings');
 ?>
     <select name="<?php print esc_attr($this->post_type);?>_settings[display_meta]">
-        <option value="2"<?php if (2 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('this plugin (below content)', 'wp-seedbank');?></option>
-        <option value="1"<?php if (1 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('this plugin (above content)', 'wp-seedbank');?></option>
-        <option value="0"<?php if (0 === $options['display_meta']) { print ' selected="selected"'; }?>><?php _e('my own template', 'wp-seedbank');?></option>
+        <option value="2"<?php if (2 === $options['display_meta']) { print ' selected="selected"'; }?>><?php esc_html_e('this plugin (below content)', 'wp-seedbank');?></option>
+        <option value="1"<?php if (1 === $options['display_meta']) { print ' selected="selected"'; }?>><?php esc_html_e('this plugin (above content)', 'wp-seedbank');?></option>
+        <option value="0"<?php if (0 === $options['display_meta']) { print ' selected="selected"'; }?>><?php esc_html_e('my own template', 'wp-seedbank');?></option>
     </select>
-    <p class="description"><?php _e('Choosing your own template without writing your own template code may result in the Seed Exchange details not appearing on your website.', 'wp-seedbank');?></p>
+    <p class="description"><?php esc_html_e('Choosing your own template without writing your own template code may result in the Seed Exchange details not appearing on your website.', 'wp-seedbank');?></p>
 <?php
     }
 
