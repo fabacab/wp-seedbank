@@ -1213,6 +1213,21 @@ END_HTML;
             $this->post_type . '_batch_exchange',
             array($this, 'dispatchBatchExchangePages')
         );
+
+        // Hacky way to add a direct link to the admin menu.
+        // TODO: Should this actually go into the admin bar?
+        global $submenu;
+        $submenu['edit.php?post_type=' . $this->post_type][] = array(
+            __('My Seeds', 'wp-seedbank'),
+            'edit_posts',
+            $this->getMySeedsURL()
+        );
+    }
+
+    private function getMySeedsURL () {
+        return admin_url(
+            'edit.php?post_type=' . $this->post_type . '&author=' . get_current_user_id()
+        );
     }
 
     public function dispatchBatchExchangePages () {
