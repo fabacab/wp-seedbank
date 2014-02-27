@@ -4,7 +4,7 @@ Donate link: https://npo.justgive.org/nonprofits/donate.jsp?ein=45-3043080
 Tags: custom posts, community, seedbank, ecology, seed swap, trade
 Requires at least: 3.5.2
 Tested up to: 3.8.1
-Stable tag: 0.4.2
+Stable tag: 0.4.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,8 +20,9 @@ Some key Features include:
 * Import a comma-separated values file to create seed exchange postings in batches.
 * Search, filter, and sort through seed exchanges with a detailed heads-up display of available postings.
 * Available in multiple languages, including:
-    * Swedish
-    * Italian
+    * Swedish (`sv_SE`)
+    * Italian (`it_IT`)
+    * Hindi (`hi_IN`)
 
 Want WP-SeedBank in your language? [Join our team of translators](https://www.transifex.com/signup/contributor/?next=/projects/p/wp-seedbank/)!
 
@@ -63,6 +64,12 @@ The Seed Exchange posts you're creating use WordPress taxonomies, which WordPres
 
 == Changelog ==
 
+= Version 0.4.3 =
+
+* Feature: "My Seeds" link takes you to a filtered view of all Seed Exchange Posts.
+* Translations for Hindi (`hi_IN`) are now available.
+* Updated translations for Swedish and Italian.
+
 = Version 0.4.2 =
 
 * Feature: Add a new common name directly from the Seed Exchange Details box. Simply type the common name you're posting about and, if it already exists, it will automatically be filled in. If it doesn't exist, saving your post will add it to the list of available common names.
@@ -76,7 +83,6 @@ The Seed Exchange posts you're creating use WordPress taxonomies, which WordPres
 * Translations for Swedish (`sv_SE`) and Italian (`it_IT`) are now available.
     * Activate your language translation by [configuring your WordPress to use your language](http://codex.wordpress.org/WordPress_in_Your_Language).
     * Want WP-SeedBank in your language? [Join our team of translators](https://www.transifex.com/signup/contributor/?next=/projects/p/wp-seedbank/)!
-
 
 = Version 0.4 =
 

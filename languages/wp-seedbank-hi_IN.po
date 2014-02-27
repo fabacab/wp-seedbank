@@ -1,124 +1,124 @@
 # Copyright (C) 2014 WP-SeedBank
 # This file is distributed under the same license as the WP-SeedBank package.
 # Translators:
-# Federico_Delise <federico.delise@gmail.com>, 2014
+# surabhi <surabhiagwl@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: WP-SeedBank\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-seedbank\n"
 "POT-Creation-Date: 2014-02-26 07:44:39+00:00\n"
-"PO-Revision-Date: 2014-02-26 07:47+0000\n"
-"Last-Translator: meitar\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/wp-seedbank/language/it/)\n"
+"PO-Revision-Date: 2014-02-26 10:21+0000\n"
+"Last-Translator: surabhi <surabhiagwl@gmail.com>\n"
+"Language-Team: Hindi (http://www.transifex.com/projects/p/wp-seedbank/language/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it\n"
+"Language: hi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: wp-seedbank.php:67
 msgid "Seed Exchanges"
-msgstr "Scambi di Semenze"
+msgstr "बीज विनिमय"
 
 #: wp-seedbank.php:68
 msgid "Seed Exchange"
-msgstr "Scambio di Sementi"
+msgstr "बीज विनिमय"
 
 #: wp-seedbank.php:69 wp-seedbank.php:70
 msgid "Add Seed Exchange"
-msgstr "Aggiungi Scambio Sementi"
+msgstr "बीज विनिमय जोड़ें"
 
 #: wp-seedbank.php:71 wp-seedbank.php:72
 msgid "Edit Seed Exchange"
-msgstr "Modifica Scambio Sementi"
+msgstr "बीज विनिमय सम्पादित करें"
 
 #: wp-seedbank.php:73
 msgid "New Seed Exchange"
-msgstr "Nuovo Scambio Sementi"
+msgstr "नया बीज विनिमय"
 
 #: wp-seedbank.php:74 wp-seedbank.php:75
 msgid "View Seed Exchange"
-msgstr "Visualizza Scambio Sementi"
+msgstr "बीज विनिमय देखें"
 
 #: wp-seedbank.php:76
 msgid "Search Seed Exchanges"
-msgstr "Cerca Scambio Sementi"
+msgstr "बीज विनिमय खोजें"
 
 #: wp-seedbank.php:77
 msgid "No Seed Exchanges found"
-msgstr "Nessuno Scambio di Sementi è stato trovato"
+msgstr "कोई बीज विनिमय नहीं मिला"
 
 #: wp-seedbank.php:78
 msgid "No Seed Exchanges found in trash"
-msgstr "Nessuno Scambio di Semenze è stato trovato nel cestino"
+msgstr "कूड़ेदान में कोई बीज विनिमय नहीं मिला"
 
 #: wp-seedbank.php:85
 msgid "Postings to the SeedBank"
-msgstr "Pubblicazioni per la Banca delle Semenze"
+msgstr "बीज-कोष में प्रस्तुत संदेश"
 
 #: wp-seedbank.php:103
 msgid "Exchange Types"
-msgstr ""
+msgstr "विनिमय के प्रकार"
 
 #: wp-seedbank.php:104
 msgid "Exchange Type"
-msgstr ""
+msgstr "विनिमय का प्रकार"
 
 #: wp-seedbank.php:105
 msgid "All Exchange Types"
-msgstr ""
+msgstr "सभी प्रकार के विनिमय"
 
 #: wp-seedbank.php:106
 msgid "Edit Exchange Type"
-msgstr ""
+msgstr "विनिमय प्रकार सम्पादित करें"
 
 #: wp-seedbank.php:107
 msgid "Update Exchange Type"
-msgstr ""
+msgstr "विनिमय प्रकार का अद्यतन करें"
 
 #: wp-seedbank.php:108
 msgid "Add New Exchange Type"
-msgstr ""
+msgstr "नया विनिमय प्रकार जोड़ें"
 
 #: wp-seedbank.php:109
 msgid "New Exchange Type"
-msgstr ""
+msgstr "नया विनिमय प्रकार"
 
 #: wp-seedbank.php:110
 msgid "Search Exchange Types"
-msgstr ""
+msgstr "विनिमय प्रकार खोजें"
 
 #: wp-seedbank.php:119
 msgid "Common Names"
-msgstr ""
+msgstr "सामान्य नाम"
 
 #: wp-seedbank.php:120 wp-seedbank.php:1274
 msgid "Common Name"
-msgstr "Nome Comune"
+msgstr "सामान्य नाम"
 
 #: wp-seedbank.php:121
 msgid "All Common Names"
-msgstr ""
+msgstr "सभी सामान्य नाम"
 
 #: wp-seedbank.php:122
 msgid "Edit Common Name"
-msgstr ""
+msgstr "सामान्य नाम सम्पादित करें"
 
 #: wp-seedbank.php:123
 msgid "Update Common Name"
-msgstr ""
+msgstr "सामान्य नाम का अद्यतन करें"
 
 #: wp-seedbank.php:124
 msgid "Add New Common Name"
-msgstr ""
+msgstr "नया सामान्य नाम जोड़ें"
 
 #: wp-seedbank.php:125
 msgid "New Common Name"
-msgstr ""
+msgstr "नया सामान्य नाम"
 
 #: wp-seedbank.php:126
 msgid "Search Common Names"
-msgstr ""
+msgstr "सामान्य नाम खोजें"
 
 #: wp-seedbank.php:135
 msgid "Inventory Units"
@@ -158,143 +158,143 @@ msgstr ""
 
 #: wp-seedbank.php:152 wp-seedbank.php:561
 msgid "Scientific Names"
-msgstr ""
+msgstr "वैज्ञानिक नाम"
 
 #: wp-seedbank.php:153 wp-seedbank.php:1279
 msgid "Scientific Name"
-msgstr ""
+msgstr "वैज्ञानिक नाम"
 
 #: wp-seedbank.php:154
 msgid "All Scientific Names"
-msgstr ""
+msgstr "सभी वैज्ञानिक नाम"
 
 #: wp-seedbank.php:155
 msgid "Edit Scientific Name"
-msgstr ""
+msgstr "वैज्ञानिक नाम सम्पादित करें"
 
 #: wp-seedbank.php:156
 msgid "Update Scientific Name"
-msgstr ""
+msgstr "वैज्ञानिक नाम का अद्यतन करें"
 
 #: wp-seedbank.php:157
 msgid "Add New Scientific Name"
-msgstr ""
+msgstr "नया वैज्ञानिक नाम जोड़ें"
 
 #: wp-seedbank.php:158
 msgid "New Scientific Name"
-msgstr ""
+msgstr "नया वैज्ञानिक नाम"
 
 #: wp-seedbank.php:159
 msgid "Parent Classification"
-msgstr ""
+msgstr "जनक वर्गीकरण"
 
 #: wp-seedbank.php:160
 msgid "Parent Classification:"
-msgstr ""
+msgstr "जनक वर्गीकरण:"
 
 #: wp-seedbank.php:161
 msgid "Search Scientific Names"
-msgstr ""
+msgstr "वैज्ञानिक नाम खोजें"
 
 #: wp-seedbank.php:174
 msgid "Exchange Statuses"
-msgstr ""
+msgstr "विनिमय स्थिति"
 
 #: wp-seedbank.php:175
 msgid "Exchange Status"
-msgstr ""
+msgstr "विनिमय की स्थिति"
 
 #: wp-seedbank.php:176
 msgid "All Exchange Statuses"
-msgstr ""
+msgstr "सभी विनिमय स्थितियाँ"
 
 #: wp-seedbank.php:177
 msgid "Edit Exchange Status"
-msgstr ""
+msgstr "विनिमय की स्थिति सम्पादित करें"
 
 #: wp-seedbank.php:178
 msgid "Update Exchange Status"
-msgstr ""
+msgstr "विनिमय स्थिति का अद्यतन करें"
 
 #: wp-seedbank.php:179
 msgid "Add New Exchange Status"
-msgstr ""
+msgstr "नई विनिमय स्थिति जोड़ें"
 
 #: wp-seedbank.php:180
 msgid "New Exchange Status"
-msgstr ""
+msgstr "नई विनिमय स्थिति"
 
 #: wp-seedbank.php:181
 msgid "Search Exchange Statuses"
-msgstr ""
+msgstr "विनिमय स्थिति खोजें"
 
 #: wp-seedbank.php:202
 msgid "Display Seed Exchange details using"
-msgstr "Mostra i dettagli dello Scambio di Sementi usando"
+msgstr "बीज विनिमय के विवरण के प्रदर्शन का माध्यम चुनें"
 
 #: wp-seedbank.php:228
 msgid "this plugin (below content)"
-msgstr "questa estensione (i contenuti di seguito)"
+msgstr "यह प्लग-इन (सबसे ऊपर)"
 
 #: wp-seedbank.php:229
 msgid "this plugin (above content)"
-msgstr "questa estensione (i contenuti sopra)"
+msgstr "यह प्लग-इन (सबसे नीचे)"
 
 #: wp-seedbank.php:230
 msgid "my own template"
-msgstr "il mio modello"
+msgstr "मेरा अपना टेम्प्लेट"
 
 #: wp-seedbank.php:232
 msgid ""
 "Choosing your own template without writing your own template code may result"
 " in the Seed Exchange details not appearing on your website."
-msgstr "Scegliendo il tuo modello personale senza scrivere il codice del tuo modello, i dettagli dello Scambio di Sementi potrebbero non apparire sul tuo sito web."
+msgstr "बिना टेम्प्लेट कोड लिखे अपना टेम्प्लेट चुन्ने से हो सकता है कि बीज विनिमय का विवरण आपकी वेबसाइट पर न दिखे।"
 
 #: wp-seedbank.php:239 wp-seedbank.php:552
 msgid "Seed Exchange Details"
-msgstr "Dettagli dello Scambio di Sementi"
+msgstr "बीज विनिमय का विवरण"
 
 #: wp-seedbank.php:277
 msgid "I would like to"
-msgstr "Vorrei che"
+msgstr "मै चाहता/चाहती हूंँ कि"
 
 #: wp-seedbank.php:278
 msgid "enter a number"
-msgstr "inserisci un numero"
+msgstr "कोई संख्या डालें"
 
 #: wp-seedbank.php:283 wp-seedbank.php:557
 msgid "These seeds will expire on or about"
-msgstr "La fertilità di questi semi si manterrà entro"
+msgstr "इन बीजों की अवधि इस तारीख पर या इसके आस-पास समाप्त होती है"
 
 #: wp-seedbank.php:283 wp-seedbank.php:286
 msgid "enter a date"
-msgstr "inserisci una data"
+msgstr "तारीख डालें"
 
 #: wp-seedbank.php:283
 msgid "(If you are requesting seeds, you can leave this blank.)"
-msgstr ""
+msgstr "(यदि आप बीजों के लिये अनुरोध कर रहे हैं, तो इसे खाली छोड़ दें।)"
 
 #: wp-seedbank.php:286
 msgid "If I don't hear from anyone by"
-msgstr "Se non verranno ricevute comunicazioni entro il"
+msgstr "यदि  इस तारीख तक किसी का जवाब नहीं आया"
 
 #: wp-seedbank.php:286
 msgid "I'll stop being available to make this exchange."
-msgstr "Non sarò più disponibile ad effettuare questo scambio."
+msgstr "मैं यह विनिमय करने के लिये उप्लब्ध नहीं रहुँगा।"
 
 #: wp-seedbank.php:286
 msgid ""
 "(If you do not get a response by this date, your request will automatically "
 "close.)"
-msgstr ""
+msgstr "(यदि इस तारीख तक आपको कोई जवाब नहीं मिला तो आपका अनुरोध स्वयं बन्द हो जाएगा।)"
 
 #: wp-seedbank.php:290
 msgid "This seed exchange is"
-msgstr "Questo Scambio Sementi è "
+msgstr "यह बीज हस्तांतरण"
 
 #: wp-seedbank.php:422 wp-seedbank.php:1204
 msgid "Deleted"
-msgstr "Cancellato"
+msgstr "मिटा दिया गया"
 
 #: wp-seedbank.php:436
 msgid "Scientific Name:"
@@ -302,7 +302,7 @@ msgstr ""
 
 #: wp-seedbank.php:488 wp-seedbank.php:1273
 msgid "Quantity"
-msgstr "Quantità"
+msgstr "मात्रा"
 
 #: wp-seedbank.php:491
 msgid "Seed Expiry Date"
@@ -317,27 +317,27 @@ msgid ""
 "Make a new Seed Exchange on this page. A Seed Exchange is just like a blog "
 "post, but tailored specifically for the Seedbank. Have some seeds to share, "
 "or trying to find seeds to grow? Let others know by posting here!"
-msgstr "Crea un nuovo Scambio Sementi su questa pagina. Pubblicare uno Scambio Sementi è come pubblicare qualcosa su un Blog, ma è concepito specificamente per la Banca delle Semenze. Hai dei semi da scambiare o stai cercando dei semi da coltivare ? Faccelo sapere qui!"
+msgstr "इस पृष्ठ पर एक नया बीज विनिमय करें। एक बीज हस्तांतरण एक ब्लौग पोस्ट की तरह है, जो खास तौर पे बीज-कोष के लिये बना होता है। क्या आपके पास औरों के साथ बाँटने के लिये बीज हैं? या फिर आप स्वयं उगाने के लिये बीज ढूंढ रहे हैं? यहाँ पर अपनी जानकारी डालके औरों को बताएँ!  "
 
 #: wp-seedbank.php:540
 msgid "To make a new Seed Exchange, follow these steps:"
-msgstr "Per effettuare un nuovo Scambio Sementi, segui questi semplici passi:"
+msgstr "नया बीज विनिमय करने के लिये इन चरणों का पालन करें:"
 
 #: wp-seedbank.php:541
 msgid "Write a title."
-msgstr "Scrivi un titolo."
+msgstr "शीर्षक लिखें।"
 
 #: wp-seedbank.php:542
 msgid "Short, descriptive summaries are best."
-msgstr "Un riepilogo breve e descrittivo è spesso il migliore."
+msgstr "संक्षिप्त और वर्णात्मक सारांश दें।"
 
 #: wp-seedbank.php:543
 msgid "Click here and then type your title."
-msgstr "Clicca qui ed inserisci il tuo titolo."
+msgstr "यहाँ क्लिक करें और फिर शीर्षक लिखें।"
 
 #: wp-seedbank.php:545
 msgid "Explain your request or offer."
-msgstr "Spiegaci la tua richiesta o la tua offerta."
+msgstr "अपने अनुरोध या प्रस्ताव का विवरण दें।"
 
 #: wp-seedbank.php:546
 msgid ""
@@ -345,44 +345,44 @@ msgid ""
 " get, or both. Be sure to include any important words you think others might"
 " use to find your post when they're searching the website. Include any "
 "additional information relevant to your posting."
-msgstr "Con parole tue, descrivi cosa stai cercando, o cosa speri di trovare, o entrambe le cose. Sii certo di includere ogni parola che pensi possa essere rilevante, o che gli altri possano usare per trovare il tuo messaggio quando effettuano una ricerca nel sito. Includi nel testo ogni informazione importante."
+msgstr "अपने शब्दों में बताएँ कि आपको क्या चाहिए, या आपको क्या मिलने की उमीद है, या दोनो।  ऐसे शब्दों का प्रयोग करने का ध्यान रखें जिनसे और लोगों को वेबसाइट पर खोज करके आपका पोस्ट ढूंढने में आसानी हो। कोई अन्य प्रासंगिक जानकारी हो तो वह भी दें।"
 
 #: wp-seedbank.php:547
 msgid "Click here and then type your message."
-msgstr "Clicca qui ed inserisci il tuo messaggio."
+msgstr "यहाँ क्लिक करें और अपना संदेश लिखें।"
 
 #: wp-seedbank.php:549
 msgid "Fill in the details."
-msgstr "Riempi con i dettagli."
+msgstr "निम्न बिन्दुओं पर जानकारी भरें।"
 
 #: wp-seedbank.php:551
 msgid ""
 "In the %1$s box, there are some fields you should fill in to help other "
 "people find your post by organizing it in a sensible place in the Seedbank. "
 "Simply complete the sentences of the fill-in-the-blank paragraph."
-msgstr "Nel riquadro %1$s, ci sono dei campi da completare per aiutare le altre persone a trovare il tuo messaggio, che verrà organizzato e collocato in un luogo sensibile della Banca delle Semenze. Completa semplicemente le frasi del paragrafo riempendone gli spazi vuoti."
+msgstr "%1$s वाले डिब्बे में दिए गये खाली स्थानों को उचित रूप से भरें जिससे आपका संदेश बीज-कोष में सही तरह से व्यवस्थित हो और लोगों को उसे ढूंढने में सुविधा हो। दिए गये अनुच्छेद के वाक्यों को पूरा करें। "
 
 #: wp-seedbank.php:556
 msgid ""
 "If your seeds are in a packet, the wrapping might have an expiration date. "
 "Put that in the \"%s\" field."
-msgstr ""
+msgstr "अगर यह बीज पैकेट में हैं, तो हो सकता है कि उस पर बीजों का इस्तमाल करने की आखिरी तारीख पड़ी हो। तारीख को \"%s\" वाले खाने में लिखें।"
 
 #: wp-seedbank.php:560
 msgid ""
 "If you know the scientific name (genus, species, variety, etc.) of your "
 "seed, you can also select it from the list of %s."
-msgstr ""
+msgstr "यदि आपको अपने बीज का वैज्ञाननिक नाम पता है (जीनस, जाति, प्रकार आदि) , तो आप उसे %s की सूचि से चुन सकते हैं।"
 
 #: wp-seedbank.php:563
 msgid ""
 "When you have done this, click the \"Publish\" (or \"Submit for review\") "
 "button. Congratulations! And thank you for spreading the seed love!"
-msgstr "Quando hai fatto ciò, clicca il pulsante \"Pubblica\" (o \"Verifica\").\nCongratulazioni! E grazie, per diffondere amore per le Sementi!"
+msgstr "जब यह सब कर लें तब \"प्रकाशित करें\" (या \"समीक्षा के लिये भेजें\") बटन पर क्लिक करें। मुबारक़ हो! बीज स्वराज आंदोलन में आपके योगदान के लिये धन्यवाद!"
 
 #: wp-seedbank.php:582
 msgid "Adding a Seed Exchange"
-msgstr "Aggiungendo uno Scambio di Sementi"
+msgstr "बीज विनिमय जोड़ा जा रहा है"
 
 #: wp-seedbank.php:588
 msgid ""
@@ -394,21 +394,21 @@ msgid ""
 "International Code of Nomenclature for Cultivated Plants (ICNCP). Several "
 "dozen genera and various species, subspecies, varieties, and cultivar Groups"
 " are already included."
-msgstr ""
+msgstr "आप बीज का वैज्ञानिक नाम देकर अपने बीजों के प्राकर को और स्पष्ट कर सकते हैं। बीज का वैज्ञानिक नाम उसकी जीनस और प्रजाति के बारे में जानकारी देता है। वर्डप्रेस बीजकोष पर दिये गये बीजों के वैज्ञानिक नाम 'इन्टरनेश्नल कोड आॅफ नौमेनक्लेचर फौर कल्टीवेटिड प्लांट्स' (पौधों की खेती के लिए नामकरण का अंतर्राष्ट्रीय कोड) के अनुसार होने चाहिये। कई दर्जन जीनस और अनेक प्रजाति, उपप्रजाति, वराइटी और कृषिजोपजाति पहले से ही दी हुई हैं।"
 
 #: wp-seedbank.php:592
 msgid "Overview"
-msgstr ""
+msgstr "अवलोकन"
 
 #: wp-seedbank.php:596
 msgid ""
 "To add a new scientific name on this screen, enter the following "
 "information:"
-msgstr ""
+msgstr "इस स्क्रीन पर नया वैज्ञानिक नाम जोड़ने के लिये निम्नलिखित जानकारी दें:"
 
 #: wp-seedbank.php:601
 msgid "Name:"
-msgstr ""
+msgstr "नाम:"
 
 #: wp-seedbank.php:602
 msgid ""
@@ -448,7 +448,7 @@ msgstr ""
 
 #: wp-seedbank.php:616 wp-seedbank.php:842
 msgid "Allium"
-msgstr "gen.  Allium"
+msgstr "अलिअम (Allium)"
 
 #: wp-seedbank.php:621
 msgid "Description:"
@@ -470,49 +470,49 @@ msgstr ""
 
 #: wp-seedbank.php:638
 msgid "About the WP-SeedBank"
-msgstr "Riguardo alla WP-SeedBank"
+msgstr "बीज-कोष (WP-SeedBank) के बारे में जानकारी"
 
 #: wp-seedbank.php:640
 msgid ""
 "The %1$s is a labor of love, and passion. Conceived by %2$s and %3$s, it is "
 "maintained by %4$s who loves fresh food and hates Monsanto. %5$s"
-msgstr "Il %1$s è un lavoro fatto con amore, e passione. Concepito da %2$s e %3$s, viene mantenuto da %4$s, amante del cibo fresco. %5$s"
+msgstr "%1$s बीज स्वराज की अवधारणा के प्रति लगन और विश्वास का परिणाम है। यह %2$s और %3$s द्वारा नियोजित है, और %4$s, जिन्हें मोन्सैंटो से नफरत और ताज़े भोजन से प्यार है, इसकी देख-रेख करते हैं। %5$s"
 
 #: wp-seedbank.php:641
 msgid "WP-SeedBank on the WordPress Plugin Repository"
-msgstr "WP-SeedBank è nell'elenco plugin di WordPress"
+msgstr "वर्ड प्रेस प्लगिन कोष में WP-SeedBank"
 
 #: wp-seedbank.php:641
 msgid "WP-SeedBank plugin"
-msgstr "WP-SeedBank plugin"
+msgstr "WP-SeedBank प्लगिन"
 
 #: wp-seedbank.php:642
 msgid "The HummingBird Project's WP-SeedBank Initiative"
-msgstr "L'iniziativa di The HummingBird Project per la WP-SeedBank "
+msgstr "हमिंगबर्ड प्रोजेक्ट की पहल: वर्ड-प्रेस बीज-कोष (WP-SeedBank)"
 
 #: wp-seedbank.php:642
 msgid "The Hummingbird Project"
-msgstr "The Hummingbird Project"
+msgstr "हमिंगबर्ड प्रोजेक्ट"
 
 #: wp-seedbank.php:643
 msgid "initially developed at Cleveland GiveCamp"
-msgstr "sviluppato inizialmente al Cleveland GiveCamp"
+msgstr "शुरुवात में Cleveland GiveCamp में बनाया गया"
 
 #: wp-seedbank.php:644
 msgid "Who is this person?"
-msgstr "Chi è questa persona?"
+msgstr "यह कौन है?"
 
 #: wp-seedbank.php:644
 msgid "a houseless, jobless, nomadic \"vigilante programmer\""
-msgstr "un \"programmatore vigilante\" nomadico, senza lavoro né dimora"
+msgstr "ैएक बेघर, बेरोज़गार, घुमक्कड़ कम्प्यूटर प्रोग्रामर "
 
 #: wp-seedbank.php:645
 msgid "Credits for WP-SeedBank"
-msgstr "RIngraziamenti per la WP-SeedBank "
+msgstr "बीज-कोष के लिए सौजन्य"
 
 #: wp-seedbank.php:645
 msgid "Donations are appreciated."
-msgstr "Donazioni sono ben accette."
+msgstr "हमे दिए गए दान के लिये हम आभारी रहेंगे। "
 
 #: wp-seedbank.php:649
 msgid "More WP-SeedBank help:"
@@ -535,42 +535,42 @@ msgstr ""
 #: wp-seedbank.php:814
 msgctxt "verb"
 msgid "Swap"
-msgstr "Scambio"
+msgstr "अदला-बदली"
 
 #: wp-seedbank.php:814
 msgid "Exchanges offering seeds for other seeds."
-msgstr "Scambi che offrono sementi in cambio di altre semenze."
+msgstr "बीजों के बदले बीज देने वाले हस्तांतरण"
 
 #: wp-seedbank.php:815
 msgctxt "verb"
 msgid "Sell"
-msgstr "Vendi"
+msgstr "बेचो"
 
 #: wp-seedbank.php:815
 msgid "Exchanges offering seeds for money."
-msgstr "Scambi richiedenti denaro al cambio delle semenze."
+msgstr "पैसे के बदले बीज देने वाले विनिमय"
 
 #: wp-seedbank.php:816
 msgctxt "verb"
 msgid "Give"
-msgstr "Dai"
+msgstr "आनुदान करो"
 
 #: wp-seedbank.php:816
 msgid "Exchanges offering free seeds being given away."
-msgstr "Scambi che offrono semenze gratuite date altrove."
+msgstr "मुफ़्त बीज देने वाले विनिमय"
 
 #: wp-seedbank.php:817
 msgctxt "verb"
 msgid "Get"
-msgstr "Ottieni"
+msgstr "प्राप्त करो"
 
 #: wp-seedbank.php:817
 msgid "Exchanges requesting seeds of a variety not already listed."
-msgstr "Scambi richiedenti semenze di varietà non ancora in lista."
+msgstr "सूची में न शामिल बीजों के लिये अनुरोध करने वाले विनिमय"
 
 #: wp-seedbank.php:832
 msgid "Abelmoschus"
-msgstr "gen.  Abelmoschus"
+msgstr "अबेलमोशस (Abelmoschus)"
 
 #: wp-seedbank.php:838
 msgid "Abelmoschus esculentus"
@@ -578,7 +578,7 @@ msgstr ""
 
 #: wp-seedbank.php:841
 msgid "Agastache"
-msgstr "gen.  Agastache"
+msgstr "अगसटशे"
 
 #: wp-seedbank.php:846
 msgid "Allium porrum"
@@ -590,7 +590,7 @@ msgstr ""
 
 #: wp-seedbank.php:850
 msgid "Amaranthus"
-msgstr "gen.  Amaranthus"
+msgstr "चौलाई (Amaranthus)"
 
 #: wp-seedbank.php:853
 msgid "Amaranthus tricolor"
@@ -598,23 +598,23 @@ msgstr ""
 
 #: wp-seedbank.php:856
 msgid "Anagallis"
-msgstr "gen.  Anagallis"
+msgstr "अनागालिस"
 
 #: wp-seedbank.php:857
 msgid "Anethum"
-msgstr "gen.  Anethum"
+msgstr "अनेथम"
 
 #: wp-seedbank.php:858
 msgid "Anthenum"
-msgstr ""
+msgstr "एन्थनम"
 
 #: wp-seedbank.php:859
 msgid "Antirrhinum"
-msgstr "gen.  Antirrhinum"
+msgstr "एन्टीर्हिनम"
 
 #: wp-seedbank.php:860
 msgid "Apium"
-msgstr "gen. Apium"
+msgstr "अपिअम"
 
 #: wp-seedbank.php:863
 msgid "Apium graveolens"
@@ -646,11 +646,11 @@ msgstr ""
 
 #: wp-seedbank.php:884
 msgid "Asclepias"
-msgstr "gen. Asclepias"
+msgstr "अस्क्लेपिअस"
 
 #: wp-seedbank.php:886
 msgid "Basella"
-msgstr "gen.  Basella"
+msgstr "बसेला"
 
 #: wp-seedbank.php:889
 msgid "Basella rubra"
@@ -658,7 +658,7 @@ msgstr ""
 
 #: wp-seedbank.php:892
 msgid "Beta"
-msgstr "gen. Beta"
+msgstr "बेटा"
 
 #: wp-seedbank.php:895
 msgid "Beta vulgaris"
@@ -670,7 +670,7 @@ msgstr ""
 
 #: wp-seedbank.php:903
 msgid "Brassica"
-msgstr "gen. Brassica"
+msgstr "ब्रासिका"
 
 #: wp-seedbank.php:906
 msgid "Brassica napus"
@@ -710,11 +710,11 @@ msgstr ""
 
 #: wp-seedbank.php:922
 msgid "Calendula"
-msgstr "gen. Calendula"
+msgstr "कैलेन्डुला"
 
 #: wp-seedbank.php:923 wp-seedbank.php:1292
 msgid "Capsicum"
-msgstr "gen. Capsicum"
+msgstr "शिमला मिर्च "
 
 #: wp-seedbank.php:926
 msgid "Capsicum annuum"
@@ -722,19 +722,19 @@ msgstr ""
 
 #: wp-seedbank.php:929
 msgid "Cardiospermum"
-msgstr "gen. Cardiospermum"
+msgstr "कार्डीयोस्पर्मम"
 
 #: wp-seedbank.php:930
 msgid "Centaurea"
-msgstr "gen. Centaurea"
+msgstr "सेन्टौरिया"
 
 #: wp-seedbank.php:931
 msgid "Chrysanthemum"
-msgstr "gen. Chrysanthemum"
+msgstr "गुलदाउदी"
 
 #: wp-seedbank.php:932
 msgid "Cichorium"
-msgstr "gen. Cichorium"
+msgstr "सिकोरियम"
 
 #: wp-seedbank.php:935
 msgid "Cichorium endivia"
@@ -746,7 +746,7 @@ msgstr ""
 
 #: wp-seedbank.php:939
 msgid "Citrullus"
-msgstr "gen. Citrullus"
+msgstr "सिट्रुलस"
 
 #: wp-seedbank.php:942
 msgid "Citrullus lanatus"
@@ -754,35 +754,35 @@ msgstr ""
 
 #: wp-seedbank.php:945
 msgid "Cleome"
-msgstr "gen. Cleome"
+msgstr "क्लिओमी"
 
 #: wp-seedbank.php:946
 msgid "Cobaea"
-msgstr "gen. Cobaea"
+msgstr "कोबिया"
 
 #: wp-seedbank.php:947
 msgid "Consolida"
-msgstr "gen. Consolida"
+msgstr "कौसोलीडा"
 
 #: wp-seedbank.php:948
 msgid "Convolvulus"
-msgstr "gen. Convolvulus"
+msgstr "कौनवोल्वुलस"
 
 #: wp-seedbank.php:949
 msgid "Coreopsis"
-msgstr "gen. Coreopsis"
+msgstr "कोरिऔप्सिस"
 
 #: wp-seedbank.php:950
 msgid "Coriandrum"
-msgstr "gen. Coriandrum"
+msgstr "धनिया"
 
 #: wp-seedbank.php:951
 msgid "Cosmos"
-msgstr "gen. Cosmos"
+msgstr "कौस्मौस"
 
 #: wp-seedbank.php:952
 msgid "Cucumis"
-msgstr "gen. Cucumis"
+msgstr "कुकुमिस"
 
 #: wp-seedbank.php:955
 msgid "Cucumis melo"
@@ -794,7 +794,7 @@ msgstr ""
 
 #: wp-seedbank.php:959
 msgid "Cucurbita"
-msgstr "gen. Cucurbita"
+msgstr "कुकुर्बिटा"
 
 #: wp-seedbank.php:962
 msgid "Cucurbita pepo"
@@ -814,11 +814,11 @@ msgstr ""
 
 #: wp-seedbank.php:973
 msgid "Dalea"
-msgstr "gen. Dalea"
+msgstr "डालिया"
 
 #: wp-seedbank.php:974
 msgid "Daucus"
-msgstr "gen. Daucus"
+msgstr "डौकस"
 
 #: wp-seedbank.php:977
 msgid "Daucus carota"
@@ -830,19 +830,19 @@ msgstr ""
 
 #: wp-seedbank.php:985
 msgid "Diplotaxis"
-msgstr "gen. Diplotaxis"
+msgstr "डिप्लोटैक्सिस"
 
 #: wp-seedbank.php:986
 msgid "Dolichos"
-msgstr "gen. Dolichos"
+msgstr "डोलीकोस"
 
 #: wp-seedbank.php:988
 msgid "Echinacea"
-msgstr "gen. Echinacea"
+msgstr "एकिनाकिया"
 
 #: wp-seedbank.php:989
 msgid "Eruca"
-msgstr "gen. Eruca"
+msgstr "एरुका"
 
 #: wp-seedbank.php:992
 msgid "Eruca vesicaria"
@@ -854,11 +854,11 @@ msgstr ""
 
 #: wp-seedbank.php:1000
 msgid "Eschscholzia"
-msgstr "gen. Eschscholzia"
+msgstr "एश्शोल्ज़िया"
 
 #: wp-seedbank.php:1002
 msgid "Foeniculum"
-msgstr "gen. Foeniculum"
+msgstr "फोनिक्युलम"
 
 #: wp-seedbank.php:1005
 msgid "Foeniculum vulgare"
@@ -870,19 +870,19 @@ msgstr ""
 
 #: wp-seedbank.php:1013
 msgid "Fragaria"
-msgstr "gen. Fragaria"
+msgstr "फ्रागारिया"
 
 #: wp-seedbank.php:1015
 msgid "Gaillardia"
-msgstr "gen. Gaillardia"
+msgstr "गलार्डिया"
 
 #: wp-seedbank.php:1016
 msgid "Glycine"
-msgstr "gen. Glycine"
+msgstr "ग्लाइसीन"
 
 #: wp-seedbank.php:1018
 msgid "Helianthus"
-msgstr "gen. Helianthus"
+msgstr "हेलियान्थस"
 
 #: wp-seedbank.php:1021
 msgid "Helianthus tuberosus"
@@ -890,7 +890,7 @@ msgstr ""
 
 #: wp-seedbank.php:1025
 msgid "Ipomoea"
-msgstr "gen. Ipomoea"
+msgstr "आइपोमोइया"
 
 #: wp-seedbank.php:1028
 msgid "Ipomoea batatas"
@@ -898,11 +898,11 @@ msgstr ""
 
 #: wp-seedbank.php:1032
 msgid "Koeleria"
-msgstr "gen. Koeleria"
+msgstr "कोलेरिया"
 
 #: wp-seedbank.php:1034
 msgid "Lactuca"
-msgstr "gen. Lactuca"
+msgstr "लाकटुका"
 
 #: wp-seedbank.php:1037
 msgid "Lactuca sativa"
@@ -910,19 +910,19 @@ msgstr ""
 
 #: wp-seedbank.php:1040
 msgid "Lagenaria"
-msgstr "gen. Lagenaria"
+msgstr "लागेनारिया"
 
 #: wp-seedbank.php:1041
 msgid "Lathyrus"
-msgstr "gen. Lathyrus"
+msgstr "लाथिरस"
 
 #: wp-seedbank.php:1042
 msgid "Lupinus"
-msgstr "gen. Lupinus"
+msgstr "लुपिनस"
 
 #: wp-seedbank.php:1043
 msgid "Lycopersicon"
-msgstr "gen. Lycopersicon"
+msgstr "लाइकोपर्सिकोन"
 
 #: wp-seedbank.php:1046
 msgid "Lycopersicon esculentum"
@@ -930,35 +930,35 @@ msgstr ""
 
 #: wp-seedbank.php:1050
 msgid "Malope"
-msgstr "gen. Malope"
+msgstr "मालोप"
 
 #: wp-seedbank.php:1051
 msgid "Matricaria"
-msgstr "gen. Matricaria"
+msgstr "माट्रिकारिया"
 
 #: wp-seedbank.php:1052
 msgid "Mentha"
-msgstr "gen. Mentha"
+msgstr "मेन्था"
 
 #: wp-seedbank.php:1053
 msgid "Mirabilis"
-msgstr "gen. Mirabilis"
+msgstr "मिराबिलिस"
 
 #: wp-seedbank.php:1055
 msgid "Nigella"
-msgstr "gen. Nigella"
+msgstr "नाइजेला"
 
 #: wp-seedbank.php:1057
 msgid "Ocimum"
-msgstr "gen. Ocimum"
+msgstr "ओकिमम"
 
 #: wp-seedbank.php:1058
 msgid "Origanum"
-msgstr "gen. Origanum"
+msgstr "औरिगैनम"
 
 #: wp-seedbank.php:1060
 msgid "Papaver"
-msgstr "gen. Papaver"
+msgstr "पापावेर"
 
 #: wp-seedbank.php:1061
 msgid "Pastinaca"
@@ -970,19 +970,19 @@ msgstr ""
 
 #: wp-seedbank.php:1067
 msgid "Passiflora"
-msgstr "gen. Passiflora"
+msgstr "पासीफ्लोरा"
 
 #: wp-seedbank.php:1068
 msgid "Penstemon"
-msgstr "gen. Penstemon"
+msgstr "पेन्स्टेमौन"
 
 #: wp-seedbank.php:1069
 msgid "Petrolselinum"
-msgstr "gen. Petrolselinum"
+msgstr "पेट्रोल्सेलिनम"
 
 #: wp-seedbank.php:1070 wp-seedbank.php:1317
 msgid "Phaseolus"
-msgstr "gen. Phaseolus"
+msgstr "फेसियोलस"
 
 #: wp-seedbank.php:1073
 msgid "Phaseolus lunatus"
@@ -994,7 +994,7 @@ msgstr ""
 
 #: wp-seedbank.php:1077
 msgid "Physalis"
-msgstr "gen. Physalis"
+msgstr "फसैलिस"
 
 #: wp-seedbank.php:1080
 msgid "Physalis ixocarpa"
@@ -1002,7 +1002,7 @@ msgstr ""
 
 #: wp-seedbank.php:1083
 msgid "Pisum"
-msgstr "gen. Pisum"
+msgstr "पिसम"
 
 #: wp-seedbank.php:1086
 msgid "Pisum sativum"
@@ -1010,7 +1010,7 @@ msgstr ""
 
 #: wp-seedbank.php:1089
 msgid "Poterium"
-msgstr "gen. Poterium"
+msgstr "पोटेरियम"
 
 #: wp-seedbank.php:1091
 msgid "Rhaphanus"
@@ -1030,23 +1030,23 @@ msgstr ""
 
 #: wp-seedbank.php:1103
 msgid "Rosmarinus"
-msgstr "gen. Rosmarinus"
+msgstr "रोसमारिनस"
 
 #: wp-seedbank.php:1104
 msgid "Rudbeckia"
-msgstr "gen. Rudbeckia"
+msgstr "रुडबेकिया"
 
 #: wp-seedbank.php:1106
 msgid "Salvia"
-msgstr "gen. Salvia"
+msgstr "सालविया"
 
 #: wp-seedbank.php:1107
 msgid "Scorpiurus"
-msgstr "gen. Scorpiurus"
+msgstr "स्कौरपियरस"
 
 #: wp-seedbank.php:1108 wp-seedbank.php:1303
 msgid "Solanum"
-msgstr "gen. Solanum"
+msgstr "सोलैनम"
 
 #: wp-seedbank.php:1111
 msgid "Solanum melongena"
@@ -1066,7 +1066,7 @@ msgstr ""
 
 #: wp-seedbank.php:1122
 msgid "Tagetes"
-msgstr "gen. Tagetes"
+msgstr "टागेटीज़"
 
 #: wp-seedbank.php:1123
 msgid "Tetragonia"
@@ -1078,19 +1078,19 @@ msgstr ""
 
 #: wp-seedbank.php:1129
 msgid "Thunbergia"
-msgstr "gen. Thunbergia"
+msgstr "थुनबर्गिया"
 
 #: wp-seedbank.php:1130
 msgid "Thymus"
-msgstr "gen. Thymus"
+msgstr "थाईमस"
 
 #: wp-seedbank.php:1131
 msgid "Triticum "
-msgstr "gen. Triticum"
+msgstr "ट्रिटिकम"
 
 #: wp-seedbank.php:1132
 msgid "Tropaeolum"
-msgstr "gen. Tropaeolum"
+msgstr "ट्रोपियोलम"
 
 #: wp-seedbank.php:1134
 msgid "Valerianella"
@@ -1110,7 +1110,7 @@ msgstr ""
 
 #: wp-seedbank.php:1147
 msgid "Zea"
-msgstr "gen. Zea"
+msgstr "ज़िया"
 
 #: wp-seedbank.php:1150
 msgid "Zea mays"
@@ -1118,175 +1118,175 @@ msgstr ""
 
 #: wp-seedbank.php:1153
 msgid "Zinnia"
-msgstr "gen. Zinnia"
+msgstr "ज़िनिया"
 
 #: wp-seedbank.php:1156
 msgid "Asian Vegetable"
-msgstr ""
+msgstr "एशियाई सबज़ी"
 
 #: wp-seedbank.php:1157 wp-seedbank.php:1312
 msgid "Bean"
-msgstr "Fagioli"
+msgstr "सेम"
 
 #: wp-seedbank.php:1158
 msgid "Beet"
-msgstr "Barbabietola"
+msgstr "चुकंदर"
 
 #: wp-seedbank.php:1159
 msgid "Berry"
-msgstr ""
+msgstr "बेर"
 
 #: wp-seedbank.php:1160
 msgid "Broccoli"
-msgstr "Broccoli"
+msgstr "ब्रोक्कोली"
 
 #: wp-seedbank.php:1161
 msgid "Brussels Sprout"
-msgstr "Cavoletti di Bruxelles"
+msgstr "ब्रसेल्स स्प्राउट्स"
 
 #: wp-seedbank.php:1162
 msgid "Cabbage"
-msgstr "Cavolo Cappuccio"
+msgstr "पत्ता गोभी"
 
 #: wp-seedbank.php:1163
 msgid "Carrot"
-msgstr "Carota"
+msgstr "गाजर"
 
 #: wp-seedbank.php:1164
 msgid "Cauliflower"
-msgstr "Cavolfiore"
+msgstr "फूल गोभी"
 
 #: wp-seedbank.php:1165
 msgid "Chard"
-msgstr "Bieta"
+msgstr "चार्ड"
 
 #: wp-seedbank.php:1166
 msgid "Corn"
-msgstr "Granturco"
+msgstr "मक्का"
 
 #: wp-seedbank.php:1167
 msgid "Collard"
-msgstr ""
+msgstr "कौलार्ड"
 
 #: wp-seedbank.php:1168
 msgid "Cover Crop"
-msgstr "Sovescio"
+msgstr ""
 
 #: wp-seedbank.php:1169
 msgid "Eggplant"
-msgstr "Melanzana"
+msgstr "बैंगन"
 
 #: wp-seedbank.php:1170
 msgid "Cucumber"
-msgstr "Cetriolo"
+msgstr "खीरा"
 
 #: wp-seedbank.php:1171
 msgid "Fava"
-msgstr "Fava"
+msgstr ""
 
 #: wp-seedbank.php:1172
 msgid "Flower"
-msgstr "Fiore"
+msgstr "फूल"
 
 #: wp-seedbank.php:1173
 msgid "Gourd"
-msgstr "Zucca"
+msgstr "लौकी"
 
 #: wp-seedbank.php:1174
 msgid "Green"
-msgstr "Verde"
+msgstr "हरा"
 
 #: wp-seedbank.php:1175
 msgid "Herb"
-msgstr "Erba"
+msgstr "जड़ी बूटी"
 
 #: wp-seedbank.php:1176
 msgid "Kale"
-msgstr "Cavolo Nero"
+msgstr "गोभी"
 
 #: wp-seedbank.php:1177
 msgid "Kohlrabi"
-msgstr "Cavolo Rapa"
+msgstr "कोल्हाबी"
 
 #: wp-seedbank.php:1178
 msgid "Legume"
-msgstr "Legumi"
+msgstr "फली"
 
 #: wp-seedbank.php:1179
 msgid "Lettuce"
-msgstr "Lattuga"
+msgstr "सलाद पत्ता"
 
 #: wp-seedbank.php:1180
 msgid "Melon"
-msgstr "Melone"
+msgstr "खरबूजा"
 
 #: wp-seedbank.php:1181
 msgid "Mustard"
-msgstr "Senape"
+msgstr "सरसों"
 
 #: wp-seedbank.php:1182
 msgid "Okra"
-msgstr "Gombo"
+msgstr "भिंडी"
 
 #: wp-seedbank.php:1183
 msgid "Onion"
-msgstr "Cipolla"
+msgstr "प्याज़"
 
 #: wp-seedbank.php:1184
 msgid "Parsnip/Root Parsley"
-msgstr "Pastinaca/Radice di Prezzemolo"
+msgstr "चुकंदर"
 
 #: wp-seedbank.php:1185
 msgid "Potato"
-msgstr "Patata"
+msgstr "आलू"
 
 #: wp-seedbank.php:1186
 msgid "Pea"
-msgstr "Pisello"
+msgstr "मटर"
 
 #: wp-seedbank.php:1187 wp-seedbank.php:1287
 msgid "Pepper"
-msgstr "Pepe"
+msgstr "मिर्च"
 
 #: wp-seedbank.php:1188
 msgid "Pumpkin"
-msgstr "Zucca"
+msgstr "कद्दू"
 
 #: wp-seedbank.php:1189
 msgid "Radish"
-msgstr "Ravanello"
+msgstr "मूली"
 
 #: wp-seedbank.php:1190
 msgid "Strawberry"
-msgstr "Fragola"
+msgstr "स्ट्रॉबेरी"
 
 #: wp-seedbank.php:1191
 msgid "Root"
-msgstr "Radice"
+msgstr "जड़"
 
 #: wp-seedbank.php:1192
 msgid "Rutabaga"
-msgstr "Rapa Svedese"
+msgstr "शलजम"
 
 #: wp-seedbank.php:1193
 msgid "Spinach"
-msgstr "Spinaci"
+msgstr "पालक"
 
 #: wp-seedbank.php:1194
 msgid "Summer Squash"
-msgstr "Zucchina"
+msgstr "कुमड़ा"
 
 #: wp-seedbank.php:1195 wp-seedbank.php:1298
 msgid "Tomato"
-msgstr "Pomodoro"
+msgstr "टमाटर"
 
 #: wp-seedbank.php:1196
 msgid "Turnip"
-msgstr "Rapa"
+msgstr "शलजम"
 
 #: wp-seedbank.php:1197
 msgid "Winter Squash"
-msgstr "Zucca"
+msgstr ""
 
 #: wp-seedbank.php:1200
 msgid "Packets"
@@ -1298,29 +1298,29 @@ msgstr ""
 
 #: wp-seedbank.php:1203 wp-seedbank.php:1413 wp-seedbank.php:1415
 msgid "Active"
-msgstr "Attiva"
+msgstr "सक्रिय"
 
 #: wp-seedbank.php:1203
 msgid "New or open seed exchange requests or offers."
-msgstr "Apri o crea una Nuova richiesta/offerta per Scambio Sementi"
+msgstr "नए या खुले हुए बीज हस्तांतरण अनुरोध या प्रस्ताव"
 
 #: wp-seedbank.php:1204
 msgid "Expired or completed seed exchanges."
-msgstr "Scambio Sementi scaduto o completato."
+msgstr "अवधि समाप्त या पूर्ण हो चुके बीज विनिमय"
 
 #: wp-seedbank.php:1210 wp-seedbank.php:1230
 msgid "Batch Seed Exchange"
-msgstr "Partita Scambio Sementi"
+msgstr "बैच में बीज विनिमय"
 
 #: wp-seedbank.php:1211
 msgid "Batch Exchange"
-msgstr "Partita di Scambio"
+msgstr "बैच विनिमय"
 
 #: wp-seedbank.php:1231
 msgid ""
 "This page allows you to upload a comma-separated values (CSV) file that will"
 " be translated to seed exchange requests or offers."
-msgstr "In questa pagina puoi caricare un file CSV (comma-separated-value) che verrà tradotto in una richiesto o in una offerta per uno scambio di semenze. "
+msgstr "इस पृष्ठ पर आप सी एस वी (CSV) फाइल अपलोड कर सकते हैं जो बीज विनिमय या अनुरोध में परिवर्तित हो जाएगी।"
 
 #: wp-seedbank.php:1231
 msgid ""
@@ -1330,15 +1330,15 @@ msgstr ""
 
 #: wp-seedbank.php:1236
 msgid "My batch exchange file is located on"
-msgstr "Il mio codice partita di scambio è posto"
+msgstr "मेरी बैच विनिमय फाइल का स्थान है"
 
 #: wp-seedbank.php:1238
 msgid "another website"
-msgstr "un altro sito web"
+msgstr "कोई अन्य वेबसाइट"
 
 #: wp-seedbank.php:1239
 msgid "my computer"
-msgstr "il mio computer"
+msgstr "मेरा कम्प्यूटर"
 
 #. TRANSLATORS:
 #.            This string becomes a Web form. The placeholder (%s) will
@@ -1364,11 +1364,11 @@ msgstr ""
 
 #: wp-seedbank.php:1258
 msgid "Web fetch options"
-msgstr "Opzioni dal Web"
+msgstr "इन्टरनेट से जानकारी लाने के विकल्प"
 
 #: wp-seedbank.php:1259
 msgid "The address of the file containing my seed exchange data is"
-msgstr "L'indirizzo del file contenente i dati del mio scambio sementi è"
+msgstr "मेरे बीज विनिमय की जानकारी जिस फाइल में है उसका पता है"
 
 #: wp-seedbank.php:1259
 msgid "http://mysite.com/file.csv"
@@ -1376,11 +1376,11 @@ msgstr "http://mysite.com/file.csv"
 
 #: wp-seedbank.php:1261
 msgid "File upload options"
-msgstr "Opzioni per il caricamento di un file"
+msgstr "फाइल अपलोड करने के विकल्प"
 
 #: wp-seedbank.php:1262
 msgid "The file on my computer containing my seed exchange data is"
-msgstr "Il file sul mio computer contenente i dati del mio scambio di sementi è"
+msgstr "मेरे कम्प्यूटर पर मौजूद मेरे बीज विनिमय की जानकारी वाली फाइल का नाम है"
 
 #: wp-seedbank.php:1263
 msgid ""
@@ -1392,47 +1392,47 @@ msgstr ""
 
 #: wp-seedbank.php:1265
 msgid "Let me review each seed exchange before publishing."
-msgstr "Permettimi di rivedere ogni scambio sementi prima di pubblicarlo."
+msgstr "हर बीज विनिमय को प्रकाशित करने से पहले मुझे उसकी समीक्षा करने दें।"
 
 #: wp-seedbank.php:1266
 msgid "Make Seed Exchanges"
-msgstr "Effettua Scambio Sementi"
+msgstr "बीज विनिमय करें"
 
 #: wp-seedbank.php:1268
 msgid "Example of batch seed exchange data."
-msgstr "Esempio di dati per una partita di scambio sementi."
+msgstr "बैच बीज विनिमय जानकारी का उदाहरण।"
 
 #: wp-seedbank.php:1271
 msgid "Title"
-msgstr "Titolo"
+msgstr "शीर्षक"
 
 #: wp-seedbank.php:1272
 msgid "Type"
-msgstr "Tipo"
+msgstr "प्रकार"
 
 #: wp-seedbank.php:1275
 msgid "Unit label"
-msgstr "Targhetta"
+msgstr ""
 
 #: wp-seedbank.php:1276
 msgid "Seed expiration date"
-msgstr "Data di scadenza delle Sementi"
+msgstr "बीज अवधि समापन की तिथि"
 
 #: wp-seedbank.php:1277
 msgid "Exchange expiration date"
-msgstr "Data di scadenza dello Scambio"
+msgstr "विनिमय अवधि समापन की तिथि"
 
 #: wp-seedbank.php:1278
 msgid "Notes"
-msgstr "Note"
+msgstr "टिप्पणी"
 
 #: wp-seedbank.php:1284
 msgid "Looking to swap peppers for carrots"
-msgstr "Cercando di scambiare dei peperoni per delle carote"
+msgstr "ंमिर्च के बदले गाजर चाहती हँू"
 
 #: wp-seedbank.php:1285 wp-seedbank.php:1310
 msgid "Swap"
-msgstr "Scambio"
+msgstr "अदला-बदली"
 
 #: wp-seedbank.php:1286
 msgid "5"
@@ -1440,7 +1440,7 @@ msgstr "5"
 
 #: wp-seedbank.php:1288
 msgid "seeds"
-msgstr "semi"
+msgstr "बीज"
 
 #: wp-seedbank.php:1289
 msgid "2016-05-01"
@@ -1452,15 +1452,15 @@ msgstr "2014-05-01"
 
 #: wp-seedbank.php:1291
 msgid "Ideally, I would like to receive carrot seeds in exchange. Thanks!"
-msgstr "Vorrei ricevere dei semi di carota. Grazie!"
+msgstr "मैं बदले में गाजर के बीज चाहँूगी। धन्यवाद!"
 
 #: wp-seedbank.php:1295
 msgid "For sale: tomato seed packets, negotiable price"
-msgstr "In vendita: sementi di pomodoro, prezzo trattabile"
+msgstr "टमाटर के बीज खरीदें, दाम कम-ज़्यादा हो सकता है"
 
 #: wp-seedbank.php:1296
 msgid "Sell"
-msgstr "Vendi"
+msgstr "बेचो"
 
 #: wp-seedbank.php:1297
 msgid "100"
@@ -1468,7 +1468,7 @@ msgstr "100"
 
 #: wp-seedbank.php:1299
 msgid "seed packets"
-msgstr "pacchetti di sementi"
+msgstr "बीज के पैकेट"
 
 #: wp-seedbank.php:1300
 msgid "2017-01-01"
@@ -1481,11 +1481,11 @@ msgstr "2015-06-01"
 #: wp-seedbank.php:1302
 msgid ""
 "Price is negotiable. Reply here or by phone at (555) 555-5555 if interested."
-msgstr "Il prezzo è trattabile. Rispondi qui, o via telefonica allo (555) 555-5555, se sei interessato."
+msgstr "दाम कम-ज़्यादा हो सकते हैं। अधिक जानकारी के लिये इस संदेश का उत्तर दें या (555) 555-5555 पर फोन करें।"
 
 #: wp-seedbank.php:1309
 msgid "These are the best bean seeds!"
-msgstr "Questi sono i migliori semi di fagioli!"
+msgstr "यह राजमा के बहतरीन बीज हैं!"
 
 #: wp-seedbank.php:1311
 msgid "20"
@@ -1493,7 +1493,7 @@ msgstr "20"
 
 #: wp-seedbank.php:1313
 msgid "packets"
-msgstr "pacchetti"
+msgstr "पैकेट"
 
 #: wp-seedbank.php:1314
 msgid "2015-03-30"
@@ -1503,7 +1503,7 @@ msgstr "2015-03-30"
 msgid ""
 "These beans are kidney beans. They are delicious and nutritious, but taste "
 "nothing like chicken."
-msgstr "Questi fagioli del tipo Fava o comunque, di norma, più grossi. Sono deliziosi e nutrienti, ma non hanno il gusto del pollo."
+msgstr "यह राजमा के बीज हैं। यह राजमा पौष्टिक और स्वादिष्ट हैं।"
 
 #. TRANSLATORS:
 #.                    Ignore these placeholders, they are for HTML code.
@@ -1529,7 +1529,7 @@ msgstr[1] ""
 
 #: wp-seedbank.php:1429
 msgid "All Seed Exchanges"
-msgstr "Tutti gli Scambi Sementi"
+msgstr "सारे बीज विनिमय"
 
 #. Plugin Name of the plugin/theme
 msgid "WP-SeedBank"
