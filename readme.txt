@@ -12,7 +12,7 @@ The WP-SeedBank plugin turns any self-hosted WordPress blog into a community see
 
 == Description ==
 
-Add a seedbank (or seed library) to your WordPress-powered website. Registered users can post seed offers and requests (called "seed exchange posts") for others to search, making it easier to swap seeds and grow your community.
+Add a seedbank (or seed library) to your WordPress-powered website. Registered users can post seed offers and requests (called "seed exchange posts") for others to search, making it easier to swap seeds and grow your community. Try the [live demo](http://wordpress-seedbank-plugin.cyberbusking.org/) yourself.
 
 Some key Features include:
 
