@@ -4,7 +4,7 @@
  * Plugin URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/
  * Description: Add a seed exchange post type to turn your WordPress website into a community seedbank or seed library! :D
  * Author: <a href="http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/#authors">The Hummingbird Project</a> and <a href="http://Cyberbusking.org/">Meitar "maymay" Moscovitz</a>
- * Version: 0.4.3
+ * Version: 0.4.4
  * Text Domain: wp-seedbank
  * Domain Path: /languages
  */
@@ -845,6 +845,7 @@ END_HTML;
                 wp_insert_term(__('Allium cepa', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
                 wp_insert_term(__('Allium porrum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
                 wp_insert_term(__('Allium sativum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+                wp_insert_term(__('Allium schoenoprasum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
             }
         }
         if ($genus = wp_insert_term(__('Amaranthus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
@@ -1051,6 +1052,12 @@ END_HTML;
         wp_insert_term(__('Matricaria', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Mentha', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Mirabilis', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        if ($genus = wp_insert_term(__('Momordica', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
+            if (is_array($genus)) {
+                delete_option($this->post_type . '_scientific_name_children');
+                wp_insert_term(__('Momordica charantia', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => '', 'parent' => $genus['term_id']));
+            }
+        }
 
         wp_insert_term(__('Nigella', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
 
@@ -1066,7 +1073,7 @@ END_HTML;
         }
         wp_insert_term(__('Passiflora', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         wp_insert_term(__('Penstemon', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
-        wp_insert_term(__('Petrolselinum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
+        wp_insert_term(__('Petroselinum', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''));
         if ($genus = wp_insert_term(__('Phaseolus', 'wp-seedbank'), $this->post_type . '_scientific_name', array('slug' => ''))) {
             if (is_array($genus)) {
                 delete_option($this->post_type . '_scientific_name_children');

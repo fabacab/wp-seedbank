@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the WP-SeedBank package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WP-SeedBank 0.4.2\n"
+"Project-Id-Version: WP-SeedBank 0.4.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-seedbank\n"
-"POT-Creation-Date: 2014-02-26 07:44:39+00:00\n"
+"POT-Creation-Date: 2014-04-16 23:02:38+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Common Names"
 msgstr ""
 
-#: wp-seedbank.php:120 wp-seedbank.php:1274
+#: wp-seedbank.php:120 wp-seedbank.php:1296
 msgid "Common Name"
 msgstr ""
 
@@ -156,7 +156,7 @@ msgstr ""
 msgid "Scientific Names"
 msgstr ""
 
-#: wp-seedbank.php:153 wp-seedbank.php:1279
+#: wp-seedbank.php:153 wp-seedbank.php:1301
 msgid "Scientific Name"
 msgstr ""
 
@@ -288,7 +288,7 @@ msgstr ""
 msgid "This seed exchange is"
 msgstr ""
 
-#: wp-seedbank.php:422 wp-seedbank.php:1204
+#: wp-seedbank.php:422 wp-seedbank.php:1211
 msgid "Deleted"
 msgstr ""
 
@@ -296,7 +296,7 @@ msgstr ""
 msgid "Scientific Name:"
 msgstr ""
 
-#: wp-seedbank.php:488 wp-seedbank.php:1273
+#: wp-seedbank.php:488 wp-seedbank.php:1295
 msgid "Quantity"
 msgstr ""
 
@@ -583,755 +583,771 @@ msgstr ""
 msgid "Allium sativum"
 msgstr ""
 
-#: wp-seedbank.php:850
+#: wp-seedbank.php:848
+msgid "Allium schoenoprasum"
+msgstr ""
+
+#: wp-seedbank.php:851
 msgid "Amaranthus"
 msgstr ""
 
-#: wp-seedbank.php:853
+#: wp-seedbank.php:854
 msgid "Amaranthus tricolor"
 msgstr ""
 
-#: wp-seedbank.php:856
+#: wp-seedbank.php:857
 msgid "Anagallis"
 msgstr ""
 
-#: wp-seedbank.php:857
+#: wp-seedbank.php:858
 msgid "Anethum"
 msgstr ""
 
-#: wp-seedbank.php:858
+#: wp-seedbank.php:859
 msgid "Anthenum"
 msgstr ""
 
-#: wp-seedbank.php:859
+#: wp-seedbank.php:860
 msgid "Antirrhinum"
 msgstr ""
 
-#: wp-seedbank.php:860
+#: wp-seedbank.php:861
 msgid "Apium"
 msgstr ""
 
-#: wp-seedbank.php:863
+#: wp-seedbank.php:864
 msgid "Apium graveolens"
 msgstr ""
 
-#: wp-seedbank.php:866
+#: wp-seedbank.php:867
 msgid "Apium graveolens var. dulce"
 msgstr ""
 
-#: wp-seedbank.php:867
+#: wp-seedbank.php:868
 msgid "Apium graveolens var. rapaceum"
 msgstr ""
 
-#: wp-seedbank.php:872
+#: wp-seedbank.php:873
 msgid "Arachis"
 msgstr ""
 
-#: wp-seedbank.php:875
+#: wp-seedbank.php:876
 msgid "Arachis hypogaea"
 msgstr ""
 
-#: wp-seedbank.php:878
+#: wp-seedbank.php:879
 msgid "Asparagus"
 msgstr ""
 
-#: wp-seedbank.php:881
+#: wp-seedbank.php:882
 msgid "Asparagus officinalis"
 msgstr ""
 
-#: wp-seedbank.php:884
+#: wp-seedbank.php:885
 msgid "Asclepias"
 msgstr ""
 
-#: wp-seedbank.php:886
+#: wp-seedbank.php:887
 msgid "Basella"
 msgstr ""
 
-#: wp-seedbank.php:889
+#: wp-seedbank.php:890
 msgid "Basella rubra"
 msgstr ""
 
-#: wp-seedbank.php:892
+#: wp-seedbank.php:893
 msgid "Beta"
 msgstr ""
 
-#: wp-seedbank.php:895
+#: wp-seedbank.php:896
 msgid "Beta vulgaris"
 msgstr ""
 
-#: wp-seedbank.php:898
+#: wp-seedbank.php:899
 msgid "Beta vulgaris subsp. cicla"
 msgstr ""
 
-#: wp-seedbank.php:903
+#: wp-seedbank.php:904
 msgid "Brassica"
 msgstr ""
 
-#: wp-seedbank.php:906
+#: wp-seedbank.php:907
 msgid "Brassica napus"
 msgstr ""
 
-#: wp-seedbank.php:907
+#: wp-seedbank.php:908
 msgid "Brassica oleracea"
 msgstr ""
 
-#: wp-seedbank.php:910
+#: wp-seedbank.php:911
 msgid "Brassica oleracea Acephala Group"
 msgstr ""
 
-#: wp-seedbank.php:911
+#: wp-seedbank.php:912
 msgid "Brassica oleracea Botrytis Group"
 msgstr ""
 
-#: wp-seedbank.php:912
+#: wp-seedbank.php:913
 msgid "Brassica oleracea Capitata Group"
 msgstr ""
 
-#: wp-seedbank.php:913
+#: wp-seedbank.php:914
 msgid "Brassica oleracea Gemmifera Group"
 msgstr ""
 
-#: wp-seedbank.php:914
+#: wp-seedbank.php:915
 msgid "Brassica oleracea Gongylodes Group"
 msgstr ""
 
-#: wp-seedbank.php:915
+#: wp-seedbank.php:916
 msgid "Brassica oleracea Italica Group"
 msgstr ""
 
-#: wp-seedbank.php:918
+#: wp-seedbank.php:919
 msgid "Brassica rapa"
 msgstr ""
 
-#: wp-seedbank.php:922
+#: wp-seedbank.php:923
 msgid "Calendula"
 msgstr ""
 
-#: wp-seedbank.php:923 wp-seedbank.php:1292
+#: wp-seedbank.php:924 wp-seedbank.php:1314
 msgid "Capsicum"
 msgstr ""
 
-#: wp-seedbank.php:926
+#: wp-seedbank.php:927
 msgid "Capsicum annuum"
 msgstr ""
 
-#: wp-seedbank.php:929
+#: wp-seedbank.php:930
 msgid "Cardiospermum"
 msgstr ""
 
-#: wp-seedbank.php:930
+#: wp-seedbank.php:931
 msgid "Centaurea"
 msgstr ""
 
-#: wp-seedbank.php:931
+#: wp-seedbank.php:932
 msgid "Chrysanthemum"
 msgstr ""
 
-#: wp-seedbank.php:932
+#: wp-seedbank.php:933
 msgid "Cichorium"
 msgstr ""
 
-#: wp-seedbank.php:935
+#: wp-seedbank.php:936
 msgid "Cichorium endivia"
 msgstr ""
 
-#: wp-seedbank.php:936
+#: wp-seedbank.php:937
 msgid "Cichorium intybus"
 msgstr ""
 
-#: wp-seedbank.php:939
+#: wp-seedbank.php:940
 msgid "Citrullus"
 msgstr ""
 
-#: wp-seedbank.php:942
+#: wp-seedbank.php:943
 msgid "Citrullus lanatus"
 msgstr ""
 
-#: wp-seedbank.php:945
+#: wp-seedbank.php:946
 msgid "Cleome"
 msgstr ""
 
-#: wp-seedbank.php:946
+#: wp-seedbank.php:947
 msgid "Cobaea"
 msgstr ""
 
-#: wp-seedbank.php:947
+#: wp-seedbank.php:948
 msgid "Consolida"
 msgstr ""
 
-#: wp-seedbank.php:948
+#: wp-seedbank.php:949
 msgid "Convolvulus"
 msgstr ""
 
-#: wp-seedbank.php:949
+#: wp-seedbank.php:950
 msgid "Coreopsis"
 msgstr ""
 
-#: wp-seedbank.php:950
+#: wp-seedbank.php:951
 msgid "Coriandrum"
 msgstr ""
 
-#: wp-seedbank.php:951
+#: wp-seedbank.php:952
 msgid "Cosmos"
 msgstr ""
 
-#: wp-seedbank.php:952
+#: wp-seedbank.php:953
 msgid "Cucumis"
 msgstr ""
 
-#: wp-seedbank.php:955
+#: wp-seedbank.php:956
 msgid "Cucumis melo"
 msgstr ""
 
-#: wp-seedbank.php:956
+#: wp-seedbank.php:957
 msgid "Cucumis sativa"
 msgstr ""
 
-#: wp-seedbank.php:959
+#: wp-seedbank.php:960
 msgid "Cucurbita"
 msgstr ""
 
-#: wp-seedbank.php:962
+#: wp-seedbank.php:963
 msgid "Cucurbita pepo"
 msgstr ""
 
-#: wp-seedbank.php:963
+#: wp-seedbank.php:964
 msgid "Cucurbita maxima"
 msgstr ""
 
-#: wp-seedbank.php:966
+#: wp-seedbank.php:967
 msgid "Cynara"
 msgstr ""
 
-#: wp-seedbank.php:969
+#: wp-seedbank.php:970
 msgid "Cynara scolymus"
 msgstr ""
 
-#: wp-seedbank.php:973
+#: wp-seedbank.php:974
 msgid "Dalea"
 msgstr ""
 
-#: wp-seedbank.php:974
+#: wp-seedbank.php:975
 msgid "Daucus"
 msgstr ""
 
-#: wp-seedbank.php:977
+#: wp-seedbank.php:978
 msgid "Daucus carota"
 msgstr ""
 
-#: wp-seedbank.php:980
+#: wp-seedbank.php:981
 msgid "Daucus carota subsp. sativus"
 msgstr ""
 
-#: wp-seedbank.php:985
+#: wp-seedbank.php:986
 msgid "Diplotaxis"
 msgstr ""
 
-#: wp-seedbank.php:986
+#: wp-seedbank.php:987
 msgid "Dolichos"
 msgstr ""
 
-#: wp-seedbank.php:988
+#: wp-seedbank.php:989
 msgid "Echinacea"
 msgstr ""
 
-#: wp-seedbank.php:989
+#: wp-seedbank.php:990
 msgid "Eruca"
 msgstr ""
 
-#: wp-seedbank.php:992
+#: wp-seedbank.php:993
 msgid "Eruca vesicaria"
 msgstr ""
 
-#: wp-seedbank.php:995
+#: wp-seedbank.php:996
 msgid "Eruca vesicaria subsp. sativa"
 msgstr ""
 
-#: wp-seedbank.php:1000
+#: wp-seedbank.php:1001
 msgid "Eschscholzia"
 msgstr ""
 
-#: wp-seedbank.php:1002
+#: wp-seedbank.php:1003
 msgid "Foeniculum"
 msgstr ""
 
-#: wp-seedbank.php:1005
+#: wp-seedbank.php:1006
 msgid "Foeniculum vulgare"
 msgstr ""
 
-#: wp-seedbank.php:1008
+#: wp-seedbank.php:1009
 msgid "Foeniculum vulgare var. azoricum"
 msgstr ""
 
-#: wp-seedbank.php:1013
+#: wp-seedbank.php:1014
 msgid "Fragaria"
 msgstr ""
 
-#: wp-seedbank.php:1015
+#: wp-seedbank.php:1016
 msgid "Gaillardia"
 msgstr ""
 
-#: wp-seedbank.php:1016
+#: wp-seedbank.php:1017
 msgid "Glycine"
 msgstr ""
 
-#: wp-seedbank.php:1018
+#: wp-seedbank.php:1019
 msgid "Helianthus"
 msgstr ""
 
-#: wp-seedbank.php:1021
+#: wp-seedbank.php:1022
 msgid "Helianthus tuberosus"
 msgstr ""
 
-#: wp-seedbank.php:1025
+#: wp-seedbank.php:1026
 msgid "Ipomoea"
 msgstr ""
 
-#: wp-seedbank.php:1028
+#: wp-seedbank.php:1029
 msgid "Ipomoea batatas"
 msgstr ""
 
-#: wp-seedbank.php:1032
+#: wp-seedbank.php:1033
 msgid "Koeleria"
 msgstr ""
 
-#: wp-seedbank.php:1034
+#: wp-seedbank.php:1035
 msgid "Lactuca"
 msgstr ""
 
-#: wp-seedbank.php:1037
+#: wp-seedbank.php:1038
 msgid "Lactuca sativa"
 msgstr ""
 
-#: wp-seedbank.php:1040
+#: wp-seedbank.php:1041
 msgid "Lagenaria"
 msgstr ""
 
-#: wp-seedbank.php:1041
+#: wp-seedbank.php:1042
 msgid "Lathyrus"
 msgstr ""
 
-#: wp-seedbank.php:1042
+#: wp-seedbank.php:1043
 msgid "Lupinus"
 msgstr ""
 
-#: wp-seedbank.php:1043
+#: wp-seedbank.php:1044
 msgid "Lycopersicon"
 msgstr ""
 
-#: wp-seedbank.php:1046
+#: wp-seedbank.php:1047
 msgid "Lycopersicon esculentum"
 msgstr ""
 
-#: wp-seedbank.php:1050
+#: wp-seedbank.php:1051
 msgid "Malope"
 msgstr ""
 
-#: wp-seedbank.php:1051
+#: wp-seedbank.php:1052
 msgid "Matricaria"
 msgstr ""
 
-#: wp-seedbank.php:1052
+#: wp-seedbank.php:1053
 msgid "Mentha"
 msgstr ""
 
-#: wp-seedbank.php:1053
+#: wp-seedbank.php:1054
 msgid "Mirabilis"
 msgstr ""
 
 #: wp-seedbank.php:1055
-msgid "Nigella"
-msgstr ""
-
-#: wp-seedbank.php:1057
-msgid "Ocimum"
+msgid "Momordica"
 msgstr ""
 
 #: wp-seedbank.php:1058
-msgid "Origanum"
+msgid "Momordica charantia"
 msgstr ""
 
-#: wp-seedbank.php:1060
-msgid "Papaver"
-msgstr ""
-
-#: wp-seedbank.php:1061
-msgid "Pastinaca"
+#: wp-seedbank.php:1062
+msgid "Nigella"
 msgstr ""
 
 #: wp-seedbank.php:1064
-msgid "Pastinaca sativa"
+msgid "Ocimum"
+msgstr ""
+
+#: wp-seedbank.php:1065
+msgid "Origanum"
 msgstr ""
 
 #: wp-seedbank.php:1067
-msgid "Passiflora"
+msgid "Papaver"
 msgstr ""
 
 #: wp-seedbank.php:1068
-msgid "Penstemon"
+msgid "Pastinaca"
 msgstr ""
 
-#: wp-seedbank.php:1069
-msgid "Petrolselinum"
-msgstr ""
-
-#: wp-seedbank.php:1070 wp-seedbank.php:1317
-msgid "Phaseolus"
-msgstr ""
-
-#: wp-seedbank.php:1073
-msgid "Phaseolus lunatus"
+#: wp-seedbank.php:1071
+msgid "Pastinaca sativa"
 msgstr ""
 
 #: wp-seedbank.php:1074
-msgid "Phaseolus vulgaris"
+msgid "Passiflora"
 msgstr ""
 
-#: wp-seedbank.php:1077
-msgid "Physalis"
+#: wp-seedbank.php:1075
+msgid "Penstemon"
+msgstr ""
+
+#: wp-seedbank.php:1076
+msgid "Petroselinum"
+msgstr ""
+
+#: wp-seedbank.php:1077 wp-seedbank.php:1339
+msgid "Phaseolus"
 msgstr ""
 
 #: wp-seedbank.php:1080
+msgid "Phaseolus lunatus"
+msgstr ""
+
+#: wp-seedbank.php:1081
+msgid "Phaseolus vulgaris"
+msgstr ""
+
+#: wp-seedbank.php:1084
+msgid "Physalis"
+msgstr ""
+
+#: wp-seedbank.php:1087
 msgid "Physalis ixocarpa"
 msgstr ""
 
-#: wp-seedbank.php:1083
+#: wp-seedbank.php:1090
 msgid "Pisum"
 msgstr ""
 
-#: wp-seedbank.php:1086
+#: wp-seedbank.php:1093
 msgid "Pisum sativum"
 msgstr ""
 
-#: wp-seedbank.php:1089
+#: wp-seedbank.php:1096
 msgid "Poterium"
 msgstr ""
 
-#: wp-seedbank.php:1091
+#: wp-seedbank.php:1098
 msgid "Rhaphanus"
 msgstr ""
 
-#: wp-seedbank.php:1094
+#: wp-seedbank.php:1101
 msgid "Rhaphanus sativus"
 msgstr ""
 
-#: wp-seedbank.php:1097
+#: wp-seedbank.php:1104
 msgid "Rheum"
 msgstr ""
 
-#: wp-seedbank.php:1100
+#: wp-seedbank.php:1107
 msgid "Rheum rhabarbarum"
 msgstr ""
 
-#: wp-seedbank.php:1103
+#: wp-seedbank.php:1110
 msgid "Rosmarinus"
 msgstr ""
 
-#: wp-seedbank.php:1104
+#: wp-seedbank.php:1111
 msgid "Rudbeckia"
 msgstr ""
 
-#: wp-seedbank.php:1106
+#: wp-seedbank.php:1113
 msgid "Salvia"
 msgstr ""
 
-#: wp-seedbank.php:1107
+#: wp-seedbank.php:1114
 msgid "Scorpiurus"
 msgstr ""
 
-#: wp-seedbank.php:1108 wp-seedbank.php:1303
+#: wp-seedbank.php:1115 wp-seedbank.php:1325
 msgid "Solanum"
 msgstr ""
 
-#: wp-seedbank.php:1111
+#: wp-seedbank.php:1118
 msgid "Solanum melongena"
 msgstr ""
 
-#: wp-seedbank.php:1112
+#: wp-seedbank.php:1119
 msgid "Solanum tuberosum"
 msgstr ""
 
-#: wp-seedbank.php:1115
+#: wp-seedbank.php:1122
 msgid "Spinacia"
 msgstr ""
 
-#: wp-seedbank.php:1118
+#: wp-seedbank.php:1125
 msgid "Spinacia oleracea"
 msgstr ""
 
-#: wp-seedbank.php:1122
+#: wp-seedbank.php:1129
 msgid "Tagetes"
 msgstr ""
 
-#: wp-seedbank.php:1123
+#: wp-seedbank.php:1130
 msgid "Tetragonia"
 msgstr ""
 
-#: wp-seedbank.php:1126
+#: wp-seedbank.php:1133
 msgid "Tetragonia tetragonioides"
 msgstr ""
 
-#: wp-seedbank.php:1129
+#: wp-seedbank.php:1136
 msgid "Thunbergia"
 msgstr ""
 
-#: wp-seedbank.php:1130
+#: wp-seedbank.php:1137
 msgid "Thymus"
 msgstr ""
 
-#: wp-seedbank.php:1131
+#: wp-seedbank.php:1138
 msgid "Triticum "
 msgstr ""
 
-#: wp-seedbank.php:1132
+#: wp-seedbank.php:1139
 msgid "Tropaeolum"
 msgstr ""
 
-#: wp-seedbank.php:1134
+#: wp-seedbank.php:1141
 msgid "Valerianella"
 msgstr ""
 
-#: wp-seedbank.php:1137
+#: wp-seedbank.php:1144
 msgid "Valerianella locusta"
 msgstr ""
 
-#: wp-seedbank.php:1140
+#: wp-seedbank.php:1147
 msgid "Vigna"
 msgstr ""
 
-#: wp-seedbank.php:1143
+#: wp-seedbank.php:1150
 msgid "Vigna unguiculata"
 msgstr ""
 
-#: wp-seedbank.php:1147
+#: wp-seedbank.php:1154
 msgid "Zea"
 msgstr ""
 
-#: wp-seedbank.php:1150
+#: wp-seedbank.php:1157
 msgid "Zea mays"
 msgstr ""
 
-#: wp-seedbank.php:1153
+#: wp-seedbank.php:1160
 msgid "Zinnia"
 msgstr ""
 
-#: wp-seedbank.php:1156
+#: wp-seedbank.php:1163
 msgid "Asian Vegetable"
 msgstr ""
 
-#: wp-seedbank.php:1157 wp-seedbank.php:1312
+#: wp-seedbank.php:1164 wp-seedbank.php:1334
 msgid "Bean"
 msgstr ""
 
-#: wp-seedbank.php:1158
+#: wp-seedbank.php:1165
 msgid "Beet"
 msgstr ""
 
-#: wp-seedbank.php:1159
+#: wp-seedbank.php:1166
 msgid "Berry"
 msgstr ""
 
-#: wp-seedbank.php:1160
+#: wp-seedbank.php:1167
 msgid "Broccoli"
 msgstr ""
 
-#: wp-seedbank.php:1161
+#: wp-seedbank.php:1168
 msgid "Brussels Sprout"
 msgstr ""
 
-#: wp-seedbank.php:1162
+#: wp-seedbank.php:1169
 msgid "Cabbage"
 msgstr ""
 
-#: wp-seedbank.php:1163
+#: wp-seedbank.php:1170
 msgid "Carrot"
 msgstr ""
 
-#: wp-seedbank.php:1164
+#: wp-seedbank.php:1171
 msgid "Cauliflower"
 msgstr ""
 
-#: wp-seedbank.php:1165
+#: wp-seedbank.php:1172
 msgid "Chard"
 msgstr ""
 
-#: wp-seedbank.php:1166
+#: wp-seedbank.php:1173
 msgid "Corn"
 msgstr ""
 
-#: wp-seedbank.php:1167
+#: wp-seedbank.php:1174
 msgid "Collard"
 msgstr ""
 
-#: wp-seedbank.php:1168
+#: wp-seedbank.php:1175
 msgid "Cover Crop"
 msgstr ""
 
-#: wp-seedbank.php:1169
+#: wp-seedbank.php:1176
 msgid "Eggplant"
 msgstr ""
 
-#: wp-seedbank.php:1170
+#: wp-seedbank.php:1177
 msgid "Cucumber"
 msgstr ""
 
-#: wp-seedbank.php:1171
+#: wp-seedbank.php:1178
 msgid "Fava"
 msgstr ""
 
-#: wp-seedbank.php:1172
+#: wp-seedbank.php:1179
 msgid "Flower"
 msgstr ""
 
-#: wp-seedbank.php:1173
+#: wp-seedbank.php:1180
 msgid "Gourd"
 msgstr ""
 
-#: wp-seedbank.php:1174
+#: wp-seedbank.php:1181
 msgid "Green"
 msgstr ""
 
-#: wp-seedbank.php:1175
+#: wp-seedbank.php:1182
 msgid "Herb"
 msgstr ""
 
-#: wp-seedbank.php:1176
+#: wp-seedbank.php:1183
 msgid "Kale"
 msgstr ""
 
-#: wp-seedbank.php:1177
+#: wp-seedbank.php:1184
 msgid "Kohlrabi"
 msgstr ""
 
-#: wp-seedbank.php:1178
+#: wp-seedbank.php:1185
 msgid "Legume"
 msgstr ""
 
-#: wp-seedbank.php:1179
+#: wp-seedbank.php:1186
 msgid "Lettuce"
 msgstr ""
 
-#: wp-seedbank.php:1180
+#: wp-seedbank.php:1187
 msgid "Melon"
 msgstr ""
 
-#: wp-seedbank.php:1181
+#: wp-seedbank.php:1188
 msgid "Mustard"
 msgstr ""
 
-#: wp-seedbank.php:1182
+#: wp-seedbank.php:1189
 msgid "Okra"
 msgstr ""
 
-#: wp-seedbank.php:1183
+#: wp-seedbank.php:1190
 msgid "Onion"
 msgstr ""
 
-#: wp-seedbank.php:1184
+#: wp-seedbank.php:1191
 msgid "Parsnip/Root Parsley"
 msgstr ""
 
-#: wp-seedbank.php:1185
+#: wp-seedbank.php:1192
 msgid "Potato"
 msgstr ""
 
-#: wp-seedbank.php:1186
+#: wp-seedbank.php:1193
 msgid "Pea"
 msgstr ""
 
-#: wp-seedbank.php:1187 wp-seedbank.php:1287
+#: wp-seedbank.php:1194 wp-seedbank.php:1309
 msgid "Pepper"
 msgstr ""
 
-#: wp-seedbank.php:1188
+#: wp-seedbank.php:1195
 msgid "Pumpkin"
 msgstr ""
 
-#: wp-seedbank.php:1189
+#: wp-seedbank.php:1196
 msgid "Radish"
 msgstr ""
 
-#: wp-seedbank.php:1190
+#: wp-seedbank.php:1197
 msgid "Strawberry"
 msgstr ""
 
-#: wp-seedbank.php:1191
+#: wp-seedbank.php:1198
 msgid "Root"
 msgstr ""
 
-#: wp-seedbank.php:1192
+#: wp-seedbank.php:1199
 msgid "Rutabaga"
 msgstr ""
 
-#: wp-seedbank.php:1193
+#: wp-seedbank.php:1200
 msgid "Spinach"
 msgstr ""
 
-#: wp-seedbank.php:1194
+#: wp-seedbank.php:1201
 msgid "Summer Squash"
 msgstr ""
 
-#: wp-seedbank.php:1195 wp-seedbank.php:1298
+#: wp-seedbank.php:1202 wp-seedbank.php:1320
 msgid "Tomato"
 msgstr ""
 
-#: wp-seedbank.php:1196
+#: wp-seedbank.php:1203
 msgid "Turnip"
 msgstr ""
 
-#: wp-seedbank.php:1197
+#: wp-seedbank.php:1204
 msgid "Winter Squash"
 msgstr ""
 
-#: wp-seedbank.php:1200
+#: wp-seedbank.php:1207
 msgid "Packets"
 msgstr ""
 
-#: wp-seedbank.php:1200
+#: wp-seedbank.php:1207
 msgid "A package containing enough seeds for a single germination attempt."
 msgstr ""
 
-#: wp-seedbank.php:1203 wp-seedbank.php:1413 wp-seedbank.php:1415
+#: wp-seedbank.php:1210 wp-seedbank.php:1435 wp-seedbank.php:1437
 msgid "Active"
 msgstr ""
 
-#: wp-seedbank.php:1203
+#: wp-seedbank.php:1210
 msgid "New or open seed exchange requests or offers."
 msgstr ""
 
-#: wp-seedbank.php:1204
+#: wp-seedbank.php:1211
 msgid "Expired or completed seed exchanges."
 msgstr ""
 
-#: wp-seedbank.php:1210 wp-seedbank.php:1230
+#: wp-seedbank.php:1217 wp-seedbank.php:1252
 msgid "Batch Seed Exchange"
 msgstr ""
 
-#: wp-seedbank.php:1211
+#: wp-seedbank.php:1218
 msgid "Batch Exchange"
 msgstr ""
 
-#: wp-seedbank.php:1231
+#: wp-seedbank.php:1228
+msgid "My Seeds"
+msgstr ""
+
+#: wp-seedbank.php:1253
 msgid ""
 "This page allows you to upload a comma-separated values (CSV) file that will "
 "be translated to seed exchange requests or offers."
 msgstr ""
 
-#: wp-seedbank.php:1231
+#: wp-seedbank.php:1253
 msgid ""
 "The CSV file should have the structure like %sthe example shown in the table "
 "below%s."
 msgstr ""
 
-#: wp-seedbank.php:1236
+#: wp-seedbank.php:1258
 msgid "My batch exchange file is located on"
 msgstr ""
 
-#: wp-seedbank.php:1238
+#: wp-seedbank.php:1260
 msgid "another website"
 msgstr ""
 
-#: wp-seedbank.php:1239
+#: wp-seedbank.php:1261
 msgid "my computer"
 msgstr ""
 
@@ -1341,43 +1357,43 @@ msgstr ""
 #.            uploaded contains column labels. When you translate this
 #.            string, put the placeholder in the appropriate spot for
 #.            either "has" or "does not have" column labels.
-#: wp-seedbank.php:1251
+#: wp-seedbank.php:1273
 msgid "It %s column labels (a header row)."
 msgstr ""
 
-#: wp-seedbank.php:1253
+#: wp-seedbank.php:1275
 msgctxt "This is the \"has\" in \"It has column labels (a header row)."
 msgid "has"
 msgstr ""
 
-#: wp-seedbank.php:1254
+#: wp-seedbank.php:1276
 msgctxt ""
 "This is the \"does not have\" in \"It does not have column labels (a header "
 "row)."
 msgid "does not have"
 msgstr ""
 
-#: wp-seedbank.php:1258
+#: wp-seedbank.php:1280
 msgid "Web fetch options"
 msgstr ""
 
-#: wp-seedbank.php:1259
+#: wp-seedbank.php:1281
 msgid "The address of the file containing my seed exchange data is"
 msgstr ""
 
-#: wp-seedbank.php:1259
+#: wp-seedbank.php:1281
 msgid "http://mysite.com/file.csv"
 msgstr ""
 
-#: wp-seedbank.php:1261
+#: wp-seedbank.php:1283
 msgid "File upload options"
 msgstr ""
 
-#: wp-seedbank.php:1262
+#: wp-seedbank.php:1284
 msgid "The file on my computer containing my seed exchange data is"
 msgstr ""
 
-#: wp-seedbank.php:1263
+#: wp-seedbank.php:1285
 msgid ""
 "For the best results, ensure your file is encoded as \"Unicode\" or \"UTF-8,"
 "\" especially if it contains diacritics or special characters. UTF-8 "
@@ -1385,116 +1401,116 @@ msgid ""
 "in the \"Save As\" window of the application you used to create this file."
 msgstr ""
 
-#: wp-seedbank.php:1265
+#: wp-seedbank.php:1287
 msgid "Let me review each seed exchange before publishing."
 msgstr ""
 
-#: wp-seedbank.php:1266
+#: wp-seedbank.php:1288
 msgid "Make Seed Exchanges"
 msgstr ""
 
-#: wp-seedbank.php:1268
+#: wp-seedbank.php:1290
 msgid "Example of batch seed exchange data."
 msgstr ""
 
-#: wp-seedbank.php:1271
+#: wp-seedbank.php:1293
 msgid "Title"
 msgstr ""
 
-#: wp-seedbank.php:1272
+#: wp-seedbank.php:1294
 msgid "Type"
 msgstr ""
 
-#: wp-seedbank.php:1275
+#: wp-seedbank.php:1297
 msgid "Unit label"
 msgstr ""
 
-#: wp-seedbank.php:1276
+#: wp-seedbank.php:1298
 msgid "Seed expiration date"
 msgstr ""
 
-#: wp-seedbank.php:1277
+#: wp-seedbank.php:1299
 msgid "Exchange expiration date"
 msgstr ""
 
-#: wp-seedbank.php:1278
+#: wp-seedbank.php:1300
 msgid "Notes"
 msgstr ""
 
-#: wp-seedbank.php:1284
+#: wp-seedbank.php:1306
 msgid "Looking to swap peppers for carrots"
 msgstr ""
 
-#: wp-seedbank.php:1285 wp-seedbank.php:1310
+#: wp-seedbank.php:1307 wp-seedbank.php:1332
 msgid "Swap"
 msgstr ""
 
-#: wp-seedbank.php:1286
+#: wp-seedbank.php:1308
 msgid "5"
 msgstr ""
 
-#: wp-seedbank.php:1288
+#: wp-seedbank.php:1310
 msgid "seeds"
 msgstr ""
 
-#: wp-seedbank.php:1289
+#: wp-seedbank.php:1311
 msgid "2016-05-01"
 msgstr ""
 
-#: wp-seedbank.php:1290 wp-seedbank.php:1315
+#: wp-seedbank.php:1312 wp-seedbank.php:1337
 msgid "2014-05-01"
 msgstr ""
 
-#: wp-seedbank.php:1291
+#: wp-seedbank.php:1313
 msgid "Ideally, I would like to receive carrot seeds in exchange. Thanks!"
 msgstr ""
 
-#: wp-seedbank.php:1295
+#: wp-seedbank.php:1317
 msgid "For sale: tomato seed packets, negotiable price"
 msgstr ""
 
-#: wp-seedbank.php:1296
+#: wp-seedbank.php:1318
 msgid "Sell"
 msgstr ""
 
-#: wp-seedbank.php:1297
+#: wp-seedbank.php:1319
 msgid "100"
 msgstr ""
 
-#: wp-seedbank.php:1299
+#: wp-seedbank.php:1321
 msgid "seed packets"
 msgstr ""
 
-#: wp-seedbank.php:1300
+#: wp-seedbank.php:1322
 msgid "2017-01-01"
 msgstr ""
 
-#: wp-seedbank.php:1301
+#: wp-seedbank.php:1323
 msgid "2015-06-01"
 msgstr ""
 
-#: wp-seedbank.php:1302
+#: wp-seedbank.php:1324
 msgid ""
 "Price is negotiable. Reply here or by phone at (555) 555-5555 if interested."
 msgstr ""
 
-#: wp-seedbank.php:1309
+#: wp-seedbank.php:1331
 msgid "These are the best bean seeds!"
 msgstr ""
 
-#: wp-seedbank.php:1311
+#: wp-seedbank.php:1333
 msgid "20"
 msgstr ""
 
-#: wp-seedbank.php:1313
+#: wp-seedbank.php:1335
 msgid "packets"
 msgstr ""
 
-#: wp-seedbank.php:1314
+#: wp-seedbank.php:1336
 msgid "2015-03-30"
 msgstr ""
 
-#: wp-seedbank.php:1316
+#: wp-seedbank.php:1338
 msgid ""
 "These beans are kidney beans. They are delicious and nutritious, but taste "
 "nothing like chicken."
@@ -1502,7 +1518,7 @@ msgstr ""
 
 #. TRANSLATORS:
 #.                    Ignore these placeholders, they are for HTML code.
-#: wp-seedbank.php:1331
+#: wp-seedbank.php:1353
 msgid ""
 "Your batch exchange request has expired or is invalid. Please %sstart again"
 "%s."
@@ -1510,18 +1526,18 @@ msgstr ""
 
 #. TRANSLATORS:
 #.                    Ignore these placeholders, they are for HTML code.
-#: wp-seedbank.php:1340
+#: wp-seedbank.php:1362
 msgid ""
 "Please let us know where to find your data. You will need to %sstart again%s."
 msgstr ""
 
-#: wp-seedbank.php:1428
+#: wp-seedbank.php:1450
 msgid "Successfully imported %d new Seed Exchange Post."
 msgid_plural "Successfully imported %d new Seed Exchange Posts."
 msgstr[0] ""
 msgstr[1] ""
 
-#: wp-seedbank.php:1429
+#: wp-seedbank.php:1451
 msgid "All Seed Exchanges"
 msgstr ""
 

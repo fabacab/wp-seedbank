@@ -3,8 +3,8 @@ Contributors: meitar
 Donate link: https://npo.justgive.org/nonprofits/donate.jsp?ein=45-3043080
 Tags: custom posts, community, seedbank, ecology, seed swap, trade
 Requires at least: 3.5.2
-Tested up to: 3.8.1
-Stable tag: 0.4.3
+Tested up to: 3.9
+Stable tag: 0.4.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -63,6 +63,12 @@ See also:
 The Seed Exchange posts you're creating use WordPress taxonomies, which WordPress doesn't include in search results by default. This means that if you're creating a Seed Exchange post for a given vegetable, but the only place the name of this vegetable appears is in the plugin's custom "Common Name" field (and not in the post's title or content), then WordPress can't find that posting based on a simple keyword search. If you'd like to make the WP-SeedBank's taxonomies searchable, too, we recommend the [Search Everything plugin](https://wordpress.org/plugins/search-everything/).
 
 == Changelog ==
+
+= Version 0.4.4 =
+
+* [Bugfix](https://github.com/meitar/wp-seedbank/issues/15): Correct typo in Scientific Name for parsley.
+* Enhancement: [Add Scientific Name for chives](https://github.com/meitar/wp-seedbank/issues/14) and [bitter melon](https://github.com/meitar/wp-seedbank/issues/13).
+    * If you don't already have these in your system but would like to add them from the built-in set provided by this plugin, go to your Plugin Administration Screen and de-activate this plugin, then reactive it.
 
 = Version 0.4.3 =
 
