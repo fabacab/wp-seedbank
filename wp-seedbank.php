@@ -3,7 +3,7 @@
  * Plugin Name: WP-SeedBank
  * Plugin URI: http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/
  * Description: Add a seed exchange post type to turn your WordPress website into a community seedbank or seed library! :D
- * Author: <a href="http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/#authors">The Hummingbird Project</a> and <a href="http://Cyberbusking.org/">Meitar "maymay" Moscovitz</a>
+ * Author: <a href="http://hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/#authors">The Hummingbird Project</a>
  * Version: 0.4.4
  * Text Domain: wp-seedbank
  * Domain Path: /languages
@@ -384,7 +384,7 @@ class WP_SeedBank {
      * Runs when we save a Seed Exchange post.
      */
     public function savePost ($post_id) {
-        if ($this->post_type !== $_POST['post_type']) { return; }
+        if (!isset($_POST['post_type']) || $this->post_type !== $_POST['post_type']) { return; }
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) { return; }
         if (!wp_verify_nonce($_POST[$this->post_type . '_meta_box_details_nonce'], 'editing_' . $this->post_type)) { return; }
         $this->saveMeta($post_id);
@@ -641,14 +641,13 @@ END_HTML;
                 '<a href="https://wordpress.org/plugins/wp-seedbank/" title="' . __('WP-SeedBank on the WordPress Plugin Repository', 'wp-seedbank') . '">' . __('WP-SeedBank plugin', 'wp-seedbank') . '</a>',
                 '<a href="http://www.hummingbirdproject.org/initiatives/wordpress-seedbank-plugin/" title="' . __('The HummingBird Project\'s WP-SeedBank Initiative', 'wp-seedbank') . '">' . __('The Hummingbird Project', 'wp-seedbank') . '</a>',
                 '<a href="http://permaculturenews.org/2013/09/25/an-open-source-community-model-to-save-seeds-a-wordpress-seedbank-plugin/" title="An Open Source Community Model to Save Seeds &mdash; a WordPress Seedbank Plugin" rel="bookmark">' . __('initially developed at Cleveland GiveCamp', 'wp-seedbank') . '</a>',
-                '<a href="http://meitar.moscovitz.name/" title="' . __('Who is this person?', 'wp-seedbank') . '">' . __('a houseless, jobless, nomadic "vigilante programmer"', 'wp-seedbank') . '</a>',
                 '<a href="http://wordpress.org/plugins/wp-seedbank/other_notes/" title="' . __('Credits for WP-SeedBank', 'wp-seedbank') . '">' . __('Donations are appreciated.', 'wp-seedbank') . '</a>'
             ) . '</p>'
         ));
 
         $sidebar = '<p><strong>' . esc_html__('More WP-SeedBank help:', 'wp-seedbank') . '</strong></p>';
         $sidebar .= '<p><a href="https://wordpress.org/support/plugin/wp-seedbank" target="_blank">' . esc_html__('WP-SeedBank support forum', 'wp-seedbank') . '</a></p>';
-        $sidebar .= '<p><a href="https://github.org/meitar/wp-seedbank/issues/new" target="_blank">' . esc_html__('WP-SeedBank bug report form (for programmers)', 'wp-seedbank') . '</a></p>';
+        $sidebar .= '<p><a href="https://github.org/fabacab/wp-seedbank/issues/new" target="_blank">' . esc_html__('WP-SeedBank bug report form (for programmers)', 'wp-seedbank') . '</a></p>';
         $sidebar .= '<p>' . sprintf(
             esc_html__('WP-SeedBank is free software, but sadly grocery stores do not offer free food. Please consider %sdonating some food to the plugin maintainer%s. %s', 'wp-seedbank'),
             '<strong><a href="http://maybemaimed.com/cyberbusking/#food">', '</a></strong>', '&hearts;'

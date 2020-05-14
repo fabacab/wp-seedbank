@@ -1558,6 +1558,5 @@ msgstr ""
 #. Author of the plugin/theme
 msgid ""
 "<a href=\"http://hummingbirdproject.org/initiatives/wordpress-seedbank-"
-"plugin/#authors\">The Hummingbird Project</a> and <a href=\"http://"
-"Cyberbusking.org/\">Meitar \"maymay\" Moscovitz</a>"
+"plugin/#authors\">The Hummingbird Project</a>"
 msgstr ""

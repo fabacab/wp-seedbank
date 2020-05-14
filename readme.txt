@@ -1,5 +1,5 @@
 === WP-Seedbank ===
-Contributors: meitar
+Contributors: maymay
 Donate link: https://npo.justgive.org/nonprofits/donate.jsp?ein=45-3043080
 Tags: custom posts, community, seedbank, ecology, seed swap, trade
 Requires at least: 3.5.2
@@ -66,8 +66,8 @@ The Seed Exchange posts you're creating use WordPress taxonomies, which WordPres
 
 = Version 0.4.4 =
 
-* [Bugfix](https://github.com/meitar/wp-seedbank/issues/15): Correct typo in Scientific Name for parsley.
-* Enhancement: [Add Scientific Name for chives](https://github.com/meitar/wp-seedbank/issues/14) and [bitter melon](https://github.com/meitar/wp-seedbank/issues/13).
+* [Bugfix](https://github.com/fabacab/wp-seedbank/issues/15): Correct typo in Scientific Name for parsley.
+* Enhancement: [Add Scientific Name for chives](https://github.com/fabacab/wp-seedbank/issues/14) and [bitter melon](https://github.com/fabacab/wp-seedbank/issues/13).
     * If you don't already have these in your system but would like to add them from the built-in set provided by this plugin, go to your Plugin Administration Screen and de-activate this plugin, then reactive it.
 
 = Version 0.4.3 =
@@ -101,7 +101,7 @@ The Seed Exchange posts you're creating use WordPress taxonomies, which WordPres
 
 = Version 0.3 =
 * Complete internal rewrite to improve code quality, security, and maintainability.
-* [Bugfix](https://github.com/meitar/wp-seedbank/issues/6): Seed Exchange posts are now correctly linked to their respective category pages.
+* [Bugfix](https://github.com/fabacab/wp-seedbank/issues/6): Seed Exchange posts are now correctly linked to their respective category pages.
 * Feature: Seed Exchange posts can now be composed in "visual" (WYSIWYG) mode.
 * Feature: Show information entered into the Seed Exchange Details box on the post itself, without needing to write your own template. If not already active on your website, go to WordPress's "Settings -> Reading" screen, and choose whether to position the details above or below the post content in the new "Seedbank Settings" section.
 * Feature: Contextual help offers step-by-step instructions for use. Click the "Help" button on any SeedBank page for help with that page.
@@ -133,8 +133,8 @@ The Seed Exchange posts you're creating use WordPress taxonomies, which WordPres
 
 The WP-Seedbank plugin could not have been possible without the generosity of the Team Hummingbird Project volunteers at [Cleveland GiveCamp](http://clevelandgivecamp.org/). Special thanks to:
 
-* [Meitar Moscovitz](http://meitarmoscovitz.com/), [Cyberbusking.org](http://Cyberbusking.org)
+* The author, [Cyberbusking.org](http://Cyberbusking.org)
 * Alex Redinger
 * Kip Price
 
-Maintaining this plugin is a volunteer, community effort, and a labor of love for the original development team. However, if you like it, please consider [donating to The Hummingbird Project](https://npo.justgive.org/nonprofits/donate.jsp?ein=45-3043080), [purchasing one of Meitar's web development books](http://www.amazon.com/gp/redirect.html?ie=UTF8&location=http%3A%2F%2Fwww.amazon.com%2Fs%3Fie%3DUTF8%26redirect%3Dtrue%26sort%3Drelevancerank%26search-type%3Dss%26index%3Dbooks%26ref%3Dntt%255Fathr%255Fdp%255Fsr%255F2%26field-author%3DMeitar%2520Moscovitz&tag=maymaydotnet-20&linkCode=ur2&camp=1789&creative=390957), or [contributing to Meitar's Cyberbusking fund](http://Cyberbusking.org/). Your support makes continued development possible!
+Maintaining this plugin is a volunteer, community effort, and a labor of love for the original development team. However, if you like it, please consider [donating to The Hummingbird Project](https://npo.justgive.org/nonprofits/donate.jsp?ein=45-3043080), or [contributing to my's Cyberbusking fund](http://Cyberbusking.org/). Your support makes continued development possible!
